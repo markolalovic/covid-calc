@@ -1,0 +1,242 @@
+name,income_grp,iso_n3,prop
+Indian Ocean Ter.,4. High income,1001,No data
+Siachen Glacier,2. Lower middle income,1002,No data
+Kosovo,2. Lower middle income,1003,No data
+Somaliland,2. Lower middle income,1004,No data
+N. Cyprus,3. Upper middle income,1000,No data
+Ashmore and Cartier Is.,1. Low income,036,No data
+Aruba,4. High income,533,No data
+Afghanistan,1. Low income,004,<5%
+Angola,3. Upper middle income,024,<5%
+Anguilla,3. Upper middle income,660,No data
+Aland,4. High income,248,No data
+Albania,2. Lower middle income,008,>20%
+Andorra,4. High income,020,No data
+United Arab Emirates,4. High income,784,<5%
+Argentina,3. Upper middle income,032,10- 20%
+Armenia,2. Lower middle income,051,10- 20%
+American Samoa,3. Upper middle income,016,No data
+Antarctica,No data,010,No data
+Fr. S. Antarctic Lands,4. High income,260,No data
+Antigua and Barbuda,3. Upper middle income,028,No data
+Australia,4. High income,036,>20%
+Austria,4. High income,040,>20%
+Azerbaijan,3. Upper middle income,031,10- 20%
+Burundi,1. Low income,108,<5%
+Belgium,4. High income,056,>20%
+Benin,1. Low income,204,5- 10%
+Burkina Faso,1. Low income,854,No data
+Bangladesh,1. Low income,050,5- 10%
+Bulgaria,3. Upper middle income,100,>20%
+Bahrain,4. High income,048,5- 10%
+Bahamas,4. High income,044,10- 20%
+Bosnia and Herzegovina,3. Upper middle income,070,>20%
+St-Barthélemy,4. High income,652,No data
+Belarus,3. Upper middle income,112,>20%
+Belize,2. Lower middle income,084,5- 10%
+Bermuda,4. High income,060,No data
+Bolivia,2. Lower middle income,068,10- 20%
+Brazil,3. Upper middle income,076,10- 20%
+Barbados,4. High income,052,>20%
+Brunei Darussalam,4. High income,096,No data
+Bhutan,2. Lower middle income,064,5- 10%
+Botswana,3. Upper middle income,072,5- 10%
+Central African Republic,1. Low income,140,<5%
+Canada,4. High income,124,>20%
+Switzerland,4. High income,756,>20%
+Chile,3. Upper middle income,152,10- 20%
+China,3. Upper middle income,156,10- 20%
+Cote d'Ivoire,2. Lower middle income,384,No data
+Cameroon,2. Lower middle income,120,<5%
+Democratic Republic of Congo,1. Low income,180,<5%
+Congo,2. Lower middle income,178,<5%
+Cook Islands,3. Upper middle income,184,No data
+Colombia,3. Upper middle income,170,10- 20%
+Comoros,1. Low income,174,5- 10%
+Cabo Verde,2. Lower middle income,132,No data
+Costa Rica,3. Upper middle income,188,10- 20%
+Cuba,3. Upper middle income,192,>20%
+Curacao,4. High income,531,No data
+Cayman Islands,4. High income,136,No data
+Cyprus,4. High income,196,10- 20%
+Czech Republic,4. High income,203,>20%
+Germany,4. High income,276,>20%
+Djibouti,2. Lower middle income,262,No data
+Dominica,3. Upper middle income,212,No data
+Denmark,4. High income,208,>20%
+Dominican Republic,3. Upper middle income,214,No data
+Algeria,3. Upper middle income,012,5- 10%
+Ecuador,3. Upper middle income,218,10- 20%
+Egypt,2. Lower middle income,818,5- 10%
+Eritrea,1. Low income,232,5- 10%
+W. Sahara,1. Low income,732,No data
+Spain,4. High income,724,>20%
+Estonia,4. High income,233,>20%
+Ethiopia,1. Low income,231,5- 10%
+Finland,4. High income,246,>20%
+Fiji,2. Lower middle income,242,5- 10%
+Falkland Islands,4. High income,238,No data
+France,4. High income,250,>20%
+Faeroe Islands,4. High income,234,No data
+"Micronesia, Fed. Sts.",2. Lower middle income,583,No data
+Gabon,3. Upper middle income,266,5- 10%
+United Kingdom,4. High income,826,>20%
+Georgia,2. Lower middle income,268,>20%
+Guernsey,4. High income,831,No data
+Ghana,2. Lower middle income,288,5- 10%
+Equatorial Guinea,1. Low income,324,No data
+Gambia,1. Low income,270,<5%
+Guinea-Bissau,1. Low income,624,No data
+Eq. Guinea,4. High income,226,No data
+Greece,4. High income,300,>20%
+Grenada,3. Upper middle income,308,10- 20%
+Greenland,No data,304,No data
+Guatemala,2. Lower middle income,320,5- 10%
+Guam,4. High income,316,10- 20%
+Guyana,2. Lower middle income,328,10- 20%
+"Hong Kong SAR, China",4. High income,344,No data
+Heard I. and McDonald Islands,1. Low income,334,No data
+Honduras,2. Lower middle income,340,5- 10%
+Croatia,4. High income,191,>20%
+Haiti,1. Low income,332,5- 10%
+Hungary,4. High income,348,>20%
+Indonesia,2. Lower middle income,360,5- 10%
+Isle of Man,4. High income,833,No data
+India,2. Lower middle income,356,5- 10%
+Br. Indian Ocean Ter.,4. High income,086,No data
+Ireland,4. High income,372,10- 20%
+Iran,3. Upper middle income,364,5- 10%
+Iraq,2. Lower middle income,368,5- 10%
+Iceland,4. High income,352,>20%
+Israel,4. High income,376,10- 20%
+Italy,4. High income,380,>20%
+Jamaica,3. Upper middle income,388,10- 20%
+Jersey,4. High income,832,No data
+Jordan,3. Upper middle income,400,5- 10%
+Japan,4. High income,392,>20%
+Kazakhstan,3. Upper middle income,398,10- 20%
+Kenya,1. Low income,404,<5%
+Kyrgyzstan,1. Low income,417,5- 10%
+Cambodia,1. Low income,116,5- 10%
+Kiribati,2. Lower middle income,296,5- 10%
+St. Kitts and Nevis,4. High income,659,No data
+South Korea,4. High income,410,>20%
+Kuwait,4. High income,414,5- 10%
+Laos,2. Lower middle income,418,5- 10%
+Lebanon,3. Upper middle income,422,10- 20%
+Liberia,1. Low income,430,5- 10%
+Libya,3. Upper middle income,434,5- 10%
+Saint Lucia,3. Upper middle income,662,No data
+Liechtenstein,4. High income,438,No data
+Sri Lanka,2. Lower middle income,144,10- 20%
+Lesotho,2. Lower middle income,426,5- 10%
+Lithuania,3. Upper middle income,440,>20%
+Luxembourg,4. High income,442,10- 20%
+Latvia,3. Upper middle income,428,>20%
+"Macao SAR, China",4. High income,446,No data
+St-Martin,4. High income,663,No data
+Morocco,2. Lower middle income,504,10- 20%
+Monaco,4. High income,492,No data
+Moldova,2. Lower middle income,498,10- 20%
+Madagascar,1. Low income,450,<5%
+Maldives,3. Upper middle income,462,5- 10%
+Mexico,3. Upper middle income,484,10- 20%
+Marshall Islands,2. Lower middle income,584,No data
+North Macedonia,3. Upper middle income,807,No data
+Mali,1. Low income,466,<5%
+Malta,4. High income,470,>20%
+Myanmar,1. Low income,104,5- 10%
+Montenegro,3. Upper middle income,499,>20%
+Mongolia,2. Lower middle income,496,5- 10%
+N. Mariana Islands,4. High income,580,No data
+Mozambique,1. Low income,508,<5%
+Mauritania,1. Low income,478,5- 10%
+Montserrat,2. Lower middle income,500,No data
+Mauritius,3. Upper middle income,480,10- 20%
+Malawi,1. Low income,454,<5%
+Malaysia,3. Upper middle income,458,10- 20%
+Namibia,3. Upper middle income,516,5- 10%
+New Caledonia,4. High income,540,No data
+Niger,1. Low income,562,<5%
+Norfolk Island,2. Lower middle income,574,No data
+Nigeria,2. Lower middle income,566,<5%
+Nicaragua,2. Lower middle income,558,5- 10%
+Niue,3. Upper middle income,570,No data
+Netherlands,4. High income,528,>20%
+Norway,4. High income,578,>20%
+Nepal,1. Low income,524,5- 10%
+Nauru,2. Lower middle income,520,No data
+New Zealand,4. High income,554,>20%
+Oman,4. High income,512,<5%
+Pakistan,2. Lower middle income,586,5- 10%
+Panama,3. Upper middle income,591,10- 20%
+Pitcairn Islands,1. Low income,612,No data
+Peru,3. Upper middle income,604,10- 20%
+Philippines,2. Lower middle income,608,5- 10%
+Palau,3. Upper middle income,585,No data
+Papua New Guinea,2. Lower middle income,598,No data
+Poland,4. High income,616,>20%
+Puerto Rico,4. High income,630,>20%
+North Korea,1. Low income,408,10- 20%
+Portugal,4. High income,620,>20%
+Paraguay,2. Lower middle income,600,5- 10%
+Palestine,2. Lower middle income,275,<5%
+French Polynesia,4. High income,258,No data
+Qatar,4. High income,634,<5%
+Romania,3. Upper middle income,642,>20%
+Russia,3. Upper middle income,643,>20%
+Rwanda,1. Low income,646,<5%
+Saudi Arabia,4. High income,682,5- 10%
+Sudan,2. Lower middle income,729,5- 10%
+Senegal,2. Lower middle income,686,<5%
+Singapore,4. High income,702,10- 20%
+S. Geo. and S. Sandw. Islands,1. Low income,239,No data
+Saint Helena,2. Lower middle income,654,No data
+Solomon Islands,2. Lower middle income,090,No data
+Sierra Leone,1. Low income,694,No data
+El Salvador,2. Lower middle income,222,No data
+San Marino,4. High income,674,No data
+Somalia,1. Low income,706,<5%
+St. Pierre and Miquelon,3. Upper middle income,666,No data
+Serbia,3. Upper middle income,688,>20%
+South Sudan,1. Low income,728,No data
+São Tomé and Principe,2. Lower middle income,678,No data
+Suriname,3. Upper middle income,740,10- 20%
+Slovakia,4. High income,703,>20%
+Slovenia,4. High income,705,>20%
+Sweden,4. High income,752,>20%
+Swaziland,2. Lower middle income,748,5- 10%
+Sint Maarten,4. High income,534,No data
+Seychelles,3. Upper middle income,690,10- 20%
+Syria,2. Lower middle income,760,5- 10%
+Turks and Caicos Islands,4. High income,796,No data
+Chad,1. Low income,148,<5%
+Togo,1. Low income,768,<5%
+Thailand,3. Upper middle income,764,10- 20%
+Tajikistan,1. Low income,762,5- 10%
+Turkmenistan,3. Upper middle income,795,5- 10%
+Timor-Leste,2. Lower middle income,626,No data
+Tonga,2. Lower middle income,776,5- 10%
+Trinidad and Tobago,4. High income,780,No data
+Tunisia,3. Upper middle income,788,10- 20%
+Turkey,3. Upper middle income,792,10- 20%
+Taiwan,4. High income,158,>20%
+Tanzania,1. Low income,834,<5%
+Uganda,1. Low income,800,<5%
+Ukraine,2. Lower middle income,804,>20%
+Uruguay,3. Upper middle income,858,>20%
+United States,4. High income,840,>20%
+Uzbekistan,2. Lower middle income,860,5- 10%
+Vatican,4. High income,336,No data
+St. Vin. and Gren.,3. Upper middle income,670,No data
+Venezuela,3. Upper middle income,862,10- 20%
+British Virgin Islands,4. High income,092,No data
+Virgin Islands (U.S.),4. High income,850,No data
+Vietnam,2. Lower middle income,704,10- 20%
+Vanuatu,2. Lower middle income,548,5- 10%
+Wallis and Futuna Islands,2. Lower middle income,876,No data
+Samoa,2. Lower middle income,882,5- 10%
+Yemen,2. Lower middle income,887,<5%
+South Africa,3. Upper middle income,710,5- 10%
+Zambia,2. Lower middle income,894,<5%
+Zimbabwe,1. Low income,716,<5%

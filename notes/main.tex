@@ -1,0 +1,217 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+
+\usepackage{url}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=cyan
+}
+\urlstyle{same}
+
+\title{Notes on COVID-19 Calculator}
+\author{Marko Lalovic}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\noindent{\bf Summary.} At the time of writing, the impacts of Coronavirus disease of 2019
+remain largely uncertain and depend on a whole range of possibilities.
+
+Organizing the overwhelming mass of the available information in the media and literature,
+coming up with a reasonable working estimates and comparing multiple scenarios can be challenging,
+especially to the non-expert such as myself.
+
+As an attempt to address this problem I used publicly available data and published information
+to create this international tool that allows users to derive their own country-specific estimates available at: \url{https://markolalovic.github.io/covid-calc}
+
+Users should be aware this tool is focused on simple presentation and pedagogical aspects and only offers crude estimates. It uses relatively simplistic methodology outlined in Technical Details~\ref{details} below.
+
+There are lots of improvements possible or more things to consider. One is to also include estimated fatality rates of COVID-19 by pre-existing health conditions. Having time to event data and applying survival analysis techniques would result in a more sensible estimates of expected years of life lost. Allowing parameters to evolve over time and comparing different time spans is another improvement.
+
+\section*{Technical Details}\label{details}
+Denote {\it number of sth} with $n(\cdot)$, e.g. $n(\text{people in the world}) \approx 7.59B$.
+
+\subsection*{Age Structure}
+For selected location population we use data about age from 2019, source~\cite{pyramids}. We divide the age in years in 9 intervals or {\it age groups}
+\begin{align*}
+G =
+  \{ \text{0-9}, \text{10-19}, \ldots, \text{70-79}, \text{80+} \}
+\end{align*}
+
+{\it Age structure} $N(g)$ is the size of population by age group $g \in G$. We estimate it by counting how many people fall into each age group $g \in G$
+
+\begin{align*}
+N(g) &=
+  n(\text{people in age group g})
+\end{align*}
+
+We estimate {\it total population size} $N$ by
+
+\begin{align*}
+N = \sum_{g \in G}
+  n(\text{people in age group g})
+\end{align*}
+
+For a more detailed analysis, we divide all age groups into two sets:
+\begin{align*}
+G_{<60} &=
+  \{ \text{0-9}, \text{10-19}, \ldots, \text{50-59} \} \\
+G_{60+} &=
+  \{ \text{60-69}, \text{70-79}, \text{80+} \}
+\end{align*}
+
+and estimate the proportion of people over 60 in selected population as
+\begin{align*}
+d_{60+} = \sum_{g \in G_{60+}} N(g) / N
+\end{align*}
+
+\subsection*{Fatality Rates}
+{\it Infection Fatality Rate (IFR)} represents~\cite{cfr_wiki} the proportion of deaths among all the infected individuals
+\begin{align*}
+\text{FR} &=
+  n(\text{deaths}) /
+  n(\text{infected})
+\end{align*}
+
+{\it Case Fatality Rate (CFR)} represents the proportion of confirmed deaths among all confirmed infected individuals
+\begin{align*}
+\text{CFR} &=
+ n( \text{confirmed cases of deaths} ) /
+ n( \text{confirmed cases of infected} )
+\end{align*}
+
+We use estimates of IFR(g) by age group from ~\cite{imperial} by default. Users can select to use estimates of CFR(g) by age group based on data from different countries, source ~\cite{cfrs}.
+
+For example if in some particular time frame we had 5 confirmed cases of people infected and 2 confirmed deaths. Then $CFR = 2/5 = 0.4$. But if, based on some other data and not only on confirmed cases, we know that there are actually more people infected, than our estimated IFR will be smaller than CFR.
+
+Users can also adjust fatality rate of each age group by input parameter $F$. It represents percent of increase or decrease.
+
+To get {\it Fatality Rate by age group} $FR(g)$, we multiply selected estimates of fatality rate for each age group $g$ in $G$ by $1 + F/100$ and use it as an estimate of true IFR:
+
+\begin{align*}
+\text{FR}(g) &=
+   \text{*FR}(g) \cdot (1 + F/100)
+\end{align*}
+where $\text{*FR}$ is user selected FR estimates (IFR or CFR).
+
+Notes:
+\begin{itemize}
+\item Since $\text{confirmed cases of infected} \subseteq \text{infected}$, wider testing can reduce CFR estimates.
+\item When using CFR, the expected number of deaths in age group 0-9 is always 0 since no children under 10 appear to have died from COVID-19 until this data was aquired.
+\item Our proposed approach for later estimation assumes that the fatality rate by age in selected location has distribution similar to that estimated by~\cite{imperial} or observed in the country of selected CFR~\cite{cfrs}.
+\end{itemize}
+
+\subsection*{Proportion of Infected}
+The selected {\it proportion of infected} $H$ is
+\begin{align*}
+H &= n(\text{infected}) \cdot 100 / N
+\end{align*}
+
+
+Users can adjust the proportion of people over 60 infected using $H_{60+}$. The overall $H$ can be decomposed as:
+
+\begin{align}\label{eq: H}
+H = (1 - d_{60+}) \cdot H_{<60} + d_{60+} \cdot H_{60+}
+\end{align}
+
+where $H_{<60}$ is proportion of people below 60 infected and is calculated from~\ref{eq: H}.
+
+\subsection*{Probability of Eliminating COVID-19}
+Let $A$ be the event of achieving complete elimination of COVID-19 disease before it manages to infect $H$ percent of population. And let $I_{A}$ be the indicator variable for event $A$. Then
+\begin{align*}
+E &= \text{Pr}(I_{A} = 1) \cdot 100 \\
+U &= n(\text{infected until elimination}) \cdot 100 / N
+\end{align*}
+
+To keep the number of parameters low let
+\begin{align}\label{eq: U}
+U_{60+} / U = H_{60+} / H
+\end{align}
+
+so we calculate proportion of people over 60 infected until elimination $U_{60+}$ from Eq.~\ref{eq: U} and proportion of people below 60 infected until elimination $U_{<60}$ from decomposition of $U$, i.e. equation
+
+\begin{align*}
+U &= (1 - d_{60+}) \cdot U_{<60} + d_{60+} \cdot U_{60+}
+\end{align*}
+
+\subsection*{Expected Number of Infected and Expected Number of Deaths}
+We estimate expected number of infected in age group $g \in G$ as
+\begin{align*}
+  \text{E} n(\text{infected in age group g})  &=
+    (1 - E/100) \cdot N(g) \cdot H_{\text{*}} + E/100 \cdot N(g) \cdot U_{\text{*}}
+\end{align*}
+where $\text{*}$ is $<60$ or $60+$.
+
+Expected number of deaths in age group $g$ in $G$ as
+\begin{align*}
+  \text{E} n(\text{deaths in age group g})  &=
+    \text{E} n(\text{infected in age group g})  \cdot FR(g)
+\end{align*}
+
+Total expected numbers are simply sums over all age groups
+\begin{align*}
+  \text{E} n(\text{infected})  &= \sum_{g \in G} \text{E} n(\text{infected in age group g})  \\
+  \text{E} n(\text{deaths})  &= \sum_{g \in G} \text{E} n(\text{deaths in age group g}) 
+\end{align*}
+
+\subsection*{Expected Years of Life Lost}
+We used the life table for global population~\cite{expectancies} for 2016 with estimates about expected number of life years left for all ages in 2016. E.g. a person at the age of 60 had 20.5 expected number of life years left in 2016.
+
+We use it as an estimate of {\it Expected Years of Life Lost}. E.g. if a person dies at the age of 60 this means we estimate 20.5 of expected years of life lost.
+
+We use an average EYLL by age and gender in a specific 10 year age group $g \in G$ as an estimate
+for all deaths in each age group.
+
+\subsection*{Costs}
+A figure of \$129,000 represents what it would cost to give a person an additional {\it quality-of-life adjusted} year of life~\cite{price}. We multiply this figure with years of life lost to get estimated costs or money saved.
+
+\subsection*{TODO}
+\begin{itemize}
+\item Years of life lost until
+\item Poverty
+\end{itemize}
+ 
+
+\section*{Data Sources}
+\begin{itemize}
+\item Case Fatality Risk (CFR) by age group estimates. From: 17th February (China), 17th March (Italy), 24th March (Spain, South Korea), source~\cite{cfrs}.
+\item Infection Fatality Risk (CFR) by age group estimates are from~\cite{imperial}.
+\item Deaths from major causes (from 2016) are from~\cite{major}.
+\item Global life tables are from~\cite{expectancies}.
+\item Estimated price of year of life from~\cite{price}.
+\item Data about age is from 2019, source~\cite{pyramids}.
+\end{itemize}
+
+\section*{Acknowledgements}
+Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
+
+\section*{Licenses}
+The source code is licensed \href{http://opensource.org/licenses/mit-license.php}{MIT}. The website content is licensed \href{https://creativecommons.org/licenses/by/4.0/deed.ast}{CC BY 4.0}.
+
+
+\section*{Disclaimer}
+The author of this website is not a health expert or an epidemiologist and disclaims responsibility for any adverse effect resulting, directly or indirectly, from information contained in this website. For health, safety, and medical emergencies or updates on the novel coronavirus pandemic, you can get the latest information from \href{https://www.who.int/emergencies/diseases/novel-coronavirus-2019}{WHO} or search for official public health information for your country on \href{https://www.google.com/search?q=Coronavirus}{Google} or \href{https://www.baidu.com/}{Baidu}.
+
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}
+
+
+
+
+
+
+
+
+  

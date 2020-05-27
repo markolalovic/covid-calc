@@ -557,7 +557,7 @@
 		<div class="eight columns title">
 			<div class = "child">
 				<h3 class="title">{translations.app.mainTitle}</h3>
-				<div class="parameter-text">{translations.app.subtitle}</div>
+				<h6 class="parameter-text">{translations.app.subtitle}</h6>
 			</div>
 		</div>
 		<div class="four columns title">
@@ -582,10 +582,10 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-						Select location
+						{translations.app.selectLocation}
 					</p>
 					<div class="parameter-text">
-						The impact of COVID-19 varies between countries.
+						{translations.app.locationDescription}
 					</div>
 				</label>
 				<span class="parameter-text">
@@ -604,11 +604,11 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-					  Infection rate
+					  {translations.app.infectionRate}
 				    <span class="parameter" style="float:right;">{pctH}%</span>
 					</p>
 					<div class="parameter-text">
-						Proportion of all people contracting the novel coronavirus.
+						{translations.app.infectionRateDescription}
 					</div>
 				</label>
 				<input class="pointer u-full-width"
@@ -623,11 +623,11 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-						Over 60 infection rate
+						{translations.app.over60InfectionRate}
 						<span class="parameter" style="float:right;">{pctH_60plus}%</span>
 					</p>
 					<div class="parameter-text">
-						Proportion of all people over the age of 60 contracting the novel coronavirus.
+						{translations.app.over60Description}
 					</div>
 				</label>
 
@@ -639,12 +639,11 @@
 					max={upperBound}
 				/>
 				<span class="parameter-text">
-					The proportion of people below 60 infected is then:
+					{translations.app.proportionIsThen}
 				</span>
 				<span class="parameter">{pctH_below60}%</span>
-
 				<span class="parameter-text">
-					Since it depends on both overall infection rate and infection rate of people over 60.
+					{translations.app.proportionIsThenDescription}
 				</span>
 			</div>
 		</div>
@@ -675,29 +674,30 @@
 					<div class="ten columns"> 
 						<div class="caption">
 							<span class="parameter-text">
-								Based on
+								{translations.app.basedOn}
 								<span class="parameter">{translations.fatalityRisks[selectedSourceId].source}</span>
-								fatality rates
-								and <span class="parameter">{rowsOfScenarios[0].loc}</span>'s age distribution
-								and other selected input parameters, the potential expected numbers:
+								{translations.app.basedOnContinued1}
+								<span class="parameter">{rowsOfScenarios[0].loc}</span>
+								{translations.app.basedOnContinued2}
 							</span>
 							<span class="emphasize-text">				
 								{numberFormatter(totalInfected)}
 							</span>
 							<span class="parameter-text">
-								infected and  
+								{translations.app.basedOnContinued2}  
 							</span>
 							<span class="emphasize-text">								
 								{numberFormatter(totalDeaths)}
 							</span>
 							<span class="parameter-text">
-								deaths or 					
+								{translations.app.basedOnContinued3}
 							</span>
 							<span class="emphasize-text">								
 								{numberFormatter(totalYearsLost)}
 							</span>	
 							<span class="parameter-text">						
-								years of life lost in <span class="parameter">{selectedLocation}</span>.
+								{translations.app.basedOnContinued4}
+								<span class="parameter">{selectedLocation}</span>.
 							</span>
 						</div>
 					</div>
@@ -730,44 +730,50 @@
 						{#if 0 == currentCompare}
 							<div class="caption">
 								<div class="parameter-text"> 
-									It is possible that estimated coronavirus deaths will span multiple years.
+									{translations.app.compareWithOtherCaption1}
 								</div>
 								<div class="parameter-text">
-									Deaths due to other causes are for the year of 2017. Source: OurWorldTroughData.
+									 {translations.app.compareWithOtherCaption2}
+									<a href="https://ourworldindata.org/causes-of-death">Our World in Data</a>
 								</div>
 								<div class="parameter-text">
-									Confirmed deaths due to COVID-19 until 2020-04-21. Source: OurWorldTroughData.
+									{translations.app.compareWithOtherCaption3}
+									<a href="https://ourworldindata.org/coronavirus-data">Our World in Data</a>
 								</div>
 							</div>		
 						{/if}
 						{#if 1 == currentCompare}
 							<div class="caption">
 								<div class="parameter-text"> 
-									It is possible that estimated coronavirus deaths will span multiple years.
+									{translations.app.compareWithOtherCaption1}
 								</div>
 								<div class="parameter-text">
-									Years of life lost due to other causes are for the year of 2017. Source: OurWorldTroughData.
+									{translations.app.compareWithOtherCaption4}
+									<a href="https://ourworldindata.org/grapher/burden-of-disease-by-cause">Our World in Data</a>
 								</div>
 								<div class="parameter-text">
-									Years of life lost due to COVID-19 until 2020-04-21. 
-									Source: OurWorldTroughData and authors calculations.
+									{translations.app.compareWithOtherCaption5}
+									<a href="https://ourworldindata.org/coronavirus-data">Our World in Data</a>
+									{translations.app.authorsCalculations}
 								</div>
 							</div>		
 						{/if}
 						{#if 2 == currentCompare}
 							<div class="caption">
-								<div class="parameter-text"> 
-									It is possible that estimated coronavirus deaths will span multiple years.
+								<div class="parameter-text">
+									{translations.app.compareWithOtherCaption1}
 								</div>
 								<div class="parameter-text">
-									Years of life lost due to other risk factors are for the year of 2017. Source: OurWorldTroughData.
+									{translations.app.compareWithOtherCaption7}
+									 <a href="https://ourworldindata.org/grapher/disease-burden-by-risk-factor">Our World in Data</a>
 								</div>
 								<div class="parameter-text">
-									Years of life lost due to COVID-19 until 2020-04-21. 
-									Source: OurWorldTroughData and authors calculations.
+									{translations.app.compareWithOtherCaption5}
+									<a href="https://ourworldindata.org/coronavirus-data">Our World in Data</a>
+									{translations.app.authorsCalculations}
 								</div>
-							</div>		
-						{/if}						
+							</div>
+						{/if}				
 					</div>
 				</div>
 			{/if}
@@ -777,11 +783,10 @@
 					<Subtabs bind:activeTabValue={selectedRisk} items={mapItems} />
 					<div class="twelve columns" style="text-align: center; margin-top: 25px">
 						<div class="child">
-
+							{translations.app.proportionOver60ByCountry}
 							{#if 0 == selectedRisk}
 								<div class='worldmap-title'
 									style='font-size: 16;'>
-									Proportion of People Over 60 Risk by Country
 								</div>
 								<div class="child">
 									<WorldMap {mapTitle} {selectedRisk} />
@@ -791,7 +796,7 @@
 							{#if 1 == selectedRisk}
 								<div class='worldmap-title'
 									style='font-size: 16;'>
-									Low Income Risk by Country
+									{translations.app.lowIncomeRiskByCountry}
 								</div>
 								<div class="child">
 									<WorldMap {mapTitle} {selectedRisk} />
@@ -800,9 +805,10 @@
 
 							<div class='caption'>
 								<span class="parameter-text">
-									You can hover over legend items to select. You can zoom in and out of map.
-									And hover over map to get information about the country it represents.
-								</span>							
+										{translations.app.mapCaption}
+									<a href="https://github.com/topojson/world-atlas">World Atlas TopoJSON</a> 
+										{translations.app.authorsCalculations}
+								</span>
 							</div>							
 
 						</div>
@@ -837,11 +843,13 @@
 						<div class="eight columns">
 							<div class='caption'>
 								<div class='parameter-text'>
-									Projected poverty increases by country due to coronavirus impact on world economy.
+									{translations.app.projectedPovery}
 								</div>
 								<div class='parameter-text'>
-									Source: POVCAL and IFM data and authors calculations.
-									<!-- TODO: links -->
+									{translations.app.sources}
+									<a href="https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en">IFM</a>, 
+									<a href="https://data.worldbank.org/indicator/SI.POV.DDA">POVCAL</a> 
+									{translations.app.authorsCalculations}
 								</div>
 							</div>
 						</div>
@@ -867,15 +875,17 @@
 						<div class="eight columns">
 							<div class='caption'>
 								<div class='parameter-text'>
-									Projected poverty increases by region due to coronavirus impact on world economy.
+									{translations.app.projectedPoveryByRegion}
 								</div>
 								<div class='parameter-text'>
-									Source: POVCAL and IFM data and authors calculations.
-									<!-- TODO: links -->
+									{translations.app.sources}
+									<a href="https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en">IFM</a>, 
+									<a href="https://data.worldbank.org/indicator/SI.POV.DDA">POVCAL</a> 
+									{translations.app.authorsCalculations}
 								</div>
 							</div>
 						</div>
-					</div>					
+					</div>									
 				{/if}
 			{/if}
 
@@ -906,12 +916,11 @@
 						<div class="eight columns">
 							<div class='caption'>
 								<div class='parameter-text'>
-									Projections of total deaths from COVID-19.
-									Click on the legend to select or deselect a country.
+									{translations.app.projectionsCaption}
 								</div>
 								<div class='parameter-text'>
-								 	Source: IHME.
-									<!-- TODO: links -->
+									{translations.app.source}
+									<a href="http://www.healthdata.org/">IHME</a> 
 								</div>
 							</div>
 						</div>
@@ -1338,9 +1347,18 @@
 						to create this international tool that allows users to derive their own country-specific estimates.
 					</p>
 					<p>
-						Please send me feedback: here (TODO: link to the Twitter post) or email me:
+						Please send me feedback:
+						here (TODO: link to the Twitter post) 
+						
+						or email me:
 						<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20analyzer" target="_top">here</a>.
-						TODO: link to notes (technical details) and code (technical details).
+					</p>
+					<p>
+						For technical details please refer to:
+						<a href="notes.html">notes</a>
+						
+						or the:
+						<a href="https://github.com/markolalovic/covid-calc">source code</a>.
 					</p>
 
 					<div class="wtitle">Acknowledgements</div>

@@ -1,0 +1,128 @@
+english,chinese,description
+COVID Calculator,COVID计算器,Main title
+A visual tool to explore and analyze potential impacts of COVID-19,一种可视工具，用于探索和分析COVID-19的潜在影响,Subtitle
+Location,位置,Location
+Select location,选择地点,Select location
+The impact of COVID-19 varies between countries.,COVID-19的影响因国家/地区而异。,Location description
+Infection rate,感染率,Infection rate
+Proportion of all people contracting the novel coronavirus.,感染新型冠状病毒的所有人比例。,Infection rate description
+Over 60 infection rate,感染率超过60,Over60infection rate
+Proportion of all people over the age of 60 contracting the novel coronavirus.,60岁以上感染新型冠状病毒的人口比例。,Over60description
+The proportion of people below 60 infected is then,然后，将60岁以下的人口比例,Proportion is then
+Since it depends on both overall infection rate and infection rate of people over 60.,因为这取决于总体感染率和60岁以上人群的感染率。,Proportion is then description
+Based on,基于,Based on
+fatality rates and ,死亡率和,Based on continued1
+"s age distribution and other selected input parameters, the potential expected numbers",的年龄分布和其他选定的输入参数，潜在的预期数字,Based on continued2
+infected and ,被感染,Based on continued3
+deaths or ,死亡或,Based on continued4
+years of life lost in ,失去的生命,Based on continued5
+It is possible that estimated coronavirus deaths will span multiple years.,估计冠状病毒死亡可能跨越数年。,Compare with other caption1
+Deaths due to other causes are for the year of 2017. Source:,其他原因导致的死亡是在2017年。资料来源：,Compare with other caption2
+"Confirmed deaths due to COVID-19 until May 27, 2020. Source: ",确认至2020年5月27日死于COVID-19。资料来源：,Compare with other caption3
+Years of life lost due to other causes are for the year of 2017. Source: ,因其他原因而丧生的年份是2017年。资料来源：,Compare with other caption4
+"Years of life lost due to COVID-19 until May 27, 2020. Source: ",直到2020年5月27日，由于COVID-19导致的生命损失。资料来源：,Compare with other caption5
+and authors calculations.,和作者的计算。,Authors calculations
+Years of life lost due to other risk factors are for the year of 2017. Source:,由于其他风险因素而导致的生命损失是在2017年。资料来源：,Compare with other caption7
+Proportion of People Over 60 Risk by Country,按国家划分的60岁以上风险人群的比例,Proportion over60by country
+Low Income Risk by Country,低收入风险（按国家/地区）,Low income risk by country
+You can hover over legend items to select. You can zoom in and out of map.         And hover over map to get information about the country it represents. Source:,您可以将鼠标悬停在图例项上以进行选择。您可以放大和缩小地图。然后将鼠标悬停在地图上即可获取有关其代表的国家的信息。资源：,Map caption
+Projected poverty increases by country due to coronavirus impact on world economy.,由于冠状病毒对世界经济的影响，预计每个国家的贫困人口将增加。,Projected povery
+Sources: ,资料来源：,Sources
+Projected poverty increases by region due to coronavirus impact on world economy.,由于冠状病毒对世界经济的影响，预计贫困地区会增加。,Projected povery by region
+Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.,COVID-19的总死亡人数预测。单击图例以选择或取消选择国家。,Projections caption
+Source:,资源：,Source
+How COVID-19 Compare With ,COVID-19如何与,Comparison title
+Select source,选择来源,Select source
+Proportion of Infected,感染比例,Prevalence
+Reset,重启,Reset
+Fatality Risks: ,死亡风险：,Fatality risks source
+Expected Infected by Age In: ,预期感染年龄：,Infected title
+Expected Deaths by Age In: ,预期死亡年龄：,Deaths title
+yrs,年,Years old
+COVID-19 estimate,COVID-19估算,Covid19cause
+Total expected numbers in,预期总数,Table title
+Enter description,输入描述,Enter describtion
+Description,描述,Description
+Expected Number of Infected,预期感染人数,Infected
+Expected Number of Deaths,预期死亡人数,Deaths
+Expected Years of Life Lost,预期寿命损失,Yrs of life lost
+Potential Costs,潜在成本,Yrs of life lost costs
+Imperial College - IFR,帝国理工学院-IFR,Sources of Fatality Rates
+China CDC - CFR,中国疾病预防控制中心-CFR,Sources of Fatality Rates
+Korea CDC - CFR,韩国CDC-CFR,Sources of Fatality Rates
+JAMA Italy - CFR,JAMA意大利-CFR,Sources of Fatality Rates
+MISAN Spain - CFR,MISAN西班牙-CFR,Sources of Fatality Rates
+Other Major Causes Of Death,其他主要死因,Option to compare with
+Diseases in Years of Life Lost,多年生命中的疾病,Option to compare with
+Risk Factors in Years of Life Lost,多年生命中的危险因素,Option to compare with
+Other Countries in the World,世界其他国家,Option to compare with
+Drug use disorders,吸毒障碍,"Cause of death, e.g. homicide"
+"COVID-19 until May 27, 2020",COVID-19，直到2020年5月27日,"Cause of death, e.g. homicide"
+Nutritional deficiencies,营养不足,"Cause of death, e.g. homicide"
+Tuberculosis,结核,"Cause of death, e.g. homicide"
+Malaria,疟疾,"Cause of death, e.g. homicide"
+Neonatal disorders,新生儿疾病,"Cause of death, e.g. homicide"
+Cardiovascular diseases,心血管疾病,"Cause of death, e.g. homicide"
+Road injuries,道路伤害,"Cause of death, e.g. homicide"
+Diarrheal diseases,腹泻病,"Cause of death, e.g. homicide"
+Cancers,癌症,"Cause of death, e.g. homicide"
+Meningitis,脑膜炎,"Cause of death, e.g. homicide"
+Diabetes,糖尿病,"Cause of death, e.g. homicide"
+Alcohol use disorders,饮酒障碍,"Cause of death, e.g. homicide"
+Terrorism,恐怖主义,"Cause of death, e.g. homicide"
+Respiratory diseases,呼吸疾病,"Cause of death, e.g. homicide"
+Parkinson disease,帕金森综合症,"Cause of death, e.g. homicide"
+Suicide,自杀,"Cause of death, e.g. homicide"
+Maternal disorders,产妇疾病,"Cause of death, e.g. homicide"
+Homicide,杀人,"Cause of death, e.g. homicide"
+Conflict,冲突,"Cause of death, e.g. homicide"
+Digestive diseases,消化系统疾病,"Cause of death, e.g. homicide"
+Natural disasters,自然灾害,"Cause of death, e.g. homicide"
+Dementia,痴呆,"Cause of death, e.g. homicide"
+HIV/AIDS,HIV爱滋病,"Cause of death, e.g. homicide"
+Lower respiratory infections,下呼吸道感染,"Cause of death, e.g. homicide"
+Kidney disease,肾脏疾病,"Cause of death, e.g. homicide"
+Protein-energy malnutrition,蛋白质能量营养不良,"Cause of death, e.g. homicide"
+Liver diseases,肝病,"Cause of death, e.g. homicide"
+Self-harm,自残,"Cause of years of life lost, e.g. cancer"
+Conflict and terrorism,冲突与恐怖主义,"Cause of years of life lost, e.g. cancer"
+"COVID-19 until May 27, 2020",COVID-19，直到2020年5月27日,"Cause of years of life lost, e.g. cancer"
+Nutritional deficiencies,营养不足,"Cause of years of life lost, e.g. cancer"
+Musculoskeletal disorders,肌肉骨骼疾病,"Cause of years of life lost, e.g. cancer"
+Interpersonal violence,人际暴力,"Cause of years of life lost, e.g. cancer"
+Neonatal disorders,新生儿疾病,"Cause of years of life lost, e.g. cancer"
+Cardiovascular diseases,心血管疾病,"Cause of years of life lost, e.g. cancer"
+"Diabetes, blood, & endocrine diseases",糖尿病，血液和内分泌疾病,"Cause of years of life lost, e.g. cancer"
+Cancers,癌症,"Cause of years of life lost, e.g. cancer"
+Malaria & neglected tropical diseases,疟疾和被忽视的热带病,"Cause of years of life lost, e.g. cancer"
+Respiratory diseases,呼吸疾病,"Cause of years of life lost, e.g. cancer"
+Other communicable diseases,其他传染病,"Cause of years of life lost, e.g. cancer"
+HIV/AIDS and tuberculosis,艾滋病毒/艾滋病与结核病,"Cause of years of life lost, e.g. cancer"
+Diarrhea & common infectious diseases,腹泻和常见传染病,"Cause of years of life lost, e.g. cancer"
+Digestive diseases,消化系统疾病,"Cause of years of life lost, e.g. cancer"
+Neurological disorders,神经系统疾病,"Cause of years of life lost, e.g. cancer"
+Unintentional injuries,意外伤害,"Cause of years of life lost, e.g. cancer"
+Other NCDs,其他非传染性疾病,"Cause of years of life lost, e.g. cancer"
+Transport injuries,运输伤害,"Cause of years of life lost, e.g. cancer"
+Mental and substance use disorders,精神和物质使用障碍,"Cause of years of life lost, e.g. cancer"
+Liver diseases,肝病,"Cause of years of life lost, e.g. cancer"
+Drug use,用药,"Risk factor, e.g. smoking"
+Diet low in vegetables,饮食中蔬菜含量低,"Risk factor, e.g. smoking"
+Secondhand smoke,二手烟,"Risk factor, e.g. smoking"
+High blood sugar,高血糖,"Risk factor, e.g. smoking"
+Diet high in salt,饮食含盐量高,"Risk factor, e.g. smoking"
+Unsafe sanitation,不安全的卫生,"Risk factor, e.g. smoking"
+Vitamin A deficiency,维生素A缺乏症,"Risk factor, e.g. smoking"
+"COVID-19 until May 27, 2020",COVID-19，直到2020年5月27日,"Risk factor, e.g. smoking"
+Child wasting,浪费孩子,"Risk factor, e.g. smoking"
+Non-exclusive breastfeeding,非独家母乳喂养,"Risk factor, e.g. smoking"
+Child stunting,儿童发育迟缓,"Risk factor, e.g. smoking"
+Unsafe water source,不安全的水源,"Risk factor, e.g. smoking"
+Iron deficiency,缺铁,"Risk factor, e.g. smoking"
+Low physical activity,低体力活动,"Risk factor, e.g. smoking"
+Air pollution (outdoor & indoor),空气污染（室内和室外）,"Risk factor, e.g. smoking"
+Obesity,肥胖,"Risk factor, e.g. smoking"
+Smoking,抽烟,"Risk factor, e.g. smoking"
+High cholesterol,高胆固醇,"Risk factor, e.g. smoking"
+High blood pressure,高血压,"Risk factor, e.g. smoking"
+Diet low in fruits,水果饮食偏少,"Risk factor, e.g. smoking"
