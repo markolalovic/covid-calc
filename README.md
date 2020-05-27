@@ -1,4 +1,4 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+The source code for: [COVID Calculator](https://markolalovic.github.io/covid-calc/)
 
 ---
 
