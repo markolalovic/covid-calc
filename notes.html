@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html >
+<head><title>Notes on COVID-19 Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)">
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)">
+<!-- html -->
+<meta name="src" content="main.tex">
+<link rel="stylesheet" type="text/css" href="main.css">
+</head><body style="margin: 35px"
+>
+   <div class="maketitle">
+
+
+
+
+
+
+
+<h2 class="titleHead">Notes on COVID-19 Calculator</h2>
+<div class="author" ><span
+class="cmr-12x-x-120">Marko Lalovic</span></div><br />
+<div class="date" ><span
+class="cmr-12x-x-120">May 27, 2020</span></div>
+   </div>
+<!--l. 27--><p class="noindent" ><span
+class="cmbx-12">Summary. </span>At the time of writing, the impacts of Coronavirus disease of 2019
+remain largely uncertain and depend on a whole range of possibilities.
+<!--l. 30--><p class="indent" >   Organizing the overwhelming mass of the available information in the media
+and literature, coming up with a reasonable working estimates and comparing
+multiple scenarios can be challenging, especially to the non-expert such as
+myself.
+<!--l. 34--><p class="indent" >   As an attempt to address this problem I used publicly available
+data and published information to create this international tool that
+allows users to derive their own country-specific estimates available at:
+<a
+href="https://markolalovic.github.io/covid-calc" class="url" >https://markolalovic.github.io/covid-calc</a>
+<!--l. 37--><p class="indent" >   Users should be aware this tool is focused on simple presentation and
+pedagogical aspects and only offers crude estimates. It uses relatively simplistic
+methodology outlined in Technical Details&#x00A0;<a
+href="#x1-1000doc"><!--tex4ht:ref: details --></a> below.
+<!--l. 39--><p class="indent" >   There are lots of improvements possible or more things to consider. One is to
+also include estimated fatality rates of COVID-19 by pre-existing health
+conditions. Having time to event data and applying survival analysis techniques
+would result in a more sensible estimates of expected years of life lost. Allowing
+parameters to evolve over time and comparing different time spans is another
+improvement.
+
+
+
+   <h3 class="likesectionHead"><a
+ id="x1-1000"></a>Technical Details</h3>
+<a
+ id="x1-1000doc"></a>
+<!--l. 42--><p class="noindent" >Denote <span
+class="cmti-12">number of sth </span>with <span
+class="cmmi-12">n</span>(<span
+class="cmsy-10x-x-120">&#x22C5;</span>), e.g. <span
+class="cmmi-12">n</span>(people in the world) <span
+class="cmsy-10x-x-120">&#x2248; </span>7<span
+class="cmmi-12">.</span>59<span
+class="cmmi-12">B</span>.
+<!--l. 44--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-2000"></a>Age Structure</h4>
+<!--l. 45--><p class="noindent" >For selected location population we use data about age from 2019, source&#x00A0;<span class="cite">[<a
+href="#Xpyramids">2</a>]</span>. We
+divide the age in years in 9 intervals or <span
+class="cmti-12">age groups</span>
+<table
+class="align-star">
+                     <tr><td
+class="align-odd"><span
+class="cmmi-12">G </span>= <span
+class="cmsy-10x-x-120">{</span>0-9<span
+class="cmmi-12">,</span> 10-19<span
+class="cmmi-12">,</span><span
+class="cmmi-12">&#x2026;</span><span
+class="cmmi-12">,</span> 70-79<span
+class="cmmi-12">,</span> 80+<span
+class="cmsy-10x-x-120">}</span></td>                     <td
+class="align-even"></td>                     <td
+class="align-label"></td></tr></table>
+<!--l. 51--><p class="indent" >   <span
+class="cmti-12">Age structure </span><span
+class="cmmi-12">N</span>(<span
+class="cmmi-12">g</span>) is the size of population by age group <span
+class="cmmi-12">g </span><span
+class="cmsy-10x-x-120">&#x2208; </span><span
+class="cmmi-12">G</span>. We estimate
+it by counting how many people fall into each age group <span
+class="cmmi-12">g </span><span
+class="cmsy-10x-x-120">&#x2208; </span><span
+class="cmmi-12">G</span>
+<!--l. 53--><p class="indent" >
+
+
+
+<table
+class="align-star">
+                     <tr><td
+class="align-odd"><span
+class="cmmi-12">N</span>(<span
+class="cmmi-12">g</span>)</td>                     <td
+class="align-even"> = <span
+class="cmmi-12">n</span>(people in age group g)</td>                     <td
+class="align-label"></td>                     <td
+class="align-label"></td></tr></table>
+<!--l. 58--><p class="indent" >   We estimate <span
+class="cmti-12">total population size </span><span
+class="cmmi-12">N </span>by
+<!--l. 60--><p class="indent" >
+<table
+class="align-star">
+                     <tr><td
+class="align-odd"><span
+class="cmmi-12">N </span>= <span
+class="cmex-10x-x-120">&#x2211;</span>
+   <sub><span
+class="cmmi-8">g</span><span
+class="cmsy-8">&#x2208;</span><span
+class="cmmi-8">G</span></sub><span
+class="cmmi-12">n</span>(people in age group g)</td>                     <td
+class="align-even"></td>                     <td
+class="align-label"></td></tr></table>
+<!--l. 65--><p class="indent" >   For a more detailed analysis, we divide all age groups into two sets:
+
+
+
+<table
+class="align-star">
+                      <tr><td
+class="align-odd"><span
+class="cmmi-12">G</span><sub><span
+class="cmmi-8">&#x003C;</span><span
+class="cmr-8">60</span></sub></td>                      <td
+class="align-even"> = <span
+class="cmsy-10x-x-120">{</span>0-9<span
+class="cmmi-12">,</span> 10-19<span
+class="cmmi-12">,</span><span
+class="cmmi-12">&#x2026;</span><span
+class="cmmi-12">,</span> 50-59<span
+class="cmsy-10x-x-120">}</span></td>                      <td
+class="align-label"></td>                      <td
+class="align-label">
+                      </td></tr><tr><td
+class="align-odd"><span
+class="cmmi-12">G</span><sub><span
+class="cmr-8">60+</span></sub></td>                      <td
+class="align-even"> = <span
+class="cmsy-10x-x-120">{</span>60-69<span
+class="cmmi-12">,</span> 70-79<span
+class="cmmi-12">,</span> 80+<span
+class="cmsy-10x-x-120">}</span></td>                        <td
+class="align-label"></td>                      <td
+class="align-label"></td></tr></table>
+<!--l. 73--><p class="indent" >   and estimate the proportion of people over 60 in selected population
+as
+<table
+class="align-star">
+                           <tr><td
+class="align-odd"><span
+class="cmmi-12">d</span><sub><span
+class="cmr-8">60+</span></sub> = <span
+class="cmex-10x-x-120">&#x2211;</span>
+   <sub><span
+class="cmmi-8">g</span><span
+class="cmsy-8">&#x2208;</span><span
+class="cmmi-8">G</span><sub><span
+class="cmr-6">60+</span></sub></sub><span
+class="cmmi-12">N</span>(<span
+class="cmmi-12">g</span>)<span
+class="cmmi-12">&#x2215;N</span></td>                           <td
+class="align-even"></td>                           <td
+class="align-label"></td></tr></table>
+<!--l. 78--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-3000"></a>Fatality Rates</h4>
+<!--l. 79--><p class="noindent" ><span
+class="cmti-12">Infection Fatality Rate (IFR) </span>represents&#x00A0;<span class="cite">[<a
+href="#Xcfr_wiki">7</a>]</span> the proportion of deaths among all
+the infected individuals
+
+
+
+<table
+class="align-star">
+                       <tr><td
+class="align-odd">FR</td>                       <td
+class="align-even"> = <span
+class="cmmi-12">n</span>(deaths)<span
+class="cmmi-12">&#x2215;n</span>(infected)</td>                       <td
+class="align-label"></td>                       <td
+class="align-label"></td></tr></table>
+<!--l. 86--><p class="indent" >   <span
+class="cmti-12">Case Fatality Rate (CFR) </span>represents the proportion of confirmed deaths
+among all confirmed infected individuals
+<table
+class="align-star">
+    <tr><td
+class="align-odd">CFR</td>    <td
+class="align-even"> = <span
+class="cmmi-12">n</span>(confirmed cases of deaths)<span
+class="cmmi-12">&#x2215;n</span>(confirmed cases of infected)</td>    <td
+class="align-label"></td>    <td
+class="align-label"></td></tr></table>
+<!--l. 93--><p class="indent" >   We use estimates of IFR(g) by age group from &#x00A0;<span class="cite">[<a
+href="#Ximperial">1</a>]</span> by default. Users can select
+to use estimates of CFR(g) by age group based on data from different countries,
+source &#x00A0;<span class="cite">[<a
+href="#Xcfrs">4</a>]</span>.
+
+
+
+<!--l. 95--><p class="indent" >   For example if in some particular time frame we had 5 confirmed cases of
+people infected and 2 confirmed deaths. Then <span
+class="cmmi-12">CFR </span>= 2<span
+class="cmmi-12">&#x2215;</span>5 = 0<span
+class="cmmi-12">.</span>4. But if, based on
+some other data and not only on confirmed cases, we know that there are
+actually more people infected, than our estimated IFR will be smaller than
+CFR.
+<!--l. 97--><p class="indent" >   Users can also adjust fatality rate of each age group by input parameter <span
+class="cmmi-12">F</span>. It
+represents percent of increase or decrease.
+<!--l. 99--><p class="indent" >   To get <span
+class="cmti-12">Fatality Rate by age group </span><span
+class="cmmi-12">FR</span>(<span
+class="cmmi-12">g</span>), we multiply selected estimates of
+fatality rate for each age group <span
+class="cmmi-12">g </span>in <span
+class="cmmi-12">G </span>by 1 + <span
+class="cmmi-12">F&#x2215;</span>100 and use it as an estimate of
+true IFR:
+<!--l. 101--><p class="indent" >
+<table
+class="align-star">
+                      <tr><td
+class="align-odd">FR(<span
+class="cmmi-12">g</span>)</td>                      <td
+class="align-even"> = *FR(<span
+class="cmmi-12">g</span>) <span
+class="cmsy-10x-x-120">&#x22C5; </span>(1 + <span
+class="cmmi-12">F&#x2215;</span>100)</td>                      <td
+class="align-label"></td>                      <td
+class="align-label"></td></tr></table>
+<!--l. 105--><p class="indent" >   where *FR is user selected FR estimates (IFR or CFR).
+<!--l. 107--><p class="indent" >   Notes:
+      <ul class="itemize1">
+      <li class="itemize">Since confirmed cases of infected <span
+class="cmsy-10x-x-120">&#x2286;</span> infected, wider testing can reduce
+      CFR estimates.
+      </li>
+      <li class="itemize">When using CFR, the expected number of deaths in age group 0-9 is
+      always 0 since no children under 10 appear to have died from COVID-19
+      until this data was aquired.
+
+
+
+      </li>
+      <li class="itemize">Our proposed approach for later estimation assumes that the fatality
+      rate  by  age  in  selected  location  has  distribution  similar  to  that
+      estimated by&#x00A0;<span class="cite">[<a
+href="#Ximperial">1</a>]</span> or observed in the country of selected CFR&#x00A0;<span class="cite">[<a
+href="#Xcfrs">4</a>]</span>.</li></ul>
+<!--l. 114--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-4000"></a>Proportion of Infected</h4>
+<!--l. 115--><p class="noindent" >The selected <span
+class="cmti-12">proportion of infected </span><span
+class="cmmi-12">H </span>is
+<table
+class="align-star">
+                         <tr><td
+class="align-odd"><span
+class="cmmi-12">H</span></td>                         <td
+class="align-even"> = <span
+class="cmmi-12">n</span>(infected) <span
+class="cmsy-10x-x-120">&#x22C5; </span>100<span
+class="cmmi-12">&#x2215;N</span></td>                         <td
+class="align-label"></td>                         <td
+class="align-label"></td></tr></table>
+<!--l. 121--><p class="indent" >   Users can adjust the proportion of people over 60 infected using <span
+class="cmmi-12">H</span><sub><span
+class="cmr-8">60+</span></sub>. The
+overall <span
+class="cmmi-12">H </span>can be decomposed as:
+<!--l. 123--><p class="indent" >
+
+
+
+<table
+class="align">
+                    <tr><td
+class="align-odd"><span
+class="cmmi-12">H </span>= (1 <span
+class="cmsy-10x-x-120">- </span><span
+class="cmmi-12">d</span><sub><span
+class="cmr-8">60+</span></sub>) <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">H</span><sub><span
+class="cmmi-8">&#x003C;</span><span
+class="cmr-8">60</span></sub> + <span
+class="cmmi-12">d</span><sub><span
+class="cmr-8">60+</span></sub> <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">H</span><sub><span
+class="cmr-8">60+</span></sub></td>                    <td
+class="align-even"></td>                    <td
+class="align-label"><a
+ id="x1-4001r1"></a>(1)                    </td></tr></table>
+<!--l. 127--><p class="indent" >   where <span
+class="cmmi-12">H</span><sub><span
+class="cmmi-8">&#x003C;</span><span
+class="cmr-8">60</span></sub> is proportion of people below 60 infected and is calculated
+from&#x00A0;<a
+href="#x1-4001r1">1<!--tex4ht:ref: eq: H --></a>.
+<!--l. 129--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-5000"></a>Probability of Eliminating COVID-19</h4>
+<!--l. 130--><p class="noindent" >Let <span
+class="cmmi-12">A </span>be the event of achieving complete elimination of COVID-19 disease before
+it manages to infect <span
+class="cmmi-12">H </span>percent of population. And let <span
+class="cmmi-12">I</span><sub><span
+class="cmmi-8">A</span></sub> be the indicator variable
+for event <span
+class="cmmi-12">A</span>. Then
+<table
+class="align-star">
+                 <tr><td
+class="align-odd"><span
+class="cmmi-12">E</span></td>                 <td
+class="align-even"> = Pr(<span
+class="cmmi-12">I</span><sub><span
+class="cmmi-8">A</span></sub> = 1) <span
+class="cmsy-10x-x-120">&#x22C5; </span>100</td>                                     <td
+class="align-label"></td>                 <td
+class="align-label">
+                 </td></tr><tr><td
+class="align-odd"><span
+class="cmmi-12">U</span></td>                 <td
+class="align-even"> = <span
+class="cmmi-12">n</span>(infected until elimination) <span
+class="cmsy-10x-x-120">&#x22C5; </span>100<span
+class="cmmi-12">&#x2215;N</span></td>                 <td
+class="align-label"></td>                 <td
+class="align-label"></td></tr></table>
+
+
+
+<!--l. 136--><p class="indent" >   To keep the number of parameters low let
+<table
+class="align">
+                            <tr><td
+class="align-odd"><span
+class="cmmi-12">U</span><sub><span
+class="cmr-8">60+</span></sub><span
+class="cmmi-12">&#x2215;U </span>= <span
+class="cmmi-12">H</span><sub><span
+class="cmr-8">60+</span></sub><span
+class="cmmi-12">&#x2215;H</span></td>                            <td
+class="align-even"></td>                            <td
+class="align-label"><a
+ id="x1-5001r2"></a>(2)                            </td></tr></table>
+<!--l. 141--><p class="indent" >   so we calculate proportion of people over 60 infected until elimination <span
+class="cmmi-12">U</span><sub><span
+class="cmr-8">60+</span></sub>
+from Eq.&#x00A0;<a
+href="#x1-5001r2">2<!--tex4ht:ref: eq: U --></a> and proportion of people below 60 infected until elimination <span
+class="cmmi-12">U</span><sub><span
+class="cmmi-8">&#x003C;</span><span
+class="cmr-8">60</span></sub>
+from decomposition of <span
+class="cmmi-12">U</span>, i.e. equation
+<!--l. 143--><p class="indent" >
+<table
+class="align-star">
+                    <tr><td
+class="align-odd"><span
+class="cmmi-12">U</span></td>                    <td
+class="align-even"> = (1 <span
+class="cmsy-10x-x-120">- </span><span
+class="cmmi-12">d</span><sub><span
+class="cmr-8">60+</span></sub>) <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">U</span><sub><span
+class="cmmi-8">&#x003C;</span><span
+class="cmr-8">60</span></sub> + <span
+class="cmmi-12">d</span><sub><span
+class="cmr-8">60+</span></sub> <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">U</span><sub><span
+class="cmr-8">60+</span></sub></td>                    <td
+class="align-label"></td>                    <td
+class="align-label"></td></tr></table>
+
+
+
+<!--l. 147--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-6000"></a>Expected Number of Infected and Expected Number of Deaths</h4>
+<!--l. 148--><p class="noindent" >We estimate expected number of infected in age group <span
+class="cmmi-12">g </span><span
+class="cmsy-10x-x-120">&#x2208; </span><span
+class="cmmi-12">G </span>as
+<table
+class="align-star">
+ <tr><td
+class="align-odd">E<span
+class="cmmi-12">n</span>(infected in age group g)</td> <td
+class="align-even"> = (1 <span
+class="cmsy-10x-x-120">- </span><span
+class="cmmi-12">E&#x2215;</span>100) <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">N</span>(<span
+class="cmmi-12">g</span>) <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">H</span><sub>*</sub> + <span
+class="cmmi-12">E&#x2215;</span>100 <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">N</span>(<span
+class="cmmi-12">g</span>) <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">U</span><sub>*</sub></td> <td
+class="align-label"></td> <td
+class="align-label"></td></tr></table>
+<!--l. 153--><p class="indent" >   where * is <span
+class="cmmi-12">&#x003C; </span>60 or 60+.
+<!--l. 155--><p class="indent" >   Expected number of deaths in age group <span
+class="cmmi-12">g </span>in <span
+class="cmmi-12">G </span>as
+
+
+
+<table
+class="align-star">
+     <tr><td
+class="align-odd">E<span
+class="cmmi-12">n</span>(deaths in age group g)</td>     <td
+class="align-even"> = E<span
+class="cmmi-12">n</span>(infected in age group g) <span
+class="cmsy-10x-x-120">&#x22C5; </span><span
+class="cmmi-12">FR</span>(<span
+class="cmmi-12">g</span>)</td>     <td
+class="align-label"></td>     <td
+class="align-label"></td></tr></table>
+<!--l. 161--><p class="indent" >   Total expected numbers are simply sums over all age groups
+<table
+class="align-star">
+              <tr><td
+class="align-odd">E<span
+class="cmmi-12">n</span>(infected)</td>              <td
+class="align-even"> = <span
+class="cmex-10x-x-120">&#x2211;</span>
+   <sub><span
+class="cmmi-8">g</span><span
+class="cmsy-8">&#x2208;</span><span
+class="cmmi-8">G</span></sub>E<span
+class="cmmi-12">n</span>(infected in age group g)</td>              <td
+class="align-label"></td>              <td
+class="align-label">
+              </td></tr><tr><td
+class="align-odd">E<span
+class="cmmi-12">n</span>(deaths)</td>               <td
+class="align-even"> = <span
+class="cmex-10x-x-120">&#x2211;</span>
+   <sub><span
+class="cmmi-8">g</span><span
+class="cmsy-8">&#x2208;</span><span
+class="cmmi-8">G</span></sub>E<span
+class="cmmi-12">n</span>(deaths in age group g)</td>               <td
+class="align-label"></td>              <td
+class="align-label"></td></tr></table>
+<!--l. 167--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-7000"></a>Expected Years of Life Lost</h4>
+<!--l. 168--><p class="noindent" >We used the life table for global population&#x00A0;<span class="cite">[<a
+href="#Xexpectancies">6</a>]</span> for 2016 with estimates about
+expected number of life years left for all ages in 2016. E.g. a person at the age of
+60 had 20.5 expected number of life years left in 2016.
+
+
+
+<!--l. 170--><p class="indent" >   We use it as an estimate of <span
+class="cmti-12">Expected Years of Life Lost</span>. E.g. if a person dies
+at the age of 60 this means we estimate 20.5 of expected years of life
+lost.
+<!--l. 172--><p class="indent" >   We use an average EYLL by age and gender in a specific 10 year age group
+<span
+class="cmmi-12">g </span><span
+class="cmsy-10x-x-120">&#x2208; </span><span
+class="cmmi-12">G </span>as an estimate for all deaths in each age group.
+<!--l. 175--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-8000"></a>Costs</h4>
+<!--l. 176--><p class="noindent" >A figure of <span
+class="tcrm-1200">$</span>129,000 represents what it would cost to give a person an additional
+<span
+class="cmti-12">quality-of-life adjusted </span>year of life&#x00A0;<span class="cite">[<a
+href="#Xprice">5</a>]</span>. We multiply this figure with years of life
+lost to get estimated costs or money saved.
+<!--l. 178--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a
+ id="x1-9000"></a>TODO</h4>
+      <ul class="itemize1">
+      <li class="itemize">Years of life lost until
+      </li>
+      <li class="itemize">Poverty</li></ul>
+<!--l. 185--><p class="noindent" >
+   <h3 class="likesectionHead"><a
+ id="x1-10000"></a>Data Sources</h3>
+      <ul class="itemize1">
+      <li class="itemize">Case Fatality Risk (CFR) by age group estimates. From: 17th February
+      (China),  17th  March  (Italy),  24th  March  (Spain,  South  Korea),
+      source&#x00A0;<span class="cite">[<a
+href="#Xcfrs">4</a>]</span>.
+      </li>
+      <li class="itemize">Infection Fatality Risk (CFR) by age group estimates are from&#x00A0;<span class="cite">[<a
+href="#Ximperial">1</a>]</span>.
+
+
+
+      </li>
+      <li class="itemize">Deaths from major causes (from 2016) are from&#x00A0;<span class="cite">[<a
+href="#Xmajor">3</a>]</span>.
+      </li>
+      <li class="itemize">Global life tables are from&#x00A0;<span class="cite">[<a
+href="#Xexpectancies">6</a>]</span>.
+      </li>
+      <li class="itemize">Estimated price of year of life from&#x00A0;<span class="cite">[<a
+href="#Xprice">5</a>]</span>.
+      </li>
+      <li class="itemize">Data about age is from 2019, source&#x00A0;<span class="cite">[<a
+href="#Xpyramids">2</a>]</span>.</li></ul>
+<!--l. 195--><p class="noindent" >
+   <h3 class="likesectionHead"><a
+ id="x1-11000"></a>Acknowledgements</h3>
+<!--l. 196--><p class="noindent" >Tja&#353;a Kova&#x010D;evi&#263; for help with the calculation of expected years of life lost and
+economic impacts on poverty.
+<!--l. 198--><p class="noindent" >
+   <h3 class="likesectionHead"><a
+ id="x1-12000"></a>Licenses</h3>
+<!--l. 199--><p class="noindent" >The source code is licensed <a
+href="http://opensource.org/licenses/mit-license.php" >MIT</a>. The website content is licensed <a
+href="https://creativecommons.org/licenses/by/4.0/deed.ast" >CC BY
+4.0</a>.
+<!--l. 202--><p class="noindent" >
+   <h3 class="likesectionHead"><a
+ id="x1-13000"></a>Disclaimer</h3>
+<!--l. 203--><p class="noindent" >The author of this website is not a health expert or an epidemiologist and
+disclaims responsibility for any adverse effect resulting, directly or indirectly, from
+information contained in this website. For health, safety, and medical emergencies
+or updates on the novel coronavirus pandemic, you can get the latest information
+from <a
+href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" >WHO</a> or search for official public health information for your country on
+<a
+href="https://www.google.com/search?q=Coronavirus" >Google</a> or <a
+href="https://www.baidu.com/" >Baidu</a>.
+
+
+
+<!--l. 1--><p class="noindent" >
+   <h3 class="likesectionHead"><a
+ id="x1-14000"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Ximperial"></a>N.&#x00A0;M.     Ferguson,     D.&#x00A0;Laydon,     G.&#x00A0;Nedjati-Gilani,     N.&#x00A0;Imai,
+   K.&#x00A0;Ainslie,    S.&#x00A0;B.    Marc&#x00A0;Baguelin,    A.&#x00A0;Boonyasiri,    Z.&#x00A0;Cucunub�,
+   G.&#x00A0;Cuomo-Dannenburg, A.&#x00A0;Dighe, I.&#x00A0;Dorigatti, H.&#x00A0;Fu, K.&#x00A0;Gaythorpe,
+   W.&#x00A0;Green,   A.&#x00A0;Hamlet,   W.&#x00A0;Hinsley,   L.&#x00A0;C.   Okell,   S.&#x00A0;van   Elsland,
+   H.&#x00A0;Thompson,   R.&#x00A0;Verity,   E.&#x00A0;Volz,   H.&#x00A0;Wang,   Y.&#x00A0;Wang,   C.&#x00A0;W.
+   Patrick   GT&#x00A0;Walker,   P.&#x00A0;Winskill,   C.&#x00A0;Whittaker,   C.&#x00A0;A.   Donnelly,
+   S.&#x00A0;Riley,   and   A.&#x00A0;C.   Ghani.        Impact   of   non-pharmaceutical
+   interventions     (NPIs)     to     reduce     COVID19     mortality     and
+   healthcare  demand.     Technical  report,  Imperial  College,  3  2020.
+   <a
+href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf" class="url" >https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Xpyramids"></a>P.&#x00A0;Pyramids. <span
+class="cmti-12">Population Pyramids of the World from 1950 to 2100</span>,
+   2020 (accessed May 27, 2020). <a
+href="https://www.populationpyramid.net/" class="url" >https://www.populationpyramid.net/</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Xmajor"></a>H.&#x00A0;Ritchie and M.&#x00A0;Roser. Causes of death. <span
+class="cmti-12">Our World in Data</span>, 2020
+   (accessed May 27, 2020). <a
+href="https://ourworldindata.org/causes-of-death" class="url" >https://ourworldindata.org/causes-of-death</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Xcfrs"></a>M.&#x00A0;Roser, H.&#x00A0;Ritchie, E.&#x00A0;Ortiz-Ospina, and J.&#x00A0;Hasell.  Coronavirus
+   disease (COVID-19) &#8211; statistics and research. <span
+class="cmti-12">Our World in Data</span>, 2020
+   (accessed May 27, 2020). <a
+href="https://ourworldindata.org/coronavirus" class="url" >https://ourworldindata.org/coronavirus</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Xprice"></a>S.&#x00A0;G.   Staff.      How   much   will   we   pay   for   a   year   of   life?
+   <a
+href="https://www.gsb.stanford.edu/insights/how-much-will-we-pay-year-life" class="url" >https://www.gsb.stanford.edu/insights/how-much-will-we-pay-year-life</a>.
+
+
+
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Xexpectancies"></a>WHO.     Life  tables  by  who,  2020  (accessed  May  27,  2020).
+   <a
+href="https://apps.who.int/gho/data/view.main.LIFEREGIONGLOBAL?lang=en" class="url" >https://apps.who.int/gho/data/view.main.LIFEREGIONGLOBAL?lang=en</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a
+ id="Xcfr_wiki"></a>Wikipedia.     <span
+class="cmti-12">Case  fatality  rate</span>,  2020  (accessed  May  27,  2020).
+   <a
+href="https://en.wikipedia.org/w/index.php?title=Case_fatality_rate&oldid=950768129" class="url" >https://en.wikipedia.org/w/index.php?title=Case_fatality_rate&amp;oldid=950768129</a>.
+</p>
+   </div>
+
+</body></html>
