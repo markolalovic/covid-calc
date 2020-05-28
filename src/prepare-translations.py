@@ -108,4 +108,4 @@ def translate():
         english_target.to_csv('../data/translations/english_' + language + '_app.csv', index = False)
 
 prepare_translations_csv()
-translate()
+# translate()

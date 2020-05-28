@@ -70,7 +70,7 @@ def get_app_dict():
     '''
     app_dict = {} # { fieldName: field_text }
     app_dict['mainTitle'] = "COVID Calculator"
-    app_dict['subtitle'] = "A visual tool to explore and analyze potential impacts of COVID-19"
+    app_dict['subtitle'] = "A visual tool to explore and analyze the potential impacts of COVID-19"
 
     # tab items
     app_dict['tabItem0'] = "Mortality by Age"

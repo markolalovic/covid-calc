@@ -1,11 +1,11 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-05-28 15:12:05;
+// version = 2020-05-28 16:59:06;
 
 export const englishDictStore = readable({ 
 	app: {
 		 mainTitle: "COVID Calculator",
-		 subtitle: "A visual tool to explore and analyze potential impacts of COVID-19",
+		 subtitle: "A visual tool to explore and analyze the potential impacts of COVID-19",
 		 tabItem0: "Mortality by Age",
 		 tabItem1: "Estimates in Context",
 		 tabItem2: "Risks by Country",

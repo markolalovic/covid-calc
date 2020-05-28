@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-05-28 15:12:05;
+// version = 2020-05-28 16:59:06;
 
 export const chineseDictStore = readable({ 
 	app: {
