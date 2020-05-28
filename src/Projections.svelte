@@ -9,11 +9,12 @@
   export let projectionsTitle = '';
   export let projectionsXAxisLabel = '';
   export let projectionsYAxisLabel = '';
+  export let language = '';
 
   let svg;
 
-  // state
-  let selectedColorValues = ['United States', 'Brazil', 'Italy'];
+  // state   
+  let selectedColorValues = ['United States', 'Brazil', 'Italy']; // 9, 0, 5
   let selectedCountries = ['United States', 'Brazil', 'Italy'];
   let data;
   let doAnimation = true;
@@ -125,7 +126,8 @@
         spacing: 30,
         textOffset: 15,
         onClick,
-        selectedColorValues
+        selectedColorValues,
+        language
       });
   }
 

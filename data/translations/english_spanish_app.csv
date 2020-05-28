@@ -1,12 +1,20 @@
 english,spanish,description
 COVID Calculator,Calculadora COVID,Main title
 A visual tool to explore and analyze potential impacts of COVID-19,Una herramienta visual para explorar y analizar los posibles impactos de COVID-19,Subtitle
+Mortality by Age,Mortalidad por edad,Tab item0
+Estimates in Context,Estimaciones en contexto,Tab item1
+Risks by Country,Riesgos por pais,Tab item2
+Poverty Proj.,Proyecto de pobreza,Tab item3
+Deaths Proj.,Proj. De muertes,Tab item4
+Hyp. Scenarios,Hyp Escenarios,Tab item5
+Ex. Interpretations,Ex. Interpretaciones,Tab item6
 Location,Ubicación,Location
 Select location,Seleccione ubicación,Select location
 The impact of COVID-19 varies between countries.,El impacto de COVID-19 varía entre países.,Location description
 Infection rate,Tasa de infección,Infection rate
 Proportion of all people contracting the novel coronavirus.,Proporción de todas las personas que contraen el nuevo coronavirus.,Infection rate description
 Over 60 infection rate,Más de 60 tasa de infección,Over60infection rate
+Below 60 infection rate,Por debajo de 60 tasa de infección,Below60infection rate
 Proportion of all people over the age of 60 contracting the novel coronavirus.,Proporción de todas las personas mayores de 60 años que contraen el nuevo coronavirus.,Over60description
 The proportion of people below 60 infected is then,La proporción de personas menores de 60 años infectadas es entonces,Proportion is then
 Since it depends on both overall infection rate and infection rate of people over 60.,Dado que depende tanto de la tasa de infección general como de la tasa de infección de las personas mayores de 60 años.,Proportion is then description
@@ -25,28 +33,85 @@ and authors calculations.,y cálculos de autores.,Authors calculations
 Years of life lost due to other risk factors are for the year of 2017. Source:,Los años de vida perdidos debido a otros factores de riesgo son para el año 2017. Fuente:,Compare with other caption7
 Proportion of People Over 60 Risk by Country,Proporción de personas mayores de 60 años de riesgo por país,Proportion over60by country
 Low Income Risk by Country,Riesgo de bajos ingresos por país,Low income risk by country
-You can hover over legend items to select. You can zoom in and out of map.         And hover over map to get information about the country it represents. Source:,Puede pasar el cursor sobre los elementos de leyenda para seleccionar. Puede acercar y alejar el mapa. Y pase el mouse sobre el mapa para obtener información sobre el país que representa. Fuente:,Map caption
-Projected poverty increases by country due to coronavirus impact on world economy.,La pobreza proyectada aumenta por país debido al impacto del coronavirus en la economía mundial.,Projected povery
+You can hover over legend items to select. You can zoom in and out of map.         And hover over map to get information about the country it represents.,Puede pasar el cursor sobre los elementos de leyenda para seleccionar. Puede acercar y alejar el mapa. Y pase el mouse sobre el mapa para obtener información sobre el país que representa.,Map caption
+"Projected increases by country due to coronavirus impact on the world economy         in the number of people living in extreme poverty,         that is an income below the international poverty line of $1.90 per day.","Los aumentos proyectados por país debido al impacto del coronavirus en la economía mundial en el número de personas que viven en la pobreza extrema, es decir, un ingreso por debajo de la línea internacional de pobreza de $ 1.90 por día.",Projected povery
 Sources: ,Fuentes:,Sources
 Projected poverty increases by region due to coronavirus impact on world economy.,La pobreza proyectada aumenta por región debido al impacto del coronavirus en la economía mundial.,Projected povery by region
 Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.,Proyecciones del total de muertes por COVID-19. Haga clic en la leyenda para seleccionar o anular la selección de un país.,Projections caption
 Source:,Fuente:,Source
-How COVID-19 Compare With ,Cómo se compara COVID-19 con,Comparison title
-Select source,Seleccionar fuente,Select source
-Proportion of Infected,Proporción de infectados,Prevalence
 Reset,Reiniciar,Reset
-Fatality Risks: ,Riesgos fatales:,Fatality risks source
-Expected Infected by Age In: ,Esperado infectado por edad en:,Infected title
-Expected Deaths by Age In: ,Muertes esperadas por edad en:,Deaths title
-yrs,años,Years old
-COVID-19 estimate,COVID-19 estimado,Covid19cause
-Total expected numbers in,Números totales esperados en,Table title
+Potential Infected by Age,Potencial infectado por edad,Infected title
+Potential Deaths by Age,Posibles muertes por edad,Deaths title
+Age,Años,Age
+Infected,Infectado,Infected
+Deaths,Fallecidos,Deaths
+Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by,Millones potenciales empujados a la pobreza extrema debido a COVID-19 por,Projections title
+Date,Fecha,Date
+Total deaths,Muertes totales,Tot deaths
+Total deaths (projected),Muertes totales (proyectadas),Tot deaths proj
+How COVID-19 Compare With,Cómo se compara COVID-19 con,Title list main
+Cause,Porque,Title list name
+Risk,Riesgo,Title list risk
+ in , en,Title list number
+Yrs of Life Lost,Años de vida perdida,Years of life lost
+ in , en,In country
+Causes of Death,Causas de la muerte,Compare items0
+Causes of Years of Life Lost,Causas de años de vida perdidos,Compare items1
+Risk Factors in Years of Life Lost,Factores de riesgo en años de vida perdidos,Compare items2
+COVID-19 (estimate),COVID-19 (estimado),Covid19cause
 Enter description,Ingrese la descripción,Enter describtion
-Description,Descripción,Description
-Expected Number of Infected,Número esperado de infectados,Infected
-Expected Number of Deaths,Número esperado de muertes,Deaths
 Expected Years of Life Lost,Años esperados de vida perdidos,Yrs of life lost
 Potential Costs,Costos potenciales,Yrs of life lost costs
+Description of scenario,Descripción del escenario,Scenarios description
+Country,País,Country
+Region,Región,Region
+People,Personas,People
+India,India,India
+Nigeria,Nigeria,Nigeria
+Democratic Republic of Congo,República Democrática del Congo,Dr congo
+Ethiopia,Etiopía,Ethiopia
+Bangladesh,Bangladesh,Bangladesh
+Tanzania,Tanzania,Tanzania
+Madagascar,Madagascar,Madagascar
+Indonesia,Indonesia,Indonesia
+Kenya,Kenia,Kenya
+Mozambique,Mozambique,Mozambique
+Uganda,Uganda,Uganda
+South Africa,Sudáfrica,South africa
+Sub-Saharan Africa,Africa Sub-sahariana,Sub sah africa
+South Asia,Asia del Sur,South asia
+East Asia & Pacific,Asia oriental y el Pacífico,East asia pacific
+Latin America & Caribbean,América Latina y el Caribe,Latin caribbean
+Middle East & North Africa,Medio Oriente y África del Norte,Middle east north africa
+Europe & Central Asia,Europa y Asia central,Europe central asia
+North America,Norteamérica,North america
+Causes of Death,Causas de la muerte,Main proj regions
+Causes of Years of Life Lost,Causas de años de vida perdidos,Name proj regions
+Risk Factors in Years of Life Lost,Factores de riesgo en años de vida perdidos,Number proj regions
+Fatality rates,Tasas de fatalidad,Fatality rates
+Select estimates of risk of death from infection with the novel coronavirus.Estimates vary between countries and over time.Wider testing can reduce CFR estimates.,Seleccione estimaciones del riesgo de muerte por infección con el nuevo coronavirus. Las estimaciones varían según el país y el tiempo. Las pruebas más amplias pueden reducir las estimaciones de CFR.,Fatality rates description
+Vary selected fatality rates,Variar las tasas de mortalidad seleccionadas,Vary f rs
+"Try increasing the risk of deaths, e.g. to 50%,for low-income country or overwhelmed healthcare.","Intente aumentar el riesgo de muerte, p. al 50%, para países de bajos ingresos o asistencia sanitaria abrumada.",Vary f rs description1
+"Or decreasing, e.g. to -50%,for expected improved treatments and better healthcare.","O disminuyendo, p. hasta -50%, para tratamientos mejorados esperados y mejor atención médica.",Vary f rs description2
+Set all input parameters back to their initial values.,Regrese todos los parámetros de entrada a sus valores iniciales.,Reset description
+Probability of eliminating COVID-19,Probabilidad de eliminar COVID-19,Elimination
+Probability of achieving complete eliminationof COVID-19 disease before it manages to infect,Probabilidad de lograr la eliminación completa de la enfermedad COVID-19 antes de que pueda infectar,Elimination description1
+of population.,de población.,Elimination description2
+Infection rate until elimination,Tasa de infección hasta la eliminación,Infection until
+Proportion of population that still gets infected even in the eventof achieving complete elimination.Note: First increase the probability of eliminationfor this parameter to take effect.,Proporción de la población que aún se infecta incluso en el caso de lograr la eliminación completa. Nota: Primero aumente la probabilidad de eliminación para que este parámetro surta efecto.,Infection until description
+Hide Export,Ocultar exportación,Hide export
+Export,Exportar,Export
+Export Hypothetical COVID-19 Scenarios in JSON format.,Exporte escenarios hipotéticos de COVID-19 en formato JSON.,Export description
+Hide Export,Ocultar exportación,Export1
+"You can set input parameters that describe a hypothetical scenario and add it tothe table for comparison.There are 3 examples of hypothetical scenarios for the selected location and fatality risks.Results should be interpreted with caution, see Example Interpretations.","Puede establecer parámetros de entrada que describan un escenario hipotético y agregarlo a la tabla para comparación. Hay 3 ejemplos de escenarios hipotéticos para la ubicación seleccionada y los riesgos de mortalidad. Los resultados deben interpretarse con precaución, consulte Interpretaciones de ejemplo.",Scenarios caption
+"Scenario 0: Do nothing, as a baseline","Escenario 0: no hacer nada, como referencia",Example scenario0
+"Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost","Escenario 1: Proteja a las personas mayores de 60 años, compense exponiendo a los menores de 60 años, considere también los años de vida perdidos",Example scenario1
+"Scenario 2: Elimination to 90%, consider also money saved","Escenario 2: eliminación al 90%, considere también el dinero ahorrado",Example scenario2
+COVID-19 Risks by Country,COVID-19 Riesgos por país,Map title
+Proportion of people over 60 by Country,Proporción de personas mayores de 60 años por país,Map items0
+Proportion of people over 60 by Country,Proporción de personas mayores de 60 años por país,Map items1
+By Country,Por país,Poverty items0
+By Region,Por región,Poverty items1
 Imperial College - IFR,Colegio Imperial - IFR,Sources of Fatality Rates
 China CDC - CFR,China CDC - CFR,Sources of Fatality Rates
 Korea CDC - CFR,Corea CDC - CFR,Sources of Fatality Rates
@@ -57,72 +122,72 @@ Diseases in Years of Life Lost,Enfermedades en años de vida perdidos,Option to 
 Risk Factors in Years of Life Lost,Factores de riesgo en años de vida perdidos,Option to compare with
 Other Countries in the World,Otros paises del mundo,Option to compare with
 Drug use disorders,Trastornos por consumo de drogas.,"Cause of death, e.g. homicide"
-"COVID-19 until May 27, 2020",COVID-19 hasta el 27 de mayo de 2020,"Cause of death, e.g. homicide"
-Nutritional deficiencies,Deficiencias nutricionales,"Cause of death, e.g. homicide"
-Tuberculosis,Tuberculosis,"Cause of death, e.g. homicide"
-Malaria,Malaria,"Cause of death, e.g. homicide"
-Neonatal disorders,Trastornos neonatales,"Cause of death, e.g. homicide"
-Cardiovascular diseases,Enfermedades cardiovasculares,"Cause of death, e.g. homicide"
-Road injuries,Lesiones viales,"Cause of death, e.g. homicide"
-Diarrheal diseases,Enfermedades diarreicas,"Cause of death, e.g. homicide"
-Cancers,Cánceres,"Cause of death, e.g. homicide"
-Meningitis,Meningitis,"Cause of death, e.g. homicide"
-Diabetes,Diabetes,"Cause of death, e.g. homicide"
-Alcohol use disorders,Trastornos por consumo de alcohol.,"Cause of death, e.g. homicide"
-Terrorism,Terrorismo,"Cause of death, e.g. homicide"
-Respiratory diseases,Enfermedades respiratorias,"Cause of death, e.g. homicide"
-Parkinson disease,Enfermedad de Parkinson,"Cause of death, e.g. homicide"
-Suicide,Suicidio,"Cause of death, e.g. homicide"
-Maternal disorders,Trastornos maternos,"Cause of death, e.g. homicide"
-Homicide,Homicidio,"Cause of death, e.g. homicide"
-Conflict,Conflicto,"Cause of death, e.g. homicide"
+Parkinson disease,enfermedad de Parkinson,"Cause of death, e.g. homicide"
 Digestive diseases,Enfermedades digestivas,"Cause of death, e.g. homicide"
-Natural disasters,Desastres naturales,"Cause of death, e.g. homicide"
-Dementia,Demencia,"Cause of death, e.g. homicide"
 HIV/AIDS,VIH / SIDA,"Cause of death, e.g. homicide"
+Dementia,Demencia,"Cause of death, e.g. homicide"
+Meningitis,Meningitis,"Cause of death, e.g. homicide"
+Alcohol use disorders,Trastornos por consumo de alcohol.,"Cause of death, e.g. homicide"
+Malaria,Malaria,"Cause of death, e.g. homicide"
+Natural disasters,Desastres naturales,"Cause of death, e.g. homicide"
+Respiratory diseases,Enfermedades respiratorias,"Cause of death, e.g. homicide"
+Diabetes,Diabetes,"Cause of death, e.g. homicide"
+Terrorism,Terrorismo,"Cause of death, e.g. homicide"
+Nutritional deficiencies,Deficiencias nutricionales,"Cause of death, e.g. homicide"
 Lower respiratory infections,Infecciones respiratorias inferiores,"Cause of death, e.g. homicide"
-Kidney disease,Nefropatía,"Cause of death, e.g. homicide"
 Protein-energy malnutrition,Desnutrición proteico-energética,"Cause of death, e.g. homicide"
+Homicide,Homicidio,"Cause of death, e.g. homicide"
+Suicide,Suicidio,"Cause of death, e.g. homicide"
 Liver diseases,Enfermedades del HIGADO,"Cause of death, e.g. homicide"
-Self-harm,Autolesiones,"Cause of years of life lost, e.g. cancer"
-Conflict and terrorism,Conflicto y terrorismo,"Cause of years of life lost, e.g. cancer"
-"COVID-19 until May 27, 2020",COVID-19 hasta el 27 de mayo de 2020,"Cause of years of life lost, e.g. cancer"
-Nutritional deficiencies,Deficiencias nutricionales,"Cause of years of life lost, e.g. cancer"
-Musculoskeletal disorders,Trastornos musculoesqueléticos,"Cause of years of life lost, e.g. cancer"
-Interpersonal violence,Violencia interpersonal,"Cause of years of life lost, e.g. cancer"
-Neonatal disorders,Trastornos neonatales,"Cause of years of life lost, e.g. cancer"
-Cardiovascular diseases,Enfermedades cardiovasculares,"Cause of years of life lost, e.g. cancer"
-"Diabetes, blood, & endocrine diseases","Diabetes, sangre y enfermedades endocrinas.","Cause of years of life lost, e.g. cancer"
-Cancers,Cánceres,"Cause of years of life lost, e.g. cancer"
-Malaria & neglected tropical diseases,Malaria y enfermedades tropicales desatendidas,"Cause of years of life lost, e.g. cancer"
-Respiratory diseases,Enfermedades respiratorias,"Cause of years of life lost, e.g. cancer"
-Other communicable diseases,Otras enfermedades transmisibles,"Cause of years of life lost, e.g. cancer"
-HIV/AIDS and tuberculosis,VIH / SIDA y tuberculosis,"Cause of years of life lost, e.g. cancer"
-Diarrhea & common infectious diseases,Diarrea y enfermedades infecciosas comunes.,"Cause of years of life lost, e.g. cancer"
-Digestive diseases,Enfermedades digestivas,"Cause of years of life lost, e.g. cancer"
-Neurological disorders,Desórdenes neurológicos,"Cause of years of life lost, e.g. cancer"
-Unintentional injuries,Lesiones no intencionales,"Cause of years of life lost, e.g. cancer"
-Other NCDs,Otras ENT,"Cause of years of life lost, e.g. cancer"
+"COVID-19 until May 27, 2020",COVID-19 hasta el 27 de mayo de 2020,"Cause of death, e.g. homicide"
+Cancers,Cánceres,"Cause of death, e.g. homicide"
+Conflict,Conflicto,"Cause of death, e.g. homicide"
+Cardiovascular diseases,Enfermedades cardiovasculares,"Cause of death, e.g. homicide"
+Neonatal disorders,Trastornos neonatales,"Cause of death, e.g. homicide"
+Kidney disease,Nefropatía,"Cause of death, e.g. homicide"
+Diarrheal diseases,Enfermedades diarreicas,"Cause of death, e.g. homicide"
+Tuberculosis,Tuberculosis,"Cause of death, e.g. homicide"
+Maternal disorders,Trastornos maternos,"Cause of death, e.g. homicide"
+Road injuries,Lesiones viales,"Cause of death, e.g. homicide"
 Transport injuries,Lesiones de transporte,"Cause of years of life lost, e.g. cancer"
-Mental and substance use disorders,Trastornos mentales y por abuso de sustancias.,"Cause of years of life lost, e.g. cancer"
+HIV/AIDS and tuberculosis,VIH / SIDA y tuberculosis,"Cause of years of life lost, e.g. cancer"
+Interpersonal violence,Violencia interpersonal,"Cause of years of life lost, e.g. cancer"
+Digestive diseases,Enfermedades digestivas,"Cause of years of life lost, e.g. cancer"
+Malaria & neglected tropical diseases,Malaria y enfermedades tropicales desatendidas,"Cause of years of life lost, e.g. cancer"
+Unintentional injuries,Lesiones no intencionales,"Cause of years of life lost, e.g. cancer"
+Respiratory diseases,Enfermedades respiratorias,"Cause of years of life lost, e.g. cancer"
+Self-harm,Autolesiones,"Cause of years of life lost, e.g. cancer"
+Musculoskeletal disorders,Trastornos musculoesqueléticos,"Cause of years of life lost, e.g. cancer"
+Neurological disorders,Desórdenes neurológicos,"Cause of years of life lost, e.g. cancer"
+Nutritional deficiencies,Deficiencias nutricionales,"Cause of years of life lost, e.g. cancer"
+Other NCDs,Otras ENT,"Cause of years of life lost, e.g. cancer"
+Other communicable diseases,Otras enfermedades transmisibles,"Cause of years of life lost, e.g. cancer"
 Liver diseases,Enfermedades del HIGADO,"Cause of years of life lost, e.g. cancer"
-Drug use,El consumo de drogas,"Risk factor, e.g. smoking"
-Diet low in vegetables,Dieta baja en vegetales,"Risk factor, e.g. smoking"
-Secondhand smoke,Humo de segunda mano,"Risk factor, e.g. smoking"
-High blood sugar,Nivel alto de azúcar en la sangre,"Risk factor, e.g. smoking"
-Diet high in salt,Dieta rica en sal,"Risk factor, e.g. smoking"
-Unsafe sanitation,Saneamiento inseguro,"Risk factor, e.g. smoking"
-Vitamin A deficiency,Deficiencia de vitamina A,"Risk factor, e.g. smoking"
-"COVID-19 until May 27, 2020",COVID-19 hasta el 27 de mayo de 2020,"Risk factor, e.g. smoking"
-Child wasting,Emaciación infantil,"Risk factor, e.g. smoking"
-Non-exclusive breastfeeding,Lactancia no exclusiva,"Risk factor, e.g. smoking"
-Child stunting,Retraso del crecimiento infantil,"Risk factor, e.g. smoking"
-Unsafe water source,Fuente de agua insegura,"Risk factor, e.g. smoking"
-Iron deficiency,Deficiencia de hierro,"Risk factor, e.g. smoking"
+"COVID-19 until May 27, 2020",COVID-19 hasta el 27 de mayo de 2020,"Cause of years of life lost, e.g. cancer"
+Cancers,Cánceres,"Cause of years of life lost, e.g. cancer"
+Cardiovascular diseases,Enfermedades cardiovasculares,"Cause of years of life lost, e.g. cancer"
+Conflict and terrorism,Conflicto y terrorismo,"Cause of years of life lost, e.g. cancer"
+Mental and substance use disorders,Trastornos mentales y por abuso de sustancias.,"Cause of years of life lost, e.g. cancer"
+Neonatal disorders,Trastornos neonatales,"Cause of years of life lost, e.g. cancer"
+Diarrhea & common infectious diseases,Diarrea y enfermedades infecciosas comunes.,"Cause of years of life lost, e.g. cancer"
+"Diabetes, blood, & endocrine diseases","Diabetes, sangre y enfermedades endocrinas.","Cause of years of life lost, e.g. cancer"
+Diet low in fruits,Dieta baja en frutas,"Risk factor, e.g. smoking"
 Low physical activity,Baja actividad física,"Risk factor, e.g. smoking"
+Vitamin A deficiency,Deficiencia de vitamina A,"Risk factor, e.g. smoking"
+High cholesterol,Colesterol alto,"Risk factor, e.g. smoking"
+Secondhand smoke,Humo de segunda mano,"Risk factor, e.g. smoking"
+High blood pressure,Hipertensión,"Risk factor, e.g. smoking"
+Diet low in vegetables,Dieta baja en vegetales,"Risk factor, e.g. smoking"
+Child stunting,Retraso del crecimiento infantil,"Risk factor, e.g. smoking"
+High blood sugar,Nivel alto de azúcar en la sangre,"Risk factor, e.g. smoking"
+Non-exclusive breastfeeding,Lactancia no exclusiva,"Risk factor, e.g. smoking"
+Child wasting,Emaciación infantil,"Risk factor, e.g. smoking"
+"COVID-19 until May 27, 2020",COVID-19 hasta el 27 de mayo de 2020,"Risk factor, e.g. smoking"
 Air pollution (outdoor & indoor),Contaminación del aire (exterior e interior),"Risk factor, e.g. smoking"
+Unsafe sanitation,Saneamiento inseguro,"Risk factor, e.g. smoking"
 Obesity,Obesidad,"Risk factor, e.g. smoking"
 Smoking,De fumar,"Risk factor, e.g. smoking"
-High cholesterol,Colesterol alto,"Risk factor, e.g. smoking"
-High blood pressure,Hipertensión,"Risk factor, e.g. smoking"
-Diet low in fruits,Dieta baja en frutas,"Risk factor, e.g. smoking"
+Unsafe water source,Fuente de agua insegura,"Risk factor, e.g. smoking"
+Diet high in salt,Dieta rica en sal,"Risk factor, e.g. smoking"
+Iron deficiency,Deficiencia de hierro,"Risk factor, e.g. smoking"
+Drug use,El consumo de drogas,"Risk factor, e.g. smoking"

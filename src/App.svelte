@@ -119,14 +119,14 @@
 	}
 
 	// tab items with labels and values
-	let tabItems = [
-    { label: "Mortality by Age", value: 0 },
-    { label: "Estimates in Context", value: 1 },
-		{ label: "Risks by Country", value: 2 },
-		{ label: "Poverty Proj.", value: 3 },
-		{ label: "Deaths Proj.", value: 4 },
-    { label: "Hyp. Scenarios", value: 5 },
-		{ label: "Ex. Interpretations", value: 6 },
+	$: tabItems = [
+    { label: translations.app.tabItem0, value: 0 }, // "Mortality by Age"
+    { label: translations.app.tabItem1, value: 1 }, // "Estimates in Context"
+		{ label: translations.app.tabItem2, value: 2 }, // "Risks by Country"
+		{ label: translations.app.tabItem3, value: 3 }, // "Poverty Proj."
+		{ label: translations.app.tabItem4, value: 4 }, // "Deaths Proj."
+    { label: translations.app.tabItem5, value: 5 }, // "Hyp. Scenarios"
+		{ label: translations.app.tabItem6, value: 6 }, // "Ex. Interpretations"
   ];
   let currentTab = 0; // current active tab
 
@@ -271,10 +271,11 @@
 	$: riskFactors = [translations.app.covid19Cause, ...translations.countries[selectedId].riskFactors];
 	$: riskDALYs = [totalYearsLost, ...translations.countries[selectedId].riskDALYs];
 
-	let compareItems = [
-    { label: "Causes of Death", value: 0 },
-    { label: "Causes of Years of Life Lost", value: 1 },
-    { label: "Risk Factors in Years of Life Lost", value: 2 },
+	let compareItems = [{}, {}, {}];
+	$: compareItems = [
+    { label: translations.app.compareItems0, value: 0 }, // "Causes of Death"
+    { label: translations.app.compareItems1, value: 1 }, // "Causes of Years of Life Lost"
+    { label: translations.app.compareItems2, value: 2 }, // "Risk Factors in Years of Life Lost"
   ];
   let currentCompare = 0; // current active comparison item
 
@@ -322,19 +323,19 @@
 	let titleListName = '';
 	let titleListNumber = '';
 	let titleListMain = '';
-	$: titleListMain = 'How COVID-19 Compare With ' // TODO: translations
+	$: titleListMain = translations.app.titleListMain
 	  + compareItems[currentCompare].label
-		+ ' in ' + selectedLocation;
+		+ translations.app.inCountry + selectedLocation;
 
 	$: if (currentCompare === 0) {
-		titleListName = 'Cause';
-		titleListNumber = 'Deaths';
+		titleListName = translations.app.titleListName;
+		titleListNumber = translations.app.deaths;
 	} else if (currentCompare === 1) {
-		titleListName = 'Cause';
-		titleListNumber = 'Yrs of Life Lost';
+		titleListName = translations.app.titleListName;
+		titleListNumber = translations.app.yearsOfLifeLost;
 	} else {
-		titleListName = 'Risk';
-		titleListNumber = 'Yrs of Life Lost';
+		titleListName = translations.app.titleListRisk;
+		titleListNumber = translations.app.yearsOfLifeLost;
 	}
 
 	// ageGroups has numbers the same in all languages
@@ -355,18 +356,25 @@
 	}
 
 	let infectedTitle = "";
-	$: infectedTitle = "Potential Infected by Age" // TODO: translations.app.infectedTitle
+	$: infectedTitle = translations.app.infectedTitle;
 	  + ' in ' + selectedLocation;
 
 	let deathsTitle = "";
-	$: deathsTitle = 	"Potential Deaths by Age" // TODO: translations.app.deathsTitle
+
+	let infectedTitleListName = "";
+	let infectedTitleListNumber = "";
+
+	let deathsTitleListName = "";
+	let deathsTitleListNumber = "";
+
+	$: deathsTitle = translations.app.deathsTitle;
 	  + ' in ' + selectedLocation;
 
-  let infectedTitleListName = 'Age'; // TODO: translations.app.age
-  let infectedTitleListNumber = 'Infected'; // TODO: translations.app.infected
+  $: infectedTitleListName = translations.app.age;
+  $: infectedTitleListNumber = translations.app.infected;
 
-  let deathsTitleListName = 'Age'; // TODO: translations.app.age
-  let deathsTitleListNumber = 'Deaths'; // TODO: translations.app.age
+  $: deathsTitleListName = translations.app.age;
+  $: deathsTitleListNumber = translations.app.age;
 
 	// projections component 
 	let projectionsTitle = '';
@@ -376,11 +384,11 @@
 	let projectionsLegendDeaths = '';
 	let projectionsLegendDeathsProjected = '';
 
-	$: projectionsTitle = 'Projections of Total Deaths over Time by Country';
-  $: projectionsXAxisLabel = 'Date';
-	$: projectionsYAxisLabel = 'Total deaths';
-	$: projectionsLegendDeaths = 'Total deaths';
-	$: projectionsLegendDeathsProjected = 'Total deaths (projected)';	
+	$: projectionsTitle = translations.app.projectionsTitle;
+  $: projectionsXAxisLabel = translations.app.date;
+	$: projectionsYAxisLabel = translations.app.totDeaths;
+	$: projectionsLegendDeaths = translations.app.totDeaths;
+	$: projectionsLegendDeathsProjected = translations.app.totDeathsProj;
 
 	// to export scenarios, countries population properties, etc. we just pretty print the JSONs
 	$: exportedData = '\"Scenarios\": ' + JSON.stringify(rowsOfScenarios, null, 2);
@@ -393,28 +401,33 @@
 
 	// prepare example scenarios as a list of parameters, comments, id's ..
 	// make a reactive for loop to define $: rowsOfScenarios! the same as infected, deaths, ...
-	let inputs = [
+	let inputs = [{}, {}, {}];
+	$: inputs = [
 	   {id: 0,
 			pctH: 60,
 			pctH_60plus: 60,
 			pctOfChange: 0,
 			prElim100: 0,
 			pctU: 0,
-			comments: "Scenario 0: Do nothing, as a baseline"},
+			comments: translations.app.exampleScenario0},
+			// "Scenario 0: Do nothing, as a baseline"
 	   {id: 1,
 			pctH: 60,
 			pctH_60plus: 20,
 			pctOfChange: 0,
 			prElim100: 0,
 			pctU: 0,
-			comments: "Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost"},
+			comments: translations.app.exampleScenario1},
+			// "Scenario 1: Protect people over 60, compensate by exposing those 
+			// below 60, consider also years of life lost"
 	   {id: 2,
 			pctH: 60,
 			pctH_60plus: 60,
 			pctOfChange: 0,
 			prElim100: 90,
 			pctU: 10,
-			comments: "Scenario 2: Elimination to 90%, consider also money saved"},
+			comments: translations.app.exampleScenario2},
+			// "Scenario 2: Elimination to 90%, consider also money saved"
 	];
 
 	// initialize all the variables the reactive loop:
@@ -484,27 +497,39 @@
 	}
 
 	// world map
-	let mapTitle = "COVID-19 Risks by Country";
+	let mapTitle = '';
+	$: mapTitle = translations.app.mapTitle;
 
-	let mapItems = [
-		{ label: "Proportion of people over 60 by Country", value: 0 },
-		{ label: "Income by Country", value: 1 }
+	let mapItems = [{}, {}];
+	$: mapItems = [
+		{ label: translations.app.mapItems0, value: 0 }, // "Proportion of people over 60 by Country"
+		{ label: translations.app.mapItems1, value: 1 } // "Income by Country"
 	];
 	let selectedRisk = 0;
 
 	
 	// poverty
-	let povertyItems = [
-    { label: "By Country", value: 0 },
-    { label: "By Region", value: 1 }
+	let povertyItems = [{}, {}];
+	$: povertyItems = [
+    { label: translations.app.povertyItems0, value: 0 }, // "By Country"
+    { label: translations.app.povertyItems1, value: 1 } // "By Region"
   ];
   let currentPoverty = 0;
 
 
 	// poverty increases by country:
-	let povertyProjCountryNames = ['India', 'Nigeria', 'Democratic Republic of Congo',
-		'Ethiopia', 'Bangladesh', 'Tanzania', 'Madagascar', 'Indonesia', 'Kenya',
-		'Mozambique', 'Uganda', 'South Africa'];
+	$: povertyProjCountryNames = [translations.app.india, 
+		translations.app.nigeria,
+		translations.app.drCongo,
+		translations.app.ethiopia,
+		translations.app.bangladesh,
+		translations.app.tanzania,
+		translations.app.madagascar,
+		translations.app.indonesia,
+		translations.app.kenya,
+		translations.app.mozambique,
+		translations.app.uganda,
+		translations.app.southAfrica];
 	let povertyProjCountryNumbers = [8784000, 5023850, 2842320, 1604720, 1221500,
 		1139840, 976040, 927000, 915720, 897520, 821600, 721050];
 
@@ -517,8 +542,15 @@
 	}
 
 	// poverty increases by region:
-	let povertyProjRegionNames = ['Sub-Saharan Africa', 'South Asia', 'East Asia & Pacific',
-		'Latin America & Caribbean', 'Middle East & North Africa', 'Europe & Central Asia', 'North America'];
+	$: povertyProjRegionNames = [
+		translations.app.subSahAfrica,
+		translations.app.southAsia,
+		translations.app.eastAsiaPacific,
+		translations.app.latinCaribbean,
+		translations.app.middleEastNorthAfrica,
+		translations.app.europeCentralAsia,
+		translations.app.northAmerica];
+
 	let povertyProjRegionNumbers = [21994380.0, 10619000.0, 2294580.0, 1796560.0, 867540.0, 665690.0, 313600.0];
 
 	let povertyProjRegions = []
@@ -530,13 +562,23 @@
 	}
 
 	// Projected Poverty Increases by Country and Region
-	let mainProjCountries = 'Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by Country';
-	let nameProjCountries = 'Country';
-	let numberProjCountries = 'People';
+	let mainProjCountries = '';
+	let nameProjCountries = '';
+	let numberProjCountries = '';
 
-	let mainProjRegions = 'Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by Region';
-	let nameProjRegions = 'Region';
-	let numberProjRegions = 'People';
+	let mainProjRegions = '';
+	let nameProjRegions = '';
+	let numberProjRegions = '';
+
+	$: mainProjCountries = translations.app.projectionsTitle + 
+		translations.app.country;
+	$: nameProjCountries = translations.app.country;
+	$: numberProjCountries = translations.app.people;
+
+	$: mainProjRegions = translations.app.projectionsTitle + 
+		translations.app.region;
+	$: nameProjRegions = translations.app.region;
+	$: numberProjRegions = translations.app.people;
 
 	// color countries by regions
 	// 'Sub-Saharan Africa', 'South Asia', 'East Asia & Pacific',
@@ -724,7 +766,7 @@
 					<div class="two columns">
 						<Square text={'2020+'} color={'#fdc086'} factorWidth={4}/>
 						<Square text={'2017'} color={'#beaed4'} factorWidth={4}/>
-						<Square text={'<2020-05-24'} color={'#7fc97f'} factorWidth={6}/>
+						<Square text={'<2020-05-27'} color={'#7fc97f'} factorWidth={6}/>
 					</div>			
 					<div class="eight columns">
 						{#if 0 == currentCompare}
@@ -783,10 +825,10 @@
 					<Subtabs bind:activeTabValue={selectedRisk} items={mapItems} />
 					<div class="twelve columns" style="text-align: center; margin-top: 25px">
 						<div class="child">
-							{translations.app.proportionOver60ByCountry}
 							{#if 0 == selectedRisk}
 								<div class='worldmap-title'
 									style='font-size: 16;'>
+									{translations.app.proportionOver60ByCountry}
 								</div>
 								<div class="child">
 									<WorldMap {mapTitle} {selectedRisk} />
@@ -804,12 +846,15 @@
 							{/if}
 
 							<div class='caption'>
-								<span class="parameter-text">
+								<div class="parameter-text">
 										{translations.app.mapCaption}
+								</div>
+								<div class="parameter-text">
+									{translations.app.source}
 									<a href="https://github.com/topojson/world-atlas">World Atlas TopoJSON</a> 
-										{translations.app.authorsCalculations}
-								</span>
-							</div>							
+									{translations.app.authorsCalculations}
+								</div>
+							</div>
 
 						</div>
 					</div>
@@ -829,16 +874,16 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="two columns">
+						<div class="one columns">
 							<svg 
 							width="{90}" height="{90}"
 							style="background-color: white">
 							</svg>
 						</div>							
-						<div class="two columns">
-							<Square text={'South Asia'} color={'#377eb8'} factorWidth={8}/>
-							<Square text={'Sub-Saharan Africa'} color={'#e41a1c'} factorWidth={8}/>
-							<Square text={'East Asia & Pacific'} color={'#4daf4a'} factorWidth={8}/>
+						<div class="three columns">
+							<Square text={translations.app.southAsia} color={'#377eb8'} factorWidth={8}/>
+							<Square text={translations.app.subSahAfrica} color={'#e41a1c'} factorWidth={8}/>
+							<Square text={translations.app.eastAsiaPacific} color={'#4daf4a'} factorWidth={8}/>
 						</div>
 						<div class="eight columns">
 							<div class='caption'>
@@ -875,7 +920,7 @@
 						<div class="eight columns">
 							<div class='caption'>
 								<div class='parameter-text'>
-									{translations.app.projectedPoveryByRegion}
+									{translations.app.projectedPovery}
 								</div>
 								<div class='parameter-text'>
 									{translations.app.sources}
@@ -897,6 +942,7 @@
 								projectionsTitle={projectionsTitle}
 								projectionsXAxisLabel={projectionsXAxisLabel}
 								projectionsYAxisLabel={projectionsYAxisLabel}
+								language={language}
 							/>
 						</div>
 					</div>
@@ -939,19 +985,19 @@
 							<table class="table1">
 								<thead>
 									<tr>
-										<th>Location</th>
-										<th>Fatality risks</th>
-										<th>Vary fatality</th>
-										<th>Infection rate</th>
-										<th>Over 60 infection rate</th>
-										<th>Below 60 infection rate</th>
-										<th>Probability of elimination</th>
-										<th>Infection rate until</th>
+										<th>{translations.app.location}</th>
+										<th>{translations.app.fatalityRates}</th>
+										<th>{translations.app.varyFRs}</th>
+										<th>{translations.app.infectionRate}</th>
+										<th>{translations.app.over60InfectionRate}</th>
+										<th>{translations.app.over60InfectionRate}</th>
+										<th>{translations.app.elimination}</th>
+										<th>{translations.app.infectionUntil}</th>
 										<th>{translations.app.infected}</th>
 										<th>{translations.app.deaths}</th>
 										<th>{translations.app.yrsOfLifeLost}</th>
 										<th>{translations.app.yrsOfLifeLostCosts}</th>
-										<th>Description of scenario</th>
+										<th>{translations.app.scenariosDescription}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -1001,10 +1047,7 @@
 						</div>
 						<div class="caption">
 							<span class="parameter-text">
-								You can set input parameters that describe a hypothetical scenario and add it to
-								the table for comparison.
-								There are 3 examples of hypothetical scenarios for the selected location and fatality risks.
-								Results should be interpreted with caution, see Example Interpretations.
+
 							</span>
 						</div>
 
@@ -1200,12 +1243,10 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-						Fatality rates
+						{translations.app.fatalityRates}
 					</p>
 					<div class="parameter-text">
-						Select estimates of risk of death from infection with the novel coronavirus.
-						Estimates vary between countries and over time.
-						Wider testing can reduce CFR estimates.
+						{translations.app.fatalityRatesDescription}
 					</div>
 				</label>
 				<span class="parameter-text">
@@ -1225,17 +1266,15 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-						Vary selected fatality rates
+						{translations.app.varyFRs}
 						<span class="parameter" style="float:right;">{pctOfChange}%</span>
 					</p>
 					<div class="parameter-text">
 							<span class="parameter-text">
-								Try increasing the risk of deaths, e.g. to 50%,
-								for low-income country or overwhelmed healthcare.
+								{translations.app.varyFRsDescription1}
 							</span>
 							<span class="parameter-text">
-								Or decreasing, e.g. to -50%,
-								for expected improved treatments and better healthcare.
+								{translations.app.varyFRsDescription2}					
 							</span>
 					</div>
 				</label>
@@ -1250,7 +1289,7 @@
 					</button>
 				</div>
 				<span class="parameter-text">
-					Set all input parameters back to their initial values.
+					{translations.app.resetDescription}
 				</span>
 			</div>
 		</div>
@@ -1262,19 +1301,18 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-						Probability of eliminating COVID-19
+						{translations.app.elimination}
 						<span class="parameter" style="float:right;">{prElimTimes100}%</span>
 					</p>
 					<div class="parameter-text">
 						<span class="parameter-text">
-							Probability of achieving complete elimination of COVID-19 disease before it manages
-							to infect
+							{translations.app.eliminationDescription1}
 						</span>
 						<span class="parameter">
 							{Math.round(pctH)}%
 						</span>
 						<span class="parameter-text">
-							of population.
+							{translations.app.eliminationDescription2}
 						</span>
 					</div>
 				</label>
@@ -1287,39 +1325,33 @@
 				<label>
 					<p class="parameter-title"
 						style="text-align:left;">
-						Infection rate until elimination
+							{translations.app.infectionUntil}
 						<span class="parameter" style="float:right;">{pctU}%</span>
 					</p>
 					<div class="parameter-text">
-						Proportion of population that still gets infected even in the event
-						of achieving complete elimination.
-
-						Note: First increase the probability of elimination
-						for this parameter to take effect.
+							{translations.app.infectionUntilDescription}
 					</div>
 				</label>
 				<input class="pointer u-full-width"	type=range
 					bind:value={pctU} min={0}	max={pctH} />
-				<!-- Watch out:
-					- upper bound on pctU should be pctH
-					- and we must correct pctU as soon as pctH goes below U!
-				 -->
 			</div>
 		</div>
 		<div class="four columns">
 			<div class="child parameter-space-4">
 				{#if userNeeds.exportData}
 					<button class="button-class" on:click={
-						toggleExportData}>Hide Export
+						toggleExportData}>
+						{translations.app.hideExport}
 					</button>
 				{/if}
 				{#if !userNeeds.exportData}
 					<button class="button-class"
-					on:click={toggleExportData}>Export
+					on:click={toggleExportData}>
+						{translations.app.export}
 					</button>
 				{/if}
 				<span	class="parameter-text">
-					Export Hypothetical COVID-19 Scenarios in JSON format.
+						{translations.app.exportDescription}
 				</span>
 		</div>
 	</div>
@@ -1336,12 +1368,11 @@
 				<div class="child parameter-text"> 
 					<div class="wtitle">About</div>
 					<p>
-						At the time of writing, the impacts of Coronavirus disease of 2019 
+						At the time of writing, the impacts of COVID-2019 
 						remain largely uncertain and depend on a whole range of possibilities.
 
 						Organizing the overwhelming mass of the available information in the media and literature, 
-						coming up with a reasonable working estimates and comparing multiple scenarios can be challenging, 
-						especially to the non-expert such as myself.
+						coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
 
 						As an attempt to address this problem I used publicly available data and published information 
 						to create this international tool that allows users to derive their own country-specific estimates.

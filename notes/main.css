@@ -3,12 +3,12 @@
 .cmr-17x-x-120{font-size:170%;}
 .cmr-12x-x-120{font-size:120%;}
 .cmbx-12{ font-weight: bold;}
+.cmti-12{ font-style: italic;}
 .cmr-8{font-size:66%;}
 .cmr-6{font-size:50%;}
 .cmmi-12{font-style: italic;}
 .cmmi-8{font-size:66%;font-style: italic;}
 .cmsy-8{font-size:66%;}
-.cmti-12{ font-style: italic;}
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}

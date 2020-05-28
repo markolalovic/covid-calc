@@ -10,7 +10,7 @@
 
   export let colorsList = [];
 
-  const transitionDuration = 200; // 300 feels right
+  const transitionDuration = 200;
 
 	afterUpdate(() => {
     d3.select('svg.compare').call(visualList, {

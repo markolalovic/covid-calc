@@ -92,7 +92,7 @@ def translate():
         english_target.rename(columns={'target': language}, inplace=True)
 
         # translate
-        dummy_tranlations = False
+        dummy_tranlations = True
         for i in range(english_target.shape[0]):
             words = english_target.iloc[0]['english']
             if dummy_tranlations: # just write english words to target language columns

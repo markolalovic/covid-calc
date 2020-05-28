@@ -5,8 +5,47 @@ export const colorLegendProjections = (selection, props) => {
     spacing,
     textOffset,
     onClick,
-    selectedColorValues
+    selectedColorValues,
+    language
   } = props;
+
+  const enToZh = {'Brazil': '巴西',
+                  'Colombia': '哥伦比亚',
+                  'Egypt': '埃及',
+                  'France': '法国',
+                  'Germany': '德国',
+                  'Italy': '意大利',
+                  'Philippines': '菲律宾',
+                  'Turkey': '火鸡',
+                  'United Kingdom': '英国',
+                  'United States': '美国'};
+
+  const enToEs = {'Brazil': 'Brasil',
+                  'Colombia': 'Colombia',
+                  'Egypt': 'Egipto',
+                  'France': 'Francia',
+                  'Germany': 'Alemania',
+                  'Italy': 'Italia',
+                  'Philippines': 'Filipinas',
+                  'Turkey': 'Turquía',
+                  'United Kingdom': 'Reino Unido',
+                  'United States': 'Estados Unidos'};
+
+  function getText(d) {
+    switch(language) {
+      case 'en':
+        return d;
+        break;
+      case 'es':
+        return enToEs[d];
+        break;
+      case 'zh':
+        return enToZh[d];
+        break;
+      default:
+        console.log(d);  
+    }
+  }
 
   const groups = selection.selectAll('g')
     .data(colorScale.domain());
@@ -34,7 +73,7 @@ export const colorLegendProjections = (selection, props) => {
 
   groupsEnter.append('text')
     .merge(groups.select('text'))
-      .text(d => d)
+      .text(getText)
       .attr('dy', '0.32em')
       .attr('x', textOffset);
 }

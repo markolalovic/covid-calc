@@ -748,18 +748,26 @@ var app = (function () {
         return { set, update, subscribe };
     }
 
-    // version = 2020-05-28 00:07:54;
+    // version = 2020-05-28 15:12:05;
 
     const englishDictStore = readable({ 
     	app: {
     		 mainTitle: "COVID Calculator",
     		 subtitle: "A visual tool to explore and analyze potential impacts of COVID-19",
+    		 tabItem0: "Mortality by Age",
+    		 tabItem1: "Estimates in Context",
+    		 tabItem2: "Risks by Country",
+    		 tabItem3: "Poverty Proj.",
+    		 tabItem4: "Deaths Proj.",
+    		 tabItem5: "Hyp. Scenarios",
+    		 tabItem6: "Ex. Interpretations",
     		 location: "Location",
     		 selectLocation: "Select location",
     		 locationDescription: "The impact of COVID-19 varies between countries.",
     		 infectionRate: "Infection rate",
     		 infectionRateDescription: "Proportion of all people contracting the novel coronavirus.",
     		 over60InfectionRate: "Over 60 infection rate",
+    		 below60InfectionRate: "Below 60 infection rate",
     		 over60Description: "Proportion of all people over the age of 60 contracting the novel coronavirus.",
     		 proportionIsThen: "The proportion of people below 60 infected is then",
     		 proportionIsThenDescription: "Since it depends on both overall infection rate and infection rate of people over 60.",
@@ -778,28 +786,85 @@ var app = (function () {
     		 compareWithOtherCaption7: "Years of life lost due to other risk factors are for the year of 2017. Source:",
     		 proportionOver60ByCountry: "Proportion of People Over 60 Risk by Country",
     		 lowIncomeRiskByCountry: "Low Income Risk by Country",
-    		 mapCaption: "You can hover over legend items to select. You can zoom in and out of map.         And hover over map to get information about the country it represents. Source:",
-    		 projectedPovery: "Projected poverty increases by country due to coronavirus impact on world economy.",
+    		 mapCaption: "You can hover over legend items to select. You can zoom in and out of map.         And hover over map to get information about the country it represents.",
+    		 projectedPovery: "Projected increases by country due to coronavirus impact on the world economy         in the number of people living in extreme poverty,         that is an income below the international poverty line of $1.90 per day.",
     		 sources: "Sources: ",
     		 projectedPoveryByRegion: "Projected poverty increases by region due to coronavirus impact on world economy.",
     		 projectionsCaption: "Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.",
     		 source: "Source:",
-    		 comparisonTitle: "How COVID-19 Compare With ",
-    		 selectSource: "Select source",
-    		 prevalence: "Proportion of Infected",
     		 reset: "Reset",
-    		 fatalityRisksSource: "Fatality Risks: ",
-    		 infectedTitle: "Expected Infected by Age In: ",
-    		 deathsTitle: "Expected Deaths by Age In: ",
-    		 yearsOld: "yrs",
-    		 covid19Cause: "COVID-19 estimate",
-    		 tableTitle: "Total expected numbers in",
+    		 infectedTitle: "Potential Infected by Age",
+    		 deathsTitle: "Potential Deaths by Age",
+    		 age: "Age",
+    		 infected: "Infected",
+    		 deaths: "Deaths",
+    		 projectionsTitle: "Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by",
+    		 date: "Date",
+    		 totDeaths: "Total deaths",
+    		 totDeathsProj: "Total deaths (projected)",
+    		 titleListMain: "How COVID-19 Compare With",
+    		 titleListName: "Cause",
+    		 titleListRisk: "Risk",
+    		 titleListNumber: " in ",
+    		 yearsOfLifeLost: "Yrs of Life Lost",
+    		 inCountry: " in ",
+    		 compareItems0: "Causes of Death",
+    		 compareItems1: "Causes of Years of Life Lost",
+    		 compareItems2: "Risk Factors in Years of Life Lost",
+    		 covid19Cause: "COVID-19 (estimate)",
     		 enterDescribtion: "Enter description",
-    		 description: "Description",
-    		 infected: "Expected Number of Infected",
-    		 deaths: "Expected Number of Deaths",
     		 yrsOfLifeLost: "Expected Years of Life Lost",
     		 yrsOfLifeLostCosts: "Potential Costs",
+    		 scenariosDescription: "Description of scenario",
+    		 country: "Country",
+    		 region: "Region",
+    		 people: "People",
+    		 india: "India",
+    		 nigeria: "Nigeria",
+    		 drCongo: "Democratic Republic of Congo",
+    		 ethiopia: "Ethiopia",
+    		 bangladesh: "Bangladesh",
+    		 tanzania: "Tanzania",
+    		 madagascar: "Madagascar",
+    		 indonesia: "Indonesia",
+    		 kenya: "Kenya",
+    		 mozambique: "Mozambique",
+    		 uganda: "Uganda",
+    		 southAfrica: "South Africa",
+    		 subSahAfrica: "Sub-Saharan Africa",
+    		 southAsia: "South Asia",
+    		 eastAsiaPacific: "East Asia & Pacific",
+    		 latinCaribbean: "Latin America & Caribbean",
+    		 middleEastNorthAfrica: "Middle East & North Africa",
+    		 europeCentralAsia: "Europe & Central Asia",
+    		 northAmerica: "North America",
+    		 mainProjRegions: "Causes of Death",
+    		 nameProjRegions: "Causes of Years of Life Lost",
+    		 numberProjRegions: "Risk Factors in Years of Life Lost",
+    		 fatalityRates: "Fatality rates",
+    		 fatalityRatesDescription: "Select estimates of risk of death from infection with the novel coronavirus.Estimates vary between countries and over time.Wider testing can reduce CFR estimates.",
+    		 varyFRs: "Vary selected fatality rates",
+    		 varyFRsDescription1: "Try increasing the risk of deaths, e.g. to 50%,for low-income country or overwhelmed healthcare.",
+    		 varyFRsDescription2: "Or decreasing, e.g. to -50%,for expected improved treatments and better healthcare.",
+    		 resetDescription: "Set all input parameters back to their initial values.",
+    		 elimination: "Probability of eliminating COVID-19",
+    		 eliminationDescription1: "Probability of achieving complete eliminationof COVID-19 disease before it manages to infect",
+    		 eliminationDescription2: "of population.",
+    		 infectionUntil: "Infection rate until elimination",
+    		 infectionUntilDescription: "Proportion of population that still gets infected even in the eventof achieving complete elimination.Note: First increase the probability of eliminationfor this parameter to take effect.",
+    		 hideExport: "Hide Export",
+    		 export: "Export",
+    		 exportDescription: "Export Hypothetical COVID-19 Scenarios in JSON format.",
+    		 export1: "Hide Export",
+    		 scenariosCaption: "You can set input parameters that describe a hypothetical scenario and add it tothe table for comparison.There are 3 examples of hypothetical scenarios for the selected location and fatality risks.Results should be interpreted with caution, see Example Interpretations.",
+    		 exampleScenario0: "Scenario 0: Do nothing, as a baseline",
+    		 exampleScenario1: "Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost",
+    		 exampleScenario2: "Scenario 2: Elimination to 90%, consider also money saved",
+    		 mapTitle: "COVID-19 Risks by Country",
+    		 mapItems0: "Proportion of people over 60 by Country",
+    		 mapItems1: "Proportion of people over 60 by Country",
+    		 povertyItems0: "By Country",
+    		 povertyItems1: "By Region",
     		},
     	fatalityRisks: [
     		 {id: 0,
@@ -2502,18 +2567,26 @@ var app = (function () {
     		],
       });
 
-    // version = 2020-05-28 00:07:54;
+    // version = 2020-05-28 15:12:05;
 
     const chineseDictStore = readable({ 
     	app: {
     		 mainTitle: "COVID计算器",
     		 subtitle: "一种可视工具，用于探索和分析COVID-19的潜在影响",
+    		 tabItem0: "年龄死亡率",
+    		 tabItem1: "上下文中的估计",
+    		 tabItem2: "国家风险",
+    		 tabItem3: "贫困项目",
+    		 tabItem4: "死亡项目",
+    		 tabItem5: "炒作情境",
+    		 tabItem6: "例如释义",
     		 location: "位置",
     		 selectLocation: "选择地点",
     		 locationDescription: "COVID-19的影响因国家/地区而异。",
     		 infectionRate: "感染率",
     		 infectionRateDescription: "感染新型冠状病毒的所有人比例。",
     		 over60InfectionRate: "感染率超过60",
+    		 below60InfectionRate: "感染率低于60",
     		 over60Description: "60岁以上感染新型冠状病毒的人口比例。",
     		 proportionIsThen: "然后，将60岁以下的人口比例",
     		 proportionIsThenDescription: "因为这取决于总体感染率和60岁以上人群的感染率。",
@@ -2532,28 +2605,85 @@ var app = (function () {
     		 compareWithOtherCaption7: "由于其他风险因素而导致的生命损失是在2017年。资料来源：",
     		 proportionOver60ByCountry: "按国家划分的60岁以上风险人群的比例",
     		 lowIncomeRiskByCountry: "低收入风险（按国家/地区）",
-    		 mapCaption: "您可以将鼠标悬停在图例项上以进行选择。您可以放大和缩小地图。然后将鼠标悬停在地图上即可获取有关其代表的国家的信息。资源：",
-    		 projectedPovery: "由于冠状病毒对世界经济的影响，预计每个国家的贫困人口将增加。",
+    		 mapCaption: "您可以将鼠标悬停在图例项上以进行选择。您可以放大和缩小地图。然后将鼠标悬停在地图上即可获取有关其代表的国家/地区的信息。",
+    		 projectedPovery: "预计由于冠状病毒对世界经济的影响，各国生活在极端贫困中的人数将增加，这是每天低于1.90美元的国际贫困线的收入。",
     		 sources: "资料来源：",
     		 projectedPoveryByRegion: "由于冠状病毒对世界经济的影响，预计贫困地区会增加。",
     		 projectionsCaption: "COVID-19的总死亡人数预测。单击图例以选择或取消选择国家。",
     		 source: "资源：",
-    		 comparisonTitle: "COVID-19如何与",
-    		 selectSource: "选择来源",
-    		 prevalence: "感染比例",
     		 reset: "重启",
-    		 fatalityRisksSource: "死亡风险：",
-    		 infectedTitle: "预期感染年龄：",
-    		 deathsTitle: "预期死亡年龄：",
-    		 yearsOld: "年",
-    		 covid19Cause: "COVID-19估算",
-    		 tableTitle: "预期总数",
+    		 infectedTitle: "被年龄感染的潜力",
+    		 deathsTitle: "按年龄划分的潜在死亡人数",
+    		 age: "年龄",
+    		 infected: "已感染",
+    		 deaths: "死亡人数",
+    		 projectionsTitle: "由于COVID-19，潜在的数百万人陷入极端贫困",
+    		 date: "日期",
+    		 totDeaths: "死亡总数",
+    		 totDeathsProj: "总死亡人数（预计）",
+    		 titleListMain: "COVID-19如何与",
+    		 titleListName: "原因",
+    		 titleListRisk: "风险",
+    		 titleListNumber: " 在",
+    		 yearsOfLifeLost: "失去生命的岁月",
+    		 inCountry: " 在",
+    		 compareItems0: "死亡原因",
+    		 compareItems1: "多年生命的原因",
+    		 compareItems2: "多年生命中的危险因素",
+    		 covid19Cause: "COVID-19（估算）",
     		 enterDescribtion: "输入描述",
-    		 description: "描述",
-    		 infected: "预期感染人数",
-    		 deaths: "预期死亡人数",
     		 yrsOfLifeLost: "预期寿命损失",
     		 yrsOfLifeLostCosts: "潜在成本",
+    		 scenariosDescription: "场景描述",
+    		 country: "国家",
+    		 region: "区域",
+    		 people: "人",
+    		 india: "印度",
+    		 nigeria: "尼日利亚",
+    		 drCongo: "刚果民主共和国",
+    		 ethiopia: "埃塞俄比亚",
+    		 bangladesh: "孟加拉国",
+    		 tanzania: "坦桑尼亚",
+    		 madagascar: "马达加斯加",
+    		 indonesia: "印尼",
+    		 kenya: "肯尼亚",
+    		 mozambique: "莫桑比克",
+    		 uganda: "乌干达",
+    		 southAfrica: "南非",
+    		 subSahAfrica: "撒哈拉以南非洲",
+    		 southAsia: "南亚",
+    		 eastAsiaPacific: "东亚与太平洋",
+    		 latinCaribbean: "拉丁美洲和加勒比海",
+    		 middleEastNorthAfrica: "中东和北非",
+    		 europeCentralAsia: "欧洲与中亚",
+    		 northAmerica: "北美",
+    		 mainProjRegions: "死亡原因",
+    		 nameProjRegions: "多年生命的原因",
+    		 numberProjRegions: "多年生命中的危险因素",
+    		 fatalityRates: "死亡率",
+    		 fatalityRatesDescription: "选择新的冠状病毒感染导致死亡的风险的估计值，各国之间的估计值会随时间而变化，更广泛的测试可以降低CFR值。",
+    		 varyFRs: "改变选择的死亡率",
+    		 varyFRsDescription1: "尝试增加死亡风险，例如到50％，适用于低收入国家或不堪重负的医疗保健。",
+    		 varyFRsDescription2: "或减少，例如达到-50％，以期望得到更好的治疗和更好的医疗保健。",
+    		 resetDescription: "将所有输入参数设置回其初始值。",
+    		 elimination: "消除COVID-19的可能性",
+    		 eliminationDescription1: "在感染前完全消除COVID-19疾病的可能性",
+    		 eliminationDescription2: "人口。",
+    		 infectionUntil: "直至消除的感染率",
+    		 infectionUntilDescription: "甚至在完全消除的情况下仍然受到感染的人口比例。注意：首先要增加消除的可能性，此参数才能生效。",
+    		 hideExport: "隐藏导出",
+    		 export: "出口",
+    		 exportDescription: "以JSON格式导出假设的COVID-19方案。",
+    		 export1: "隐藏导出",
+    		 scenariosCaption: "您可以设置描述假设情景的输入参数，并将其添加到表格中进行比较，其中有3个针对所选位置和死亡风险的假设情景示例，应谨慎解释结果，请参阅示例解释。",
+    		 exampleScenario0: "场景0：不做任何事情，作为基准",
+    		 exampleScenario1: "方案1：保护60岁以上的人们，通过暴露60岁以下的人们进行补偿，同时考虑失去的生命",
+    		 exampleScenario2: "方案2：消除90％，同时考虑省钱",
+    		 mapTitle: "COVID-19各国风险",
+    		 mapItems0: "按国家划分的60岁以上人口的比例",
+    		 mapItems1: "按国家划分的60岁以上人口的比例",
+    		 povertyItems0: "按国家",
+    		 povertyItems1: "按地区",
     		},
     	fatalityRisks: [
     		 {id: 0,
@@ -2597,7 +2727,7 @@ var app = (function () {
     		  name: "阿尔巴尼亚",
     		  lifeExpectancy: 78.57,
     		  demographics: [333920, 375307, 481846, 377350, 330419, 392129, 317994, 189973, 81975],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '下呼吸道感染', '肾脏疾病', '肝病', '道路伤害', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '下呼吸道感染', '肾脏疾病', '肝病', '道路伤害', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [12145, 4345, 1337, 736, 489, 382, 363, 309, 248, 234, 33],
     		  diseaseNames: ['心血管疾病', '癌症', '肌肉骨骼疾病', '意外伤害', '神经系统疾病', '精神和物质使用障碍', '其他非传染性疾病', '糖尿病，血液和内分泌疾病', '新生儿疾病', '呼吸疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [206331, 100981, 64286, 53506, 51865, 38507, 37568, 35191, 27693, 24834, 483],
@@ -2647,7 +2777,7 @@ var app = (function () {
     		  name: "澳大利亚",
     		  lifeExpectancy: 83.44,
     		  demographics: [3280238, 3079378, 3401525, 3662343, 3282597, 3093653, 2605017, 1768659, 1029790],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '下呼吸道感染', '糖尿病', '自杀', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '下呼吸道感染', '糖尿病', '自杀', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [52101, 50254, 17119, 10822, 6112, 4455, 4451, 3755, 3055, 2328, 102],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '精神和物质使用障碍', '神经系统疾病', '意外伤害', '呼吸疾病', '糖尿病，血液和内分泌疾病', '其他非传染性疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [970836, 694335, 645111, 549355, 438634, 432478, 305003, 292021, 244224, 147752, 1386],
@@ -2657,7 +2787,7 @@ var app = (function () {
     		  name: "奥地利",
     		  lifeExpectancy: 81.54,
     		  demographics: [863022, 877100, 1124426, 1224528, 1195561, 1402944, 1000416, 789863, 477248],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '糖尿病', '肝病', '自杀', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '糖尿病', '肝病', '自杀', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [31386, 21745, 7481, 3383, 3227, 2754, 2059, 1860, 1422, 994, 643],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '糖尿病，血液和内分泌疾病', '意外伤害', '其他非传染性疾病', '消化系统疾病', '呼吸疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [412725, 410715, 249516, 205240, 164586, 148028, 122133, 119273, 104957, 103622, 8364],
@@ -2777,7 +2907,7 @@ var app = (function () {
     		  name: "波斯尼亚和黑塞哥维那",
     		  lifeExpectancy: 77.4,
     		  demographics: [306587, 351419, 409569, 468369, 448869, 508292, 452975, 235035, 119881],
-    		  majorCauses: ['心血管疾病', '癌症', '糖尿病', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '肝病', '下呼吸道感染', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '糖尿病', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '肝病', '下呼吸道感染', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [18107, 8950, 2293, 1991, 1310, 1136, 604, 577, 360, 324, 149],
     		  diseaseNames: ['心血管疾病', '癌症', '糖尿病，血液和内分泌疾病', '肌肉骨骼疾病', '意外伤害', '神经系统疾病', '精神和物质使用障碍', '呼吸疾病', '其他非传染性疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [314480, 202956, 96087, 76811, 71590, 67986, 49804, 45325, 40933, 39556, 2127],
@@ -3057,7 +3187,7 @@ var app = (function () {
     		  name: "芬兰",
     		  lifeExpectancy: 81.91,
     		  demographics: [578800, 602758, 678649, 705213, 655323, 728975, 720693, 556209, 305539],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '消化系统疾病', '呼吸疾病', '肝病', '自杀', '下呼吸道感染', '帕金森综合症', '饮酒障碍', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '消化系统疾病', '呼吸疾病', '肝病', '自杀', '下呼吸道感染', '帕金森氏病', '饮酒障碍', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [21359, 13089, 8546, 2416, 1784, 1178, 868, 713, 682, 598, 312],
     		  diseaseNames: ['心血管疾病', '癌症', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '意外伤害', '糖尿病，血液和内分泌疾病', '消化系统疾病', '呼吸疾病', '其他非传染性疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [297803, 244327, 168915, 159341, 109069, 95183, 67129, 65492, 57755, 56824, 3999],
@@ -3107,7 +3237,7 @@ var app = (function () {
     		  name: "德国",
     		  lifeExpectancy: 81.33,
     		  demographics: [7726915, 7948424, 9421661, 10770439, 10400203, 13574883, 10347526, 7589596, 5737398],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '下呼吸道感染', '肝病', '糖尿病', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '下呼吸道感染', '肝病', '糖尿病', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [356362, 252763, 83782, 46375, 44735, 26754, 25237, 19558, 19133, 12716, 8349],
     		  diseaseNames: ['心血管疾病', '癌症', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '糖尿病，血液和内分泌疾病', '呼吸疾病', '意外伤害', '消化系统疾病', '其他非传染性疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [4855900, 4820928, 2911225, 2149784, 1683775, 1498390, 1240818, 1133138, 1077631, 979500, 103590],
@@ -3127,7 +3257,7 @@ var app = (function () {
     		  name: "希腊",
     		  lifeExpectancy: 82.24,
     		  demographics: [910515, 1071214, 1068916, 1384511, 1584912, 1489576, 1243217, 940663, 779928],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '下呼吸道感染', '肾脏疾病', '消化系统疾病', '帕金森综合症', '肝病', '道路伤害', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '下呼吸道感染', '肾脏疾病', '消化系统疾病', '帕金森氏病', '肝病', '道路伤害', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [50895, 31245, 11489, 6069, 4269, 3582, 3579, 1460, 1308, 1221, 173],
     		  diseaseNames: ['心血管疾病', '癌症', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '呼吸疾病', '糖尿病，血液和内分泌疾病', '意外伤害', '其他非传染性疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [687099, 569885, 326957, 284049, 219619, 153164, 151809, 133281, 120023, 89730, 2100],
@@ -3207,7 +3337,7 @@ var app = (function () {
     		  name: "冰岛",
     		  lifeExpectancy: 82.99,
     		  demographics: [43668, 44269, 48238, 46464, 42622, 42276, 36635, 22223, 12642],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '下呼吸道感染', '消化系统疾病', '自杀', '帕金森综合症', '肾脏疾病', '糖尿病', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '下呼吸道感染', '消化系统疾病', '自杀', '帕金森氏病', '肾脏疾病', '糖尿病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [738, 652, 236, 114, 95, 65, 40, 39, 27, 22, 10],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '呼吸疾病', '意外伤害', '糖尿病，血液和内分泌疾病', '其他非传染性疾病', '腹泻和常见传染病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [12927, 10060, 9227, 7061, 6135, 3992, 3785, 3121, 3018, 1716, 139],
@@ -3277,7 +3407,7 @@ var app = (function () {
     		  name: "意大利",
     		  lifeExpectancy: 83.51,
     		  demographics: [5103576, 5740332, 6135226, 7100743, 9225165, 9453168, 7391126, 5935048, 4465708],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', 'COVID-19，直到2020年5月27日', '呼吸疾病', '消化系统疾病', '糖尿病', '肾脏疾病', '下呼吸道感染', '肝病', '帕金森综合症'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', 'COVID-19，直到2020年5月27日', '呼吸疾病', '消化系统疾病', '糖尿病', '肾脏疾病', '下呼吸道感染', '肝病', '帕金森氏病'],
     		  majorDeaths: [216585, 180577, 73339, 32955, 29044, 26403, 18551, 14292, 13167, 11695, 7557],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '糖尿病，血液和内分泌疾病', '意外伤害', '消化系统疾病', '其他非传染性疾病', '呼吸疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [3227357, 2648270, 1971740, 1748118, 1191659, 1020109, 703647, 597865, 593953, 578073, 402295],
@@ -3297,7 +3427,7 @@ var app = (function () {
     		  name: "日本",
     		  lifeExpectancy: 84.63,
     		  demographics: [10363426, 11337747, 12268082, 14762678, 18753747, 16223340, 16318424, 15814619, 11018236],
-    		  majorCauses: ['癌症', '心血管疾病', '痴呆', '下呼吸道感染', '消化系统疾病', '呼吸疾病', '肾脏疾病', '自杀', '肝病', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['癌症', '心血管疾病', '痴呆', '下呼吸道感染', '消化系统疾病', '呼吸疾病', '肾脏疾病', '自杀', '肝病', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [414698, 368091, 198556, 109534, 56334, 53739, 35709, 28819, 25352, 15613, 858],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '糖尿病，血液和内分泌疾病', '精神和物质使用障碍', '意外伤害', '呼吸疾病', '其他非传染性疾病', '腹泻和常见传染病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [6647076, 5124426, 4181686, 3088970, 2174030, 2146019, 2122420, 1348675, 1284802, 1131219, 10052],
@@ -3507,7 +3637,7 @@ var app = (function () {
     		  name: "马耳他",
     		  lifeExpectancy: 82.53,
     		  demographics: [42898, 41262, 56840, 65191, 58253, 54234, 57908, 43005, 20785],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '下呼吸道感染', '呼吸疾病', '消化系统疾病', '糖尿病', '肾脏疾病', '帕金森综合症', '肝病', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '下呼吸道感染', '呼吸疾病', '消化系统疾病', '糖尿病', '肾脏疾病', '帕金森氏病', '肝病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [1569, 1042, 331, 173, 172, 127, 117, 94, 54, 44, 6],
     		  diseaseNames: ['心血管疾病', '癌症', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '糖尿病，血液和内分泌疾病', '意外伤害', '其他非传染性疾病', '呼吸疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [22705, 20259, 14018, 9810, 8075, 6672, 5952, 5074, 4816, 3573, 79],
@@ -3627,7 +3757,7 @@ var app = (function () {
     		  name: "荷兰",
     		  lifeExpectancy: 82.28,
     		  demographics: [1762690, 1973468, 2106722, 2075858, 2201959, 2520370, 2109482, 1526904, 819669],
-    		  majorCauses: ['癌症', '心血管疾病', '痴呆', '呼吸疾病', '下呼吸道感染', 'COVID-19，直到2020年5月27日', '消化系统疾病', '糖尿病', '肾脏疾病', '自杀', '帕金森综合症'],
+    		  majorCauses: ['癌症', '心血管疾病', '痴呆', '呼吸疾病', '下呼吸道感染', 'COVID-19，直到2020年5月27日', '消化系统疾病', '糖尿病', '肾脏疾病', '自杀', '帕金森氏病'],
     		  majorDeaths: [51854, 40564, 14836, 10109, 6178, 5856, 5649, 2729, 2683, 2066, 1792],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '呼吸疾病', '糖尿病，血液和内分泌疾病', '其他非传染性疾病', '意外伤害', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [987417, 581670, 576427, 405596, 365519, 255064, 246098, 201647, 181251, 123640, 77616],
@@ -3637,7 +3767,7 @@ var app = (function () {
     		  name: "新西兰",
     		  lifeExpectancy: 82.29,
     		  demographics: [618147, 620994, 673857, 604748, 598468, 627307, 511426, 346232, 181883],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '下呼吸道感染', '糖尿病', '自杀', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '肾脏疾病', '下呼吸道感染', '糖尿病', '自杀', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [10898, 9838, 2975, 2143, 1000, 773, 728, 556, 537, 377, 21],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '精神和物质使用障碍', '意外伤害', '神经系统疾病', '呼吸疾病', '糖尿病，血液和内分泌疾病', '其他非传染性疾病', '运输伤害', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [196818, 157168, 133048, 98229, 96355, 81421, 57606, 52563, 48073, 35614, 289],
@@ -3687,7 +3817,7 @@ var app = (function () {
     		  name: "挪威",
     		  lifeExpectancy: 82.4,
     		  demographics: [616243, 643048, 724428, 727725, 730800, 701457, 581791, 427144, 226223],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '下呼吸道感染', '消化系统疾病', '糖尿病', '肾脏疾病', '自杀', '帕金森综合症', 'COVID-19，直到2020年5月27日'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '下呼吸道感染', '消化系统疾病', '糖尿病', '肾脏疾病', '自杀', '帕金森氏病', 'COVID-19，直到2020年5月27日'],
     		  majorDeaths: [12886, 11611, 4465, 2639, 1840, 1388, 591, 590, 583, 465, 235],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '意外伤害', '呼吸疾病', '糖尿病，血液和内分泌疾病', '其他非传染性疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [221284, 172270, 155719, 121986, 107914, 76659, 67981, 64332, 62429, 36676, 3177],
@@ -3947,7 +4077,7 @@ var app = (function () {
     		  name: "西班牙",
     		  lifeExpectancy: 83.56,
     		  demographics: [4340417, 4682339, 4652133, 6158281, 7935505, 6944643, 5200462, 3921750, 2901252],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '下呼吸道感染', '肾脏疾病', '糖尿病', '肝病', '帕金森综合症'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', '消化系统疾病', '下呼吸道感染', '肾脏疾病', '糖尿病', '肝病', '帕金森氏病'],
     		  majorDeaths: [123577, 115657, 51759, 33490, 21593, 12941, 10605, 8292, 8132, 5808],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '糖尿病，血液和内分泌疾病', '呼吸疾病', '意外伤害', '其他非传染性疾病', '消化系统疾病'],
     		  diseaseDALYs: [2182632, 1682048, 1265974, 1243119, 950283, 660386, 588589, 549012, 475533, 448367],
@@ -3997,7 +4127,7 @@ var app = (function () {
     		  name: "瑞典",
     		  lifeExpectancy: 82.8,
     		  demographics: [1191245, 1106232, 1304961, 1289302, 1277210, 1280608, 1097278, 967449, 522106],
-    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', 'COVID-19，直到2020年5月27日', '消化系统疾病', '下呼吸道感染', '糖尿病', '肾脏疾病', '自杀', '帕金森综合症'],
+    		  majorCauses: ['心血管疾病', '癌症', '痴呆', '呼吸疾病', 'COVID-19，直到2020年5月27日', '消化系统疾病', '下呼吸道感染', '糖尿病', '肾脏疾病', '自杀', '帕金森氏病'],
     		  majorDeaths: [34164, 24053, 9660, 4518, 4125, 3034, 2903, 1722, 1461, 1395, 1213],
     		  diseaseNames: ['心血管疾病', '癌症', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '糖尿病，血液和内分泌疾病', '意外伤害', '呼吸疾病', '其他非传染性疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [446549, 436415, 277268, 240709, 211399, 139367, 139276, 136083, 110778, 73435, 52985],
@@ -4147,7 +4277,7 @@ var app = (function () {
     		  name: "英国",
     		  lifeExpectancy: 81.32,
     		  demographics: [8065283, 7569160, 8630614, 9203569, 8624679, 9138365, 7206475, 5673457, 3418559],
-    		  majorCauses: ['癌症', '心血管疾病', '痴呆', '呼吸疾病', 'COVID-19，直到2020年5月27日', '下呼吸道感染', '消化系统疾病', '肝病', '帕金森综合症', '肾脏疾病', '自杀'],
+    		  majorCauses: ['癌症', '心血管疾病', '痴呆', '呼吸疾病', 'COVID-19，直到2020年5月27日', '下呼吸道感染', '消化系统疾病', '肝病', '帕金森氏病', '肾脏疾病', '自杀'],
     		  majorDeaths: [179856, 176516, 63894, 47298, 37048, 36952, 29640, 9258, 7334, 6766, 5778],
     		  diseaseNames: ['癌症', '心血管疾病', '肌肉骨骼疾病', '神经系统疾病', '精神和物质使用障碍', '呼吸疾病', '其他非传染性疾病', '意外伤害', '糖尿病，血液和内分泌疾病', '消化系统疾病', 'COVID-19，直到2020年5月27日'],
     		  diseaseDALYs: [3323621, 2620719, 2099648, 1589106, 1296572, 1217869, 789427, 782490, 740272, 738202, 481718],
@@ -4256,18 +4386,26 @@ var app = (function () {
     		],
       });
 
-    // version = 2020-05-28 00:07:54;
+    // version = 2020-05-28 15:12:05;
 
     const spanishDictStore = readable({ 
     	app: {
     		 mainTitle: "Calculadora COVID",
     		 subtitle: "Una herramienta visual para explorar y analizar los posibles impactos de COVID-19",
+    		 tabItem0: "Mortalidad por edad",
+    		 tabItem1: "Estimaciones en contexto",
+    		 tabItem2: "Riesgos por pais",
+    		 tabItem3: "Proyecto de pobreza",
+    		 tabItem4: "Proj. De muertes",
+    		 tabItem5: "Hyp Escenarios",
+    		 tabItem6: "Ex. Interpretaciones",
     		 location: "Ubicación",
     		 selectLocation: "Seleccione ubicación",
     		 locationDescription: "El impacto de COVID-19 varía entre países.",
     		 infectionRate: "Tasa de infección",
     		 infectionRateDescription: "Proporción de todas las personas que contraen el nuevo coronavirus.",
     		 over60InfectionRate: "Más de 60 tasa de infección",
+    		 below60InfectionRate: "Por debajo de 60 tasa de infección",
     		 over60Description: "Proporción de todas las personas mayores de 60 años que contraen el nuevo coronavirus.",
     		 proportionIsThen: "La proporción de personas menores de 60 años infectadas es entonces",
     		 proportionIsThenDescription: "Dado que depende tanto de la tasa de infección general como de la tasa de infección de las personas mayores de 60 años.",
@@ -4286,28 +4424,85 @@ var app = (function () {
     		 compareWithOtherCaption7: "Los años de vida perdidos debido a otros factores de riesgo son para el año 2017. Fuente:",
     		 proportionOver60ByCountry: "Proporción de personas mayores de 60 años de riesgo por país",
     		 lowIncomeRiskByCountry: "Riesgo de bajos ingresos por país",
-    		 mapCaption: "Puede pasar el cursor sobre los elementos de leyenda para seleccionar. Puede acercar y alejar el mapa. Y pase el mouse sobre el mapa para obtener información sobre el país que representa. Fuente:",
-    		 projectedPovery: "La pobreza proyectada aumenta por país debido al impacto del coronavirus en la economía mundial.",
+    		 mapCaption: "Puede pasar el cursor sobre los elementos de leyenda para seleccionar. Puede acercar y alejar el mapa. Y pase el mouse sobre el mapa para obtener información sobre el país que representa.",
+    		 projectedPovery: "Los aumentos proyectados por país debido al impacto del coronavirus en la economía mundial en el número de personas que viven en la pobreza extrema, es decir, un ingreso por debajo de la línea internacional de pobreza de $ 1.90 por día.",
     		 sources: "Fuentes:",
     		 projectedPoveryByRegion: "La pobreza proyectada aumenta por región debido al impacto del coronavirus en la economía mundial.",
     		 projectionsCaption: "Proyecciones del total de muertes por COVID-19. Haga clic en la leyenda para seleccionar o anular la selección de un país.",
     		 source: "Fuente:",
-    		 comparisonTitle: "Cómo se compara COVID-19 con",
-    		 selectSource: "Seleccionar fuente",
-    		 prevalence: "Proporción de infectados",
     		 reset: "Reiniciar",
-    		 fatalityRisksSource: "Riesgos fatales:",
-    		 infectedTitle: "Esperado infectado por edad en:",
-    		 deathsTitle: "Muertes esperadas por edad en:",
-    		 yearsOld: "años",
-    		 covid19Cause: "COVID-19 estimado",
-    		 tableTitle: "Números totales esperados en",
+    		 infectedTitle: "Potencial infectado por edad",
+    		 deathsTitle: "Posibles muertes por edad",
+    		 age: "Años",
+    		 infected: "Infectado",
+    		 deaths: "Fallecidos",
+    		 projectionsTitle: "Millones potenciales empujados a la pobreza extrema debido a COVID-19 por",
+    		 date: "Fecha",
+    		 totDeaths: "Muertes totales",
+    		 totDeathsProj: "Muertes totales (proyectadas)",
+    		 titleListMain: "Cómo se compara COVID-19 con",
+    		 titleListName: "Porque",
+    		 titleListRisk: "Riesgo",
+    		 titleListNumber: " en",
+    		 yearsOfLifeLost: "Años de vida perdida",
+    		 inCountry: " en",
+    		 compareItems0: "Causas de la muerte",
+    		 compareItems1: "Causas de años de vida perdidos",
+    		 compareItems2: "Factores de riesgo en años de vida perdidos",
+    		 covid19Cause: "COVID-19 (estimado)",
     		 enterDescribtion: "Ingrese la descripción",
-    		 description: "Descripción",
-    		 infected: "Número esperado de infectados",
-    		 deaths: "Número esperado de muertes",
     		 yrsOfLifeLost: "Años esperados de vida perdidos",
     		 yrsOfLifeLostCosts: "Costos potenciales",
+    		 scenariosDescription: "Descripción del escenario",
+    		 country: "País",
+    		 region: "Región",
+    		 people: "Personas",
+    		 india: "India",
+    		 nigeria: "Nigeria",
+    		 drCongo: "República Democrática del Congo",
+    		 ethiopia: "Etiopía",
+    		 bangladesh: "Bangladés",
+    		 tanzania: "Tanzania",
+    		 madagascar: "Madagascar",
+    		 indonesia: "Indonesia",
+    		 kenya: "Kenia",
+    		 mozambique: "Mozambique",
+    		 uganda: "Uganda",
+    		 southAfrica: "Sudáfrica",
+    		 subSahAfrica: "Africa Sub-sahariana",
+    		 southAsia: "Asia del Sur",
+    		 eastAsiaPacific: "Asia oriental y el Pacífico",
+    		 latinCaribbean: "América Latina y el Caribe",
+    		 middleEastNorthAfrica: "Medio Oriente y África del Norte",
+    		 europeCentralAsia: "Europa y Asia central",
+    		 northAmerica: "Norteamérica",
+    		 mainProjRegions: "Causas de la muerte",
+    		 nameProjRegions: "Causas de años de vida perdidos",
+    		 numberProjRegions: "Factores de riesgo en años de vida perdidos",
+    		 fatalityRates: "Tasas de fatalidad",
+    		 fatalityRatesDescription: "Seleccione estimaciones del riesgo de muerte por infección con el nuevo coronavirus. Las estimaciones varían según el país y el tiempo. Las pruebas más amplias pueden reducir las estimaciones de CFR.",
+    		 varyFRs: "Variar las tasas de mortalidad seleccionadas",
+    		 varyFRsDescription1: "Intente aumentar el riesgo de muerte, p. al 50%, para países de bajos ingresos o asistencia sanitaria abrumada.",
+    		 varyFRsDescription2: "O disminuyendo, p. hasta -50%, para tratamientos mejorados esperados y mejor atención médica.",
+    		 resetDescription: "Regrese todos los parámetros de entrada a sus valores iniciales.",
+    		 elimination: "Probabilidad de eliminar COVID-19",
+    		 eliminationDescription1: "Probabilidad de lograr la eliminación completa de la enfermedad COVID-19 antes de que pueda infectar",
+    		 eliminationDescription2: "de población.",
+    		 infectionUntil: "Tasa de infección hasta la eliminación",
+    		 infectionUntilDescription: "Proporción de la población que aún se infecta incluso en el caso de lograr la eliminación completa. Nota: Primero aumente la probabilidad de eliminación para que este parámetro surta efecto.",
+    		 hideExport: "Ocultar exportación",
+    		 export: "Exportar",
+    		 exportDescription: "Exporte escenarios hipotéticos de COVID-19 en formato JSON.",
+    		 export1: "Ocultar exportación",
+    		 scenariosCaption: "Puede establecer parámetros de entrada que describan un escenario hipotético y agregarlo a la tabla para comparación. Hay 3 ejemplos de escenarios hipotéticos para la ubicación seleccionada y los riesgos de mortalidad. Los resultados deben interpretarse con precaución, consulte Interpretaciones de ejemplo.",
+    		 exampleScenario0: "Escenario 0: no hacer nada, como referencia",
+    		 exampleScenario1: "Escenario 1: Proteja a las personas mayores de 60 años, compense exponiendo a los menores de 60 años, considere también los años de vida perdidos",
+    		 exampleScenario2: "Escenario 2: eliminación al 90%, considere también el dinero ahorrado",
+    		 mapTitle: "COVID-19 Riesgos por país",
+    		 mapItems0: "Proporción de personas mayores de 60 años por país",
+    		 mapItems1: "Proporción de personas mayores de 60 años por país",
+    		 povertyItems0: "Por país",
+    		 povertyItems1: "Por región",
     		},
     	fatalityRisks: [
     		 {id: 0,
@@ -4351,7 +4546,7 @@ var app = (function () {
     		  name: "Albania",
     		  lifeExpectancy: 78.57,
     		  demographics: [333920, 375307, 481846, 377350, 330419, 392129, 317994, 189973, 81975],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'Lesiones viales', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'Lesiones viales', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [12145, 4345, 1337, 736, 489, 382, 363, 309, 248, 234, 33],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [206331, 100981, 64286, 53506, 51865, 38507, 37568, 35191, 27693, 24834, 483],
@@ -4401,7 +4596,7 @@ var app = (function () {
     		  name: "Australia",
     		  lifeExpectancy: 83.44,
     		  demographics: [3280238, 3079378, 3401525, 3662343, 3282597, 3093653, 2605017, 1768659, 1029790],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Diabetes', 'Suicidio', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Diabetes', 'Suicidio', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [52101, 50254, 17119, 10822, 6112, 4455, 4451, 3755, 3055, 2328, 102],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [970836, 694335, 645111, 549355, 438634, 432478, 305003, 292021, 244224, 147752, 1386],
@@ -4411,7 +4606,7 @@ var app = (function () {
     		  name: "Austria",
     		  lifeExpectancy: 81.54,
     		  demographics: [863022, 877100, 1124426, 1224528, 1195561, 1402944, 1000416, 789863, 477248],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Diabetes', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Diabetes', 'Enfermedades del HIGADO', 'Suicidio', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [31386, 21745, 7481, 3383, 3227, 2754, 2059, 1860, 1422, 994, 643],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [412725, 410715, 249516, 205240, 164586, 148028, 122133, 119273, 104957, 103622, 8364],
@@ -4531,7 +4726,7 @@ var app = (function () {
     		  name: "Bosnia-Herzegovina",
     		  lifeExpectancy: 77.4,
     		  demographics: [306587, 351419, 409569, 468369, 448869, 508292, 452975, 235035, 119881],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades del HIGADO', 'Infecciones respiratorias inferiores', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades del HIGADO', 'Infecciones respiratorias inferiores', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [18107, 8950, 2293, 1991, 1310, 1136, 604, 577, 360, 324, 149],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [314480, 202956, 96087, 76811, 71590, 67986, 49804, 45325, 40933, 39556, 2127],
@@ -4811,7 +5006,7 @@ var app = (function () {
     		  name: "Finlandia",
     		  lifeExpectancy: 81.91,
     		  demographics: [578800, 602758, 678649, 705213, 655323, 728975, 720693, 556209, 305539],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Suicidio', 'Infecciones respiratorias inferiores', 'Enfermedad de Parkinson', 'Trastornos por consumo de alcohol.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Suicidio', 'Infecciones respiratorias inferiores', 'enfermedad de Parkinson', 'Trastornos por consumo de alcohol.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [21359, 13089, 8546, 2416, 1784, 1178, 868, 713, 682, 598, 312],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [297803, 244327, 168915, 159341, 109069, 95183, 67129, 65492, 57755, 56824, 3999],
@@ -4861,7 +5056,7 @@ var app = (function () {
     		  name: "Alemania",
     		  lifeExpectancy: 81.33,
     		  demographics: [7726915, 7948424, 9421661, 10770439, 10400203, 13574883, 10347526, 7589596, 5737398],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Diabetes', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Diabetes', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [356362, 252763, 83782, 46375, 44735, 26754, 25237, 19558, 19133, 12716, 8349],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4855900, 4820928, 2911225, 2149784, 1683775, 1498390, 1240818, 1133138, 1077631, 979500, 103590],
@@ -4881,7 +5076,7 @@ var app = (function () {
     		  name: "Grecia",
     		  lifeExpectancy: 82.24,
     		  demographics: [910515, 1071214, 1068916, 1384511, 1584912, 1489576, 1243217, 940663, 779928],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedad de Parkinson', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades digestivas', 'enfermedad de Parkinson', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [50895, 31245, 11489, 6069, 4269, 3582, 3579, 1460, 1308, 1221, 173],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [687099, 569885, 326957, 284049, 219619, 153164, 151809, 133281, 120023, 89730, 2100],
@@ -4961,7 +5156,7 @@ var app = (function () {
     		  name: "Islandia",
     		  lifeExpectancy: 82.99,
     		  demographics: [43668, 44269, 48238, 46464, 42622, 42276, 36635, 22223, 12642],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Suicidio', 'Enfermedad de Parkinson', 'Nefropatía', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Suicidio', 'enfermedad de Parkinson', 'Nefropatía', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [738, 652, 236, 114, 95, 65, 40, 39, 27, 22, 10],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [12927, 10060, 9227, 7061, 6135, 3992, 3785, 3121, 3018, 1716, 139],
@@ -5031,7 +5226,7 @@ var app = (function () {
     		  name: "Italia",
     		  lifeExpectancy: 83.51,
     		  demographics: [5103576, 5740332, 6135226, 7100743, 9225165, 9453168, 7391126, 5935048, 4465708],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Enfermedad de Parkinson'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'enfermedad de Parkinson'],
     		  majorDeaths: [216585, 180577, 73339, 32955, 29044, 26403, 18551, 14292, 13167, 11695, 7557],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3227357, 2648270, 1971740, 1748118, 1191659, 1020109, 703647, 597865, 593953, 578073, 402295],
@@ -5051,7 +5246,7 @@ var app = (function () {
     		  name: "Japón",
     		  lifeExpectancy: 84.63,
     		  demographics: [10363426, 11337747, 12268082, 14762678, 18753747, 16223340, 16318424, 15814619, 11018236],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Nefropatía', 'Suicidio', 'Enfermedades del HIGADO', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Nefropatía', 'Suicidio', 'Enfermedades del HIGADO', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [414698, 368091, 198556, 109534, 56334, 53739, 35709, 28819, 25352, 15613, 858],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [6647076, 5124426, 4181686, 3088970, 2174030, 2146019, 2122420, 1348675, 1284802, 1131219, 10052],
@@ -5261,7 +5456,7 @@ var app = (function () {
     		  name: "Malta",
     		  lifeExpectancy: 82.53,
     		  demographics: [42898, 41262, 56840, 65191, 58253, 54234, 57908, 43005, 20785],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Enfermedad de Parkinson', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'enfermedad de Parkinson', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [1569, 1042, 331, 173, 172, 127, 117, 94, 54, 44, 6],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [22705, 20259, 14018, 9810, 8075, 6672, 5952, 5074, 4816, 3573, 79],
@@ -5381,7 +5576,7 @@ var app = (function () {
     		  name: "Países Bajos",
     		  lifeExpectancy: 82.28,
     		  demographics: [1762690, 1973468, 2106722, 2075858, 2201959, 2520370, 2109482, 1526904, 819669],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Suicidio', 'Enfermedad de Parkinson'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Suicidio', 'enfermedad de Parkinson'],
     		  majorDeaths: [51854, 40564, 14836, 10109, 6178, 5856, 5649, 2729, 2683, 2066, 1792],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [987417, 581670, 576427, 405596, 365519, 255064, 246098, 201647, 181251, 123640, 77616],
@@ -5391,7 +5586,7 @@ var app = (function () {
     		  name: "Nueva Zelanda",
     		  lifeExpectancy: 82.29,
     		  demographics: [618147, 620994, 673857, 604748, 598468, 627307, 511426, 346232, 181883],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Diabetes', 'Suicidio', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Diabetes', 'Suicidio', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [10898, 9838, 2975, 2143, 1000, 773, 728, 556, 537, 377, 21],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [196818, 157168, 133048, 98229, 96355, 81421, 57606, 52563, 48073, 35614, 289],
@@ -5441,7 +5636,7 @@ var app = (function () {
     		  name: "Noruega",
     		  lifeExpectancy: 82.4,
     		  demographics: [616243, 643048, 724428, 727725, 730800, 701457, 581791, 427144, 226223],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Suicidio', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Suicidio', 'enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [12886, 11611, 4465, 2639, 1840, 1388, 591, 590, 583, 465, 235],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [221284, 172270, 155719, 121986, 107914, 76659, 67981, 64332, 62429, 36676, 3177],
@@ -5701,7 +5896,7 @@ var app = (function () {
     		  name: "España",
     		  lifeExpectancy: 83.56,
     		  demographics: [4340417, 4682339, 4652133, 6158281, 7935505, 6944643, 5200462, 3921750, 2901252],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Diabetes', 'Enfermedades del HIGADO', 'Enfermedad de Parkinson'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Diabetes', 'Enfermedades del HIGADO', 'enfermedad de Parkinson'],
     		  majorDeaths: [123577, 115657, 51759, 33490, 21593, 12941, 10605, 8292, 8132, 5808],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas'],
     		  diseaseDALYs: [2182632, 1682048, 1265974, 1243119, 950283, 660386, 588589, 549012, 475533, 448367],
@@ -5751,7 +5946,7 @@ var app = (function () {
     		  name: "Suecia",
     		  lifeExpectancy: 82.8,
     		  demographics: [1191245, 1106232, 1304961, 1289302, 1277210, 1280608, 1097278, 967449, 522106],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Diabetes', 'Nefropatía', 'Suicidio', 'Enfermedad de Parkinson'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Diabetes', 'Nefropatía', 'Suicidio', 'enfermedad de Parkinson'],
     		  majorDeaths: [34164, 24053, 9660, 4518, 4125, 3034, 2903, 1722, 1461, 1395, 1213],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [446549, 436415, 277268, 240709, 211399, 139367, 139276, 136083, 110778, 73435, 52985],
@@ -5901,7 +6096,7 @@ var app = (function () {
     		  name: "Reino Unido",
     		  lifeExpectancy: 81.32,
     		  demographics: [8065283, 7569160, 8630614, 9203569, 8624679, 9138365, 7206475, 5673457, 3418559],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Enfermedad de Parkinson', 'Nefropatía', 'Suicidio'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'enfermedad de Parkinson', 'Nefropatía', 'Suicidio'],
     		  majorDeaths: [179856, 176516, 63894, 47298, 37048, 36952, 29640, 9258, 7334, 6766, 5778],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Otras ENT', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3323621, 2620719, 2099648, 1589106, 1296572, 1217869, 789427, 782490, 740272, 738202, 481718],
@@ -7166,12 +7361,12 @@ var app = (function () {
     			svg = svg_element("svg");
     			style = svg_element("style");
     			t = text(".hover-rect:hover {\n        opacity: 1;\n        stroke: black;\n        stroke-width: 1px;\n        fill: rgba(228,26,28, 1);\n      }");
-    			add_location(style, file$3, 45, 4, 1024);
+    			add_location(style, file$3, 45, 4, 1005);
     			attr_dev(svg, "class", "compare");
     			attr_dev(svg, "width", "700");
     			attr_dev(svg, "height", "420");
-    			add_location(svg, file$3, 41, 1, 961);
-    			add_location(div, file$3, 38, 0, 873);
+    			add_location(svg, file$3, 41, 1, 942);
+    			add_location(div, file$3, 38, 0, 854);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7201,7 +7396,7 @@ var app = (function () {
     	return block;
     }
 
-    const transitionDuration$2 = 200; // 300 feels right
+    const transitionDuration$2 = 200;
 
     function instance$3($$self, $$props, $$invalidate) {
     	let { compareData = [] } = $$props;
@@ -7620,8 +7815,44 @@ var app = (function () {
         spacing,
         textOffset,
         onClick,
-        selectedColorValues
+        selectedColorValues,
+        language
       } = props;
+
+      const enToZh = {'Brazil': '巴西',
+                      'Colombia': '哥伦比亚',
+                      'Egypt': '埃及',
+                      'France': '法国',
+                      'Germany': '德国',
+                      'Italy': '意大利',
+                      'Philippines': '菲律宾',
+                      'Turkey': '火鸡',
+                      'United Kingdom': '英国',
+                      'United States': '美国'};
+
+      const enToEs = {'Brazil': 'Brasil',
+                      'Colombia': 'Colombia',
+                      'Egypt': 'Egipto',
+                      'France': 'Francia',
+                      'Germany': 'Alemania',
+                      'Italy': 'Italia',
+                      'Philippines': 'Filipinas',
+                      'Turkey': 'Turquía',
+                      'United Kingdom': 'Reino Unido',
+                      'United States': 'Estados Unidos'};
+
+      function getText(d) {
+        switch(language) {
+          case 'en':
+            return d;
+          case 'es':
+            return enToEs[d];
+          case 'zh':
+            return enToZh[d];
+          default:
+            console.log(d);  
+        }
+      }
 
       const groups = selection.selectAll('g')
         .data(colorScale.domain());
@@ -7649,7 +7880,7 @@ var app = (function () {
 
       groupsEnter.append('text')
         .merge(groups.select('text'))
-          .text(d => d)
+          .text(getText)
           .attr('dy', '0.32em')
           .attr('x', textOffset);
     };
@@ -7667,11 +7898,11 @@ var app = (function () {
     			svg_1 = svg_element("svg");
     			style = svg_element("style");
     			t = text(".line {\n      fill: none;\n      stroke-width: 5;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .continuous {\n      fill: none;  \n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;  \n    }\n    .dashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      /* stroke-dasharray: 8 8; */\n    }\n    .alldashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    .legend-continuous {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .legend-dashed {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    text {\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick-colorlegend {\n      cursor: pointer;\n    }\n    .tick text {\n      font-weight: normal;\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick line {\n      stroke: #C0C0BB;\n    }\n    .axis-label {\n      font-size: 15px;\n      font-weight: 800;\n      fill: rgba(72,72,72,1);\n      font-family: 'Roboto', sans-serif;\n    }\n    .title {\n      font-weight: 800;\n      font-family: 'Roboto', sans-serif;\n      fill: rgba(72,72,72,1);\n      font-size: 17px;\n    }");
-    			add_location(style, file$4, 135, 2, 3349);
+    			add_location(style, file$4, 137, 2, 3409);
     			attr_dev(svg_1, "class", "projections");
     			attr_dev(svg_1, "width", "960");
     			attr_dev(svg_1, "height", "450");
-    			add_location(svg_1, file$4, 133, 0, 3294);
+    			add_location(svg_1, file$4, 135, 0, 3354);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7714,10 +7945,11 @@ var app = (function () {
     	let { projectionsTitle = "" } = $$props;
     	let { projectionsXAxisLabel = "" } = $$props;
     	let { projectionsYAxisLabel = "" } = $$props;
+    	let { language = "" } = $$props;
     	let svg;
 
-    	// state
-    	let selectedColorValues = ["United States", "Brazil", "Italy"];
+    	// state   
+    	let selectedColorValues = ["United States", "Brazil", "Italy"]; // 9, 0, 5
 
     	let selectedCountries = ["United States", "Brazil", "Italy"];
     	let data;
@@ -7805,11 +8037,17 @@ var app = (function () {
     			spacing: 30,
     			textOffset: 15,
     			onClick,
-    			selectedColorValues
+    			selectedColorValues,
+    			language
     		});
     	};
 
-    	const writable_props = ["projectionsTitle", "projectionsXAxisLabel", "projectionsYAxisLabel"];
+    	const writable_props = [
+    		"projectionsTitle",
+    		"projectionsXAxisLabel",
+    		"projectionsYAxisLabel",
+    		"language"
+    	];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Projections> was created with unknown prop '${key}'`);
@@ -7822,6 +8060,7 @@ var app = (function () {
     		if ("projectionsTitle" in $$props) $$invalidate(0, projectionsTitle = $$props.projectionsTitle);
     		if ("projectionsXAxisLabel" in $$props) $$invalidate(1, projectionsXAxisLabel = $$props.projectionsXAxisLabel);
     		if ("projectionsYAxisLabel" in $$props) $$invalidate(2, projectionsYAxisLabel = $$props.projectionsYAxisLabel);
+    		if ("language" in $$props) $$invalidate(3, language = $$props.language);
     	};
 
     	$$self.$capture_state = () => ({
@@ -7832,6 +8071,7 @@ var app = (function () {
     		projectionsTitle,
     		projectionsXAxisLabel,
     		projectionsYAxisLabel,
+    		language,
     		svg,
     		selectedColorValues,
     		selectedCountries,
@@ -7846,6 +8086,7 @@ var app = (function () {
     		if ("projectionsTitle" in $$props) $$invalidate(0, projectionsTitle = $$props.projectionsTitle);
     		if ("projectionsXAxisLabel" in $$props) $$invalidate(1, projectionsXAxisLabel = $$props.projectionsXAxisLabel);
     		if ("projectionsYAxisLabel" in $$props) $$invalidate(2, projectionsYAxisLabel = $$props.projectionsYAxisLabel);
+    		if ("language" in $$props) $$invalidate(3, language = $$props.language);
     		if ("svg" in $$props) svg = $$props.svg;
     		if ("selectedColorValues" in $$props) selectedColorValues = $$props.selectedColorValues;
     		if ("selectedCountries" in $$props) selectedCountries = $$props.selectedCountries;
@@ -7857,7 +8098,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [projectionsTitle, projectionsXAxisLabel, projectionsYAxisLabel];
+    	return [projectionsTitle, projectionsXAxisLabel, projectionsYAxisLabel, language];
     }
 
     class Projections extends SvelteComponentDev {
@@ -7867,7 +8108,8 @@ var app = (function () {
     		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
     			projectionsTitle: 0,
     			projectionsXAxisLabel: 1,
-    			projectionsYAxisLabel: 2
+    			projectionsYAxisLabel: 2,
+    			language: 3
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -7899,6 +8141,14 @@ var app = (function () {
     	}
 
     	set projectionsYAxisLabel(value) {
+    		throw new Error("<Projections>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get language() {
+    		throw new Error("<Projections>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set language(value) {
     		throw new Error("<Projections>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -10944,7 +11194,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (657:3) {#if 0 === currentTab}
+    // (699:3) {#if 0 === currentTab}
     function create_if_block_17(ctx) {
     	let div2;
     	let div1;
@@ -10959,45 +11209,45 @@ var app = (function () {
     	let div5;
     	let div4;
     	let span2;
-    	let t3_value = /*translations*/ ctx[30].app.basedOn + "";
+    	let t3_value = /*translations*/ ctx[45].app.basedOn + "";
     	let t3;
     	let t4;
     	let span0;
-    	let t5_value = /*translations*/ ctx[30].fatalityRisks[/*selectedSourceId*/ ctx[31]].source + "";
+    	let t5_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "";
     	let t5;
     	let t6;
-    	let t7_value = /*translations*/ ctx[30].app.basedOnContinued1 + "";
+    	let t7_value = /*translations*/ ctx[45].app.basedOnContinued1 + "";
     	let t7;
     	let t8;
     	let span1;
-    	let t9_value = /*rowsOfScenarios*/ ctx[24][0].loc + "";
+    	let t9_value = /*rowsOfScenarios*/ ctx[30][0].loc + "";
     	let t9;
     	let t10;
-    	let t11_value = /*translations*/ ctx[30].app.basedOnContinued2 + "";
+    	let t11_value = /*translations*/ ctx[45].app.basedOnContinued2 + "";
     	let t11;
     	let t12;
     	let span3;
-    	let t13_value = numberFormatter(/*totalInfected*/ ctx[33]) + "";
+    	let t13_value = numberFormatter(/*totalInfected*/ ctx[48]) + "";
     	let t13;
     	let t14;
     	let span4;
-    	let t15_value = /*translations*/ ctx[30].app.basedOnContinued2 + "";
+    	let t15_value = /*translations*/ ctx[45].app.basedOnContinued2 + "";
     	let t15;
     	let t16;
     	let span5;
-    	let t17_value = numberFormatter(/*totalDeaths*/ ctx[34]) + "";
+    	let t17_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "";
     	let t17;
     	let t18;
     	let span6;
-    	let t19_value = /*translations*/ ctx[30].app.basedOnContinued3 + "";
+    	let t19_value = /*translations*/ ctx[45].app.basedOnContinued3 + "";
     	let t19;
     	let t20;
     	let span7;
-    	let t21_value = numberFormatter(/*totalYearsLost*/ ctx[35]) + "";
+    	let t21_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "";
     	let t21;
     	let t22;
     	let span9;
-    	let t23_value = /*translations*/ ctx[30].app.basedOnContinued4 + "";
+    	let t23_value = /*translations*/ ctx[45].app.basedOnContinued4 + "";
     	let t23;
     	let t24;
     	let span8;
@@ -11007,14 +11257,14 @@ var app = (function () {
 
     	const comparebyage = new CompareByAge({
     			props: {
-    				infectedData: /*infectedData*/ ctx[15],
-    				infectedTitle: /*infectedTitle*/ ctx[17],
-    				infectedTitleListName: /*infectedTitleListName*/ ctx[48],
-    				infectedTitleListNumber: /*infectedTitleListNumber*/ ctx[49],
-    				deathsData: /*deathsData*/ ctx[16],
-    				deathsTitle: /*deathsTitle*/ ctx[18],
-    				deathsTitleListName: /*deathsTitleListName*/ ctx[50],
-    				deathsTitleListNumber: /*deathsTitleListNumber*/ ctx[51]
+    				infectedData: /*infectedData*/ ctx[17],
+    				infectedTitle: /*infectedTitle*/ ctx[19],
+    				infectedTitleListName: /*infectedTitleListName*/ ctx[21],
+    				infectedTitleListNumber: /*infectedTitleListNumber*/ ctx[22],
+    				deathsData: /*deathsData*/ ctx[18],
+    				deathsTitle: /*deathsTitle*/ ctx[20],
+    				deathsTitleListName: /*deathsTitleListName*/ ctx[23],
+    				deathsTitleListNumber: /*deathsTitleListNumber*/ ctx[24]
     			},
     			$$inline: true
     		});
@@ -11079,39 +11329,39 @@ var app = (function () {
     			t25 = text(/*selectedLocation*/ ctx[2]);
     			t26 = text(".");
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 659, 6, 22476);
+    			add_location(div0, file$a, 701, 6, 23762);
     			attr_dev(div1, "class", "twelve columns");
-    			add_location(div1, file$a, 658, 5, 22441);
+    			add_location(div1, file$a, 700, 5, 23727);
     			attr_dev(div2, "class", "row svelte-1havf7j");
-    			add_location(div2, file$a, 657, 4, 22346);
+    			add_location(div2, file$a, 699, 4, 23632);
     			attr_dev(div3, "class", "one columns");
-    			add_location(div3, file$a, 669, 5, 22773);
+    			add_location(div3, file$a, 711, 5, 24059);
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 677, 8, 23045);
+    			add_location(span0, file$a, 719, 8, 24331);
     			attr_dev(span1, "class", "parameter svelte-1havf7j");
-    			add_location(span1, file$a, 679, 8, 23183);
+    			add_location(span1, file$a, 721, 8, 24469);
     			attr_dev(span2, "class", "parameter-text svelte-1havf7j");
-    			add_location(span2, file$a, 675, 7, 22972);
+    			add_location(span2, file$a, 717, 7, 24258);
     			attr_dev(span3, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span3, file$a, 682, 7, 23306);
+    			add_location(span3, file$a, 724, 7, 24592);
     			attr_dev(span4, "class", "parameter-text svelte-1havf7j");
-    			add_location(span4, file$a, 685, 7, 23403);
+    			add_location(span4, file$a, 727, 7, 24689);
     			attr_dev(span5, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span5, file$a, 688, 7, 23502);
+    			add_location(span5, file$a, 730, 7, 24788);
     			attr_dev(span6, "class", "parameter-text svelte-1havf7j");
-    			add_location(span6, file$a, 691, 7, 23601);
+    			add_location(span6, file$a, 733, 7, 24887);
     			attr_dev(span7, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span7, file$a, 694, 7, 23698);
+    			add_location(span7, file$a, 736, 7, 24984);
     			attr_dev(span8, "class", "parameter svelte-1havf7j");
-    			add_location(span8, file$a, 699, 8, 23890);
+    			add_location(span8, file$a, 741, 8, 25176);
     			attr_dev(span9, "class", "parameter-text svelte-1havf7j");
-    			add_location(span9, file$a, 697, 7, 23801);
+    			add_location(span9, file$a, 739, 7, 25087);
     			attr_dev(div4, "class", "caption svelte-1havf7j");
-    			add_location(div4, file$a, 674, 6, 22943);
+    			add_location(div4, file$a, 716, 6, 24229);
     			attr_dev(div5, "class", "ten columns");
-    			add_location(div5, file$a, 673, 5, 22910);
+    			add_location(div5, file$a, 715, 5, 24196);
     			attr_dev(div6, "class", "row svelte-1havf7j");
-    			add_location(div6, file$a, 668, 4, 22750);
+    			add_location(div6, file$a, 710, 4, 24036);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -11165,22 +11415,26 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const comparebyage_changes = {};
-    			if (dirty[0] & /*infectedData*/ 32768) comparebyage_changes.infectedData = /*infectedData*/ ctx[15];
-    			if (dirty[0] & /*infectedTitle*/ 131072) comparebyage_changes.infectedTitle = /*infectedTitle*/ ctx[17];
-    			if (dirty[0] & /*deathsData*/ 65536) comparebyage_changes.deathsData = /*deathsData*/ ctx[16];
-    			if (dirty[0] & /*deathsTitle*/ 262144) comparebyage_changes.deathsTitle = /*deathsTitle*/ ctx[18];
+    			if (dirty[0] & /*infectedData*/ 131072) comparebyage_changes.infectedData = /*infectedData*/ ctx[17];
+    			if (dirty[0] & /*infectedTitle*/ 524288) comparebyage_changes.infectedTitle = /*infectedTitle*/ ctx[19];
+    			if (dirty[0] & /*infectedTitleListName*/ 2097152) comparebyage_changes.infectedTitleListName = /*infectedTitleListName*/ ctx[21];
+    			if (dirty[0] & /*infectedTitleListNumber*/ 4194304) comparebyage_changes.infectedTitleListNumber = /*infectedTitleListNumber*/ ctx[22];
+    			if (dirty[0] & /*deathsData*/ 262144) comparebyage_changes.deathsData = /*deathsData*/ ctx[18];
+    			if (dirty[0] & /*deathsTitle*/ 1048576) comparebyage_changes.deathsTitle = /*deathsTitle*/ ctx[20];
+    			if (dirty[0] & /*deathsTitleListName*/ 8388608) comparebyage_changes.deathsTitleListName = /*deathsTitleListName*/ ctx[23];
+    			if (dirty[0] & /*deathsTitleListNumber*/ 16777216) comparebyage_changes.deathsTitleListNumber = /*deathsTitleListNumber*/ ctx[24];
     			comparebyage.$set(comparebyage_changes);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t3_value !== (t3_value = /*translations*/ ctx[30].app.basedOn + "")) set_data_dev(t3, t3_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824 | dirty[1] & /*selectedSourceId*/ 1) && t5_value !== (t5_value = /*translations*/ ctx[30].fatalityRisks[/*selectedSourceId*/ ctx[31]].source + "")) set_data_dev(t5, t5_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t7_value !== (t7_value = /*translations*/ ctx[30].app.basedOnContinued1 + "")) set_data_dev(t7, t7_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[24][0].loc + "")) set_data_dev(t9, t9_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t11_value !== (t11_value = /*translations*/ ctx[30].app.basedOnContinued2 + "")) set_data_dev(t11, t11_value);
-    			if ((!current || dirty[1] & /*totalInfected*/ 4) && t13_value !== (t13_value = numberFormatter(/*totalInfected*/ ctx[33]) + "")) set_data_dev(t13, t13_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t15_value !== (t15_value = /*translations*/ ctx[30].app.basedOnContinued2 + "")) set_data_dev(t15, t15_value);
-    			if ((!current || dirty[1] & /*totalDeaths*/ 8) && t17_value !== (t17_value = numberFormatter(/*totalDeaths*/ ctx[34]) + "")) set_data_dev(t17, t17_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t19_value !== (t19_value = /*translations*/ ctx[30].app.basedOnContinued3 + "")) set_data_dev(t19, t19_value);
-    			if ((!current || dirty[1] & /*totalYearsLost*/ 16) && t21_value !== (t21_value = numberFormatter(/*totalYearsLost*/ ctx[35]) + "")) set_data_dev(t21, t21_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t23_value !== (t23_value = /*translations*/ ctx[30].app.basedOnContinued4 + "")) set_data_dev(t23, t23_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t3_value !== (t3_value = /*translations*/ ctx[45].app.basedOn + "")) set_data_dev(t3, t3_value);
+    			if ((!current || dirty[1] & /*translations, selectedSourceId*/ 49152) && t5_value !== (t5_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "")) set_data_dev(t5, t5_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t7_value !== (t7_value = /*translations*/ ctx[45].app.basedOnContinued1 + "")) set_data_dev(t7, t7_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[30][0].loc + "")) set_data_dev(t9, t9_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t11_value !== (t11_value = /*translations*/ ctx[45].app.basedOnContinued2 + "")) set_data_dev(t11, t11_value);
+    			if ((!current || dirty[1] & /*totalInfected*/ 131072) && t13_value !== (t13_value = numberFormatter(/*totalInfected*/ ctx[48]) + "")) set_data_dev(t13, t13_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t15_value !== (t15_value = /*translations*/ ctx[45].app.basedOnContinued2 + "")) set_data_dev(t15, t15_value);
+    			if ((!current || dirty[1] & /*totalDeaths*/ 262144) && t17_value !== (t17_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "")) set_data_dev(t17, t17_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t19_value !== (t19_value = /*translations*/ ctx[45].app.basedOnContinued3 + "")) set_data_dev(t19, t19_value);
+    			if ((!current || dirty[1] & /*totalYearsLost*/ 524288) && t21_value !== (t21_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "")) set_data_dev(t21, t21_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t23_value !== (t23_value = /*translations*/ ctx[45].app.basedOnContinued4 + "")) set_data_dev(t23, t23_value);
     			if (!current || dirty[0] & /*selectedLocation*/ 4) set_data_dev(t25, /*selectedLocation*/ ctx[2]);
     		},
     		i: function intro(local) {
@@ -11220,14 +11474,14 @@ var app = (function () {
     		block,
     		id: create_if_block_17.name,
     		type: "if",
-    		source: "(657:3) {#if 0 === currentTab}",
+    		source: "(699:3) {#if 0 === currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (707:3) {#if 1 === currentTab}
+    // (749:3) {#if 1 === currentTab}
     function create_if_block_13(ctx) {
     	let div0;
     	let updating_activeTabValue;
@@ -11254,10 +11508,10 @@ var app = (function () {
     		/*subtabs_activeTabValue_binding*/ ctx[128].call(null, value);
     	}
 
-    	let subtabs_props = { items: /*compareItems*/ ctx[47] };
+    	let subtabs_props = { items: /*compareItems*/ ctx[11] };
 
-    	if (/*currentCompare*/ ctx[10] !== void 0) {
-    		subtabs_props.activeTabValue = /*currentCompare*/ ctx[10];
+    	if (/*currentCompare*/ ctx[12] !== void 0) {
+    		subtabs_props.activeTabValue = /*currentCompare*/ ctx[12];
     	}
 
     	const subtabs = new Subtabs({ props: subtabs_props, $$inline: true });
@@ -11265,10 +11519,10 @@ var app = (function () {
 
     	const compare = new Compare({
     			props: {
-    				compareData: /*compareList*/ ctx[11],
-    				titleListMain: /*titleListMain*/ ctx[14],
-    				titleListName: /*titleListName*/ ctx[12],
-    				titleListNumber: /*titleListNumber*/ ctx[13]
+    				compareData: /*compareList*/ ctx[13],
+    				titleListMain: /*titleListMain*/ ctx[16],
+    				titleListName: /*titleListName*/ ctx[14],
+    				titleListNumber: /*titleListNumber*/ ctx[15]
     			},
     			$$inline: true
     		});
@@ -11293,16 +11547,16 @@ var app = (function () {
 
     	const square2 = new Square({
     			props: {
-    				text: "<2020-05-24",
+    				text: "<2020-05-27",
     				color: "#7fc97f",
     				factorWidth: 6
     			},
     			$$inline: true
     		});
 
-    	let if_block0 = 0 == /*currentCompare*/ ctx[10] && create_if_block_16(ctx);
-    	let if_block1 = 1 == /*currentCompare*/ ctx[10] && create_if_block_15(ctx);
-    	let if_block2 = 2 == /*currentCompare*/ ctx[10] && create_if_block_14(ctx);
+    	let if_block0 = 0 == /*currentCompare*/ ctx[12] && create_if_block_16(ctx);
+    	let if_block1 = 1 == /*currentCompare*/ ctx[12] && create_if_block_15(ctx);
+    	let if_block2 = 2 == /*currentCompare*/ ctx[12] && create_if_block_14(ctx);
 
     	const block = {
     		c: function create() {
@@ -11331,25 +11585,25 @@ var app = (function () {
     			t7 = space();
     			if (if_block2) if_block2.c();
     			set_style(div0, "margin-top", "5px");
-    			add_location(div0, file$a, 707, 4, 24032);
+    			add_location(div0, file$a, 749, 4, 25318);
     			attr_dev(div1, "class", "child svelte-1havf7j");
-    			add_location(div1, file$a, 711, 5, 24231);
+    			add_location(div1, file$a, 753, 5, 25517);
     			attr_dev(div2, "class", "twelve columns");
     			set_style(div2, "text-align", "center");
     			set_style(div2, "margin-top", "25px");
-    			add_location(div2, file$a, 710, 4, 24152);
+    			add_location(div2, file$a, 752, 4, 25438);
     			attr_dev(svg, "width", svg_width_value = 90);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
-    			add_location(svg, file$a, 718, 6, 24434);
+    			add_location(svg, file$a, 760, 6, 25720);
     			attr_dev(div3, "class", "two columns");
-    			add_location(div3, file$a, 717, 5, 24402);
+    			add_location(div3, file$a, 759, 5, 25688);
     			attr_dev(div4, "class", "two columns");
-    			add_location(div4, file$a, 723, 5, 24542);
+    			add_location(div4, file$a, 765, 5, 25828);
     			attr_dev(div5, "class", "eight columns");
-    			add_location(div5, file$a, 728, 5, 24788);
+    			add_location(div5, file$a, 770, 5, 26074);
     			attr_dev(div6, "class", "row svelte-1havf7j");
-    			add_location(div6, file$a, 716, 4, 24379);
+    			add_location(div6, file$a, 758, 4, 25665);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -11380,22 +11634,23 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const subtabs_changes = {};
+    			if (dirty[0] & /*compareItems*/ 2048) subtabs_changes.items = /*compareItems*/ ctx[11];
 
-    			if (!updating_activeTabValue && dirty[0] & /*currentCompare*/ 1024) {
+    			if (!updating_activeTabValue && dirty[0] & /*currentCompare*/ 4096) {
     				updating_activeTabValue = true;
-    				subtabs_changes.activeTabValue = /*currentCompare*/ ctx[10];
+    				subtabs_changes.activeTabValue = /*currentCompare*/ ctx[12];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			subtabs.$set(subtabs_changes);
     			const compare_changes = {};
-    			if (dirty[0] & /*compareList*/ 2048) compare_changes.compareData = /*compareList*/ ctx[11];
-    			if (dirty[0] & /*titleListMain*/ 16384) compare_changes.titleListMain = /*titleListMain*/ ctx[14];
-    			if (dirty[0] & /*titleListName*/ 4096) compare_changes.titleListName = /*titleListName*/ ctx[12];
-    			if (dirty[0] & /*titleListNumber*/ 8192) compare_changes.titleListNumber = /*titleListNumber*/ ctx[13];
+    			if (dirty[0] & /*compareList*/ 8192) compare_changes.compareData = /*compareList*/ ctx[13];
+    			if (dirty[0] & /*titleListMain*/ 65536) compare_changes.titleListMain = /*titleListMain*/ ctx[16];
+    			if (dirty[0] & /*titleListName*/ 16384) compare_changes.titleListName = /*titleListName*/ ctx[14];
+    			if (dirty[0] & /*titleListNumber*/ 32768) compare_changes.titleListNumber = /*titleListNumber*/ ctx[15];
     			compare.$set(compare_changes);
 
-    			if (0 == /*currentCompare*/ ctx[10]) {
+    			if (0 == /*currentCompare*/ ctx[12]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
@@ -11408,7 +11663,7 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (1 == /*currentCompare*/ ctx[10]) {
+    			if (1 == /*currentCompare*/ ctx[12]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
@@ -11421,7 +11676,7 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if (2 == /*currentCompare*/ ctx[10]) {
+    			if (2 == /*currentCompare*/ ctx[12]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
@@ -11472,28 +11727,28 @@ var app = (function () {
     		block,
     		id: create_if_block_13.name,
     		type: "if",
-    		source: "(707:3) {#if 1 === currentTab}",
+    		source: "(749:3) {#if 1 === currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (730:6) {#if 0 == currentCompare}
+    // (772:6) {#if 0 == currentCompare}
     function create_if_block_16(ctx) {
     	let div3;
     	let div0;
-    	let t0_value = /*translations*/ ctx[30].app.compareWithOtherCaption1 + "";
+    	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*translations*/ ctx[30].app.compareWithOtherCaption2 + "";
+    	let t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption2 + "";
     	let t2;
     	let t3;
     	let a0;
     	let t5;
     	let div2;
-    	let t6_value = /*translations*/ ctx[30].app.compareWithOtherCaption3 + "";
+    	let t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption3 + "";
     	let t6;
     	let t7;
     	let a1;
@@ -11516,17 +11771,17 @@ var app = (function () {
     			a1 = element("a");
     			a1.textContent = "Our World in Data";
     			attr_dev(div0, "class", "parameter-text svelte-1havf7j");
-    			add_location(div0, file$a, 731, 8, 24885);
+    			add_location(div0, file$a, 773, 8, 26171);
     			attr_dev(a0, "href", "https://ourworldindata.org/causes-of-death");
-    			add_location(a0, file$a, 736, 9, 25083);
+    			add_location(a0, file$a, 778, 9, 26369);
     			attr_dev(div1, "class", "parameter-text svelte-1havf7j");
-    			add_location(div1, file$a, 734, 8, 24991);
+    			add_location(div1, file$a, 776, 8, 26277);
     			attr_dev(a1, "href", "https://ourworldindata.org/coronavirus-data");
-    			add_location(a1, file$a, 740, 9, 25272);
+    			add_location(a1, file$a, 782, 9, 26558);
     			attr_dev(div2, "class", "parameter-text svelte-1havf7j");
-    			add_location(div2, file$a, 738, 8, 25181);
+    			add_location(div2, file$a, 780, 8, 26467);
     			attr_dev(div3, "class", "caption svelte-1havf7j");
-    			add_location(div3, file$a, 730, 7, 24855);
+    			add_location(div3, file$a, 772, 7, 26141);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -11544,9 +11799,9 @@ var app = (function () {
     			append_dev(div2, a1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*translations*/ 1073741824 && t0_value !== (t0_value = /*translations*/ ctx[30].app.compareWithOtherCaption1 + "")) set_data_dev(t0, t0_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t2_value !== (t2_value = /*translations*/ ctx[30].app.compareWithOtherCaption2 + "")) set_data_dev(t2, t2_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t6_value !== (t6_value = /*translations*/ ctx[30].app.compareWithOtherCaption3 + "")) set_data_dev(t6, t6_value);
+    			if (dirty[1] & /*translations*/ 16384 && t0_value !== (t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "")) set_data_dev(t0, t0_value);
+    			if (dirty[1] & /*translations*/ 16384 && t2_value !== (t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption2 + "")) set_data_dev(t2, t2_value);
+    			if (dirty[1] & /*translations*/ 16384 && t6_value !== (t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption3 + "")) set_data_dev(t6, t6_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
@@ -11557,33 +11812,33 @@ var app = (function () {
     		block,
     		id: create_if_block_16.name,
     		type: "if",
-    		source: "(730:6) {#if 0 == currentCompare}",
+    		source: "(772:6) {#if 0 == currentCompare}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (745:6) {#if 1 == currentCompare}
+    // (787:6) {#if 1 == currentCompare}
     function create_if_block_15(ctx) {
     	let div3;
     	let div0;
-    	let t0_value = /*translations*/ ctx[30].app.compareWithOtherCaption1 + "";
+    	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*translations*/ ctx[30].app.compareWithOtherCaption4 + "";
+    	let t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption4 + "";
     	let t2;
     	let t3;
     	let a0;
     	let t5;
     	let div2;
-    	let t6_value = /*translations*/ ctx[30].app.compareWithOtherCaption5 + "";
+    	let t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "";
     	let t6;
     	let t7;
     	let a1;
     	let t9;
-    	let t10_value = /*translations*/ ctx[30].app.authorsCalculations + "";
+    	let t10_value = /*translations*/ ctx[45].app.authorsCalculations + "";
     	let t10;
 
     	const block = {
@@ -11606,17 +11861,17 @@ var app = (function () {
     			t9 = space();
     			t10 = text(t10_value);
     			attr_dev(div0, "class", "parameter-text svelte-1havf7j");
-    			add_location(div0, file$a, 746, 8, 25460);
+    			add_location(div0, file$a, 788, 8, 26746);
     			attr_dev(a0, "href", "https://ourworldindata.org/grapher/burden-of-disease-by-cause");
-    			add_location(a0, file$a, 751, 9, 25657);
+    			add_location(a0, file$a, 793, 9, 26943);
     			attr_dev(div1, "class", "parameter-text svelte-1havf7j");
-    			add_location(div1, file$a, 749, 8, 25566);
+    			add_location(div1, file$a, 791, 8, 26852);
     			attr_dev(a1, "href", "https://ourworldindata.org/coronavirus-data");
-    			add_location(a1, file$a, 755, 9, 25865);
+    			add_location(a1, file$a, 797, 9, 27151);
     			attr_dev(div2, "class", "parameter-text svelte-1havf7j");
-    			add_location(div2, file$a, 753, 8, 25774);
+    			add_location(div2, file$a, 795, 8, 27060);
     			attr_dev(div3, "class", "caption svelte-1havf7j");
-    			add_location(div3, file$a, 745, 7, 25430);
+    			add_location(div3, file$a, 787, 7, 26716);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -11636,10 +11891,10 @@ var app = (function () {
     			append_dev(div2, t10);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*translations*/ 1073741824 && t0_value !== (t0_value = /*translations*/ ctx[30].app.compareWithOtherCaption1 + "")) set_data_dev(t0, t0_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t2_value !== (t2_value = /*translations*/ ctx[30].app.compareWithOtherCaption4 + "")) set_data_dev(t2, t2_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t6_value !== (t6_value = /*translations*/ ctx[30].app.compareWithOtherCaption5 + "")) set_data_dev(t6, t6_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t10_value !== (t10_value = /*translations*/ ctx[30].app.authorsCalculations + "")) set_data_dev(t10, t10_value);
+    			if (dirty[1] & /*translations*/ 16384 && t0_value !== (t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "")) set_data_dev(t0, t0_value);
+    			if (dirty[1] & /*translations*/ 16384 && t2_value !== (t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption4 + "")) set_data_dev(t2, t2_value);
+    			if (dirty[1] & /*translations*/ 16384 && t6_value !== (t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "")) set_data_dev(t6, t6_value);
+    			if (dirty[1] & /*translations*/ 16384 && t10_value !== (t10_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data_dev(t10, t10_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
@@ -11650,33 +11905,33 @@ var app = (function () {
     		block,
     		id: create_if_block_15.name,
     		type: "if",
-    		source: "(745:6) {#if 1 == currentCompare}",
+    		source: "(787:6) {#if 1 == currentCompare}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (761:6) {#if 2 == currentCompare}
+    // (803:6) {#if 2 == currentCompare}
     function create_if_block_14(ctx) {
     	let div3;
     	let div0;
-    	let t0_value = /*translations*/ ctx[30].app.compareWithOtherCaption1 + "";
+    	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*translations*/ ctx[30].app.compareWithOtherCaption7 + "";
+    	let t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption7 + "";
     	let t2;
     	let t3;
     	let a0;
     	let t5;
     	let div2;
-    	let t6_value = /*translations*/ ctx[30].app.compareWithOtherCaption5 + "";
+    	let t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "";
     	let t6;
     	let t7;
     	let a1;
     	let t9;
-    	let t10_value = /*translations*/ ctx[30].app.authorsCalculations + "";
+    	let t10_value = /*translations*/ ctx[45].app.authorsCalculations + "";
     	let t10;
 
     	const block = {
@@ -11699,17 +11954,17 @@ var app = (function () {
     			t9 = space();
     			t10 = text(t10_value);
     			attr_dev(div0, "class", "parameter-text svelte-1havf7j");
-    			add_location(div0, file$a, 762, 8, 26101);
+    			add_location(div0, file$a, 804, 8, 27387);
     			attr_dev(a0, "href", "https://ourworldindata.org/grapher/disease-burden-by-risk-factor");
-    			add_location(a0, file$a, 767, 10, 26298);
+    			add_location(a0, file$a, 809, 10, 27584);
     			attr_dev(div1, "class", "parameter-text svelte-1havf7j");
-    			add_location(div1, file$a, 765, 8, 26206);
+    			add_location(div1, file$a, 807, 8, 27492);
     			attr_dev(a1, "href", "https://ourworldindata.org/coronavirus-data");
-    			add_location(a1, file$a, 771, 9, 26509);
+    			add_location(a1, file$a, 813, 9, 27795);
     			attr_dev(div2, "class", "parameter-text svelte-1havf7j");
-    			add_location(div2, file$a, 769, 8, 26418);
+    			add_location(div2, file$a, 811, 8, 27704);
     			attr_dev(div3, "class", "caption svelte-1havf7j");
-    			add_location(div3, file$a, 761, 7, 26071);
+    			add_location(div3, file$a, 803, 7, 27357);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -11729,10 +11984,10 @@ var app = (function () {
     			append_dev(div2, t10);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*translations*/ 1073741824 && t0_value !== (t0_value = /*translations*/ ctx[30].app.compareWithOtherCaption1 + "")) set_data_dev(t0, t0_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t2_value !== (t2_value = /*translations*/ ctx[30].app.compareWithOtherCaption7 + "")) set_data_dev(t2, t2_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t6_value !== (t6_value = /*translations*/ ctx[30].app.compareWithOtherCaption5 + "")) set_data_dev(t6, t6_value);
-    			if (dirty[0] & /*translations*/ 1073741824 && t10_value !== (t10_value = /*translations*/ ctx[30].app.authorsCalculations + "")) set_data_dev(t10, t10_value);
+    			if (dirty[1] & /*translations*/ 16384 && t0_value !== (t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "")) set_data_dev(t0, t0_value);
+    			if (dirty[1] & /*translations*/ 16384 && t2_value !== (t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption7 + "")) set_data_dev(t2, t2_value);
+    			if (dirty[1] & /*translations*/ 16384 && t6_value !== (t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "")) set_data_dev(t6, t6_value);
+    			if (dirty[1] & /*translations*/ 16384 && t10_value !== (t10_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data_dev(t10, t10_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
@@ -11743,134 +11998,139 @@ var app = (function () {
     		block,
     		id: create_if_block_14.name,
     		type: "if",
-    		source: "(761:6) {#if 2 == currentCompare}",
+    		source: "(803:6) {#if 2 == currentCompare}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (781:3) {#if 2 === currentTab}
+    // (823:3) {#if 2 === currentTab}
     function create_if_block_10(ctx) {
-    	let div3;
+    	let div5;
     	let updating_activeTabValue;
     	let t0;
-    	let div2;
-    	let div1;
-    	let t1_value = /*translations*/ ctx[30].app.proportionOver60ByCountry + "";
+    	let div4;
+    	let div3;
     	let t1;
     	let t2;
+    	let div2;
+    	let div0;
+    	let t3_value = /*translations*/ ctx[45].app.mapCaption + "";
     	let t3;
     	let t4;
-    	let div0;
-    	let span;
-    	let t5_value = /*translations*/ ctx[30].app.mapCaption + "";
+    	let div1;
+    	let t5_value = /*translations*/ ctx[45].app.source + "";
     	let t5;
     	let t6;
     	let a;
     	let t8;
-    	let t9_value = /*translations*/ ctx[30].app.authorsCalculations + "";
+    	let t9_value = /*translations*/ ctx[45].app.authorsCalculations + "";
     	let t9;
-    	let div3_intro;
-    	let div3_outro;
+    	let div5_intro;
+    	let div5_outro;
     	let current;
 
     	function subtabs_activeTabValue_binding_1(value) {
     		/*subtabs_activeTabValue_binding_1*/ ctx[129].call(null, value);
     	}
 
-    	let subtabs_props = { items: /*mapItems*/ ctx[53] };
+    	let subtabs_props = { items: /*mapItems*/ ctx[32] };
 
-    	if (/*selectedRisk*/ ctx[25] !== void 0) {
-    		subtabs_props.activeTabValue = /*selectedRisk*/ ctx[25];
+    	if (/*selectedRisk*/ ctx[33] !== void 0) {
+    		subtabs_props.activeTabValue = /*selectedRisk*/ ctx[33];
     	}
 
     	const subtabs = new Subtabs({ props: subtabs_props, $$inline: true });
     	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding_1));
-    	let if_block0 = 0 == /*selectedRisk*/ ctx[25] && create_if_block_12(ctx);
-    	let if_block1 = 1 == /*selectedRisk*/ ctx[25] && create_if_block_11(ctx);
+    	let if_block0 = 0 == /*selectedRisk*/ ctx[33] && create_if_block_12(ctx);
+    	let if_block1 = 1 == /*selectedRisk*/ ctx[33] && create_if_block_11(ctx);
 
     	const block = {
     		c: function create() {
-    			div3 = element("div");
+    			div5 = element("div");
     			create_component(subtabs.$$.fragment);
     			t0 = space();
-    			div2 = element("div");
-    			div1 = element("div");
-    			t1 = text(t1_value);
-    			t2 = space();
+    			div4 = element("div");
+    			div3 = element("div");
     			if (if_block0) if_block0.c();
-    			t3 = space();
+    			t1 = space();
     			if (if_block1) if_block1.c();
-    			t4 = space();
+    			t2 = space();
+    			div2 = element("div");
     			div0 = element("div");
-    			span = element("span");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			div1 = element("div");
     			t5 = text(t5_value);
     			t6 = space();
     			a = element("a");
     			a.textContent = "World Atlas TopoJSON";
     			t8 = space();
     			t9 = text(t9_value);
+    			attr_dev(div0, "class", "parameter-text svelte-1havf7j");
+    			add_location(div0, file$a, 848, 8, 28875);
     			attr_dev(a, "href", "https://github.com/topojson/world-atlas");
-    			add_location(a, file$a, 808, 9, 27666);
-    			attr_dev(span, "class", "parameter-text svelte-1havf7j");
-    			add_location(span, file$a, 806, 8, 27587);
-    			attr_dev(div0, "class", "caption svelte-1havf7j");
-    			add_location(div0, file$a, 805, 7, 27557);
-    			attr_dev(div1, "class", "child svelte-1havf7j");
-    			add_location(div1, file$a, 784, 6, 26987);
-    			attr_dev(div2, "class", "twelve columns");
-    			set_style(div2, "text-align", "center");
-    			set_style(div2, "margin-top", "25px");
-    			add_location(div2, file$a, 783, 5, 26907);
-    			attr_dev(div3, "class", "row svelte-1havf7j");
-    			add_location(div3, file$a, 781, 4, 26741);
+    			add_location(a, file$a, 853, 9, 29040);
+    			attr_dev(div1, "class", "parameter-text svelte-1havf7j");
+    			add_location(div1, file$a, 851, 8, 28967);
+    			attr_dev(div2, "class", "caption svelte-1havf7j");
+    			add_location(div2, file$a, 847, 7, 28845);
+    			attr_dev(div3, "class", "child svelte-1havf7j");
+    			add_location(div3, file$a, 826, 6, 28273);
+    			attr_dev(div4, "class", "twelve columns");
+    			set_style(div4, "text-align", "center");
+    			set_style(div4, "margin-top", "25px");
+    			add_location(div4, file$a, 825, 5, 28193);
+    			attr_dev(div5, "class", "row svelte-1havf7j");
+    			add_location(div5, file$a, 823, 4, 28027);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div3, anchor);
-    			mount_component(subtabs, div3, null);
-    			append_dev(div3, t0);
+    			insert_dev(target, div5, anchor);
+    			mount_component(subtabs, div5, null);
+    			append_dev(div5, t0);
+    			append_dev(div5, div4);
+    			append_dev(div4, div3);
+    			if (if_block0) if_block0.m(div3, null);
+    			append_dev(div3, t1);
+    			if (if_block1) if_block1.m(div3, null);
+    			append_dev(div3, t2);
     			append_dev(div3, div2);
+    			append_dev(div2, div0);
+    			append_dev(div0, t3);
+    			append_dev(div2, t4);
     			append_dev(div2, div1);
-    			append_dev(div1, t1);
-    			append_dev(div1, t2);
-    			if (if_block0) if_block0.m(div1, null);
-    			append_dev(div1, t3);
-    			if (if_block1) if_block1.m(div1, null);
-    			append_dev(div1, t4);
-    			append_dev(div1, div0);
-    			append_dev(div0, span);
-    			append_dev(span, t5);
-    			append_dev(span, t6);
-    			append_dev(span, a);
-    			append_dev(span, t8);
-    			append_dev(span, t9);
+    			append_dev(div1, t5);
+    			append_dev(div1, t6);
+    			append_dev(div1, a);
+    			append_dev(div1, t8);
+    			append_dev(div1, t9);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const subtabs_changes = {};
+    			if (dirty[1] & /*mapItems*/ 2) subtabs_changes.items = /*mapItems*/ ctx[32];
 
-    			if (!updating_activeTabValue && dirty[0] & /*selectedRisk*/ 33554432) {
+    			if (!updating_activeTabValue && dirty[1] & /*selectedRisk*/ 4) {
     				updating_activeTabValue = true;
-    				subtabs_changes.activeTabValue = /*selectedRisk*/ ctx[25];
+    				subtabs_changes.activeTabValue = /*selectedRisk*/ ctx[33];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			subtabs.$set(subtabs_changes);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t1_value !== (t1_value = /*translations*/ ctx[30].app.proportionOver60ByCountry + "")) set_data_dev(t1, t1_value);
 
-    			if (0 == /*selectedRisk*/ ctx[25]) {
+    			if (0 == /*selectedRisk*/ ctx[33]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
-    					if (dirty[0] & /*selectedRisk*/ 33554432) {
+    					if (dirty[1] & /*selectedRisk*/ 4) {
     						transition_in(if_block0, 1);
     					}
     				} else {
     					if_block0 = create_if_block_12(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
-    					if_block0.m(div1, t3);
+    					if_block0.m(div3, t1);
     				}
     			} else if (if_block0) {
     				group_outros();
@@ -11882,18 +12142,18 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (1 == /*selectedRisk*/ ctx[25]) {
+    			if (1 == /*selectedRisk*/ ctx[33]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[0] & /*selectedRisk*/ 33554432) {
+    					if (dirty[1] & /*selectedRisk*/ 4) {
     						transition_in(if_block1, 1);
     					}
     				} else {
     					if_block1 = create_if_block_11(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
-    					if_block1.m(div1, t4);
+    					if_block1.m(div3, t2);
     				}
     			} else if (if_block1) {
     				group_outros();
@@ -11905,8 +12165,9 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t5_value !== (t5_value = /*translations*/ ctx[30].app.mapCaption + "")) set_data_dev(t5, t5_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t9_value !== (t9_value = /*translations*/ ctx[30].app.authorsCalculations + "")) set_data_dev(t9, t9_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t3_value !== (t3_value = /*translations*/ ctx[45].app.mapCaption + "")) set_data_dev(t3, t3_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t5_value !== (t5_value = /*translations*/ ctx[45].app.source + "")) set_data_dev(t5, t5_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t9_value !== (t9_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data_dev(t9, t9_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -11915,9 +12176,9 @@ var app = (function () {
     			transition_in(if_block1);
 
     			add_render_callback(() => {
-    				if (div3_outro) div3_outro.end(1);
-    				if (!div3_intro) div3_intro = create_in_transition(div3, fade, { duration: durationIn });
-    				div3_intro.start();
+    				if (div5_outro) div5_outro.end(1);
+    				if (!div5_intro) div5_intro = create_in_transition(div5, fade, { duration: durationIn });
+    				div5_intro.start();
     			});
 
     			current = true;
@@ -11926,16 +12187,16 @@ var app = (function () {
     			transition_out(subtabs.$$.fragment, local);
     			transition_out(if_block0);
     			transition_out(if_block1);
-    			if (div3_intro) div3_intro.invalidate();
-    			div3_outro = create_out_transition(div3, fade, { duration: durationOut });
+    			if (div5_intro) div5_intro.invalidate();
+    			div5_outro = create_out_transition(div5, fade, { duration: durationOut });
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div3);
+    			if (detaching) detach_dev(div5);
     			destroy_component(subtabs);
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
-    			if (detaching && div3_outro) div3_outro.end();
+    			if (detaching && div5_outro) div5_outro.end();
     		}
     	};
 
@@ -11943,24 +12204,26 @@ var app = (function () {
     		block,
     		id: create_if_block_10.name,
     		type: "if",
-    		source: "(781:3) {#if 2 === currentTab}",
+    		source: "(823:3) {#if 2 === currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (787:7) {#if 0 == selectedRisk}
+    // (828:7) {#if 0 == selectedRisk}
     function create_if_block_12(ctx) {
     	let div0;
-    	let t;
+    	let t0_value = /*translations*/ ctx[45].app.proportionOver60ByCountry + "";
+    	let t0;
+    	let t1;
     	let div1;
     	let current;
 
     	const worldmap = new WorldMap({
     			props: {
-    				mapTitle: /*mapTitle*/ ctx[52],
-    				selectedRisk: /*selectedRisk*/ ctx[25]
+    				mapTitle: /*mapTitle*/ ctx[31],
+    				selectedRisk: /*selectedRisk*/ ctx[33]
     			},
     			$$inline: true
     		});
@@ -11968,25 +12231,29 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div0 = element("div");
-    			t = space();
+    			t0 = text(t0_value);
+    			t1 = space();
     			div1 = element("div");
     			create_component(worldmap.$$.fragment);
     			attr_dev(div0, "class", "worldmap-title svelte-1havf7j");
     			set_style(div0, "font-size", "16");
-    			add_location(div0, file$a, 787, 8, 27098);
+    			add_location(div0, file$a, 828, 8, 28332);
     			attr_dev(div1, "class", "child svelte-1havf7j");
-    			add_location(div1, file$a, 790, 8, 27182);
+    			add_location(div1, file$a, 832, 8, 28470);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
-    			insert_dev(target, t, anchor);
+    			append_dev(div0, t0);
+    			insert_dev(target, t1, anchor);
     			insert_dev(target, div1, anchor);
     			mount_component(worldmap, div1, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t0_value !== (t0_value = /*translations*/ ctx[45].app.proportionOver60ByCountry + "")) set_data_dev(t0, t0_value);
     			const worldmap_changes = {};
-    			if (dirty[0] & /*selectedRisk*/ 33554432) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[25];
+    			if (dirty[1] & /*mapTitle*/ 1) worldmap_changes.mapTitle = /*mapTitle*/ ctx[31];
+    			if (dirty[1] & /*selectedRisk*/ 4) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[33];
     			worldmap.$set(worldmap_changes);
     		},
     		i: function intro(local) {
@@ -12000,7 +12267,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div0);
-    			if (detaching) detach_dev(t);
+    			if (detaching) detach_dev(t1);
     			if (detaching) detach_dev(div1);
     			destroy_component(worldmap);
     		}
@@ -12010,17 +12277,17 @@ var app = (function () {
     		block,
     		id: create_if_block_12.name,
     		type: "if",
-    		source: "(787:7) {#if 0 == selectedRisk}",
+    		source: "(828:7) {#if 0 == selectedRisk}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (796:7) {#if 1 == selectedRisk}
+    // (838:7) {#if 1 == selectedRisk}
     function create_if_block_11(ctx) {
     	let div0;
-    	let t0_value = /*translations*/ ctx[30].app.lowIncomeRiskByCountry + "";
+    	let t0_value = /*translations*/ ctx[45].app.lowIncomeRiskByCountry + "";
     	let t0;
     	let t1;
     	let div1;
@@ -12028,8 +12295,8 @@ var app = (function () {
 
     	const worldmap = new WorldMap({
     			props: {
-    				mapTitle: /*mapTitle*/ ctx[52],
-    				selectedRisk: /*selectedRisk*/ ctx[25]
+    				mapTitle: /*mapTitle*/ ctx[31],
+    				selectedRisk: /*selectedRisk*/ ctx[33]
     			},
     			$$inline: true
     		});
@@ -12043,9 +12310,9 @@ var app = (function () {
     			create_component(worldmap.$$.fragment);
     			attr_dev(div0, "class", "worldmap-title svelte-1havf7j");
     			set_style(div0, "font-size", "16");
-    			add_location(div0, file$a, 796, 8, 27318);
+    			add_location(div0, file$a, 838, 8, 28606);
     			attr_dev(div1, "class", "child svelte-1havf7j");
-    			add_location(div1, file$a, 800, 8, 27453);
+    			add_location(div1, file$a, 842, 8, 28741);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -12056,9 +12323,10 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t0_value !== (t0_value = /*translations*/ ctx[30].app.lowIncomeRiskByCountry + "")) set_data_dev(t0, t0_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t0_value !== (t0_value = /*translations*/ ctx[45].app.lowIncomeRiskByCountry + "")) set_data_dev(t0, t0_value);
     			const worldmap_changes = {};
-    			if (dirty[0] & /*selectedRisk*/ 33554432) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[25];
+    			if (dirty[1] & /*mapTitle*/ 1) worldmap_changes.mapTitle = /*mapTitle*/ ctx[31];
+    			if (dirty[1] & /*selectedRisk*/ 4) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[33];
     			worldmap.$set(worldmap_changes);
     		},
     		i: function intro(local) {
@@ -12082,14 +12350,14 @@ var app = (function () {
     		block,
     		id: create_if_block_11.name,
     		type: "if",
-    		source: "(796:7) {#if 1 == selectedRisk}",
+    		source: "(838:7) {#if 1 == selectedRisk}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (819:3) {#if 3 === currentTab}
+    // (864:3) {#if 3 === currentTab}
     function create_if_block_7(ctx) {
     	let updating_activeTabValue;
     	let t0;
@@ -12101,16 +12369,16 @@ var app = (function () {
     		/*subtabs_activeTabValue_binding_2*/ ctx[130].call(null, value);
     	}
 
-    	let subtabs_props = { items: /*povertyItems*/ ctx[54] };
+    	let subtabs_props = { items: /*povertyItems*/ ctx[34] };
 
-    	if (/*currentPoverty*/ ctx[26] !== void 0) {
-    		subtabs_props.activeTabValue = /*currentPoverty*/ ctx[26];
+    	if (/*currentPoverty*/ ctx[35] !== void 0) {
+    		subtabs_props.activeTabValue = /*currentPoverty*/ ctx[35];
     	}
 
     	const subtabs = new Subtabs({ props: subtabs_props, $$inline: true });
     	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding_2));
-    	let if_block0 = 0 == /*currentPoverty*/ ctx[26] && create_if_block_9(ctx);
-    	let if_block1 = 1 == /*currentPoverty*/ ctx[26] && create_if_block_8(ctx);
+    	let if_block0 = 0 == /*currentPoverty*/ ctx[35] && create_if_block_9(ctx);
+    	let if_block1 = 1 == /*currentPoverty*/ ctx[35] && create_if_block_8(ctx);
 
     	const block = {
     		c: function create() {
@@ -12132,20 +12400,21 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const subtabs_changes = {};
+    			if (dirty[1] & /*povertyItems*/ 8) subtabs_changes.items = /*povertyItems*/ ctx[34];
 
-    			if (!updating_activeTabValue && dirty[0] & /*currentPoverty*/ 67108864) {
+    			if (!updating_activeTabValue && dirty[1] & /*currentPoverty*/ 16) {
     				updating_activeTabValue = true;
-    				subtabs_changes.activeTabValue = /*currentPoverty*/ ctx[26];
+    				subtabs_changes.activeTabValue = /*currentPoverty*/ ctx[35];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			subtabs.$set(subtabs_changes);
 
-    			if (0 == /*currentPoverty*/ ctx[26]) {
+    			if (0 == /*currentPoverty*/ ctx[35]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentPoverty*/ 67108864) {
+    					if (dirty[1] & /*currentPoverty*/ 16) {
     						transition_in(if_block0, 1);
     					}
     				} else {
@@ -12164,11 +12433,11 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (1 == /*currentPoverty*/ ctx[26]) {
+    			if (1 == /*currentPoverty*/ ctx[35]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentPoverty*/ 67108864) {
+    					if (dirty[1] & /*currentPoverty*/ 16) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -12214,14 +12483,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(819:3) {#if 3 === currentTab}",
+    		source: "(864:3) {#if 3 === currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (821:4) {#if 0 == currentPoverty}
+    // (866:4) {#if 0 == currentPoverty}
     function create_if_block_9(ctx) {
     	let div1;
     	let div0;
@@ -12239,35 +12508,35 @@ var app = (function () {
     	let div7;
     	let div6;
     	let div4;
-    	let t5_value = /*translations*/ ctx[30].app.projectedPovery + "";
+    	let t5_value = /*translations*/ ctx[45].app.projectedPovery + "";
     	let t5;
     	let t6;
     	let div5;
-    	let t7_value = /*translations*/ ctx[30].app.sources + "";
+    	let t7_value = /*translations*/ ctx[45].app.sources + "";
     	let t7;
     	let t8;
     	let a0;
     	let t10;
     	let a1;
     	let t12;
-    	let t13_value = /*translations*/ ctx[30].app.authorsCalculations + "";
+    	let t13_value = /*translations*/ ctx[45].app.authorsCalculations + "";
     	let t13;
     	let current;
 
     	const poverty = new Poverty({
     			props: {
-    				compareData: /*povertyProjCountries*/ ctx[27],
-    				titleListMain: /*mainProjCountries*/ ctx[55],
-    				titleListName: /*nameProjCountries*/ ctx[56],
-    				titleListNumber: /*numberProjCountries*/ ctx[57],
-    				colorsList: /*colorsProjCountries*/ ctx[62]
+    				compareData: /*povertyProjCountries*/ ctx[36],
+    				titleListMain: /*mainProjCountries*/ ctx[38],
+    				titleListName: /*nameProjCountries*/ ctx[39],
+    				titleListNumber: /*numberProjCountries*/ ctx[40],
+    				colorsList: /*colorsProjCountries*/ ctx[63]
     			},
     			$$inline: true
     		});
 
     	const square0 = new Square({
     			props: {
-    				text: "South Asia",
+    				text: /*translations*/ ctx[45].app.southAsia,
     				color: "#377eb8",
     				factorWidth: 8
     			},
@@ -12276,7 +12545,7 @@ var app = (function () {
 
     	const square1 = new Square({
     			props: {
-    				text: "Sub-Saharan Africa",
+    				text: /*translations*/ ctx[45].app.subSahAfrica,
     				color: "#e41a1c",
     				factorWidth: 8
     			},
@@ -12285,7 +12554,7 @@ var app = (function () {
 
     	const square2 = new Square({
     			props: {
-    				text: "East Asia & Pacific",
+    				text: /*translations*/ ctx[45].app.eastAsiaPacific,
     				color: "#4daf4a",
     				factorWidth: 8
     			},
@@ -12325,33 +12594,33 @@ var app = (function () {
     			t12 = space();
     			t13 = text(t13_value);
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 822, 6, 28090);
+    			add_location(div0, file$a, 867, 6, 29455);
     			attr_dev(div1, "class", "twelve columns");
     			set_style(div1, "text-align", "center");
     			set_style(div1, "margin-top", "25px");
-    			add_location(div1, file$a, 821, 5, 28010);
+    			add_location(div1, file$a, 866, 5, 29375);
     			attr_dev(svg, "width", svg_width_value = 90);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
-    			add_location(svg, file$a, 832, 7, 28439);
-    			attr_dev(div2, "class", "two columns");
-    			add_location(div2, file$a, 831, 6, 28406);
-    			attr_dev(div3, "class", "two columns");
-    			add_location(div3, file$a, 837, 6, 28559);
+    			add_location(svg, file$a, 877, 7, 29804);
+    			attr_dev(div2, "class", "one columns");
+    			add_location(div2, file$a, 876, 6, 29771);
+    			attr_dev(div3, "class", "three columns");
+    			add_location(div3, file$a, 882, 6, 29924);
     			attr_dev(div4, "class", "parameter-text svelte-1havf7j");
-    			add_location(div4, file$a, 844, 8, 28899);
+    			add_location(div4, file$a, 889, 8, 30300);
     			attr_dev(a0, "href", "https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en");
-    			add_location(a0, file$a, 849, 9, 29069);
+    			add_location(a0, file$a, 894, 9, 30470);
     			attr_dev(a1, "href", "https://data.worldbank.org/indicator/SI.POV.DDA");
-    			add_location(a1, file$a, 850, 9, 29187);
+    			add_location(a1, file$a, 895, 9, 30588);
     			attr_dev(div5, "class", "parameter-text svelte-1havf7j");
-    			add_location(div5, file$a, 847, 8, 28995);
+    			add_location(div5, file$a, 892, 8, 30396);
     			attr_dev(div6, "class", "caption svelte-1havf7j");
-    			add_location(div6, file$a, 843, 7, 28869);
+    			add_location(div6, file$a, 888, 7, 30270);
     			attr_dev(div7, "class", "eight columns");
-    			add_location(div7, file$a, 842, 6, 28834);
+    			add_location(div7, file$a, 887, 6, 30235);
     			attr_dev(div8, "class", "row svelte-1havf7j");
-    			add_location(div8, file$a, 830, 5, 28382);
+    			add_location(div8, file$a, 875, 5, 29747);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -12386,11 +12655,23 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const poverty_changes = {};
-    			if (dirty[0] & /*povertyProjCountries*/ 134217728) poverty_changes.compareData = /*povertyProjCountries*/ ctx[27];
+    			if (dirty[1] & /*povertyProjCountries*/ 32) poverty_changes.compareData = /*povertyProjCountries*/ ctx[36];
+    			if (dirty[1] & /*mainProjCountries*/ 128) poverty_changes.titleListMain = /*mainProjCountries*/ ctx[38];
+    			if (dirty[1] & /*nameProjCountries*/ 256) poverty_changes.titleListName = /*nameProjCountries*/ ctx[39];
+    			if (dirty[1] & /*numberProjCountries*/ 512) poverty_changes.titleListNumber = /*numberProjCountries*/ ctx[40];
     			poverty.$set(poverty_changes);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t5_value !== (t5_value = /*translations*/ ctx[30].app.projectedPovery + "")) set_data_dev(t5, t5_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t7_value !== (t7_value = /*translations*/ ctx[30].app.sources + "")) set_data_dev(t7, t7_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t13_value !== (t13_value = /*translations*/ ctx[30].app.authorsCalculations + "")) set_data_dev(t13, t13_value);
+    			const square0_changes = {};
+    			if (dirty[1] & /*translations*/ 16384) square0_changes.text = /*translations*/ ctx[45].app.southAsia;
+    			square0.$set(square0_changes);
+    			const square1_changes = {};
+    			if (dirty[1] & /*translations*/ 16384) square1_changes.text = /*translations*/ ctx[45].app.subSahAfrica;
+    			square1.$set(square1_changes);
+    			const square2_changes = {};
+    			if (dirty[1] & /*translations*/ 16384) square2_changes.text = /*translations*/ ctx[45].app.eastAsiaPacific;
+    			square2.$set(square2_changes);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t5_value !== (t5_value = /*translations*/ ctx[45].app.projectedPovery + "")) set_data_dev(t5, t5_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t7_value !== (t7_value = /*translations*/ ctx[45].app.sources + "")) set_data_dev(t7, t7_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t13_value !== (t13_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data_dev(t13, t13_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -12422,14 +12703,14 @@ var app = (function () {
     		block,
     		id: create_if_block_9.name,
     		type: "if",
-    		source: "(821:4) {#if 0 == currentPoverty}",
+    		source: "(866:4) {#if 0 == currentPoverty}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (858:4) {#if 1 == currentPoverty}
+    // (903:4) {#if 1 == currentPoverty}
     function create_if_block_8(ctx) {
     	let div1;
     	let div0;
@@ -12443,28 +12724,28 @@ var app = (function () {
     	let div6;
     	let div5;
     	let div3;
-    	let t2_value = /*translations*/ ctx[30].app.projectedPoveryByRegion + "";
+    	let t2_value = /*translations*/ ctx[45].app.projectedPovery + "";
     	let t2;
     	let t3;
     	let div4;
-    	let t4_value = /*translations*/ ctx[30].app.sources + "";
+    	let t4_value = /*translations*/ ctx[45].app.sources + "";
     	let t4;
     	let t5;
     	let a0;
     	let t7;
     	let a1;
     	let t9;
-    	let t10_value = /*translations*/ ctx[30].app.authorsCalculations + "";
+    	let t10_value = /*translations*/ ctx[45].app.authorsCalculations + "";
     	let t10;
     	let current;
 
     	const poverty = new Poverty({
     			props: {
-    				compareData: /*povertyProjRegions*/ ctx[28],
-    				titleListMain: /*mainProjRegions*/ ctx[58],
-    				titleListName: /*nameProjRegions*/ ctx[59],
-    				titleListNumber: /*numberProjRegions*/ ctx[60],
-    				colorsList: /*colorsProjRegions*/ ctx[61]
+    				compareData: /*povertyProjRegions*/ ctx[37],
+    				titleListMain: /*mainProjRegions*/ ctx[41],
+    				titleListName: /*nameProjRegions*/ ctx[42],
+    				titleListNumber: /*numberProjRegions*/ ctx[43],
+    				colorsList: /*colorsProjRegions*/ ctx[62]
     			},
     			$$inline: true
     		});
@@ -12495,31 +12776,31 @@ var app = (function () {
     			t9 = space();
     			t10 = text(t10_value);
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 859, 6, 29484);
+    			add_location(div0, file$a, 904, 6, 30885);
     			attr_dev(div1, "class", "twelve columns");
     			set_style(div1, "text-align", "center");
     			set_style(div1, "margin-top", "25px");
-    			add_location(div1, file$a, 858, 5, 29404);
+    			add_location(div1, file$a, 903, 5, 30805);
     			attr_dev(svg, "width", svg_width_value = 90);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
-    			add_location(svg, file$a, 869, 7, 29827);
+    			add_location(svg, file$a, 914, 7, 31228);
     			attr_dev(div2, "class", "four columns");
-    			add_location(div2, file$a, 868, 6, 29793);
+    			add_location(div2, file$a, 913, 6, 31194);
     			attr_dev(div3, "class", "parameter-text svelte-1havf7j");
-    			add_location(div3, file$a, 876, 8, 30005);
+    			add_location(div3, file$a, 921, 8, 31406);
     			attr_dev(a0, "href", "https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en");
-    			add_location(a0, file$a, 881, 9, 30183);
+    			add_location(a0, file$a, 926, 9, 31576);
     			attr_dev(a1, "href", "https://data.worldbank.org/indicator/SI.POV.DDA");
-    			add_location(a1, file$a, 882, 9, 30301);
+    			add_location(a1, file$a, 927, 9, 31694);
     			attr_dev(div4, "class", "parameter-text svelte-1havf7j");
-    			add_location(div4, file$a, 879, 8, 30109);
+    			add_location(div4, file$a, 924, 8, 31502);
     			attr_dev(div5, "class", "caption svelte-1havf7j");
-    			add_location(div5, file$a, 875, 7, 29975);
+    			add_location(div5, file$a, 920, 7, 31376);
     			attr_dev(div6, "class", "eight columns");
-    			add_location(div6, file$a, 874, 6, 29940);
+    			add_location(div6, file$a, 919, 6, 31341);
     			attr_dev(div7, "class", "row svelte-1havf7j");
-    			add_location(div7, file$a, 867, 5, 29769);
+    			add_location(div7, file$a, 912, 5, 31170);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -12547,11 +12828,14 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const poverty_changes = {};
-    			if (dirty[0] & /*povertyProjRegions*/ 268435456) poverty_changes.compareData = /*povertyProjRegions*/ ctx[28];
+    			if (dirty[1] & /*povertyProjRegions*/ 64) poverty_changes.compareData = /*povertyProjRegions*/ ctx[37];
+    			if (dirty[1] & /*mainProjRegions*/ 1024) poverty_changes.titleListMain = /*mainProjRegions*/ ctx[41];
+    			if (dirty[1] & /*nameProjRegions*/ 2048) poverty_changes.titleListName = /*nameProjRegions*/ ctx[42];
+    			if (dirty[1] & /*numberProjRegions*/ 4096) poverty_changes.titleListNumber = /*numberProjRegions*/ ctx[43];
     			poverty.$set(poverty_changes);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t2_value !== (t2_value = /*translations*/ ctx[30].app.projectedPoveryByRegion + "")) set_data_dev(t2, t2_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t4_value !== (t4_value = /*translations*/ ctx[30].app.sources + "")) set_data_dev(t4, t4_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t10_value !== (t10_value = /*translations*/ ctx[30].app.authorsCalculations + "")) set_data_dev(t10, t10_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t2_value !== (t2_value = /*translations*/ ctx[45].app.projectedPovery + "")) set_data_dev(t2, t2_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t4_value !== (t4_value = /*translations*/ ctx[45].app.sources + "")) set_data_dev(t4, t4_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t10_value !== (t10_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data_dev(t10, t10_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -12574,14 +12858,14 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(858:4) {#if 1 == currentPoverty}",
+    		source: "(903:4) {#if 1 == currentPoverty}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (892:3) {#if 4 === currentTab}
+    // (937:3) {#if 4 === currentTab}
     function create_if_block_6(ctx) {
     	let div9;
     	let div1;
@@ -12599,11 +12883,11 @@ var app = (function () {
     	let div7;
     	let div6;
     	let div4;
-    	let t4_value = /*translations*/ ctx[30].app.projectionsCaption + "";
+    	let t4_value = /*translations*/ ctx[45].app.projectionsCaption + "";
     	let t4;
     	let t5;
     	let div5;
-    	let t6_value = /*translations*/ ctx[30].app.source + "";
+    	let t6_value = /*translations*/ ctx[45].app.source + "";
     	let t6;
     	let t7;
     	let a;
@@ -12613,16 +12897,17 @@ var app = (function () {
 
     	const projections = new Projections({
     			props: {
-    				projectionsTitle: /*projectionsTitle*/ ctx[19],
-    				projectionsXAxisLabel: /*projectionsXAxisLabel*/ ctx[20],
-    				projectionsYAxisLabel: /*projectionsYAxisLabel*/ ctx[21]
+    				projectionsTitle: /*projectionsTitle*/ ctx[25],
+    				projectionsXAxisLabel: /*projectionsXAxisLabel*/ ctx[26],
+    				projectionsYAxisLabel: /*projectionsYAxisLabel*/ ctx[27],
+    				language: /*language*/ ctx[4]
     			},
     			$$inline: true
     		});
 
     	const linelegend0 = new LineLegend({
     			props: {
-    				text: /*projectionsLegendDeaths*/ ctx[22],
+    				text: /*projectionsLegendDeaths*/ ctx[28],
     				type: "continuous",
     				factorWidth: 15
     			},
@@ -12631,7 +12916,7 @@ var app = (function () {
 
     	const linelegend1 = new LineLegend({
     			props: {
-    				text: /*projectionsLegendDeathsProjected*/ ctx[23],
+    				text: /*projectionsLegendDeathsProjected*/ ctx[29],
     				type: "dashed",
     				factorWidth: 15
     			},
@@ -12665,31 +12950,31 @@ var app = (function () {
     			a = element("a");
     			a.textContent = "IHME";
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 894, 6, 30664);
+    			add_location(div0, file$a, 939, 6, 32057);
     			attr_dev(div1, "class", "twelve columns");
-    			add_location(div1, file$a, 893, 5, 30629);
+    			add_location(div1, file$a, 938, 5, 32022);
     			attr_dev(svg, "width", svg_width_value = 90);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
-    			add_location(svg, file$a, 904, 7, 30954);
+    			add_location(svg, file$a, 950, 7, 32375);
     			attr_dev(div2, "class", "one columns");
-    			add_location(div2, file$a, 903, 6, 30921);
+    			add_location(div2, file$a, 949, 6, 32342);
     			attr_dev(div3, "class", "three columns");
-    			add_location(div3, file$a, 909, 6, 31074);
+    			add_location(div3, file$a, 955, 6, 32495);
     			attr_dev(div4, "class", "parameter-text svelte-1havf7j");
-    			add_location(div4, file$a, 917, 8, 31387);
+    			add_location(div4, file$a, 963, 8, 32808);
     			attr_dev(a, "href", "http://www.healthdata.org/");
-    			add_location(a, file$a, 922, 9, 31559);
+    			add_location(a, file$a, 968, 9, 32980);
     			attr_dev(div5, "class", "parameter-text svelte-1havf7j");
-    			add_location(div5, file$a, 920, 8, 31486);
+    			add_location(div5, file$a, 966, 8, 32907);
     			attr_dev(div6, "class", "caption svelte-1havf7j");
-    			add_location(div6, file$a, 916, 7, 31357);
+    			add_location(div6, file$a, 962, 7, 32778);
     			attr_dev(div7, "class", "eight columns");
-    			add_location(div7, file$a, 915, 6, 31322);
+    			add_location(div7, file$a, 961, 6, 32743);
     			attr_dev(div8, "class", "row svelte-1havf7j");
-    			add_location(div8, file$a, 902, 5, 30897);
+    			add_location(div8, file$a, 948, 5, 32318);
     			attr_dev(div9, "class", "row svelte-1havf7j");
-    			add_location(div9, file$a, 892, 4, 30532);
+    			add_location(div9, file$a, 937, 4, 31925);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div9, anchor);
@@ -12719,18 +13004,19 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const projections_changes = {};
-    			if (dirty[0] & /*projectionsTitle*/ 524288) projections_changes.projectionsTitle = /*projectionsTitle*/ ctx[19];
-    			if (dirty[0] & /*projectionsXAxisLabel*/ 1048576) projections_changes.projectionsXAxisLabel = /*projectionsXAxisLabel*/ ctx[20];
-    			if (dirty[0] & /*projectionsYAxisLabel*/ 2097152) projections_changes.projectionsYAxisLabel = /*projectionsYAxisLabel*/ ctx[21];
+    			if (dirty[0] & /*projectionsTitle*/ 33554432) projections_changes.projectionsTitle = /*projectionsTitle*/ ctx[25];
+    			if (dirty[0] & /*projectionsXAxisLabel*/ 67108864) projections_changes.projectionsXAxisLabel = /*projectionsXAxisLabel*/ ctx[26];
+    			if (dirty[0] & /*projectionsYAxisLabel*/ 134217728) projections_changes.projectionsYAxisLabel = /*projectionsYAxisLabel*/ ctx[27];
+    			if (dirty[0] & /*language*/ 16) projections_changes.language = /*language*/ ctx[4];
     			projections.$set(projections_changes);
     			const linelegend0_changes = {};
-    			if (dirty[0] & /*projectionsLegendDeaths*/ 4194304) linelegend0_changes.text = /*projectionsLegendDeaths*/ ctx[22];
+    			if (dirty[0] & /*projectionsLegendDeaths*/ 268435456) linelegend0_changes.text = /*projectionsLegendDeaths*/ ctx[28];
     			linelegend0.$set(linelegend0_changes);
     			const linelegend1_changes = {};
-    			if (dirty[0] & /*projectionsLegendDeathsProjected*/ 8388608) linelegend1_changes.text = /*projectionsLegendDeathsProjected*/ ctx[23];
+    			if (dirty[0] & /*projectionsLegendDeathsProjected*/ 536870912) linelegend1_changes.text = /*projectionsLegendDeathsProjected*/ ctx[29];
     			linelegend1.$set(linelegend1_changes);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t4_value !== (t4_value = /*translations*/ ctx[30].app.projectionsCaption + "")) set_data_dev(t4, t4_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t6_value !== (t6_value = /*translations*/ ctx[30].app.source + "")) set_data_dev(t6, t6_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t4_value !== (t4_value = /*translations*/ ctx[45].app.projectionsCaption + "")) set_data_dev(t4, t4_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t6_value !== (t6_value = /*translations*/ ctx[45].app.source + "")) set_data_dev(t6, t6_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -12767,14 +13053,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(892:3) {#if 4 === currentTab}",
+    		source: "(937:3) {#if 4 === currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (931:3) {#if 5 == currentTab}
+    // (977:3) {#if 5 == currentTab}
     function create_if_block_4$1(ctx) {
     	let div4;
     	let div3;
@@ -12785,38 +13071,56 @@ var app = (function () {
     	let thead;
     	let tr0;
     	let th0;
+    	let t2_value = /*translations*/ ctx[45].app.location + "";
+    	let t2;
     	let t3;
     	let th1;
+    	let t4_value = /*translations*/ ctx[45].app.fatalityRates + "";
+    	let t4;
     	let t5;
     	let th2;
+    	let t6_value = /*translations*/ ctx[45].app.varyFRs + "";
+    	let t6;
     	let t7;
     	let th3;
+    	let t8_value = /*translations*/ ctx[45].app.infectionRate + "";
+    	let t8;
     	let t9;
     	let th4;
+    	let t10_value = /*translations*/ ctx[45].app.over60InfectionRate + "";
+    	let t10;
     	let t11;
     	let th5;
+    	let t12_value = /*translations*/ ctx[45].app.over60InfectionRate + "";
+    	let t12;
     	let t13;
     	let th6;
+    	let t14_value = /*translations*/ ctx[45].app.elimination + "";
+    	let t14;
     	let t15;
     	let th7;
+    	let t16_value = /*translations*/ ctx[45].app.infectionUntil + "";
+    	let t16;
     	let t17;
     	let th8;
-    	let t18_value = /*translations*/ ctx[30].app.infected + "";
+    	let t18_value = /*translations*/ ctx[45].app.infected + "";
     	let t18;
     	let t19;
     	let th9;
-    	let t20_value = /*translations*/ ctx[30].app.deaths + "";
+    	let t20_value = /*translations*/ ctx[45].app.deaths + "";
     	let t20;
     	let t21;
     	let th10;
-    	let t22_value = /*translations*/ ctx[30].app.yrsOfLifeLost + "";
+    	let t22_value = /*translations*/ ctx[45].app.yrsOfLifeLost + "";
     	let t22;
     	let t23;
     	let th11;
-    	let t24_value = /*translations*/ ctx[30].app.yrsOfLifeLostCosts + "";
+    	let t24_value = /*translations*/ ctx[45].app.yrsOfLifeLostCosts + "";
     	let t24;
     	let t25;
     	let th12;
+    	let t26_value = /*translations*/ ctx[45].app.scenariosDescription + "";
+    	let t26;
     	let t27;
     	let tbody;
     	let t28;
@@ -12827,7 +13131,7 @@ var app = (function () {
     	let t30;
     	let td1;
     	let span1;
-    	let t31_value = /*translations*/ ctx[30].fatalityRisks[/*selectedSourceId*/ ctx[31]].source + "";
+    	let t31_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "";
     	let t31;
     	let t32;
     	let td2;
@@ -12862,23 +13166,23 @@ var app = (function () {
     	let t50;
     	let td8;
     	let span8;
-    	let t51_value = numberFormatter(/*totalInfected*/ ctx[33]) + "";
+    	let t51_value = numberFormatter(/*totalInfected*/ ctx[48]) + "";
     	let t51;
     	let t52;
     	let td9;
     	let span9;
-    	let t53_value = numberFormatter(/*totalDeaths*/ ctx[34]) + "";
+    	let t53_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "";
     	let t53;
     	let t54;
     	let td10;
     	let span10;
-    	let t55_value = numberFormatter(/*totalYearsLost*/ ctx[35]) + "";
+    	let t55_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "";
     	let t55;
     	let t56;
     	let td11;
     	let span11;
     	let t57;
-    	let t58_value = numberFormatter(/*totalMoneyLost*/ ctx[36]) + "";
+    	let t58_value = numberFormatter(/*totalMoneyLost*/ ctx[51]) + "";
     	let t58;
     	let t59;
     	let t60;
@@ -12893,7 +13197,7 @@ var app = (function () {
     	let div4_outro;
     	let current;
     	let dispose;
-    	let each_value = /*rowsOfScenarios*/ ctx[24];
+    	let each_value = /*rowsOfScenarios*/ ctx[30];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -12913,28 +13217,28 @@ var app = (function () {
     			thead = element("thead");
     			tr0 = element("tr");
     			th0 = element("th");
-    			th0.textContent = "Location";
+    			t2 = text(t2_value);
     			t3 = space();
     			th1 = element("th");
-    			th1.textContent = "Fatality risks";
+    			t4 = text(t4_value);
     			t5 = space();
     			th2 = element("th");
-    			th2.textContent = "Vary fatality";
+    			t6 = text(t6_value);
     			t7 = space();
     			th3 = element("th");
-    			th3.textContent = "Infection rate";
+    			t8 = text(t8_value);
     			t9 = space();
     			th4 = element("th");
-    			th4.textContent = "Over 60 infection rate";
+    			t10 = text(t10_value);
     			t11 = space();
     			th5 = element("th");
-    			th5.textContent = "Below 60 infection rate";
+    			t12 = text(t12_value);
     			t13 = space();
     			th6 = element("th");
-    			th6.textContent = "Probability of elimination";
+    			t14 = text(t14_value);
     			t15 = space();
     			th7 = element("th");
-    			th7.textContent = "Infection rate until";
+    			t16 = text(t16_value);
     			t17 = space();
     			th8 = element("th");
     			t18 = text(t18_value);
@@ -12949,7 +13253,7 @@ var app = (function () {
     			t24 = text(t24_value);
     			t25 = space();
     			th12 = element("th");
-    			th12.textContent = "Description of scenario";
+    			t26 = text(t26_value);
     			t27 = space();
     			tbody = element("tbody");
 
@@ -12969,32 +13273,32 @@ var app = (function () {
     			t32 = space();
     			td2 = element("td");
     			span2 = element("span");
-    			t33 = text(/*pctOfChange*/ ctx[6]);
+    			t33 = text(/*pctOfChange*/ ctx[7]);
     			t34 = text("%");
     			t35 = space();
     			td3 = element("td");
     			span3 = element("span");
-    			t36 = text(/*pctH*/ ctx[7]);
+    			t36 = text(/*pctH*/ ctx[8]);
     			t37 = text("%");
     			t38 = space();
     			td4 = element("td");
     			span4 = element("span");
-    			t39 = text(/*pctH_60plus*/ ctx[29]);
+    			t39 = text(/*pctH_60plus*/ ctx[44]);
     			t40 = text("%");
     			t41 = space();
     			td5 = element("td");
     			span5 = element("span");
-    			t42 = text(/*pctH_below60*/ ctx[32]);
+    			t42 = text(/*pctH_below60*/ ctx[47]);
     			t43 = text("%");
     			t44 = space();
     			td6 = element("td");
     			span6 = element("span");
-    			t45 = text(/*prElimTimes100*/ ctx[8]);
+    			t45 = text(/*prElimTimes100*/ ctx[9]);
     			t46 = text("%");
     			t47 = space();
     			td7 = element("td");
     			span7 = element("span");
-    			t48 = text(/*pctU*/ ctx[9]);
+    			t48 = text(/*pctU*/ ctx[10]);
     			t49 = text("%");
     			t50 = space();
     			td8 = element("td");
@@ -13023,104 +13327,103 @@ var app = (function () {
     			t63 = space();
     			div2 = element("div");
     			span12 = element("span");
-    			span12.textContent = "You can set input parameters that describe a hypothetical scenario and add it to\n\t\t\t\t\t\t\t\tthe table for comparison.\n\t\t\t\t\t\t\t\tThere are 3 examples of hypothetical scenarios for the selected location and fatality risks.\n\t\t\t\t\t\t\t\tResults should be interpreted with caution, see Example Interpretations.";
     			attr_dev(div0, "class", "wtitle svelte-1havf7j");
-    			add_location(div0, file$a, 935, 7, 31883);
+    			add_location(div0, file$a, 981, 7, 33304);
     			attr_dev(th0, "class", "svelte-1havf7j");
-    			add_location(th0, file$a, 941, 10, 32028);
+    			add_location(th0, file$a, 987, 10, 33449);
     			attr_dev(th1, "class", "svelte-1havf7j");
-    			add_location(th1, file$a, 942, 10, 32056);
+    			add_location(th1, file$a, 988, 10, 33496);
     			attr_dev(th2, "class", "svelte-1havf7j");
-    			add_location(th2, file$a, 943, 10, 32090);
+    			add_location(th2, file$a, 989, 10, 33548);
     			attr_dev(th3, "class", "svelte-1havf7j");
-    			add_location(th3, file$a, 944, 10, 32123);
+    			add_location(th3, file$a, 990, 10, 33594);
     			attr_dev(th4, "class", "svelte-1havf7j");
-    			add_location(th4, file$a, 945, 10, 32157);
+    			add_location(th4, file$a, 991, 10, 33646);
     			attr_dev(th5, "class", "svelte-1havf7j");
-    			add_location(th5, file$a, 946, 10, 32199);
+    			add_location(th5, file$a, 992, 10, 33704);
     			attr_dev(th6, "class", "svelte-1havf7j");
-    			add_location(th6, file$a, 947, 10, 32242);
+    			add_location(th6, file$a, 993, 10, 33762);
     			attr_dev(th7, "class", "svelte-1havf7j");
-    			add_location(th7, file$a, 948, 10, 32288);
+    			add_location(th7, file$a, 994, 10, 33812);
     			attr_dev(th8, "class", "svelte-1havf7j");
-    			add_location(th8, file$a, 949, 10, 32328);
+    			add_location(th8, file$a, 995, 10, 33865);
     			attr_dev(th9, "class", "svelte-1havf7j");
-    			add_location(th9, file$a, 950, 10, 32375);
+    			add_location(th9, file$a, 996, 10, 33912);
     			attr_dev(th10, "class", "svelte-1havf7j");
-    			add_location(th10, file$a, 951, 10, 32420);
+    			add_location(th10, file$a, 997, 10, 33957);
     			attr_dev(th11, "class", "svelte-1havf7j");
-    			add_location(th11, file$a, 952, 10, 32472);
+    			add_location(th11, file$a, 998, 10, 34009);
     			attr_dev(th12, "class", "svelte-1havf7j");
-    			add_location(th12, file$a, 953, 10, 32529);
-    			add_location(tr0, file$a, 940, 9, 32013);
-    			add_location(thead, file$a, 939, 8, 31996);
+    			add_location(th12, file$a, 999, 10, 34066);
+    			add_location(tr0, file$a, 986, 9, 33434);
+    			add_location(thead, file$a, 985, 8, 33417);
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 982, 13, 33530);
+    			add_location(span0, file$a, 1028, 13, 35083);
     			attr_dev(td0, "class", "svelte-1havf7j");
-    			add_location(td0, file$a, 982, 9, 33526);
+    			add_location(td0, file$a, 1028, 9, 35079);
     			attr_dev(span1, "class", "parameter svelte-1havf7j");
-    			add_location(span1, file$a, 983, 13, 33598);
+    			add_location(span1, file$a, 1029, 13, 35151);
     			attr_dev(td1, "class", "svelte-1havf7j");
-    			add_location(td1, file$a, 983, 9, 33594);
+    			add_location(td1, file$a, 1029, 9, 35147);
     			attr_dev(span2, "class", "parameter svelte-1havf7j");
-    			add_location(span2, file$a, 984, 13, 33701);
+    			add_location(span2, file$a, 1030, 13, 35254);
     			attr_dev(td2, "class", "svelte-1havf7j");
-    			add_location(td2, file$a, 984, 9, 33697);
+    			add_location(td2, file$a, 1030, 9, 35250);
     			attr_dev(span3, "class", "parameter svelte-1havf7j");
-    			add_location(span3, file$a, 985, 13, 33765);
+    			add_location(span3, file$a, 1031, 13, 35318);
     			attr_dev(td3, "class", "svelte-1havf7j");
-    			add_location(td3, file$a, 985, 9, 33761);
+    			add_location(td3, file$a, 1031, 9, 35314);
     			attr_dev(span4, "class", "parameter svelte-1havf7j");
-    			add_location(span4, file$a, 986, 13, 33822);
+    			add_location(span4, file$a, 1032, 13, 35375);
     			attr_dev(td4, "class", "svelte-1havf7j");
-    			add_location(td4, file$a, 986, 9, 33818);
+    			add_location(td4, file$a, 1032, 9, 35371);
     			attr_dev(span5, "class", "parameter svelte-1havf7j");
-    			add_location(span5, file$a, 987, 13, 33886);
+    			add_location(span5, file$a, 1033, 13, 35439);
     			attr_dev(td5, "class", "svelte-1havf7j");
-    			add_location(td5, file$a, 987, 9, 33882);
+    			add_location(td5, file$a, 1033, 9, 35435);
     			attr_dev(span6, "class", "parameter svelte-1havf7j");
-    			add_location(span6, file$a, 988, 13, 33951);
+    			add_location(span6, file$a, 1034, 13, 35504);
     			attr_dev(td6, "class", "svelte-1havf7j");
-    			add_location(td6, file$a, 988, 9, 33947);
+    			add_location(td6, file$a, 1034, 9, 35500);
     			attr_dev(span7, "class", "parameter svelte-1havf7j");
-    			add_location(span7, file$a, 989, 13, 34018);
+    			add_location(span7, file$a, 1035, 13, 35571);
     			attr_dev(td7, "class", "svelte-1havf7j");
-    			add_location(td7, file$a, 989, 9, 34014);
+    			add_location(td7, file$a, 1035, 9, 35567);
     			attr_dev(span8, "class", "parameter svelte-1havf7j");
-    			add_location(span8, file$a, 990, 13, 34075);
+    			add_location(span8, file$a, 1036, 13, 35628);
     			attr_dev(td8, "class", "svelte-1havf7j");
-    			add_location(td8, file$a, 990, 9, 34071);
+    			add_location(td8, file$a, 1036, 9, 35624);
     			attr_dev(span9, "class", "parameter svelte-1havf7j");
-    			add_location(span9, file$a, 991, 13, 34157);
+    			add_location(span9, file$a, 1037, 13, 35710);
     			attr_dev(td9, "class", "svelte-1havf7j");
-    			add_location(td9, file$a, 991, 9, 34153);
+    			add_location(td9, file$a, 1037, 9, 35706);
     			attr_dev(span10, "class", "parameter svelte-1havf7j");
-    			add_location(span10, file$a, 992, 13, 34237);
+    			add_location(span10, file$a, 1038, 13, 35790);
     			attr_dev(td10, "class", "svelte-1havf7j");
-    			add_location(td10, file$a, 992, 9, 34233);
+    			add_location(td10, file$a, 1038, 9, 35786);
     			attr_dev(span11, "class", "parameter svelte-1havf7j");
-    			add_location(span11, file$a, 993, 13, 34320);
+    			add_location(span11, file$a, 1039, 13, 35873);
     			attr_dev(td11, "class", "svelte-1havf7j");
-    			add_location(td11, file$a, 993, 9, 34316);
-    			add_location(input, file$a, 994, 13, 34405);
+    			add_location(td11, file$a, 1039, 9, 35869);
+    			add_location(input, file$a, 1040, 13, 35958);
     			attr_dev(button, "class", "button svelte-1havf7j");
-    			add_location(button, file$a, 995, 10, 34441);
+    			add_location(button, file$a, 1041, 10, 35994);
     			attr_dev(td12, "class", "svelte-1havf7j");
-    			add_location(td12, file$a, 994, 9, 34401);
-    			add_location(tr1, file$a, 981, 8, 33512);
-    			add_location(tbody, file$a, 956, 8, 32602);
+    			add_location(td12, file$a, 1040, 9, 35954);
+    			add_location(tr1, file$a, 1027, 8, 35065);
+    			add_location(tbody, file$a, 1002, 8, 34155);
     			attr_dev(table, "class", "table1 svelte-1havf7j");
-    			add_location(table, file$a, 938, 7, 31965);
+    			add_location(table, file$a, 984, 7, 33386);
     			attr_dev(div1, "class", "child parameter-text svelte-1havf7j");
-    			add_location(div1, file$a, 933, 6, 31840);
+    			add_location(div1, file$a, 979, 6, 33261);
     			attr_dev(span12, "class", "parameter-text svelte-1havf7j");
-    			add_location(span12, file$a, 1002, 7, 34610);
+    			add_location(span12, file$a, 1048, 7, 36163);
     			attr_dev(div2, "class", "caption svelte-1havf7j");
-    			add_location(div2, file$a, 1001, 6, 34581);
+    			add_location(div2, file$a, 1047, 6, 36134);
     			attr_dev(div3, "class", "twelve columns");
-    			add_location(div3, file$a, 932, 5, 31805);
+    			add_location(div3, file$a, 978, 5, 33226);
     			attr_dev(div4, "class", "row svelte-1havf7j");
-    			add_location(div4, file$a, 931, 4, 31710);
+    			add_location(div4, file$a, 977, 4, 33131);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div4, anchor);
@@ -13132,20 +13435,28 @@ var app = (function () {
     			append_dev(table, thead);
     			append_dev(thead, tr0);
     			append_dev(tr0, th0);
+    			append_dev(th0, t2);
     			append_dev(tr0, t3);
     			append_dev(tr0, th1);
+    			append_dev(th1, t4);
     			append_dev(tr0, t5);
     			append_dev(tr0, th2);
+    			append_dev(th2, t6);
     			append_dev(tr0, t7);
     			append_dev(tr0, th3);
+    			append_dev(th3, t8);
     			append_dev(tr0, t9);
     			append_dev(tr0, th4);
+    			append_dev(th4, t10);
     			append_dev(tr0, t11);
     			append_dev(tr0, th5);
+    			append_dev(th5, t12);
     			append_dev(tr0, t13);
     			append_dev(tr0, th6);
+    			append_dev(th6, t14);
     			append_dev(tr0, t15);
     			append_dev(tr0, th7);
+    			append_dev(th7, t16);
     			append_dev(tr0, t17);
     			append_dev(tr0, th8);
     			append_dev(th8, t18);
@@ -13160,6 +13471,7 @@ var app = (function () {
     			append_dev(th11, t24);
     			append_dev(tr0, t25);
     			append_dev(tr0, th12);
+    			append_dev(th12, t26);
     			append_dev(table, t27);
     			append_dev(table, tbody);
 
@@ -13238,17 +13550,26 @@ var app = (function () {
 
     			dispose = [
     				listen_dev(input, "input", /*input_input_handler*/ ctx[131]),
-    				listen_dev(button, "click", /*addScenario*/ ctx[43], false, false, false)
+    				listen_dev(button, "click", /*addScenario*/ ctx[59], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t18_value !== (t18_value = /*translations*/ ctx[30].app.infected + "")) set_data_dev(t18, t18_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t20_value !== (t20_value = /*translations*/ ctx[30].app.deaths + "")) set_data_dev(t20, t20_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t22_value !== (t22_value = /*translations*/ ctx[30].app.yrsOfLifeLost + "")) set_data_dev(t22, t22_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t24_value !== (t24_value = /*translations*/ ctx[30].app.yrsOfLifeLostCosts + "")) set_data_dev(t24, t24_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t2_value !== (t2_value = /*translations*/ ctx[45].app.location + "")) set_data_dev(t2, t2_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t4_value !== (t4_value = /*translations*/ ctx[45].app.fatalityRates + "")) set_data_dev(t4, t4_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t6_value !== (t6_value = /*translations*/ ctx[45].app.varyFRs + "")) set_data_dev(t6, t6_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t8_value !== (t8_value = /*translations*/ ctx[45].app.infectionRate + "")) set_data_dev(t8, t8_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t10_value !== (t10_value = /*translations*/ ctx[45].app.over60InfectionRate + "")) set_data_dev(t10, t10_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t12_value !== (t12_value = /*translations*/ ctx[45].app.over60InfectionRate + "")) set_data_dev(t12, t12_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t14_value !== (t14_value = /*translations*/ ctx[45].app.elimination + "")) set_data_dev(t14, t14_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t16_value !== (t16_value = /*translations*/ ctx[45].app.infectionUntil + "")) set_data_dev(t16, t16_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t18_value !== (t18_value = /*translations*/ ctx[45].app.infected + "")) set_data_dev(t18, t18_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t20_value !== (t20_value = /*translations*/ ctx[45].app.deaths + "")) set_data_dev(t20, t20_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t22_value !== (t22_value = /*translations*/ ctx[45].app.yrsOfLifeLost + "")) set_data_dev(t22, t22_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t24_value !== (t24_value = /*translations*/ ctx[45].app.yrsOfLifeLostCosts + "")) set_data_dev(t24, t24_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t26_value !== (t26_value = /*translations*/ ctx[45].app.scenariosDescription + "")) set_data_dev(t26, t26_value);
 
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 | dirty[1] & /*deleteScenario*/ 8192) {
-    				each_value = /*rowsOfScenarios*/ ctx[24];
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 | dirty[1] & /*deleteScenario*/ 536870912) {
+    				each_value = /*rowsOfScenarios*/ ctx[30];
     				validate_each_argument(each_value);
     				let i;
 
@@ -13272,17 +13593,17 @@ var app = (function () {
     			}
 
     			if (!current || dirty[0] & /*selectedLocation*/ 4) set_data_dev(t29, /*selectedLocation*/ ctx[2]);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824 | dirty[1] & /*selectedSourceId*/ 1) && t31_value !== (t31_value = /*translations*/ ctx[30].fatalityRisks[/*selectedSourceId*/ ctx[31]].source + "")) set_data_dev(t31, t31_value);
-    			if (!current || dirty[0] & /*pctOfChange*/ 64) set_data_dev(t33, /*pctOfChange*/ ctx[6]);
-    			if (!current || dirty[0] & /*pctH*/ 128) set_data_dev(t36, /*pctH*/ ctx[7]);
-    			if (!current || dirty[0] & /*pctH_60plus*/ 536870912) set_data_dev(t39, /*pctH_60plus*/ ctx[29]);
-    			if (!current || dirty[1] & /*pctH_below60*/ 2) set_data_dev(t42, /*pctH_below60*/ ctx[32]);
-    			if (!current || dirty[0] & /*prElimTimes100*/ 256) set_data_dev(t45, /*prElimTimes100*/ ctx[8]);
-    			if (!current || dirty[0] & /*pctU*/ 512) set_data_dev(t48, /*pctU*/ ctx[9]);
-    			if ((!current || dirty[1] & /*totalInfected*/ 4) && t51_value !== (t51_value = numberFormatter(/*totalInfected*/ ctx[33]) + "")) set_data_dev(t51, t51_value);
-    			if ((!current || dirty[1] & /*totalDeaths*/ 8) && t53_value !== (t53_value = numberFormatter(/*totalDeaths*/ ctx[34]) + "")) set_data_dev(t53, t53_value);
-    			if ((!current || dirty[1] & /*totalYearsLost*/ 16) && t55_value !== (t55_value = numberFormatter(/*totalYearsLost*/ ctx[35]) + "")) set_data_dev(t55, t55_value);
-    			if ((!current || dirty[1] & /*totalMoneyLost*/ 32) && t58_value !== (t58_value = numberFormatter(/*totalMoneyLost*/ ctx[36]) + "")) set_data_dev(t58, t58_value);
+    			if ((!current || dirty[1] & /*translations, selectedSourceId*/ 49152) && t31_value !== (t31_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "")) set_data_dev(t31, t31_value);
+    			if (!current || dirty[0] & /*pctOfChange*/ 128) set_data_dev(t33, /*pctOfChange*/ ctx[7]);
+    			if (!current || dirty[0] & /*pctH*/ 256) set_data_dev(t36, /*pctH*/ ctx[8]);
+    			if (!current || dirty[1] & /*pctH_60plus*/ 8192) set_data_dev(t39, /*pctH_60plus*/ ctx[44]);
+    			if (!current || dirty[1] & /*pctH_below60*/ 65536) set_data_dev(t42, /*pctH_below60*/ ctx[47]);
+    			if (!current || dirty[0] & /*prElimTimes100*/ 512) set_data_dev(t45, /*prElimTimes100*/ ctx[9]);
+    			if (!current || dirty[0] & /*pctU*/ 1024) set_data_dev(t48, /*pctU*/ ctx[10]);
+    			if ((!current || dirty[1] & /*totalInfected*/ 131072) && t51_value !== (t51_value = numberFormatter(/*totalInfected*/ ctx[48]) + "")) set_data_dev(t51, t51_value);
+    			if ((!current || dirty[1] & /*totalDeaths*/ 262144) && t53_value !== (t53_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "")) set_data_dev(t53, t53_value);
+    			if ((!current || dirty[1] & /*totalYearsLost*/ 524288) && t55_value !== (t55_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "")) set_data_dev(t55, t55_value);
+    			if ((!current || dirty[1] & /*totalMoneyLost*/ 1048576) && t58_value !== (t58_value = numberFormatter(/*totalMoneyLost*/ ctx[51]) + "")) set_data_dev(t58, t58_value);
 
     			if (dirty[0] & /*desc*/ 8 && input.value !== /*desc*/ ctx[3]) {
     				set_input_value(input, /*desc*/ ctx[3]);
@@ -13316,14 +13637,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4$1.name,
     		type: "if",
-    		source: "(931:3) {#if 5 == currentTab}",
+    		source: "(977:3) {#if 5 == currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (973:11) {#if scenario.id > 2}
+    // (1019:11) {#if scenario.id > 2}
     function create_if_block_5(ctx) {
     	let button;
     	let dispose;
@@ -13333,7 +13654,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Delete";
     			attr_dev(button, "class", "button svelte-1havf7j");
-    			add_location(button, file$a, 973, 12, 33323);
+    			add_location(button, file$a, 1019, 12, 34876);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -13343,7 +13664,7 @@ var app = (function () {
     				button,
     				"click",
     				function () {
-    					if (is_function(/*deleteScenario*/ ctx[44](/*scenario*/ ctx[137].id))) /*deleteScenario*/ ctx[44](/*scenario*/ ctx[137].id).apply(this, arguments);
+    					if (is_function(/*deleteScenario*/ ctx[60](/*scenario*/ ctx[137].id))) /*deleteScenario*/ ctx[60](/*scenario*/ ctx[137].id).apply(this, arguments);
     				},
     				false,
     				false,
@@ -13363,14 +13684,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(973:11) {#if scenario.id > 2}",
+    		source: "(1019:11) {#if scenario.id > 2}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (958:8) {#each rowsOfScenarios as scenario}
+    // (1004:8) {#each rowsOfScenarios as scenario}
     function create_each_block$3(ctx) {
     	let tr;
     	let td0;
@@ -13491,36 +13812,36 @@ var app = (function () {
     			t33 = space();
     			if (if_block) if_block.c();
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 959, 14, 32682);
+    			add_location(span0, file$a, 1005, 14, 34235);
     			attr_dev(td0, "class", "svelte-1havf7j");
-    			add_location(td0, file$a, 959, 10, 32678);
+    			add_location(td0, file$a, 1005, 10, 34231);
     			attr_dev(span1, "class", "parameter svelte-1havf7j");
-    			add_location(span1, file$a, 960, 14, 32747);
+    			add_location(span1, file$a, 1006, 14, 34300);
     			attr_dev(td1, "class", "svelte-1havf7j");
-    			add_location(td1, file$a, 960, 10, 32743);
+    			add_location(td1, file$a, 1006, 10, 34296);
     			attr_dev(td2, "class", "svelte-1havf7j");
-    			add_location(td2, file$a, 961, 10, 32808);
+    			add_location(td2, file$a, 1007, 10, 34361);
     			attr_dev(td3, "class", "svelte-1havf7j");
-    			add_location(td3, file$a, 962, 10, 32841);
+    			add_location(td3, file$a, 1008, 10, 34394);
     			attr_dev(td4, "class", "svelte-1havf7j");
-    			add_location(td4, file$a, 963, 10, 32874);
+    			add_location(td4, file$a, 1009, 10, 34427);
     			attr_dev(td5, "class", "svelte-1havf7j");
-    			add_location(td5, file$a, 964, 10, 32910);
+    			add_location(td5, file$a, 1010, 10, 34463);
     			attr_dev(td6, "class", "svelte-1havf7j");
-    			add_location(td6, file$a, 965, 10, 32949);
+    			add_location(td6, file$a, 1011, 10, 34502);
     			attr_dev(td7, "class", "svelte-1havf7j");
-    			add_location(td7, file$a, 966, 10, 32985);
+    			add_location(td7, file$a, 1012, 10, 34538);
     			attr_dev(td8, "class", "svelte-1havf7j");
-    			add_location(td8, file$a, 967, 10, 33018);
+    			add_location(td8, file$a, 1013, 10, 34571);
     			attr_dev(td9, "class", "svelte-1havf7j");
-    			add_location(td9, file$a, 968, 10, 33072);
+    			add_location(td9, file$a, 1014, 10, 34625);
     			attr_dev(td10, "class", "svelte-1havf7j");
-    			add_location(td10, file$a, 969, 10, 33129);
+    			add_location(td10, file$a, 1015, 10, 34682);
     			attr_dev(td11, "class", "svelte-1havf7j");
-    			add_location(td11, file$a, 970, 10, 33188);
+    			add_location(td11, file$a, 1016, 10, 34741);
     			attr_dev(td12, "class", "svelte-1havf7j");
-    			add_location(td12, file$a, 971, 10, 33254);
-    			add_location(tr, file$a, 958, 9, 32663);
+    			add_location(td12, file$a, 1017, 10, 34807);
+    			add_location(tr, file$a, 1004, 9, 34216);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -13576,19 +13897,19 @@ var app = (function () {
     			if (if_block) if_block.m(td12, null);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t0_value !== (t0_value = /*scenario*/ ctx[137].loc + "")) set_data_dev(t0, t0_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t2_value !== (t2_value = /*scenario*/ ctx[137].frs + "")) set_data_dev(t2, t2_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t4_value !== (t4_value = /*scenario*/ ctx[137].F + "")) set_data_dev(t4, t4_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t7_value !== (t7_value = /*scenario*/ ctx[137].H + "")) set_data_dev(t7, t7_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t10_value !== (t10_value = /*scenario*/ ctx[137].H_60 + "")) set_data_dev(t10, t10_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t13_value !== (t13_value = /*scenario*/ ctx[137].H_below + "")) set_data_dev(t13, t13_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t16_value !== (t16_value = /*scenario*/ ctx[137].Elim + "")) set_data_dev(t16, t16_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t19_value !== (t19_value = /*scenario*/ ctx[137].U + "")) set_data_dev(t19, t19_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t22_value !== (t22_value = numberFormatter(/*scenario*/ ctx[137].totInf) + "")) set_data_dev(t22, t22_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t24_value !== (t24_value = numberFormatter(/*scenario*/ ctx[137].totDeaths) + "")) set_data_dev(t24, t24_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t26_value !== (t26_value = numberFormatter(/*scenario*/ ctx[137].yrsLifeLost) + "")) set_data_dev(t26, t26_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t29_value !== (t29_value = numberFormatter(/*scenario*/ ctx[137].yrsLifeLostCosts) + "")) set_data_dev(t29, t29_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 16777216 && t32_value !== (t32_value = /*scenario*/ ctx[137].comments + "")) set_data_dev(t32, t32_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t0_value !== (t0_value = /*scenario*/ ctx[137].loc + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t2_value !== (t2_value = /*scenario*/ ctx[137].frs + "")) set_data_dev(t2, t2_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t4_value !== (t4_value = /*scenario*/ ctx[137].F + "")) set_data_dev(t4, t4_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t7_value !== (t7_value = /*scenario*/ ctx[137].H + "")) set_data_dev(t7, t7_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t10_value !== (t10_value = /*scenario*/ ctx[137].H_60 + "")) set_data_dev(t10, t10_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t13_value !== (t13_value = /*scenario*/ ctx[137].H_below + "")) set_data_dev(t13, t13_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t16_value !== (t16_value = /*scenario*/ ctx[137].Elim + "")) set_data_dev(t16, t16_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t19_value !== (t19_value = /*scenario*/ ctx[137].U + "")) set_data_dev(t19, t19_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t22_value !== (t22_value = numberFormatter(/*scenario*/ ctx[137].totInf) + "")) set_data_dev(t22, t22_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t24_value !== (t24_value = numberFormatter(/*scenario*/ ctx[137].totDeaths) + "")) set_data_dev(t24, t24_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t26_value !== (t26_value = numberFormatter(/*scenario*/ ctx[137].yrsLifeLost) + "")) set_data_dev(t26, t26_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t29_value !== (t29_value = numberFormatter(/*scenario*/ ctx[137].yrsLifeLostCosts) + "")) set_data_dev(t29, t29_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t32_value !== (t32_value = /*scenario*/ ctx[137].comments + "")) set_data_dev(t32, t32_value);
 
     			if (/*scenario*/ ctx[137].id > 2) {
     				if (if_block) {
@@ -13613,14 +13934,14 @@ var app = (function () {
     		block,
     		id: create_each_block$3.name,
     		type: "each",
-    		source: "(958:8) {#each rowsOfScenarios as scenario}",
+    		source: "(1004:8) {#each rowsOfScenarios as scenario}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1015:3) {#if 6 == currentTab}
+    // (1058:3) {#if 6 == currentTab}
     function create_if_block_3$1(ctx) {
     	let div4;
     	let div3;
@@ -13641,16 +13962,16 @@ var app = (function () {
     	let td0;
     	let span1;
     	let t8;
-    	let t9_value = /*rowsOfScenarios*/ ctx[24][0].H + "";
+    	let t9_value = /*rowsOfScenarios*/ ctx[30][0].H + "";
     	let t9;
     	let t10;
     	let span0;
-    	let t11_value = /*rowsOfScenarios*/ ctx[24][0].loc + "";
+    	let t11_value = /*rowsOfScenarios*/ ctx[30][0].loc + "";
     	let t11;
     	let t12;
     	let t13;
     	let span2;
-    	let t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totInf) + "";
+    	let t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totInf) + "";
     	let t14;
     	let t15;
     	let span3;
@@ -13658,23 +13979,23 @@ var app = (function () {
     	let td1;
     	let span4;
     	let t18;
-    	let t19_value = /*rowsOfScenarios*/ ctx[24][1].H_60 + "";
+    	let t19_value = /*rowsOfScenarios*/ ctx[30][1].H_60 + "";
     	let t19;
     	let t20;
-    	let t21_value = /*rowsOfScenarios*/ ctx[24][1].H_below + "";
+    	let t21_value = /*rowsOfScenarios*/ ctx[30][1].H_below + "";
     	let t21;
     	let t22;
-    	let t23_value = /*rowsOfScenarios*/ ctx[24][1].H + "";
+    	let t23_value = /*rowsOfScenarios*/ ctx[30][1].H + "";
     	let t23;
     	let t24;
     	let t25;
     	let td2;
     	let span5;
     	let t26;
-    	let t27_value = /*rowsOfScenarios*/ ctx[24][2].Elim + "";
+    	let t27_value = /*rowsOfScenarios*/ ctx[30][2].Elim + "";
     	let t27;
     	let t28;
-    	let t29_value = /*rowsOfScenarios*/ ctx[24][2].U + "";
+    	let t29_value = /*rowsOfScenarios*/ ctx[30][2].U + "";
     	let t29;
     	let t30;
     	let t31;
@@ -13683,16 +14004,16 @@ var app = (function () {
     	let span8;
     	let t32;
     	let span6;
-    	let t33_value = /*translations*/ ctx[30].fatalityRisks[/*selectedSourceId*/ ctx[31]].source + "";
+    	let t33_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "";
     	let t33;
     	let t34;
     	let span7;
-    	let t35_value = /*rowsOfScenarios*/ ctx[24][0].loc + "";
+    	let t35_value = /*rowsOfScenarios*/ ctx[30][0].loc + "";
     	let t35;
     	let t36;
     	let t37;
     	let span9;
-    	let t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths) + "";
+    	let t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "";
     	let t38;
     	let t39;
     	let span10;
@@ -13700,21 +14021,21 @@ var app = (function () {
     	let td4;
     	let span11;
     	let t42;
-    	let t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths) + "";
+    	let t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "";
     	let t43;
     	let t44;
-    	let t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][1].totDeaths) + "";
+    	let t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].totDeaths) + "";
     	let t45;
     	let t46;
     	let t47;
     	let span12;
-    	let t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths - /*rowsOfScenarios*/ ctx[24][1].totDeaths) + "";
+    	let t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][1].totDeaths) + "";
     	let t48;
     	let t49;
     	let span13;
     	let t51;
     	let span14;
-    	let t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[24][1].totDeaths / /*rowsOfScenarios*/ ctx[24][0].totDeaths - 1)) + "";
+    	let t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][1].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "";
     	let t52;
     	let t53;
     	let t54;
@@ -13723,21 +14044,21 @@ var app = (function () {
     	let td5;
     	let span16;
     	let t57;
-    	let t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths) + "";
+    	let t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "";
     	let t58;
     	let t59;
-    	let t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][2].totDeaths) + "";
+    	let t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].totDeaths) + "";
     	let t60;
     	let t61;
     	let t62;
     	let span17;
-    	let t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths - /*rowsOfScenarios*/ ctx[24][2].totDeaths) + "";
+    	let t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][2].totDeaths) + "";
     	let t63;
     	let t64;
     	let span18;
     	let t66;
     	let span19;
-    	let t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[24][2].totDeaths / /*rowsOfScenarios*/ ctx[24][0].totDeaths - 1)) + "";
+    	let t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][2].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "";
     	let t67;
     	let t68;
     	let t69;
@@ -13748,35 +14069,35 @@ var app = (function () {
     	let span21;
     	let t73;
     	let span22;
-    	let t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLost) + "";
+    	let t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "";
     	let t74;
     	let t75;
     	let span23;
     	let t77;
     	let span24;
     	let t78;
-    	let t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLostCosts) + "";
+    	let t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "";
     	let t79;
     	let t80;
     	let t81;
     	let td7;
     	let span25;
     	let t82;
-    	let t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLost) + "";
+    	let t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "";
     	let t83;
     	let t84;
-    	let t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][1].yrsLifeLost) + "";
+    	let t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "";
     	let t85;
     	let t86;
     	let t87;
     	let span26;
-    	let t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[24][1].yrsLifeLost) + "";
+    	let t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "";
     	let t88;
     	let t89;
     	let span27;
     	let t91;
     	let span28;
-    	let t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[24][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[24][0].yrsLifeLost) + "";
+    	let t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "";
     	let t92;
     	let t93;
     	let t94;
@@ -13785,16 +14106,16 @@ var app = (function () {
     	let td8;
     	let span30;
     	let t97;
-    	let t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLostCosts) + "";
+    	let t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "";
     	let t98;
     	let t99;
-    	let t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][2].yrsLifeLostCosts) + "";
+    	let t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "";
     	let t100;
     	let t101;
     	let t102;
     	let span31;
     	let t103;
-    	let t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[24][2].yrsLifeLostCosts) + "";
+    	let t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "";
     	let t104;
     	let t105;
     	let t106;
@@ -13977,104 +14298,104 @@ var app = (function () {
     			span33 = element("span");
     			span33.textContent = "Estimates should be interpreted with caution.\n\t\t\t\t\t\t\t\tThis tool is focused on simple presentation and pedagogical aspects\n\t\t\t\t\t\t\t\tand only offers crude estimates. It uses relatively simplistic\n\t\t\t\t\t\t\t\tmethodology outlined in the Notes below.";
     			attr_dev(div0, "class", "wtitle svelte-1havf7j");
-    			add_location(div0, file$a, 1019, 7, 35194);
-    			add_location(th0, file$a, 1025, 10, 35355);
-    			add_location(th1, file$a, 1026, 10, 35412);
-    			add_location(th2, file$a, 1028, 10, 35529);
+    			add_location(div0, file$a, 1062, 7, 36443);
+    			add_location(th0, file$a, 1068, 10, 36604);
+    			add_location(th1, file$a, 1069, 10, 36661);
+    			add_location(th2, file$a, 1071, 10, 36778);
     			attr_dev(tr0, "class", "parameter-title svelte-1havf7j");
-    			add_location(tr0, file$a, 1024, 9, 35316);
-    			add_location(thead, file$a, 1023, 8, 35299);
+    			add_location(tr0, file$a, 1067, 9, 36565);
+    			add_location(thead, file$a, 1066, 8, 36548);
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 1037, 11, 35822);
+    			add_location(span0, file$a, 1080, 11, 37071);
     			attr_dev(span1, "class", "parameter-text svelte-1havf7j");
-    			add_location(span1, file$a, 1034, 10, 35675);
+    			add_location(span1, file$a, 1077, 10, 36924);
     			attr_dev(span2, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span2, file$a, 1040, 10, 35938);
+    			add_location(span2, file$a, 1083, 10, 37187);
     			attr_dev(span3, "class", "parameter-text svelte-1havf7j");
-    			add_location(span3, file$a, 1043, 10, 36052);
-    			add_location(td0, file$a, 1033, 9, 35660);
+    			add_location(span3, file$a, 1086, 10, 37301);
+    			add_location(td0, file$a, 1076, 9, 36909);
     			attr_dev(span4, "class", "parameter-text svelte-1havf7j");
-    			add_location(span4, file$a, 1048, 10, 36160);
-    			add_location(td1, file$a, 1047, 9, 36145);
+    			add_location(span4, file$a, 1091, 10, 37409);
+    			add_location(td1, file$a, 1090, 9, 37394);
     			attr_dev(span5, "class", "parameter-text svelte-1havf7j");
-    			add_location(span5, file$a, 1057, 10, 36556);
-    			add_location(td2, file$a, 1056, 9, 36541);
-    			add_location(tr1, file$a, 1032, 8, 35646);
+    			add_location(span5, file$a, 1100, 10, 37805);
+    			add_location(td2, file$a, 1099, 9, 37790);
+    			add_location(tr1, file$a, 1075, 8, 36895);
     			attr_dev(span6, "class", "parameter svelte-1havf7j");
-    			add_location(span6, file$a, 1070, 11, 37014);
+    			add_location(span6, file$a, 1113, 11, 38263);
     			attr_dev(span7, "class", "parameter svelte-1havf7j");
-    			add_location(span7, file$a, 1071, 15, 37114);
+    			add_location(span7, file$a, 1114, 15, 38363);
     			attr_dev(span8, "class", "parameter-text svelte-1havf7j");
-    			add_location(span8, file$a, 1068, 10, 36929);
+    			add_location(span8, file$a, 1111, 10, 38178);
     			attr_dev(span9, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span9, file$a, 1074, 10, 37243);
+    			add_location(span9, file$a, 1117, 10, 38492);
     			attr_dev(span10, "class", "parameter-text svelte-1havf7j");
-    			add_location(span10, file$a, 1077, 10, 37360);
-    			add_location(td3, file$a, 1067, 9, 36914);
+    			add_location(span10, file$a, 1120, 10, 38609);
+    			add_location(td3, file$a, 1110, 9, 38163);
     			attr_dev(span11, "class", "parameter-text svelte-1havf7j");
-    			add_location(span11, file$a, 1082, 10, 37470);
+    			add_location(span11, file$a, 1125, 10, 38719);
     			attr_dev(span12, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span12, file$a, 1087, 10, 37689);
+    			add_location(span12, file$a, 1130, 10, 38938);
     			attr_dev(span13, "class", "parameter-text svelte-1havf7j");
-    			add_location(span13, file$a, 1090, 10, 37837);
+    			add_location(span13, file$a, 1133, 10, 39086);
     			attr_dev(span14, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span14, file$a, 1093, 10, 37923);
+    			add_location(span14, file$a, 1136, 10, 39172);
     			attr_dev(span15, "class", "parameter-text svelte-1havf7j");
-    			add_location(span15, file$a, 1096, 10, 38138);
-    			add_location(td4, file$a, 1081, 9, 37455);
+    			add_location(span15, file$a, 1139, 10, 39387);
+    			add_location(td4, file$a, 1124, 9, 38704);
     			attr_dev(span16, "class", "parameter-text svelte-1havf7j");
-    			add_location(span16, file$a, 1101, 10, 38263);
+    			add_location(span16, file$a, 1144, 10, 39512);
     			attr_dev(span17, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span17, file$a, 1106, 10, 38482);
+    			add_location(span17, file$a, 1149, 10, 39731);
     			attr_dev(span18, "class", "parameter-text svelte-1havf7j");
-    			add_location(span18, file$a, 1109, 10, 38630);
+    			add_location(span18, file$a, 1152, 10, 39879);
     			attr_dev(span19, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span19, file$a, 1113, 10, 38727);
+    			add_location(span19, file$a, 1156, 10, 39976);
     			attr_dev(span20, "class", "parameter-text svelte-1havf7j");
-    			add_location(span20, file$a, 1116, 10, 38885);
-    			add_location(td5, file$a, 1100, 9, 38248);
-    			add_location(tr2, file$a, 1066, 8, 36900);
+    			add_location(span20, file$a, 1159, 10, 40134);
+    			add_location(td5, file$a, 1143, 9, 39497);
+    			add_location(tr2, file$a, 1109, 8, 38149);
     			attr_dev(span21, "class", "parameter-text svelte-1havf7j");
-    			add_location(span21, file$a, 1123, 10, 39041);
+    			add_location(span21, file$a, 1166, 10, 40290);
     			attr_dev(span22, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span22, file$a, 1127, 10, 39209);
+    			add_location(span22, file$a, 1170, 10, 40458);
     			attr_dev(span23, "class", "parameter-text svelte-1havf7j");
-    			add_location(span23, file$a, 1130, 10, 39328);
+    			add_location(span23, file$a, 1173, 10, 40577);
     			attr_dev(span24, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span24, file$a, 1135, 10, 39537);
-    			add_location(td6, file$a, 1122, 9, 39026);
+    			add_location(span24, file$a, 1178, 10, 40786);
+    			add_location(td6, file$a, 1165, 9, 40275);
     			attr_dev(span25, "class", "parameter-text svelte-1havf7j");
-    			add_location(span25, file$a, 1140, 10, 39693);
+    			add_location(span25, file$a, 1183, 10, 40942);
     			attr_dev(span26, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span26, file$a, 1148, 10, 40151);
+    			add_location(span26, file$a, 1191, 10, 41400);
     			attr_dev(span27, "class", "parameter-text svelte-1havf7j");
-    			add_location(span27, file$a, 1151, 10, 40303);
+    			add_location(span27, file$a, 1194, 10, 41552);
     			attr_dev(span28, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span28, file$a, 1154, 10, 40407);
+    			add_location(span28, file$a, 1197, 10, 41656);
     			attr_dev(span29, "class", "parameter-text svelte-1havf7j");
-    			add_location(span29, file$a, 1157, 10, 40620);
-    			add_location(td7, file$a, 1139, 9, 39678);
+    			add_location(span29, file$a, 1200, 10, 41869);
+    			add_location(td7, file$a, 1182, 9, 40927);
     			attr_dev(span30, "class", "parameter-text svelte-1havf7j");
-    			add_location(span30, file$a, 1162, 10, 40759);
+    			add_location(span30, file$a, 1205, 10, 42008);
     			attr_dev(span31, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span31, file$a, 1168, 10, 41039);
+    			add_location(span31, file$a, 1211, 10, 42288);
     			attr_dev(span32, "class", "parameter-text svelte-1havf7j");
-    			add_location(span32, file$a, 1171, 10, 41204);
-    			add_location(td8, file$a, 1161, 9, 40744);
-    			add_location(tr3, file$a, 1121, 8, 39012);
-    			add_location(tbody, file$a, 1031, 8, 35630);
+    			add_location(span32, file$a, 1214, 10, 42453);
+    			add_location(td8, file$a, 1204, 9, 41993);
+    			add_location(tr3, file$a, 1164, 8, 40261);
+    			add_location(tbody, file$a, 1074, 8, 36879);
     			attr_dev(table, "class", "table2 svelte-1havf7j");
-    			add_location(table, file$a, 1022, 7, 35268);
+    			add_location(table, file$a, 1065, 7, 36517);
     			attr_dev(div1, "class", "child svelte-1havf7j");
-    			add_location(div1, file$a, 1017, 6, 35166);
+    			add_location(div1, file$a, 1060, 6, 36415);
     			attr_dev(span33, "class", "parameter-text svelte-1havf7j");
-    			add_location(span33, file$a, 1182, 7, 41582);
+    			add_location(span33, file$a, 1225, 7, 42831);
     			attr_dev(div2, "class", "caption svelte-1havf7j");
-    			add_location(div2, file$a, 1181, 6, 41553);
+    			add_location(div2, file$a, 1224, 6, 42802);
     			attr_dev(div3, "class", "twelve columns");
-    			add_location(div3, file$a, 1016, 5, 35131);
+    			add_location(div3, file$a, 1059, 5, 36380);
     			attr_dev(div4, "class", "row svelte-1havf7j");
-    			add_location(div4, file$a, 1015, 4, 35036);
+    			add_location(div4, file$a, 1058, 4, 36285);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -14232,34 +14553,34 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[24][0].H + "")) set_data_dev(t9, t9_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t11_value !== (t11_value = /*rowsOfScenarios*/ ctx[24][0].loc + "")) set_data_dev(t11, t11_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t14_value !== (t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totInf) + "")) set_data_dev(t14, t14_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t19_value !== (t19_value = /*rowsOfScenarios*/ ctx[24][1].H_60 + "")) set_data_dev(t19, t19_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t21_value !== (t21_value = /*rowsOfScenarios*/ ctx[24][1].H_below + "")) set_data_dev(t21, t21_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t23_value !== (t23_value = /*rowsOfScenarios*/ ctx[24][1].H + "")) set_data_dev(t23, t23_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t27_value !== (t27_value = /*rowsOfScenarios*/ ctx[24][2].Elim + "")) set_data_dev(t27, t27_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t29_value !== (t29_value = /*rowsOfScenarios*/ ctx[24][2].U + "")) set_data_dev(t29, t29_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824 | dirty[1] & /*selectedSourceId*/ 1) && t33_value !== (t33_value = /*translations*/ ctx[30].fatalityRisks[/*selectedSourceId*/ ctx[31]].source + "")) set_data_dev(t33, t33_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t35_value !== (t35_value = /*rowsOfScenarios*/ ctx[24][0].loc + "")) set_data_dev(t35, t35_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t38_value !== (t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths) + "")) set_data_dev(t38, t38_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t43_value !== (t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths) + "")) set_data_dev(t43, t43_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t45_value !== (t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][1].totDeaths) + "")) set_data_dev(t45, t45_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t48_value !== (t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths - /*rowsOfScenarios*/ ctx[24][1].totDeaths) + "")) set_data_dev(t48, t48_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t52_value !== (t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[24][1].totDeaths / /*rowsOfScenarios*/ ctx[24][0].totDeaths - 1)) + "")) set_data_dev(t52, t52_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t58_value !== (t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths) + "")) set_data_dev(t58, t58_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t60_value !== (t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][2].totDeaths) + "")) set_data_dev(t60, t60_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t63_value !== (t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].totDeaths - /*rowsOfScenarios*/ ctx[24][2].totDeaths) + "")) set_data_dev(t63, t63_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t67_value !== (t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[24][2].totDeaths / /*rowsOfScenarios*/ ctx[24][0].totDeaths - 1)) + "")) set_data_dev(t67, t67_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t74_value !== (t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLost) + "")) set_data_dev(t74, t74_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t79_value !== (t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLostCosts) + "")) set_data_dev(t79, t79_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t83_value !== (t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLost) + "")) set_data_dev(t83, t83_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t85_value !== (t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][1].yrsLifeLost) + "")) set_data_dev(t85, t85_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t88_value !== (t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[24][1].yrsLifeLost) + "")) set_data_dev(t88, t88_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t92_value !== (t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[24][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[24][0].yrsLifeLost) + "")) set_data_dev(t92, t92_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t98_value !== (t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLostCosts) + "")) set_data_dev(t98, t98_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t100_value !== (t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][2].yrsLifeLostCosts) + "")) set_data_dev(t100, t100_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 16777216) && t104_value !== (t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[24][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[24][2].yrsLifeLostCosts) + "")) set_data_dev(t104, t104_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[30][0].H + "")) set_data_dev(t9, t9_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t11_value !== (t11_value = /*rowsOfScenarios*/ ctx[30][0].loc + "")) set_data_dev(t11, t11_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t14_value !== (t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totInf) + "")) set_data_dev(t14, t14_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t19_value !== (t19_value = /*rowsOfScenarios*/ ctx[30][1].H_60 + "")) set_data_dev(t19, t19_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t21_value !== (t21_value = /*rowsOfScenarios*/ ctx[30][1].H_below + "")) set_data_dev(t21, t21_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t23_value !== (t23_value = /*rowsOfScenarios*/ ctx[30][1].H + "")) set_data_dev(t23, t23_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t27_value !== (t27_value = /*rowsOfScenarios*/ ctx[30][2].Elim + "")) set_data_dev(t27, t27_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t29_value !== (t29_value = /*rowsOfScenarios*/ ctx[30][2].U + "")) set_data_dev(t29, t29_value);
+    			if ((!current || dirty[1] & /*translations, selectedSourceId*/ 49152) && t33_value !== (t33_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "")) set_data_dev(t33, t33_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t35_value !== (t35_value = /*rowsOfScenarios*/ ctx[30][0].loc + "")) set_data_dev(t35, t35_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t38_value !== (t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "")) set_data_dev(t38, t38_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t43_value !== (t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "")) set_data_dev(t43, t43_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t45_value !== (t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].totDeaths) + "")) set_data_dev(t45, t45_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t48_value !== (t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][1].totDeaths) + "")) set_data_dev(t48, t48_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t52_value !== (t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][1].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "")) set_data_dev(t52, t52_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t58_value !== (t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "")) set_data_dev(t58, t58_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t60_value !== (t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].totDeaths) + "")) set_data_dev(t60, t60_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t63_value !== (t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][2].totDeaths) + "")) set_data_dev(t63, t63_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t67_value !== (t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][2].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "")) set_data_dev(t67, t67_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t74_value !== (t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "")) set_data_dev(t74, t74_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t79_value !== (t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "")) set_data_dev(t79, t79_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t83_value !== (t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "")) set_data_dev(t83, t83_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t85_value !== (t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "")) set_data_dev(t85, t85_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t88_value !== (t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "")) set_data_dev(t88, t88_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t92_value !== (t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "")) set_data_dev(t92, t92_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t98_value !== (t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "")) set_data_dev(t98, t98_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t100_value !== (t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "")) set_data_dev(t100, t100_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t104_value !== (t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "")) set_data_dev(t104, t104_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -14287,31 +14608,36 @@ var app = (function () {
     		block,
     		id: create_if_block_3$1.name,
     		type: "if",
-    		source: "(1015:3) {#if 6 == currentTab}",
+    		source: "(1058:3) {#if 6 == currentTab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1311:4) {#if userNeeds.exportData}
+    // (1341:4) {#if userNeeds.exportData}
     function create_if_block_2$1(ctx) {
     	let button;
+    	let t_value = /*translations*/ ctx[45].app.hideExport + "";
+    	let t;
     	let dispose;
 
     	const block = {
     		c: function create() {
     			button = element("button");
-    			button.textContent = "Hide Export";
+    			t = text(t_value);
     			attr_dev(button, "class", "button-class svelte-1havf7j");
-    			add_location(button, file$a, 1311, 5, 45393);
+    			add_location(button, file$a, 1341, 5, 46061);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
+    			append_dev(button, t);
     			if (remount) dispose();
-    			dispose = listen_dev(button, "click", /*toggleExportData*/ ctx[46], false, false, false);
+    			dispose = listen_dev(button, "click", /*toggleExportData*/ ctx[61], false, false, false);
     		},
-    		p: noop,
+    		p: function update(ctx, dirty) {
+    			if (dirty[1] & /*translations*/ 16384 && t_value !== (t_value = /*translations*/ ctx[45].app.hideExport + "")) set_data_dev(t, t_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(button);
     			dispose();
@@ -14322,31 +14648,36 @@ var app = (function () {
     		block,
     		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(1311:4) {#if userNeeds.exportData}",
+    		source: "(1341:4) {#if userNeeds.exportData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1316:4) {#if !userNeeds.exportData}
+    // (1347:4) {#if !userNeeds.exportData}
     function create_if_block_1$2(ctx) {
     	let button;
+    	let t_value = /*translations*/ ctx[45].app.export + "";
+    	let t;
     	let dispose;
 
     	const block = {
     		c: function create() {
     			button = element("button");
-    			button.textContent = "Export";
+    			t = text(t_value);
     			attr_dev(button, "class", "button-class svelte-1havf7j");
-    			add_location(button, file$a, 1316, 5, 45531);
+    			add_location(button, file$a, 1347, 5, 46224);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
+    			append_dev(button, t);
     			if (remount) dispose();
-    			dispose = listen_dev(button, "click", /*toggleExportData*/ ctx[46], false, false, false);
+    			dispose = listen_dev(button, "click", /*toggleExportData*/ ctx[61], false, false, false);
     		},
-    		p: noop,
+    		p: function update(ctx, dirty) {
+    			if (dirty[1] & /*translations*/ 16384 && t_value !== (t_value = /*translations*/ ctx[45].app.export + "")) set_data_dev(t, t_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(button);
     			dispose();
@@ -14357,14 +14688,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(1316:4) {#if !userNeeds.exportData}",
+    		source: "(1347:4) {#if !userNeeds.exportData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1326:1) {#if userNeeds.exportData}
+    // (1358:1) {#if userNeeds.exportData}
     function create_if_block$4(ctx) {
     	let div1;
     	let div0;
@@ -14380,24 +14711,24 @@ var app = (function () {
     			div0 = element("div");
     			textarea = element("textarea");
     			attr_dev(textarea, "class", "svelte-1havf7j");
-    			add_location(textarea, file$a, 1328, 4, 45887);
+    			add_location(textarea, file$a, 1360, 4, 46589);
     			attr_dev(div0, "class", "twelve columns");
-    			add_location(div0, file$a, 1327, 3, 45854);
+    			add_location(div0, file$a, 1359, 3, 46556);
     			attr_dev(div1, "class", "row svelte-1havf7j");
-    			add_location(div1, file$a, 1326, 2, 45778);
+    			add_location(div1, file$a, 1358, 2, 46480);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
     			append_dev(div1, div0);
     			append_dev(div0, textarea);
-    			set_input_value(textarea, /*exportedData*/ ctx[39]);
+    			set_input_value(textarea, /*exportedData*/ ctx[55]);
     			current = true;
     			if (remount) dispose();
     			dispose = listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[136]);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[1] & /*exportedData*/ 256) {
-    				set_input_value(textarea, /*exportedData*/ ctx[39]);
+    			if (dirty[1] & /*exportedData*/ 16777216) {
+    				set_input_value(textarea, /*exportedData*/ ctx[55]);
     			}
     		},
     		i: function intro(local) {
@@ -14427,7 +14758,7 @@ var app = (function () {
     		block,
     		id: create_if_block$4.name,
     		type: "if",
-    		source: "(1326:1) {#if userNeeds.exportData}",
+    		source: "(1358:1) {#if userNeeds.exportData}",
     		ctx
     	});
 
@@ -14440,11 +14771,11 @@ var app = (function () {
     	let div1;
     	let div0;
     	let h3;
-    	let t0_value = /*translations*/ ctx[30].app.mainTitle + "";
+    	let t0_value = /*translations*/ ctx[45].app.mainTitle + "";
     	let t0;
     	let t1;
     	let h6;
-    	let t2_value = /*translations*/ ctx[30].app.subtitle + "";
+    	let t2_value = /*translations*/ ctx[45].app.subtitle + "";
     	let t2;
     	let t3;
     	let div3;
@@ -14460,11 +14791,11 @@ var app = (function () {
     	let div6;
     	let label0;
     	let p0;
-    	let t10_value = /*translations*/ ctx[30].app.selectLocation + "";
+    	let t10_value = /*translations*/ ctx[45].app.selectLocation + "";
     	let t10;
     	let t11;
     	let div5;
-    	let t12_value = /*translations*/ ctx[30].app.locationDescription + "";
+    	let t12_value = /*translations*/ ctx[45].app.locationDescription + "";
     	let t12;
     	let t13;
     	let span0;
@@ -14474,7 +14805,7 @@ var app = (function () {
     	let div9;
     	let label1;
     	let p1;
-    	let t15_value = /*translations*/ ctx[30].app.infectionRate + "";
+    	let t15_value = /*translations*/ ctx[45].app.infectionRate + "";
     	let t15;
     	let t16;
     	let span1;
@@ -14482,7 +14813,7 @@ var app = (function () {
     	let t18;
     	let t19;
     	let div8;
-    	let t20_value = /*translations*/ ctx[30].app.infectionRateDescription + "";
+    	let t20_value = /*translations*/ ctx[45].app.infectionRateDescription + "";
     	let t20;
     	let t21;
     	let input0;
@@ -14491,7 +14822,7 @@ var app = (function () {
     	let div12;
     	let label2;
     	let p2;
-    	let t23_value = /*translations*/ ctx[30].app.over60InfectionRate + "";
+    	let t23_value = /*translations*/ ctx[45].app.over60InfectionRate + "";
     	let t23;
     	let t24;
     	let span2;
@@ -14499,13 +14830,13 @@ var app = (function () {
     	let t26;
     	let t27;
     	let div11;
-    	let t28_value = /*translations*/ ctx[30].app.over60Description + "";
+    	let t28_value = /*translations*/ ctx[45].app.over60Description + "";
     	let t28;
     	let t29;
     	let input1;
     	let t30;
     	let span3;
-    	let t31_value = /*translations*/ ctx[30].app.proportionIsThen + "";
+    	let t31_value = /*translations*/ ctx[45].app.proportionIsThen + "";
     	let t31;
     	let t32;
     	let span4;
@@ -14513,7 +14844,7 @@ var app = (function () {
     	let t34;
     	let t35;
     	let span5;
-    	let t36_value = /*translations*/ ctx[30].app.proportionIsThenDescription + "";
+    	let t36_value = /*translations*/ ctx[45].app.proportionIsThenDescription + "";
     	let t36;
     	let t37;
     	let div16;
@@ -14532,8 +14863,12 @@ var app = (function () {
     	let div18;
     	let label3;
     	let p3;
+    	let t46_value = /*translations*/ ctx[45].app.fatalityRates + "";
+    	let t46;
     	let t47;
     	let div17;
+    	let t48_value = /*translations*/ ctx[45].app.fatalityRatesDescription + "";
+    	let t48;
     	let t49;
     	let span6;
     	let updating_selectedItem_1;
@@ -14544,91 +14879,111 @@ var app = (function () {
     	let div21;
     	let label4;
     	let p4;
+    	let t52_value = /*translations*/ ctx[45].app.varyFRs + "";
     	let t52;
-    	let span8;
     	let t53;
+    	let span8;
     	let t54;
     	let t55;
+    	let t56;
     	let div20;
     	let span9;
+    	let t57_value = /*translations*/ ctx[45].app.varyFRsDescription1 + "";
     	let t57;
+    	let t58;
     	let span10;
+    	let t59_value = /*translations*/ ctx[45].app.varyFRsDescription2 + "";
     	let t59;
-    	let input2;
     	let t60;
+    	let input2;
+    	let t61;
     	let div25;
     	let div24;
     	let div23;
     	let button;
-    	let t61_value = /*translations*/ ctx[30].app.reset + "";
-    	let t61;
+    	let t62_value = /*translations*/ ctx[45].app.reset + "";
     	let t62;
+    	let t63;
     	let span11;
+    	let t64_value = /*translations*/ ctx[45].app.resetDescription + "";
     	let t64;
+    	let t65;
     	let div40;
     	let div29;
     	let div28;
     	let label5;
     	let p5;
-    	let t65;
-    	let span12;
+    	let t66_value = /*translations*/ ctx[45].app.elimination + "";
     	let t66;
     	let t67;
+    	let span12;
     	let t68;
+    	let t69;
+    	let t70;
     	let div27;
     	let span13;
-    	let t70;
-    	let span14;
-    	let t71_value = Math.round(/*pctH*/ ctx[7]) + "";
+    	let t71_value = /*translations*/ ctx[45].app.eliminationDescription1 + "";
     	let t71;
     	let t72;
+    	let span14;
+    	let t73_value = Math.round(/*pctH*/ ctx[8]) + "";
     	let t73;
-    	let span15;
+    	let t74;
     	let t75;
-    	let input3;
+    	let span15;
+    	let t76_value = /*translations*/ ctx[45].app.eliminationDescription2 + "";
     	let t76;
+    	let t77;
+    	let input3;
+    	let t78;
     	let div32;
     	let div31;
     	let label6;
     	let p6;
-    	let t77;
-    	let span16;
-    	let t78;
+    	let t79_value = /*translations*/ ctx[45].app.infectionUntil + "";
     	let t79;
     	let t80;
-    	let div30;
+    	let span16;
+    	let t81;
     	let t82;
-    	let input4;
-    	let input4_min_value;
     	let t83;
-    	let div34;
-    	let div33;
+    	let div30;
+    	let t84_value = /*translations*/ ctx[45].app.infectionUntilDescription + "";
     	let t84;
     	let t85;
-    	let span17;
+    	let input4;
+    	let input4_min_value;
+    	let t86;
+    	let div34;
+    	let div33;
     	let t87;
     	let t88;
+    	let span17;
+    	let t89_value = /*translations*/ ctx[45].app.exportDescription + "";
+    	let t89;
+    	let t90;
+    	let t91;
     	let div39;
     	let div38;
     	let div37;
     	let div35;
-    	let t90;
-    	let p7;
-    	let t92;
-    	let p8;
     	let t93;
-    	let a3;
+    	let p7;
     	let t95;
+    	let p8;
     	let t96;
-    	let p9;
-    	let t97;
-    	let a4;
+    	let a3;
+    	let t98;
     	let t99;
-    	let a5;
-    	let t101;
+    	let p9;
+    	let t100;
+    	let a4;
     	let t102;
-    	let div36;
+    	let a5;
     	let t104;
+    	let t105;
+    	let div36;
+    	let t107;
     	let p10;
     	let current;
     	let dispose;
@@ -14638,12 +14993,12 @@ var app = (function () {
     	}
 
     	let autocomplete0_props = {
-    		items: /*translations*/ ctx[30].countries,
+    		items: /*translations*/ ctx[45].countries,
     		labelFieldName: "name"
     	};
 
-    	if (/*selectedObject*/ ctx[4] !== void 0) {
-    		autocomplete0_props.selectedItem = /*selectedObject*/ ctx[4];
+    	if (/*selectedObject*/ ctx[5] !== void 0) {
+    		autocomplete0_props.selectedItem = /*selectedObject*/ ctx[5];
     	}
 
     	const autocomplete0 = new SimpleAutocomplete({
@@ -14657,7 +15012,7 @@ var app = (function () {
     		/*tabs_activeTabValue_binding*/ ctx[127].call(null, value);
     	}
 
-    	let tabs_props = { items: /*tabItems*/ ctx[45] };
+    	let tabs_props = { items: /*tabItems*/ ctx[52] };
 
     	if (/*currentTab*/ ctx[0] !== void 0) {
     		tabs_props.activeTabValue = /*currentTab*/ ctx[0];
@@ -14678,12 +15033,12 @@ var app = (function () {
     	}
 
     	let autocomplete1_props = {
-    		items: /*translations*/ ctx[30].fatalityRisks,
+    		items: /*translations*/ ctx[45].fatalityRisks,
     		labelFieldName: "source"
     	};
 
-    	if (/*selectedSourceObject*/ ctx[5] !== void 0) {
-    		autocomplete1_props.selectedItem = /*selectedSourceObject*/ ctx[5];
+    	if (/*selectedSourceObject*/ ctx[6] !== void 0) {
+    		autocomplete1_props.selectedItem = /*selectedSourceObject*/ ctx[6];
     	}
 
     	const autocomplete1 = new SimpleAutocomplete({
@@ -14739,7 +15094,7 @@ var app = (function () {
     			t15 = text(t15_value);
     			t16 = space();
     			span1 = element("span");
-    			t17 = text(/*pctH*/ ctx[7]);
+    			t17 = text(/*pctH*/ ctx[8]);
     			t18 = text("%");
     			t19 = space();
     			div8 = element("div");
@@ -14754,7 +15109,7 @@ var app = (function () {
     			t23 = text(t23_value);
     			t24 = space();
     			span2 = element("span");
-    			t25 = text(/*pctH_60plus*/ ctx[29]);
+    			t25 = text(/*pctH_60plus*/ ctx[44]);
     			t26 = text("%");
     			t27 = space();
     			div11 = element("div");
@@ -14766,7 +15121,7 @@ var app = (function () {
     			t31 = text(t31_value);
     			t32 = space();
     			span4 = element("span");
-    			t33 = text(/*pctH_below60*/ ctx[32]);
+    			t33 = text(/*pctH_below60*/ ctx[47]);
     			t34 = text("%");
     			t35 = space();
     			span5 = element("span");
@@ -14795,10 +15150,10 @@ var app = (function () {
     			div18 = element("div");
     			label3 = element("label");
     			p3 = element("p");
-    			p3.textContent = "Fatality rates";
+    			t46 = text(t46_value);
     			t47 = space();
     			div17 = element("div");
-    			div17.textContent = "Select estimates of risk of death from infection with the novel coronavirus.\n\t\t\t\t\t\tEstimates vary between countries and over time.\n\t\t\t\t\t\tWider testing can reduce CFR estimates.";
+    			t48 = text(t48_value);
     			t49 = space();
     			span6 = element("span");
     			create_component(autocomplete1.$$.fragment);
@@ -14809,310 +15164,313 @@ var app = (function () {
     			div21 = element("div");
     			label4 = element("label");
     			p4 = element("p");
-    			t52 = text("Vary selected fatality rates\n\t\t\t\t\t\t");
+    			t52 = text(t52_value);
+    			t53 = space();
     			span8 = element("span");
-    			t53 = text(/*pctOfChange*/ ctx[6]);
-    			t54 = text("%");
-    			t55 = space();
+    			t54 = text(/*pctOfChange*/ ctx[7]);
+    			t55 = text("%");
+    			t56 = space();
     			div20 = element("div");
     			span9 = element("span");
-    			span9.textContent = "Try increasing the risk of deaths, e.g. to 50%,\n\t\t\t\t\t\t\t\tfor low-income country or overwhelmed healthcare.";
-    			t57 = space();
+    			t57 = text(t57_value);
+    			t58 = space();
     			span10 = element("span");
-    			span10.textContent = "Or decreasing, e.g. to -50%,\n\t\t\t\t\t\t\t\tfor expected improved treatments and better healthcare.";
-    			t59 = space();
-    			input2 = element("input");
+    			t59 = text(t59_value);
     			t60 = space();
+    			input2 = element("input");
+    			t61 = space();
     			div25 = element("div");
     			div24 = element("div");
     			div23 = element("div");
     			button = element("button");
-    			t61 = text(t61_value);
-    			t62 = space();
+    			t62 = text(t62_value);
+    			t63 = space();
     			span11 = element("span");
-    			span11.textContent = "Set all input parameters back to their initial values.";
-    			t64 = space();
+    			t64 = text(t64_value);
+    			t65 = space();
     			div40 = element("div");
     			div29 = element("div");
     			div28 = element("div");
     			label5 = element("label");
     			p5 = element("p");
-    			t65 = text("Probability of eliminating COVID-19\n\t\t\t\t\t\t");
+    			t66 = text(t66_value);
+    			t67 = space();
     			span12 = element("span");
-    			t66 = text(/*prElimTimes100*/ ctx[8]);
-    			t67 = text("%");
-    			t68 = space();
+    			t68 = text(/*prElimTimes100*/ ctx[9]);
+    			t69 = text("%");
+    			t70 = space();
     			div27 = element("div");
     			span13 = element("span");
-    			span13.textContent = "Probability of achieving complete elimination of COVID-19 disease before it manages\n\t\t\t\t\t\t\tto infect";
-    			t70 = space();
-    			span14 = element("span");
     			t71 = text(t71_value);
-    			t72 = text("%");
-    			t73 = space();
-    			span15 = element("span");
-    			span15.textContent = "of population.";
+    			t72 = space();
+    			span14 = element("span");
+    			t73 = text(t73_value);
+    			t74 = text("%");
     			t75 = space();
+    			span15 = element("span");
+    			t76 = text(t76_value);
+    			t77 = space();
     			input3 = element("input");
-    			t76 = space();
+    			t78 = space();
     			div32 = element("div");
     			div31 = element("div");
     			label6 = element("label");
     			p6 = element("p");
-    			t77 = text("Infection rate until elimination\n\t\t\t\t\t\t");
-    			span16 = element("span");
-    			t78 = text(/*pctU*/ ctx[9]);
-    			t79 = text("%");
+    			t79 = text(t79_value);
     			t80 = space();
-    			div30 = element("div");
-    			div30.textContent = "Proportion of population that still gets infected even in the event\n\t\t\t\t\t\tof achieving complete elimination.\n\n\t\t\t\t\t\tNote: First increase the probability of elimination\n\t\t\t\t\t\tfor this parameter to take effect.";
-    			t82 = space();
-    			input4 = element("input");
+    			span16 = element("span");
+    			t81 = text(/*pctU*/ ctx[10]);
+    			t82 = text("%");
     			t83 = space();
+    			div30 = element("div");
+    			t84 = text(t84_value);
+    			t85 = space();
+    			input4 = element("input");
+    			t86 = space();
     			div34 = element("div");
     			div33 = element("div");
     			if (if_block7) if_block7.c();
-    			t84 = space();
-    			if (if_block8) if_block8.c();
-    			t85 = space();
-    			span17 = element("span");
-    			span17.textContent = "Export Hypothetical COVID-19 Scenarios in JSON format.";
     			t87 = space();
-    			if (if_block9) if_block9.c();
+    			if (if_block8) if_block8.c();
     			t88 = space();
+    			span17 = element("span");
+    			t89 = text(t89_value);
+    			t90 = space();
+    			if (if_block9) if_block9.c();
+    			t91 = space();
     			div39 = element("div");
     			div38 = element("div");
     			div37 = element("div");
     			div35 = element("div");
     			div35.textContent = "About";
-    			t90 = space();
+    			t93 = space();
     			p7 = element("p");
-    			p7.textContent = "At the time of writing, the impacts of Coronavirus disease of 2019 \n\t\t\t\t\t\tremain largely uncertain and depend on a whole range of possibilities.\n\n\t\t\t\t\t\tOrganizing the overwhelming mass of the available information in the media and literature, \n\t\t\t\t\t\tcoming up with a reasonable working estimates and comparing multiple scenarios can be challenging, \n\t\t\t\t\t\tespecially to the non-expert such as myself.\n\n\t\t\t\t\t\tAs an attempt to address this problem I used publicly available data and published information \n\t\t\t\t\t\tto create this international tool that allows users to derive their own country-specific estimates.";
-    			t92 = space();
+    			p7.textContent = "At the time of writing, the impacts of COVID-2019 \n\t\t\t\t\t\tremain largely uncertain and depend on a whole range of possibilities.\n\n\t\t\t\t\t\tOrganizing the overwhelming mass of the available information in the media and literature, \n\t\t\t\t\t\tcoming up with a reasonable working estimates and comparing multiple scenarios can be challenging.\n\n\t\t\t\t\t\tAs an attempt to address this problem I used publicly available data and published information \n\t\t\t\t\t\tto create this international tool that allows users to derive their own country-specific estimates.";
+    			t95 = space();
     			p8 = element("p");
-    			t93 = text("Please send me feedback:\n\t\t\t\t\t\there (TODO: link to the Twitter post) \n\t\t\t\t\t\t\n\t\t\t\t\t\tor email me:\n\t\t\t\t\t\t");
+    			t96 = text("Please send me feedback:\n\t\t\t\t\t\there (TODO: link to the Twitter post) \n\t\t\t\t\t\t\n\t\t\t\t\t\tor email me:\n\t\t\t\t\t\t");
     			a3 = element("a");
     			a3.textContent = "here";
-    			t95 = text(".");
-    			t96 = space();
+    			t98 = text(".");
+    			t99 = space();
     			p9 = element("p");
-    			t97 = text("For technical details please refer to:\n\t\t\t\t\t\t");
+    			t100 = text("For technical details please refer to:\n\t\t\t\t\t\t");
     			a4 = element("a");
     			a4.textContent = "notes";
-    			t99 = text("\n\t\t\t\t\t\t\n\t\t\t\t\t\tor the:\n\t\t\t\t\t\t");
+    			t102 = text("\n\t\t\t\t\t\t\n\t\t\t\t\t\tor the:\n\t\t\t\t\t\t");
     			a5 = element("a");
     			a5.textContent = "source code";
-    			t101 = text(".");
-    			t102 = space();
+    			t104 = text(".");
+    			t105 = space();
     			div36 = element("div");
     			div36.textContent = "Acknowledgements";
-    			t104 = space();
+    			t107 = space();
     			p10 = element("p");
     			p10.textContent = "Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.";
     			attr_dev(h3, "class", "title svelte-1havf7j");
-    			add_location(h3, file$a, 558, 4, 19867);
+    			add_location(h3, file$a, 600, 4, 21153);
     			attr_dev(h6, "class", "parameter-text svelte-1havf7j");
-    			add_location(h6, file$a, 559, 4, 19923);
+    			add_location(h6, file$a, 601, 4, 21209);
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 557, 3, 19841);
+    			add_location(div0, file$a, 599, 3, 21127);
     			attr_dev(div1, "class", "eight columns title svelte-1havf7j");
-    			add_location(div1, file$a, 556, 2, 19804);
+    			add_location(div1, file$a, 598, 2, 21090);
     			attr_dev(a0, "href", "#zh");
     			attr_dev(a0, "class", "lang-link svelte-1havf7j");
-    			add_location(a0, file$a, 564, 4, 20064);
+    			add_location(a0, file$a, 606, 4, 21350);
     			attr_dev(a1, "href", "#es");
     			attr_dev(a1, "class", "lang-link svelte-1havf7j");
-    			add_location(a1, file$a, 567, 4, 20160);
+    			add_location(a1, file$a, 609, 4, 21446);
     			attr_dev(a2, "href", "#en");
     			attr_dev(a2, "class", "lang-link svelte-1havf7j");
-    			add_location(a2, file$a, 570, 4, 20262);
+    			add_location(a2, file$a, 612, 4, 21548);
     			attr_dev(div2, "class", "child svelte-1havf7j");
-    			add_location(div2, file$a, 563, 3, 20040);
+    			add_location(div2, file$a, 605, 3, 21326);
     			attr_dev(div3, "class", "four columns title svelte-1havf7j");
-    			add_location(div3, file$a, 562, 2, 20004);
+    			add_location(div3, file$a, 604, 2, 21290);
     			attr_dev(div4, "class", "row svelte-1havf7j");
-    			add_location(div4, file$a, 555, 1, 19784);
+    			add_location(div4, file$a, 597, 1, 21070);
     			attr_dev(p0, "class", "parameter-title svelte-1havf7j");
     			set_style(p0, "text-align", "left");
-    			add_location(p0, file$a, 582, 5, 20494);
+    			add_location(p0, file$a, 624, 5, 21780);
     			attr_dev(div5, "class", "parameter-text svelte-1havf7j");
-    			add_location(div5, file$a, 586, 5, 20608);
-    			add_location(label0, file$a, 581, 4, 20481);
+    			add_location(div5, file$a, 628, 5, 21894);
+    			add_location(label0, file$a, 623, 4, 21767);
     			attr_dev(span0, "class", "parameter-text svelte-1havf7j");
-    			add_location(span0, file$a, 590, 4, 20711);
+    			add_location(span0, file$a, 632, 4, 21997);
     			attr_dev(div6, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div6, file$a, 580, 3, 20439);
+    			add_location(div6, file$a, 622, 3, 21725);
     			attr_dev(div7, "class", "four columns");
-    			add_location(div7, file$a, 579, 2, 20409);
+    			add_location(div7, file$a, 621, 2, 21695);
     			attr_dev(span1, "class", "parameter svelte-1havf7j");
     			set_style(span1, "float", "right");
-    			add_location(span1, file$a, 607, 8, 21101);
+    			add_location(span1, file$a, 649, 8, 22387);
     			attr_dev(p1, "class", "parameter-title svelte-1havf7j");
     			set_style(p1, "text-align", "left");
-    			add_location(p1, file$a, 604, 5, 20994);
+    			add_location(p1, file$a, 646, 5, 22280);
     			attr_dev(div8, "class", "parameter-text svelte-1havf7j");
-    			add_location(div8, file$a, 609, 5, 21176);
-    			add_location(label1, file$a, 603, 4, 20981);
+    			add_location(div8, file$a, 651, 5, 22462);
+    			add_location(label1, file$a, 645, 4, 22267);
     			attr_dev(input0, "class", "pointer u-full-width svelte-1havf7j");
     			attr_dev(input0, "type", "range");
     			attr_dev(input0, "min", "1");
     			attr_dev(input0, "max", "99");
-    			add_location(input0, file$a, 613, 4, 21284);
+    			add_location(input0, file$a, 655, 4, 22570);
     			attr_dev(div9, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div9, file$a, 601, 3, 20938);
+    			add_location(div9, file$a, 643, 3, 22224);
     			attr_dev(div10, "class", "four columns");
-    			add_location(div10, file$a, 600, 2, 20908);
+    			add_location(div10, file$a, 642, 2, 22194);
     			attr_dev(span2, "class", "parameter svelte-1havf7j");
     			set_style(span2, "float", "right");
-    			add_location(span2, file$a, 626, 6, 21616);
+    			add_location(span2, file$a, 668, 6, 22902);
     			attr_dev(p2, "class", "parameter-title svelte-1havf7j");
     			set_style(p2, "text-align", "left");
-    			add_location(p2, file$a, 623, 5, 21506);
+    			add_location(p2, file$a, 665, 5, 22792);
     			attr_dev(div11, "class", "parameter-text svelte-1havf7j");
-    			add_location(div11, file$a, 628, 5, 21698);
-    			add_location(label2, file$a, 622, 4, 21493);
+    			add_location(div11, file$a, 670, 5, 22984);
+    			add_location(label2, file$a, 664, 4, 22779);
     			attr_dev(input1, "class", "pointer u-full-width svelte-1havf7j");
     			attr_dev(input1, "type", "range");
-    			attr_dev(input1, "min", /*lowerBound*/ ctx[37]);
-    			attr_dev(input1, "max", /*upperBound*/ ctx[38]);
-    			add_location(input1, file$a, 633, 4, 21800);
+    			attr_dev(input1, "min", /*lowerBound*/ ctx[53]);
+    			attr_dev(input1, "max", /*upperBound*/ ctx[54]);
+    			add_location(input1, file$a, 675, 4, 23086);
     			attr_dev(span3, "class", "parameter-text svelte-1havf7j");
-    			add_location(span3, file$a, 640, 4, 21942);
+    			add_location(span3, file$a, 682, 4, 23228);
     			attr_dev(span4, "class", "parameter svelte-1havf7j");
-    			add_location(span4, file$a, 643, 4, 22029);
+    			add_location(span4, file$a, 685, 4, 23315);
     			attr_dev(span5, "class", "parameter-text svelte-1havf7j");
-    			add_location(span5, file$a, 644, 4, 22080);
+    			add_location(span5, file$a, 686, 4, 23366);
     			attr_dev(div12, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div12, file$a, 621, 3, 21451);
+    			add_location(div12, file$a, 663, 3, 22737);
     			attr_dev(div13, "class", "four columns");
-    			add_location(div13, file$a, 620, 2, 21421);
+    			add_location(div13, file$a, 662, 2, 22707);
     			attr_dev(div14, "class", "row svelte-1havf7j");
-    			add_location(div14, file$a, 577, 1, 20388);
+    			add_location(div14, file$a, 619, 1, 21674);
     			attr_dev(div15, "class", "twelve columns");
-    			add_location(div15, file$a, 653, 2, 22224);
+    			add_location(div15, file$a, 695, 2, 23510);
     			attr_dev(div16, "class", "row svelte-1havf7j");
-    			add_location(div16, file$a, 652, 1, 22204);
+    			add_location(div16, file$a, 694, 1, 23490);
     			attr_dev(p3, "class", "parameter-title svelte-1havf7j");
     			set_style(p3, "text-align", "left");
-    			add_location(p3, file$a, 1200, 5, 42047);
+    			add_location(p3, file$a, 1243, 5, 43296);
     			attr_dev(div17, "class", "parameter-text svelte-1havf7j");
-    			add_location(div17, file$a, 1204, 5, 42142);
-    			add_location(label3, file$a, 1199, 4, 42034);
+    			add_location(div17, file$a, 1247, 5, 43409);
+    			add_location(label3, file$a, 1242, 4, 43283);
     			attr_dev(span6, "class", "parameter-text svelte-1havf7j");
-    			add_location(span6, file$a, 1210, 4, 42383);
+    			add_location(span6, file$a, 1251, 4, 43517);
     			attr_dev(span7, "class", "parameter-text svelte-1havf7j");
-    			add_location(span7, file$a, 1217, 4, 42574);
+    			add_location(span7, file$a, 1258, 4, 43708);
     			attr_dev(div18, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div18, file$a, 1197, 3, 41991);
+    			add_location(div18, file$a, 1240, 3, 43240);
     			attr_dev(div19, "class", "four columns");
-    			add_location(div19, file$a, 1196, 2, 41961);
+    			add_location(div19, file$a, 1239, 2, 43210);
     			attr_dev(span8, "class", "parameter svelte-1havf7j");
     			set_style(span8, "float", "right");
-    			add_location(span8, file$a, 1228, 6, 42823);
+    			add_location(span8, file$a, 1269, 6, 43955);
     			attr_dev(p4, "class", "parameter-title svelte-1havf7j");
     			set_style(p4, "text-align", "left");
-    			add_location(p4, file$a, 1225, 5, 42723);
+    			add_location(p4, file$a, 1266, 5, 43857);
     			attr_dev(span9, "class", "parameter-text svelte-1havf7j");
-    			add_location(span9, file$a, 1231, 7, 42941);
+    			add_location(span9, file$a, 1272, 7, 44073);
     			attr_dev(span10, "class", "parameter-text svelte-1havf7j");
-    			add_location(span10, file$a, 1235, 7, 43107);
+    			add_location(span10, file$a, 1275, 7, 44172);
     			attr_dev(div20, "class", "parameter-text svelte-1havf7j");
-    			add_location(div20, file$a, 1230, 5, 42905);
-    			add_location(label4, file$a, 1224, 4, 42710);
+    			add_location(div20, file$a, 1271, 5, 44037);
+    			add_location(label4, file$a, 1265, 4, 43844);
     			attr_dev(input2, "class", "u-full-width");
     			attr_dev(input2, "type", "range");
     			attr_dev(input2, "min", "-100");
     			attr_dev(input2, "max", "100");
-    			add_location(input2, file$a, 1241, 4, 43282);
+    			add_location(input2, file$a, 1280, 4, 44298);
     			attr_dev(div21, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div21, file$a, 1223, 3, 42668);
+    			add_location(div21, file$a, 1264, 3, 43802);
     			attr_dev(div22, "class", "four columns");
-    			add_location(div22, file$a, 1222, 2, 42638);
+    			add_location(div22, file$a, 1263, 2, 43772);
     			attr_dev(button, "class", "button svelte-1havf7j");
-    			add_location(button, file$a, 1248, 5, 43495);
+    			add_location(button, file$a, 1287, 5, 44511);
     			attr_dev(div23, "class", "button-class");
-    			add_location(div23, file$a, 1247, 4, 43463);
+    			add_location(div23, file$a, 1286, 4, 44479);
     			attr_dev(span11, "class", "parameter-text svelte-1havf7j");
-    			add_location(span11, file$a, 1251, 4, 43600);
+    			add_location(span11, file$a, 1290, 4, 44616);
     			attr_dev(div24, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div24, file$a, 1246, 3, 43421);
+    			add_location(div24, file$a, 1285, 3, 44437);
     			attr_dev(div25, "class", "four columns");
-    			add_location(div25, file$a, 1245, 2, 43391);
+    			add_location(div25, file$a, 1284, 2, 44407);
     			attr_dev(div26, "class", "row svelte-1havf7j");
-    			add_location(div26, file$a, 1195, 1, 41941);
+    			add_location(div26, file$a, 1238, 1, 43190);
     			attr_dev(span12, "class", "parameter svelte-1havf7j");
     			set_style(span12, "float", "right");
-    			add_location(span12, file$a, 1265, 6, 43943);
+    			add_location(span12, file$a, 1304, 6, 44935);
     			attr_dev(p5, "class", "parameter-title svelte-1havf7j");
     			set_style(p5, "text-align", "left");
-    			add_location(p5, file$a, 1262, 5, 43836);
+    			add_location(p5, file$a, 1301, 5, 44833);
     			attr_dev(span13, "class", "parameter-text svelte-1havf7j");
-    			add_location(span13, file$a, 1268, 6, 44063);
+    			add_location(span13, file$a, 1307, 6, 45055);
     			attr_dev(span14, "class", "parameter svelte-1havf7j");
-    			add_location(span14, file$a, 1272, 6, 44221);
+    			add_location(span14, file$a, 1310, 6, 45155);
     			attr_dev(span15, "class", "parameter-text svelte-1havf7j");
-    			add_location(span15, file$a, 1275, 6, 44293);
+    			add_location(span15, file$a, 1313, 6, 45227);
     			attr_dev(div27, "class", "parameter-text svelte-1havf7j");
-    			add_location(div27, file$a, 1267, 5, 44028);
-    			add_location(label5, file$a, 1261, 4, 43823);
+    			add_location(div27, file$a, 1306, 5, 45020);
+    			add_location(label5, file$a, 1300, 4, 44820);
     			attr_dev(input3, "class", "pointer u-full-width svelte-1havf7j");
     			attr_dev(input3, "type", "range");
     			attr_dev(input3, "min", "0");
     			attr_dev(input3, "max", "100");
-    			add_location(input3, file$a, 1280, 4, 44388);
+    			add_location(input3, file$a, 1318, 4, 45350);
     			attr_dev(div28, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div28, file$a, 1260, 3, 43781);
+    			add_location(div28, file$a, 1299, 3, 44778);
     			attr_dev(div29, "class", "four columns");
-    			add_location(div29, file$a, 1259, 2, 43751);
+    			add_location(div29, file$a, 1298, 2, 44748);
     			attr_dev(span16, "class", "parameter svelte-1havf7j");
     			set_style(span16, "float", "right");
-    			add_location(span16, file$a, 1290, 6, 44695);
+    			add_location(span16, file$a, 1328, 6, 45659);
     			attr_dev(p6, "class", "parameter-title svelte-1havf7j");
     			set_style(p6, "text-align", "left");
-    			add_location(p6, file$a, 1287, 5, 44591);
+    			add_location(p6, file$a, 1325, 5, 45553);
     			attr_dev(div30, "class", "parameter-text svelte-1havf7j");
-    			add_location(div30, file$a, 1292, 5, 44770);
-    			add_location(label6, file$a, 1286, 4, 44578);
+    			add_location(div30, file$a, 1330, 5, 45734);
+    			add_location(label6, file$a, 1324, 4, 45540);
     			attr_dev(input4, "class", "pointer u-full-width svelte-1havf7j");
     			attr_dev(input4, "type", "range");
     			attr_dev(input4, "min", input4_min_value = 0);
-    			attr_dev(input4, "max", /*pctH*/ ctx[7]);
-    			add_location(input4, file$a, 1300, 4, 45043);
+    			attr_dev(input4, "max", /*pctH*/ ctx[8]);
+    			add_location(input4, file$a, 1334, 4, 45844);
     			attr_dev(div31, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div31, file$a, 1285, 3, 44536);
+    			add_location(div31, file$a, 1323, 3, 45498);
     			attr_dev(div32, "class", "four columns");
-    			add_location(div32, file$a, 1284, 2, 44506);
+    			add_location(div32, file$a, 1322, 2, 45468);
     			attr_dev(span17, "class", "parameter-text svelte-1havf7j");
-    			add_location(span17, file$a, 1320, 4, 45629);
+    			add_location(span17, file$a, 1352, 4, 46348);
     			attr_dev(div33, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div33, file$a, 1309, 3, 45319);
+    			add_location(div33, file$a, 1339, 3, 45987);
     			attr_dev(div34, "class", "four columns");
-    			add_location(div34, file$a, 1308, 2, 45289);
+    			add_location(div34, file$a, 1338, 2, 45957);
     			attr_dev(div35, "class", "wtitle svelte-1havf7j");
-    			add_location(div35, file$a, 1336, 5, 46059);
-    			add_location(p7, file$a, 1337, 5, 46096);
+    			add_location(div35, file$a, 1368, 5, 46761);
+    			add_location(p7, file$a, 1369, 5, 46798);
     			attr_dev(a3, "href", "mailto:marko.lalovic@yahoo.com?Subject=COVID%20analyzer");
     			attr_dev(a3, "target", "_top");
-    			add_location(a3, file$a, 1353, 6, 46843);
-    			add_location(p8, file$a, 1348, 5, 46731);
+    			add_location(a3, file$a, 1384, 6, 47476);
+    			add_location(p8, file$a, 1379, 5, 47364);
     			attr_dev(a4, "href", "notes.html");
-    			add_location(a4, file$a, 1357, 6, 47003);
+    			add_location(a4, file$a, 1388, 6, 47636);
     			attr_dev(a5, "href", "https://github.com/markolalovic/covid-calc");
-    			add_location(a5, file$a, 1360, 6, 47061);
-    			add_location(p9, file$a, 1355, 5, 46948);
+    			add_location(a5, file$a, 1391, 6, 47694);
+    			add_location(p9, file$a, 1386, 5, 47581);
     			attr_dev(div36, "class", "wtitle svelte-1havf7j");
-    			add_location(div36, file$a, 1363, 5, 47147);
-    			add_location(p10, file$a, 1364, 5, 47195);
+    			add_location(div36, file$a, 1394, 5, 47780);
+    			add_location(p10, file$a, 1395, 5, 47828);
     			attr_dev(div37, "class", "child parameter-text svelte-1havf7j");
-    			add_location(div37, file$a, 1335, 4, 46018);
+    			add_location(div37, file$a, 1367, 4, 46720);
     			attr_dev(div38, "class", "twelve columns");
-    			add_location(div38, file$a, 1334, 3, 45985);
+    			add_location(div38, file$a, 1366, 3, 46687);
     			attr_dev(div39, "class", "row svelte-1havf7j");
-    			add_location(div39, file$a, 1333, 2, 45964);
+    			add_location(div39, file$a, 1365, 2, 46666);
     			attr_dev(div40, "class", "row svelte-1havf7j");
-    			add_location(div40, file$a, 1258, 1, 43731);
+    			add_location(div40, file$a, 1297, 1, 44728);
     			attr_dev(main, "class", "container");
-    			add_location(main, file$a, 553, 0, 19757);
+    			add_location(main, file$a, 595, 0, 21043);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -15163,7 +15521,7 @@ var app = (function () {
     			append_dev(div8, t20);
     			append_dev(div9, t21);
     			append_dev(div9, input0);
-    			set_input_value(input0, /*pctH*/ ctx[7]);
+    			set_input_value(input0, /*pctH*/ ctx[8]);
     			append_dev(div14, t22);
     			append_dev(div14, div13);
     			append_dev(div13, div12);
@@ -15179,7 +15537,7 @@ var app = (function () {
     			append_dev(div11, t28);
     			append_dev(div12, t29);
     			append_dev(div12, input1);
-    			set_input_value(input1, /*pctH_60plus*/ ctx[29]);
+    			set_input_value(input1, /*pctH_60plus*/ ctx[44]);
     			append_dev(div12, t30);
     			append_dev(div12, span3);
     			append_dev(span3, t31);
@@ -15214,8 +15572,10 @@ var app = (function () {
     			append_dev(div19, div18);
     			append_dev(div18, label3);
     			append_dev(label3, p3);
+    			append_dev(p3, t46);
     			append_dev(label3, t47);
     			append_dev(label3, div17);
+    			append_dev(div17, t48);
     			append_dev(div18, t49);
     			append_dev(div18, span6);
     			mount_component(autocomplete1, span6, null);
@@ -15227,93 +15587,103 @@ var app = (function () {
     			append_dev(div21, label4);
     			append_dev(label4, p4);
     			append_dev(p4, t52);
+    			append_dev(p4, t53);
     			append_dev(p4, span8);
-    			append_dev(span8, t53);
     			append_dev(span8, t54);
-    			append_dev(label4, t55);
+    			append_dev(span8, t55);
+    			append_dev(label4, t56);
     			append_dev(label4, div20);
     			append_dev(div20, span9);
-    			append_dev(div20, t57);
+    			append_dev(span9, t57);
+    			append_dev(div20, t58);
     			append_dev(div20, span10);
-    			append_dev(div21, t59);
+    			append_dev(span10, t59);
+    			append_dev(div21, t60);
     			append_dev(div21, input2);
-    			set_input_value(input2, /*pctOfChange*/ ctx[6]);
-    			append_dev(div26, t60);
+    			set_input_value(input2, /*pctOfChange*/ ctx[7]);
+    			append_dev(div26, t61);
     			append_dev(div26, div25);
     			append_dev(div25, div24);
     			append_dev(div24, div23);
     			append_dev(div23, button);
-    			append_dev(button, t61);
-    			append_dev(div24, t62);
+    			append_dev(button, t62);
+    			append_dev(div24, t63);
     			append_dev(div24, span11);
-    			append_dev(main, t64);
+    			append_dev(span11, t64);
+    			append_dev(main, t65);
     			append_dev(main, div40);
     			append_dev(div40, div29);
     			append_dev(div29, div28);
     			append_dev(div28, label5);
     			append_dev(label5, p5);
-    			append_dev(p5, t65);
+    			append_dev(p5, t66);
+    			append_dev(p5, t67);
     			append_dev(p5, span12);
-    			append_dev(span12, t66);
-    			append_dev(span12, t67);
-    			append_dev(label5, t68);
+    			append_dev(span12, t68);
+    			append_dev(span12, t69);
+    			append_dev(label5, t70);
     			append_dev(label5, div27);
     			append_dev(div27, span13);
-    			append_dev(div27, t70);
+    			append_dev(span13, t71);
+    			append_dev(div27, t72);
     			append_dev(div27, span14);
-    			append_dev(span14, t71);
-    			append_dev(span14, t72);
-    			append_dev(div27, t73);
+    			append_dev(span14, t73);
+    			append_dev(span14, t74);
+    			append_dev(div27, t75);
     			append_dev(div27, span15);
-    			append_dev(div28, t75);
+    			append_dev(span15, t76);
+    			append_dev(div28, t77);
     			append_dev(div28, input3);
-    			set_input_value(input3, /*prElimTimes100*/ ctx[8]);
-    			append_dev(div40, t76);
+    			set_input_value(input3, /*prElimTimes100*/ ctx[9]);
+    			append_dev(div40, t78);
     			append_dev(div40, div32);
     			append_dev(div32, div31);
     			append_dev(div31, label6);
     			append_dev(label6, p6);
-    			append_dev(p6, t77);
+    			append_dev(p6, t79);
+    			append_dev(p6, t80);
     			append_dev(p6, span16);
-    			append_dev(span16, t78);
-    			append_dev(span16, t79);
-    			append_dev(label6, t80);
+    			append_dev(span16, t81);
+    			append_dev(span16, t82);
+    			append_dev(label6, t83);
     			append_dev(label6, div30);
-    			append_dev(div31, t82);
+    			append_dev(div30, t84);
+    			append_dev(div31, t85);
     			append_dev(div31, input4);
-    			set_input_value(input4, /*pctU*/ ctx[9]);
-    			append_dev(div40, t83);
+    			set_input_value(input4, /*pctU*/ ctx[10]);
+    			append_dev(div40, t86);
     			append_dev(div40, div34);
     			append_dev(div34, div33);
     			if (if_block7) if_block7.m(div33, null);
-    			append_dev(div33, t84);
+    			append_dev(div33, t87);
     			if (if_block8) if_block8.m(div33, null);
-    			append_dev(div33, t85);
+    			append_dev(div33, t88);
     			append_dev(div33, span17);
-    			append_dev(div40, t87);
+    			append_dev(span17, t89);
+    			append_dev(div40, t90);
     			if (if_block9) if_block9.m(div40, null);
-    			append_dev(div40, t88);
+    			append_dev(div40, t91);
     			append_dev(div40, div39);
     			append_dev(div39, div38);
     			append_dev(div38, div37);
     			append_dev(div37, div35);
-    			append_dev(div37, t90);
+    			append_dev(div37, t93);
     			append_dev(div37, p7);
-    			append_dev(div37, t92);
+    			append_dev(div37, t95);
     			append_dev(div37, p8);
-    			append_dev(p8, t93);
+    			append_dev(p8, t96);
     			append_dev(p8, a3);
-    			append_dev(p8, t95);
-    			append_dev(div37, t96);
+    			append_dev(p8, t98);
+    			append_dev(div37, t99);
     			append_dev(div37, p9);
-    			append_dev(p9, t97);
+    			append_dev(p9, t100);
     			append_dev(p9, a4);
-    			append_dev(p9, t99);
+    			append_dev(p9, t102);
     			append_dev(p9, a5);
-    			append_dev(p9, t101);
-    			append_dev(div37, t102);
+    			append_dev(p9, t104);
+    			append_dev(div37, t105);
     			append_dev(div37, div36);
-    			append_dev(div37, t104);
+    			append_dev(div37, t107);
     			append_dev(div37, p10);
     			current = true;
     			if (remount) run_all(dispose);
@@ -15324,12 +15694,12 @@ var app = (function () {
     				listen_dev(a2, "click", /*click_handler_2*/ ctx[123], false, false, false),
     				listen_dev(input0, "change", /*input0_change_input_handler*/ ctx[125]),
     				listen_dev(input0, "input", /*input0_change_input_handler*/ ctx[125]),
-    				listen_dev(input0, "click", /*keepUpWithH*/ ctx[41], false, false, false),
+    				listen_dev(input0, "click", /*keepUpWithH*/ ctx[57], false, false, false),
     				listen_dev(input1, "change", /*input1_change_input_handler*/ ctx[126]),
     				listen_dev(input1, "input", /*input1_change_input_handler*/ ctx[126]),
     				listen_dev(input2, "change", /*input2_change_input_handler*/ ctx[133]),
     				listen_dev(input2, "input", /*input2_change_input_handler*/ ctx[133]),
-    				listen_dev(button, "click", /*resetParameters*/ ctx[40], false, false, false),
+    				listen_dev(button, "click", /*resetParameters*/ ctx[56], false, false, false),
     				listen_dev(input3, "change", /*input3_change_input_handler*/ ctx[134]),
     				listen_dev(input3, "input", /*input3_change_input_handler*/ ctx[134]),
     				listen_dev(input4, "change", /*input4_change_input_handler*/ ctx[135]),
@@ -15337,48 +15707,49 @@ var app = (function () {
     			];
     		},
     		p: function update(ctx, dirty) {
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t0_value !== (t0_value = /*translations*/ ctx[30].app.mainTitle + "")) set_data_dev(t0, t0_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t2_value !== (t2_value = /*translations*/ ctx[30].app.subtitle + "")) set_data_dev(t2, t2_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t10_value !== (t10_value = /*translations*/ ctx[30].app.selectLocation + "")) set_data_dev(t10, t10_value);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t12_value !== (t12_value = /*translations*/ ctx[30].app.locationDescription + "")) set_data_dev(t12, t12_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t0_value !== (t0_value = /*translations*/ ctx[45].app.mainTitle + "")) set_data_dev(t0, t0_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t2_value !== (t2_value = /*translations*/ ctx[45].app.subtitle + "")) set_data_dev(t2, t2_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t10_value !== (t10_value = /*translations*/ ctx[45].app.selectLocation + "")) set_data_dev(t10, t10_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t12_value !== (t12_value = /*translations*/ ctx[45].app.locationDescription + "")) set_data_dev(t12, t12_value);
     			const autocomplete0_changes = {};
-    			if (dirty[0] & /*translations*/ 1073741824) autocomplete0_changes.items = /*translations*/ ctx[30].countries;
+    			if (dirty[1] & /*translations*/ 16384) autocomplete0_changes.items = /*translations*/ ctx[45].countries;
 
-    			if (!updating_selectedItem && dirty[0] & /*selectedObject*/ 16) {
+    			if (!updating_selectedItem && dirty[0] & /*selectedObject*/ 32) {
     				updating_selectedItem = true;
-    				autocomplete0_changes.selectedItem = /*selectedObject*/ ctx[4];
+    				autocomplete0_changes.selectedItem = /*selectedObject*/ ctx[5];
     				add_flush_callback(() => updating_selectedItem = false);
     			}
 
     			autocomplete0.$set(autocomplete0_changes);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t15_value !== (t15_value = /*translations*/ ctx[30].app.infectionRate + "")) set_data_dev(t15, t15_value);
-    			if (!current || dirty[0] & /*pctH*/ 128) set_data_dev(t17, /*pctH*/ ctx[7]);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t20_value !== (t20_value = /*translations*/ ctx[30].app.infectionRateDescription + "")) set_data_dev(t20, t20_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t15_value !== (t15_value = /*translations*/ ctx[45].app.infectionRate + "")) set_data_dev(t15, t15_value);
+    			if (!current || dirty[0] & /*pctH*/ 256) set_data_dev(t17, /*pctH*/ ctx[8]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t20_value !== (t20_value = /*translations*/ ctx[45].app.infectionRateDescription + "")) set_data_dev(t20, t20_value);
 
-    			if (dirty[0] & /*pctH*/ 128) {
-    				set_input_value(input0, /*pctH*/ ctx[7]);
+    			if (dirty[0] & /*pctH*/ 256) {
+    				set_input_value(input0, /*pctH*/ ctx[8]);
     			}
 
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t23_value !== (t23_value = /*translations*/ ctx[30].app.over60InfectionRate + "")) set_data_dev(t23, t23_value);
-    			if (!current || dirty[0] & /*pctH_60plus*/ 536870912) set_data_dev(t25, /*pctH_60plus*/ ctx[29]);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t28_value !== (t28_value = /*translations*/ ctx[30].app.over60Description + "")) set_data_dev(t28, t28_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t23_value !== (t23_value = /*translations*/ ctx[45].app.over60InfectionRate + "")) set_data_dev(t23, t23_value);
+    			if (!current || dirty[1] & /*pctH_60plus*/ 8192) set_data_dev(t25, /*pctH_60plus*/ ctx[44]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t28_value !== (t28_value = /*translations*/ ctx[45].app.over60Description + "")) set_data_dev(t28, t28_value);
 
-    			if (!current || dirty[1] & /*lowerBound*/ 64) {
-    				attr_dev(input1, "min", /*lowerBound*/ ctx[37]);
+    			if (!current || dirty[1] & /*lowerBound*/ 4194304) {
+    				attr_dev(input1, "min", /*lowerBound*/ ctx[53]);
     			}
 
-    			if (!current || dirty[1] & /*upperBound*/ 128) {
-    				attr_dev(input1, "max", /*upperBound*/ ctx[38]);
+    			if (!current || dirty[1] & /*upperBound*/ 8388608) {
+    				attr_dev(input1, "max", /*upperBound*/ ctx[54]);
     			}
 
-    			if (dirty[0] & /*pctH_60plus*/ 536870912) {
-    				set_input_value(input1, /*pctH_60plus*/ ctx[29]);
+    			if (dirty[1] & /*pctH_60plus*/ 8192) {
+    				set_input_value(input1, /*pctH_60plus*/ ctx[44]);
     			}
 
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t31_value !== (t31_value = /*translations*/ ctx[30].app.proportionIsThen + "")) set_data_dev(t31, t31_value);
-    			if (!current || dirty[1] & /*pctH_below60*/ 2) set_data_dev(t33, /*pctH_below60*/ ctx[32]);
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t36_value !== (t36_value = /*translations*/ ctx[30].app.proportionIsThenDescription + "")) set_data_dev(t36, t36_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t31_value !== (t31_value = /*translations*/ ctx[45].app.proportionIsThen + "")) set_data_dev(t31, t31_value);
+    			if (!current || dirty[1] & /*pctH_below60*/ 65536) set_data_dev(t33, /*pctH_below60*/ ctx[47]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t36_value !== (t36_value = /*translations*/ ctx[45].app.proportionIsThenDescription + "")) set_data_dev(t36, t36_value);
     			const tabs_changes = {};
+    			if (dirty[1] & /*tabItems*/ 2097152) tabs_changes.items = /*tabItems*/ ctx[52];
 
     			if (!updating_activeTabValue && dirty[0] & /*currentTab*/ 1) {
     				updating_activeTabValue = true;
@@ -15549,38 +15920,49 @@ var app = (function () {
     				check_outros();
     			}
 
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t46_value !== (t46_value = /*translations*/ ctx[45].app.fatalityRates + "")) set_data_dev(t46, t46_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t48_value !== (t48_value = /*translations*/ ctx[45].app.fatalityRatesDescription + "")) set_data_dev(t48, t48_value);
     			const autocomplete1_changes = {};
-    			if (dirty[0] & /*translations*/ 1073741824) autocomplete1_changes.items = /*translations*/ ctx[30].fatalityRisks;
+    			if (dirty[1] & /*translations*/ 16384) autocomplete1_changes.items = /*translations*/ ctx[45].fatalityRisks;
 
-    			if (!updating_selectedItem_1 && dirty[0] & /*selectedSourceObject*/ 32) {
+    			if (!updating_selectedItem_1 && dirty[0] & /*selectedSourceObject*/ 64) {
     				updating_selectedItem_1 = true;
-    				autocomplete1_changes.selectedItem = /*selectedSourceObject*/ ctx[5];
+    				autocomplete1_changes.selectedItem = /*selectedSourceObject*/ ctx[6];
     				add_flush_callback(() => updating_selectedItem_1 = false);
     			}
 
     			autocomplete1.$set(autocomplete1_changes);
-    			if (!current || dirty[0] & /*pctOfChange*/ 64) set_data_dev(t53, /*pctOfChange*/ ctx[6]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t52_value !== (t52_value = /*translations*/ ctx[45].app.varyFRs + "")) set_data_dev(t52, t52_value);
+    			if (!current || dirty[0] & /*pctOfChange*/ 128) set_data_dev(t54, /*pctOfChange*/ ctx[7]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t57_value !== (t57_value = /*translations*/ ctx[45].app.varyFRsDescription1 + "")) set_data_dev(t57, t57_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t59_value !== (t59_value = /*translations*/ ctx[45].app.varyFRsDescription2 + "")) set_data_dev(t59, t59_value);
 
-    			if (dirty[0] & /*pctOfChange*/ 64) {
-    				set_input_value(input2, /*pctOfChange*/ ctx[6]);
+    			if (dirty[0] & /*pctOfChange*/ 128) {
+    				set_input_value(input2, /*pctOfChange*/ ctx[7]);
     			}
 
-    			if ((!current || dirty[0] & /*translations*/ 1073741824) && t61_value !== (t61_value = /*translations*/ ctx[30].app.reset + "")) set_data_dev(t61, t61_value);
-    			if (!current || dirty[0] & /*prElimTimes100*/ 256) set_data_dev(t66, /*prElimTimes100*/ ctx[8]);
-    			if ((!current || dirty[0] & /*pctH*/ 128) && t71_value !== (t71_value = Math.round(/*pctH*/ ctx[7]) + "")) set_data_dev(t71, t71_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t62_value !== (t62_value = /*translations*/ ctx[45].app.reset + "")) set_data_dev(t62, t62_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t64_value !== (t64_value = /*translations*/ ctx[45].app.resetDescription + "")) set_data_dev(t64, t64_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t66_value !== (t66_value = /*translations*/ ctx[45].app.elimination + "")) set_data_dev(t66, t66_value);
+    			if (!current || dirty[0] & /*prElimTimes100*/ 512) set_data_dev(t68, /*prElimTimes100*/ ctx[9]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t71_value !== (t71_value = /*translations*/ ctx[45].app.eliminationDescription1 + "")) set_data_dev(t71, t71_value);
+    			if ((!current || dirty[0] & /*pctH*/ 256) && t73_value !== (t73_value = Math.round(/*pctH*/ ctx[8]) + "")) set_data_dev(t73, t73_value);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t76_value !== (t76_value = /*translations*/ ctx[45].app.eliminationDescription2 + "")) set_data_dev(t76, t76_value);
 
-    			if (dirty[0] & /*prElimTimes100*/ 256) {
-    				set_input_value(input3, /*prElimTimes100*/ ctx[8]);
+    			if (dirty[0] & /*prElimTimes100*/ 512) {
+    				set_input_value(input3, /*prElimTimes100*/ ctx[9]);
     			}
 
-    			if (!current || dirty[0] & /*pctU*/ 512) set_data_dev(t78, /*pctU*/ ctx[9]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t79_value !== (t79_value = /*translations*/ ctx[45].app.infectionUntil + "")) set_data_dev(t79, t79_value);
+    			if (!current || dirty[0] & /*pctU*/ 1024) set_data_dev(t81, /*pctU*/ ctx[10]);
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t84_value !== (t84_value = /*translations*/ ctx[45].app.infectionUntilDescription + "")) set_data_dev(t84, t84_value);
 
-    			if (!current || dirty[0] & /*pctH*/ 128) {
-    				attr_dev(input4, "max", /*pctH*/ ctx[7]);
+    			if (!current || dirty[0] & /*pctH*/ 256) {
+    				attr_dev(input4, "max", /*pctH*/ ctx[8]);
     			}
 
-    			if (dirty[0] & /*pctU*/ 512) {
-    				set_input_value(input4, /*pctU*/ ctx[9]);
+    			if (dirty[0] & /*pctU*/ 1024) {
+    				set_input_value(input4, /*pctU*/ ctx[10]);
     			}
 
     			if (/*userNeeds*/ ctx[1].exportData) {
@@ -15589,7 +15971,7 @@ var app = (function () {
     				} else {
     					if_block7 = create_if_block_2$1(ctx);
     					if_block7.c();
-    					if_block7.m(div33, t84);
+    					if_block7.m(div33, t87);
     				}
     			} else if (if_block7) {
     				if_block7.d(1);
@@ -15602,12 +15984,14 @@ var app = (function () {
     				} else {
     					if_block8 = create_if_block_1$2(ctx);
     					if_block8.c();
-    					if_block8.m(div33, t85);
+    					if_block8.m(div33, t88);
     				}
     			} else if (if_block8) {
     				if_block8.d(1);
     				if_block8 = null;
     			}
+
+    			if ((!current || dirty[1] & /*translations*/ 16384) && t89_value !== (t89_value = /*translations*/ ctx[45].app.exportDescription + "")) set_data_dev(t89, t89_value);
 
     			if (/*userNeeds*/ ctx[1].exportData) {
     				if (if_block9) {
@@ -15620,7 +16004,7 @@ var app = (function () {
     					if_block9 = create_if_block$4(ctx);
     					if_block9.c();
     					transition_in(if_block9, 1);
-    					if_block9.m(div40, t88);
+    					if_block9.m(div40, t91);
     				}
     			} else if (if_block9) {
     				group_outros();
@@ -15721,39 +16105,39 @@ var app = (function () {
     	let $chineseDictStore;
     	let $spanishDictStore;
     	validate_store(englishDictStore, "englishDictStore");
-    	component_subscribe($$self, englishDictStore, $$value => $$invalidate(87, $englishDictStore = $$value));
+    	component_subscribe($$self, englishDictStore, $$value => $$invalidate(88, $englishDictStore = $$value));
     	validate_store(chineseDictStore, "chineseDictStore");
-    	component_subscribe($$self, chineseDictStore, $$value => $$invalidate(88, $chineseDictStore = $$value));
+    	component_subscribe($$self, chineseDictStore, $$value => $$invalidate(89, $chineseDictStore = $$value));
     	validate_store(spanishDictStore, "spanishDictStore");
-    	component_subscribe($$self, spanishDictStore, $$value => $$invalidate(89, $spanishDictStore = $$value));
+    	component_subscribe($$self, spanishDictStore, $$value => $$invalidate(90, $spanishDictStore = $$value));
 
     	function resetParameters() {
-    		$$invalidate(7, pctH = 30); // proportion of infected case Pr(elimination) = 0
-    		$$invalidate(29, pctH_60plus = 30); // proportion of people over 60 infected
-    		$$invalidate(6, pctOfChange = 0); // proportion of increase or decrease fatality risks
-    		$$invalidate(8, prElimTimes100 = 0); // probability of elimination case Pr(elimination) = 1
-    		$$invalidate(9, pctU = 0); // proportion of infected until elimination
+    		$$invalidate(8, pctH = 30); // proportion of infected case Pr(elimination) = 0
+    		$$invalidate(44, pctH_60plus = 30); // proportion of people over 60 infected
+    		$$invalidate(7, pctOfChange = 0); // proportion of increase or decrease fatality risks
+    		$$invalidate(9, prElimTimes100 = 0); // probability of elimination case Pr(elimination) = 1
+    		$$invalidate(10, pctU = 0); // proportion of infected until elimination
     	}
 
     	function keepUpWithH() {
-    		$$invalidate(29, pctH_60plus = pctH); // so that H_below60 doesn't explode
+    		$$invalidate(44, pctH_60plus = pctH); // so that H_below60 doesn't explode
 
     		if (pctH < pctU) {
-    			$$invalidate(9, pctU = pctH);
+    			$$invalidate(10, pctU = pctH);
     		}
     	}
 
     	function changeLanguageTo(newLanguage) {
-    		$$invalidate(63, language = newLanguage);
+    		$$invalidate(4, language = newLanguage);
 
     		// change default location translation
-    		$$invalidate(4, selectedObject = {
+    		$$invalidate(5, selectedObject = {
     			id: 163,
     			name: translationMap[newLanguage].countries[163].name
     		}); // translations.countries[selectedId].name;
 
     		// change default source object translation
-    		$$invalidate(5, selectedSourceObject = {
+    		$$invalidate(6, selectedSourceObject = {
     			id: 0,
     			source: translationMap[newLanguage].fatalityRisks[0].source,
     			ftr: [0.002, 0.006, 0.03, 0.08, 0.15, 0.6, 2.2, 5.1, 9.3]
@@ -15781,23 +16165,12 @@ var app = (function () {
     			comments: "Scenario " + rowsOfScenarios.length.toString() + ": " + desc
     		};
 
-    		$$invalidate(24, rowsOfScenarios = rowsOfScenarios.concat(newScenario));
+    		$$invalidate(30, rowsOfScenarios = rowsOfScenarios.concat(newScenario));
     	}
 
     	let deleteScenario = id => {
-    		$$invalidate(24, rowsOfScenarios = rowsOfScenarios.filter(scn => scn.id !== id));
+    		$$invalidate(30, rowsOfScenarios = rowsOfScenarios.filter(scn => scn.id !== id));
     	};
-
-    	// tab items with labels and values
-    	let tabItems = [
-    		{ label: "Mortality by Age", value: 0 },
-    		{ label: "Estimates in Context", value: 1 },
-    		{ label: "Risks by Country", value: 2 },
-    		{ label: "Poverty Proj.", value: 3 },
-    		{ label: "Deaths Proj.", value: 4 },
-    		{ label: "Hyp. Scenarios", value: 5 },
-    		{ label: "Ex. Interpretations", value: 6 }
-    	];
 
     	let currentTab = 0; // current active tab
 
@@ -15863,18 +16236,7 @@ var app = (function () {
     	// expected years of life lost
     	let yearsLost = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    	let compareItems = [
-    		{ label: "Causes of Death", value: 0 },
-    		{
-    			label: "Causes of Years of Life Lost",
-    			value: 1
-    		},
-    		{
-    			label: "Risk Factors in Years of Life Lost",
-    			value: 2
-    		}
-    	];
-
+    	let compareItems = [{}, {}, {}];
     	let currentCompare = 0; // current active comparison item
 
     	// let COVID estimate be 'parameter' color and COVID until be 'until' color
@@ -15898,10 +16260,10 @@ var app = (function () {
     	let deathsData = [];
     	let infectedTitle = "";
     	let deathsTitle = "";
-    	let infectedTitleListName = "Age"; // TODO: translations.app.age
-    	let infectedTitleListNumber = "Infected"; // TODO: translations.app.infected
-    	let deathsTitleListName = "Age"; // TODO: translations.app.age
-    	let deathsTitleListNumber = "Deaths"; // TODO: translations.app.age
+    	let infectedTitleListName = "";
+    	let infectedTitleListNumber = "";
+    	let deathsTitleListName = "";
+    	let deathsTitleListNumber = "";
 
     	// projections component 
     	let projectionsTitle = "";
@@ -15918,35 +16280,7 @@ var app = (function () {
     */
     	// prepare example scenarios as a list of parameters, comments, id's ..
     	// make a reactive for loop to define $: rowsOfScenarios! the same as infected, deaths, ...
-    	let inputs = [
-    		{
-    			id: 0,
-    			pctH: 60,
-    			pctH_60plus: 60,
-    			pctOfChange: 0,
-    			prElim100: 0,
-    			pctU: 0,
-    			comments: "Scenario 0: Do nothing, as a baseline"
-    		},
-    		{
-    			id: 1,
-    			pctH: 60,
-    			pctH_60plus: 20,
-    			pctOfChange: 0,
-    			prElim100: 0,
-    			pctU: 0,
-    			comments: "Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost"
-    		},
-    		{
-    			id: 2,
-    			pctH: 60,
-    			pctH_60plus: 60,
-    			pctOfChange: 0,
-    			prElim100: 90,
-    			pctU: 10,
-    			comments: "Scenario 2: Elimination to 90%, consider also money saved"
-    		}
-    	];
+    	let inputs = [{}, {}, {}];
 
     	// initialize all the variables the reactive loop:
     	let pctH_below60Example = 0;
@@ -15966,38 +16300,15 @@ var app = (function () {
     	let rowsOfScenarios = [{}, {}, {}];
 
     	// world map
-    	let mapTitle = "COVID-19 Risks by Country";
+    	let mapTitle = "";
 
-    	let mapItems = [
-    		{
-    			label: "Proportion of people over 60 by Country",
-    			value: 0
-    		},
-    		{ label: "Income by Country", value: 1 }
-    	];
-
+    	let mapItems = [{}, {}];
     	let selectedRisk = 0;
 
     	// poverty
-    	let povertyItems = [{ label: "By Country", value: 0 }, { label: "By Region", value: 1 }];
+    	let povertyItems = [{}, {}];
 
     	let currentPoverty = 0;
-
-    	// poverty increases by country:
-    	let povertyProjCountryNames = [
-    		"India",
-    		"Nigeria",
-    		"Democratic Republic of Congo",
-    		"Ethiopia",
-    		"Bangladesh",
-    		"Tanzania",
-    		"Madagascar",
-    		"Indonesia",
-    		"Kenya",
-    		"Mozambique",
-    		"Uganda",
-    		"South Africa"
-    	];
 
     	let povertyProjCountryNumbers = [
     		8784000,
@@ -16015,29 +16326,17 @@ var app = (function () {
     	];
 
     	let povertyProjCountries = [];
-
-    	// poverty increases by region:
-    	let povertyProjRegionNames = [
-    		"Sub-Saharan Africa",
-    		"South Asia",
-    		"East Asia & Pacific",
-    		"Latin America & Caribbean",
-    		"Middle East & North Africa",
-    		"Europe & Central Asia",
-    		"North America"
-    	];
-
     	let povertyProjRegionNumbers = [21994380, 10619000, 2294580, 1796560, 867540, 665690, 313600];
     	let povertyProjRegions = [];
 
     	// Projected Poverty Increases by Country and Region
-    	let mainProjCountries = "Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by Country";
+    	let mainProjCountries = "";
 
-    	let nameProjCountries = "Country";
-    	let numberProjCountries = "People";
-    	let mainProjRegions = "Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by Region";
-    	let nameProjRegions = "Region";
-    	let numberProjRegions = "People";
+    	let nameProjCountries = "";
+    	let numberProjCountries = "";
+    	let mainProjRegions = "";
+    	let nameProjRegions = "";
+    	let numberProjRegions = "";
 
     	// color countries by regions
     	// 'Sub-Saharan Africa', 'South Asia', 'East Asia & Pacific',
@@ -16073,17 +16372,17 @@ var app = (function () {
 
     	function autocomplete0_selectedItem_binding(value) {
     		selectedObject = value;
-    		$$invalidate(4, selectedObject);
+    		$$invalidate(5, selectedObject);
     	}
 
     	function input0_change_input_handler() {
     		pctH = to_number(this.value);
-    		$$invalidate(7, pctH);
+    		$$invalidate(8, pctH);
     	}
 
     	function input1_change_input_handler() {
     		pctH_60plus = to_number(this.value);
-    		($$invalidate(29, pctH_60plus), $$invalidate(7, pctH));
+    		($$invalidate(44, pctH_60plus), $$invalidate(8, pctH));
     	}
 
     	function tabs_activeTabValue_binding(value) {
@@ -16093,17 +16392,17 @@ var app = (function () {
 
     	function subtabs_activeTabValue_binding(value) {
     		currentCompare = value;
-    		$$invalidate(10, currentCompare);
+    		$$invalidate(12, currentCompare);
     	}
 
     	function subtabs_activeTabValue_binding_1(value) {
     		selectedRisk = value;
-    		$$invalidate(25, selectedRisk);
+    		$$invalidate(33, selectedRisk);
     	}
 
     	function subtabs_activeTabValue_binding_2(value) {
     		currentPoverty = value;
-    		$$invalidate(26, currentPoverty);
+    		$$invalidate(35, currentPoverty);
     	}
 
     	function input_input_handler() {
@@ -16113,27 +16412,27 @@ var app = (function () {
 
     	function autocomplete1_selectedItem_binding(value) {
     		selectedSourceObject = value;
-    		$$invalidate(5, selectedSourceObject);
+    		$$invalidate(6, selectedSourceObject);
     	}
 
     	function input2_change_input_handler() {
     		pctOfChange = to_number(this.value);
-    		$$invalidate(6, pctOfChange);
+    		$$invalidate(7, pctOfChange);
     	}
 
     	function input3_change_input_handler() {
     		prElimTimes100 = to_number(this.value);
-    		$$invalidate(8, prElimTimes100);
+    		$$invalidate(9, prElimTimes100);
     	}
 
     	function input4_change_input_handler() {
     		pctU = to_number(this.value);
-    		($$invalidate(9, pctU), $$invalidate(7, pctH));
+    		($$invalidate(10, pctU), $$invalidate(8, pctH));
     	}
 
     	function textarea_input_handler() {
     		exportedData = this.value;
-    		(((((((((((((((((((((((((((((((((((((((((((((((((((((((((($$invalidate(39, exportedData), $$invalidate(24, rowsOfScenarios)), $$invalidate(65, i)), $$invalidate(116, inputs)), $$invalidate(93, d_60plus)), $$invalidate(75, pctU_60plusExample)), $$invalidate(91, fatalitiesBaseline)), $$invalidate(85, j)), $$invalidate(76, prElimExample)), $$invalidate(90, demographics)), $$invalidate(74, pctU_below60Example)), $$invalidate(73, pctH_below60Example)), $$invalidate(79, deathsExample)), $$invalidate(78, infectedExample)), $$invalidate(77, fatalitiesExample)), $$invalidate(80, yearsLostExample)), $$invalidate(114, lifeExpectanciesGlobal)), $$invalidate(83, totalYearsLostExample)), $$invalidate(2, selectedLocation)), $$invalidate(30, translations)), $$invalidate(31, selectedSourceId)), $$invalidate(81, totalInfectedExample)), $$invalidate(82, totalDeathsExample)), $$invalidate(84, totalMoneyLostExample)), $$invalidate(94, prElim)), $$invalidate(96, pctU_below60)), $$invalidate(32, pctH_below60)), $$invalidate(95, pctU_60plus)), $$invalidate(29, pctH_60plus)), $$invalidate(66, deaths)), $$invalidate(64, infected)), $$invalidate(99, fatalities)), $$invalidate(106, majorCausesEng)), $$invalidate(100, majorCauses)), $$invalidate(101, majorDeaths)), $$invalidate(68, compareTypes)), $$invalidate(102, diseaseNames)), $$invalidate(103, diseaseDALYs)), $$invalidate(104, riskFactors)), $$invalidate(105, riskDALYs)), $$invalidate(113, ageGroups)), $$invalidate(72, ageTypes)), $$invalidate(117, povertyProjCountryNames)), $$invalidate(118, povertyProjCountryNumbers)), $$invalidate(119, povertyProjRegionNames)), $$invalidate(120, povertyProjRegionNumbers)), $$invalidate(92, popSize)), $$invalidate(86, selectedId)), $$invalidate(110, translationMap)), $$invalidate(63, language)), $$invalidate(5, selectedSourceObject)), $$invalidate(8, prElimTimes100)), $$invalidate(9, pctU)), $$invalidate(7, pctH)), $$invalidate(6, pctOfChange)), $$invalidate(34, totalDeaths)), $$invalidate(35, totalYearsLost)), $$invalidate(4, selectedObject)), $$invalidate(67, yearsLost));
+    		(((((((((((((((((((((((((((((((((((((((((((((((((((((((((($$invalidate(55, exportedData), $$invalidate(30, rowsOfScenarios)), $$invalidate(65, i)), $$invalidate(73, inputs)), $$invalidate(94, d_60plus)), $$invalidate(76, pctU_60plusExample)), $$invalidate(92, fatalitiesBaseline)), $$invalidate(86, j)), $$invalidate(77, prElimExample)), $$invalidate(91, demographics)), $$invalidate(75, pctU_below60Example)), $$invalidate(74, pctH_below60Example)), $$invalidate(80, deathsExample)), $$invalidate(79, infectedExample)), $$invalidate(78, fatalitiesExample)), $$invalidate(81, yearsLostExample)), $$invalidate(117, lifeExpectanciesGlobal)), $$invalidate(84, totalYearsLostExample)), $$invalidate(2, selectedLocation)), $$invalidate(45, translations)), $$invalidate(46, selectedSourceId)), $$invalidate(82, totalInfectedExample)), $$invalidate(83, totalDeathsExample)), $$invalidate(85, totalMoneyLostExample)), $$invalidate(95, prElim)), $$invalidate(97, pctU_below60)), $$invalidate(47, pctH_below60)), $$invalidate(96, pctU_60plus)), $$invalidate(44, pctH_60plus)), $$invalidate(66, deaths)), $$invalidate(64, infected)), $$invalidate(100, fatalities)), $$invalidate(107, majorCausesEng)), $$invalidate(101, majorCauses)), $$invalidate(102, majorDeaths)), $$invalidate(68, compareTypes)), $$invalidate(103, diseaseNames)), $$invalidate(104, diseaseDALYs)), $$invalidate(105, riskFactors)), $$invalidate(106, riskDALYs)), $$invalidate(116, ageGroups)), $$invalidate(72, ageTypes)), $$invalidate(108, povertyProjCountryNames)), $$invalidate(119, povertyProjCountryNumbers)), $$invalidate(109, povertyProjRegionNames)), $$invalidate(120, povertyProjRegionNumbers)), $$invalidate(93, popSize)), $$invalidate(87, selectedId)), $$invalidate(113, translationMap)), $$invalidate(4, language)), $$invalidate(6, selectedSourceObject)), $$invalidate(9, prElimTimes100)), $$invalidate(10, pctU)), $$invalidate(8, pctH)), $$invalidate(7, pctOfChange)), $$invalidate(49, totalDeaths)), $$invalidate(50, totalYearsLost)), $$invalidate(5, selectedObject)), $$invalidate(67, yearsLost));
     	}
 
     	$$self.$capture_state = () => ({
@@ -16164,7 +16463,6 @@ var app = (function () {
     		jsonToConsole,
     		addScenario,
     		deleteScenario,
-    		tabItems,
     		currentTab,
     		userNeeds,
     		toggleExportData,
@@ -16234,10 +16532,8 @@ var app = (function () {
     		selectedRisk,
     		povertyItems,
     		currentPoverty,
-    		povertyProjCountryNames,
     		povertyProjCountryNumbers,
     		povertyProjCountries,
-    		povertyProjRegionNames,
     		povertyProjRegionNumbers,
     		povertyProjRegions,
     		mainProjCountries,
@@ -16256,6 +16552,7 @@ var app = (function () {
     		totalDeaths,
     		totalYearsLost,
     		totalMoneyLost,
+    		tabItems,
     		selectedId,
     		$englishDictStore,
     		$chineseDictStore,
@@ -16279,12 +16576,13 @@ var app = (function () {
     		riskFactors,
     		riskDALYs,
     		majorCausesEng,
-    		exportedData
+    		exportedData,
+    		povertyProjCountryNames,
+    		povertyProjRegionNames
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("deleteScenario" in $$props) $$invalidate(44, deleteScenario = $$props.deleteScenario);
-    		if ("tabItems" in $$props) $$invalidate(45, tabItems = $$props.tabItems);
+    		if ("deleteScenario" in $$props) $$invalidate(60, deleteScenario = $$props.deleteScenario);
     		if ("currentTab" in $$props) $$invalidate(0, currentTab = $$props.currentTab);
     		if ("userNeeds" in $$props) $$invalidate(1, userNeeds = $$props.userNeeds);
     		if ("selectedLocation" in $$props) $$invalidate(2, selectedLocation = $$props.selectedLocation);
@@ -16292,112 +16590,114 @@ var app = (function () {
     		if ("english" in $$props) english = $$props.english;
     		if ("chinese" in $$props) chinese = $$props.chinese;
     		if ("spanish" in $$props) spanish = $$props.spanish;
-    		if ("translationMap" in $$props) $$invalidate(110, translationMap = $$props.translationMap);
-    		if ("language" in $$props) $$invalidate(63, language = $$props.language);
+    		if ("translationMap" in $$props) $$invalidate(113, translationMap = $$props.translationMap);
+    		if ("language" in $$props) $$invalidate(4, language = $$props.language);
     		if ("defaultLocation" in $$props) defaultLocation = $$props.defaultLocation;
-    		if ("selectedObject" in $$props) $$invalidate(4, selectedObject = $$props.selectedObject);
+    		if ("selectedObject" in $$props) $$invalidate(5, selectedObject = $$props.selectedObject);
     		if ("defaultSourceObject" in $$props) defaultSourceObject = $$props.defaultSourceObject;
-    		if ("selectedSourceObject" in $$props) $$invalidate(5, selectedSourceObject = $$props.selectedSourceObject);
-    		if ("ageGroups" in $$props) $$invalidate(113, ageGroups = $$props.ageGroups);
-    		if ("lifeExpectanciesGlobal" in $$props) $$invalidate(114, lifeExpectanciesGlobal = $$props.lifeExpectanciesGlobal);
-    		if ("pctOfChange" in $$props) $$invalidate(6, pctOfChange = $$props.pctOfChange);
-    		if ("pctH" in $$props) $$invalidate(7, pctH = $$props.pctH);
-    		if ("prElimTimes100" in $$props) $$invalidate(8, prElimTimes100 = $$props.prElimTimes100);
-    		if ("pctU" in $$props) $$invalidate(9, pctU = $$props.pctU);
+    		if ("selectedSourceObject" in $$props) $$invalidate(6, selectedSourceObject = $$props.selectedSourceObject);
+    		if ("ageGroups" in $$props) $$invalidate(116, ageGroups = $$props.ageGroups);
+    		if ("lifeExpectanciesGlobal" in $$props) $$invalidate(117, lifeExpectanciesGlobal = $$props.lifeExpectanciesGlobal);
+    		if ("pctOfChange" in $$props) $$invalidate(7, pctOfChange = $$props.pctOfChange);
+    		if ("pctH" in $$props) $$invalidate(8, pctH = $$props.pctH);
+    		if ("prElimTimes100" in $$props) $$invalidate(9, prElimTimes100 = $$props.prElimTimes100);
+    		if ("pctU" in $$props) $$invalidate(10, pctU = $$props.pctU);
     		if ("infected" in $$props) $$invalidate(64, infected = $$props.infected);
     		if ("i" in $$props) $$invalidate(65, i = $$props.i);
     		if ("deaths" in $$props) $$invalidate(66, deaths = $$props.deaths);
     		if ("yearsLost" in $$props) $$invalidate(67, yearsLost = $$props.yearsLost);
-    		if ("compareItems" in $$props) $$invalidate(47, compareItems = $$props.compareItems);
-    		if ("currentCompare" in $$props) $$invalidate(10, currentCompare = $$props.currentCompare);
+    		if ("compareItems" in $$props) $$invalidate(11, compareItems = $$props.compareItems);
+    		if ("currentCompare" in $$props) $$invalidate(12, currentCompare = $$props.currentCompare);
     		if ("compareTypes" in $$props) $$invalidate(68, compareTypes = $$props.compareTypes);
     		if ("compareCauses" in $$props) $$invalidate(69, compareCauses = $$props.compareCauses);
     		if ("compareDiseases" in $$props) $$invalidate(70, compareDiseases = $$props.compareDiseases);
     		if ("compareRisks" in $$props) $$invalidate(71, compareRisks = $$props.compareRisks);
-    		if ("compareList" in $$props) $$invalidate(11, compareList = $$props.compareList);
-    		if ("titleListName" in $$props) $$invalidate(12, titleListName = $$props.titleListName);
-    		if ("titleListNumber" in $$props) $$invalidate(13, titleListNumber = $$props.titleListNumber);
-    		if ("titleListMain" in $$props) $$invalidate(14, titleListMain = $$props.titleListMain);
+    		if ("compareList" in $$props) $$invalidate(13, compareList = $$props.compareList);
+    		if ("titleListName" in $$props) $$invalidate(14, titleListName = $$props.titleListName);
+    		if ("titleListNumber" in $$props) $$invalidate(15, titleListNumber = $$props.titleListNumber);
+    		if ("titleListMain" in $$props) $$invalidate(16, titleListMain = $$props.titleListMain);
     		if ("ageTypes" in $$props) $$invalidate(72, ageTypes = $$props.ageTypes);
-    		if ("infectedData" in $$props) $$invalidate(15, infectedData = $$props.infectedData);
-    		if ("deathsData" in $$props) $$invalidate(16, deathsData = $$props.deathsData);
-    		if ("infectedTitle" in $$props) $$invalidate(17, infectedTitle = $$props.infectedTitle);
-    		if ("deathsTitle" in $$props) $$invalidate(18, deathsTitle = $$props.deathsTitle);
-    		if ("infectedTitleListName" in $$props) $$invalidate(48, infectedTitleListName = $$props.infectedTitleListName);
-    		if ("infectedTitleListNumber" in $$props) $$invalidate(49, infectedTitleListNumber = $$props.infectedTitleListNumber);
-    		if ("deathsTitleListName" in $$props) $$invalidate(50, deathsTitleListName = $$props.deathsTitleListName);
-    		if ("deathsTitleListNumber" in $$props) $$invalidate(51, deathsTitleListNumber = $$props.deathsTitleListNumber);
-    		if ("projectionsTitle" in $$props) $$invalidate(19, projectionsTitle = $$props.projectionsTitle);
+    		if ("infectedData" in $$props) $$invalidate(17, infectedData = $$props.infectedData);
+    		if ("deathsData" in $$props) $$invalidate(18, deathsData = $$props.deathsData);
+    		if ("infectedTitle" in $$props) $$invalidate(19, infectedTitle = $$props.infectedTitle);
+    		if ("deathsTitle" in $$props) $$invalidate(20, deathsTitle = $$props.deathsTitle);
+    		if ("infectedTitleListName" in $$props) $$invalidate(21, infectedTitleListName = $$props.infectedTitleListName);
+    		if ("infectedTitleListNumber" in $$props) $$invalidate(22, infectedTitleListNumber = $$props.infectedTitleListNumber);
+    		if ("deathsTitleListName" in $$props) $$invalidate(23, deathsTitleListName = $$props.deathsTitleListName);
+    		if ("deathsTitleListNumber" in $$props) $$invalidate(24, deathsTitleListNumber = $$props.deathsTitleListNumber);
+    		if ("projectionsTitle" in $$props) $$invalidate(25, projectionsTitle = $$props.projectionsTitle);
     		if ("projectionsCaption" in $$props) projectionsCaption = $$props.projectionsCaption;
-    		if ("projectionsXAxisLabel" in $$props) $$invalidate(20, projectionsXAxisLabel = $$props.projectionsXAxisLabel);
-    		if ("projectionsYAxisLabel" in $$props) $$invalidate(21, projectionsYAxisLabel = $$props.projectionsYAxisLabel);
-    		if ("projectionsLegendDeaths" in $$props) $$invalidate(22, projectionsLegendDeaths = $$props.projectionsLegendDeaths);
-    		if ("projectionsLegendDeathsProjected" in $$props) $$invalidate(23, projectionsLegendDeathsProjected = $$props.projectionsLegendDeathsProjected);
-    		if ("inputs" in $$props) $$invalidate(116, inputs = $$props.inputs);
-    		if ("pctH_below60Example" in $$props) $$invalidate(73, pctH_below60Example = $$props.pctH_below60Example);
-    		if ("pctU_below60Example" in $$props) $$invalidate(74, pctU_below60Example = $$props.pctU_below60Example);
-    		if ("pctU_60plusExample" in $$props) $$invalidate(75, pctU_60plusExample = $$props.pctU_60plusExample);
-    		if ("prElimExample" in $$props) $$invalidate(76, prElimExample = $$props.prElimExample);
-    		if ("fatalitiesExample" in $$props) $$invalidate(77, fatalitiesExample = $$props.fatalitiesExample);
-    		if ("infectedExample" in $$props) $$invalidate(78, infectedExample = $$props.infectedExample);
-    		if ("deathsExample" in $$props) $$invalidate(79, deathsExample = $$props.deathsExample);
-    		if ("yearsLostExample" in $$props) $$invalidate(80, yearsLostExample = $$props.yearsLostExample);
-    		if ("totalInfectedExample" in $$props) $$invalidate(81, totalInfectedExample = $$props.totalInfectedExample);
-    		if ("totalDeathsExample" in $$props) $$invalidate(82, totalDeathsExample = $$props.totalDeathsExample);
-    		if ("totalYearsLostExample" in $$props) $$invalidate(83, totalYearsLostExample = $$props.totalYearsLostExample);
-    		if ("totalMoneyLostExample" in $$props) $$invalidate(84, totalMoneyLostExample = $$props.totalMoneyLostExample);
-    		if ("j" in $$props) $$invalidate(85, j = $$props.j);
-    		if ("rowsOfScenarios" in $$props) $$invalidate(24, rowsOfScenarios = $$props.rowsOfScenarios);
-    		if ("mapTitle" in $$props) $$invalidate(52, mapTitle = $$props.mapTitle);
-    		if ("mapItems" in $$props) $$invalidate(53, mapItems = $$props.mapItems);
-    		if ("selectedRisk" in $$props) $$invalidate(25, selectedRisk = $$props.selectedRisk);
-    		if ("povertyItems" in $$props) $$invalidate(54, povertyItems = $$props.povertyItems);
-    		if ("currentPoverty" in $$props) $$invalidate(26, currentPoverty = $$props.currentPoverty);
-    		if ("povertyProjCountryNames" in $$props) $$invalidate(117, povertyProjCountryNames = $$props.povertyProjCountryNames);
-    		if ("povertyProjCountryNumbers" in $$props) $$invalidate(118, povertyProjCountryNumbers = $$props.povertyProjCountryNumbers);
-    		if ("povertyProjCountries" in $$props) $$invalidate(27, povertyProjCountries = $$props.povertyProjCountries);
-    		if ("povertyProjRegionNames" in $$props) $$invalidate(119, povertyProjRegionNames = $$props.povertyProjRegionNames);
+    		if ("projectionsXAxisLabel" in $$props) $$invalidate(26, projectionsXAxisLabel = $$props.projectionsXAxisLabel);
+    		if ("projectionsYAxisLabel" in $$props) $$invalidate(27, projectionsYAxisLabel = $$props.projectionsYAxisLabel);
+    		if ("projectionsLegendDeaths" in $$props) $$invalidate(28, projectionsLegendDeaths = $$props.projectionsLegendDeaths);
+    		if ("projectionsLegendDeathsProjected" in $$props) $$invalidate(29, projectionsLegendDeathsProjected = $$props.projectionsLegendDeathsProjected);
+    		if ("inputs" in $$props) $$invalidate(73, inputs = $$props.inputs);
+    		if ("pctH_below60Example" in $$props) $$invalidate(74, pctH_below60Example = $$props.pctH_below60Example);
+    		if ("pctU_below60Example" in $$props) $$invalidate(75, pctU_below60Example = $$props.pctU_below60Example);
+    		if ("pctU_60plusExample" in $$props) $$invalidate(76, pctU_60plusExample = $$props.pctU_60plusExample);
+    		if ("prElimExample" in $$props) $$invalidate(77, prElimExample = $$props.prElimExample);
+    		if ("fatalitiesExample" in $$props) $$invalidate(78, fatalitiesExample = $$props.fatalitiesExample);
+    		if ("infectedExample" in $$props) $$invalidate(79, infectedExample = $$props.infectedExample);
+    		if ("deathsExample" in $$props) $$invalidate(80, deathsExample = $$props.deathsExample);
+    		if ("yearsLostExample" in $$props) $$invalidate(81, yearsLostExample = $$props.yearsLostExample);
+    		if ("totalInfectedExample" in $$props) $$invalidate(82, totalInfectedExample = $$props.totalInfectedExample);
+    		if ("totalDeathsExample" in $$props) $$invalidate(83, totalDeathsExample = $$props.totalDeathsExample);
+    		if ("totalYearsLostExample" in $$props) $$invalidate(84, totalYearsLostExample = $$props.totalYearsLostExample);
+    		if ("totalMoneyLostExample" in $$props) $$invalidate(85, totalMoneyLostExample = $$props.totalMoneyLostExample);
+    		if ("j" in $$props) $$invalidate(86, j = $$props.j);
+    		if ("rowsOfScenarios" in $$props) $$invalidate(30, rowsOfScenarios = $$props.rowsOfScenarios);
+    		if ("mapTitle" in $$props) $$invalidate(31, mapTitle = $$props.mapTitle);
+    		if ("mapItems" in $$props) $$invalidate(32, mapItems = $$props.mapItems);
+    		if ("selectedRisk" in $$props) $$invalidate(33, selectedRisk = $$props.selectedRisk);
+    		if ("povertyItems" in $$props) $$invalidate(34, povertyItems = $$props.povertyItems);
+    		if ("currentPoverty" in $$props) $$invalidate(35, currentPoverty = $$props.currentPoverty);
+    		if ("povertyProjCountryNumbers" in $$props) $$invalidate(119, povertyProjCountryNumbers = $$props.povertyProjCountryNumbers);
+    		if ("povertyProjCountries" in $$props) $$invalidate(36, povertyProjCountries = $$props.povertyProjCountries);
     		if ("povertyProjRegionNumbers" in $$props) $$invalidate(120, povertyProjRegionNumbers = $$props.povertyProjRegionNumbers);
-    		if ("povertyProjRegions" in $$props) $$invalidate(28, povertyProjRegions = $$props.povertyProjRegions);
-    		if ("mainProjCountries" in $$props) $$invalidate(55, mainProjCountries = $$props.mainProjCountries);
-    		if ("nameProjCountries" in $$props) $$invalidate(56, nameProjCountries = $$props.nameProjCountries);
-    		if ("numberProjCountries" in $$props) $$invalidate(57, numberProjCountries = $$props.numberProjCountries);
-    		if ("mainProjRegions" in $$props) $$invalidate(58, mainProjRegions = $$props.mainProjRegions);
-    		if ("nameProjRegions" in $$props) $$invalidate(59, nameProjRegions = $$props.nameProjRegions);
-    		if ("numberProjRegions" in $$props) $$invalidate(60, numberProjRegions = $$props.numberProjRegions);
-    		if ("colorsProjRegions" in $$props) $$invalidate(61, colorsProjRegions = $$props.colorsProjRegions);
-    		if ("colorsProjCountries" in $$props) $$invalidate(62, colorsProjCountries = $$props.colorsProjCountries);
-    		if ("pctH_60plus" in $$props) $$invalidate(29, pctH_60plus = $$props.pctH_60plus);
-    		if ("translations" in $$props) $$invalidate(30, translations = $$props.translations);
-    		if ("selectedSourceId" in $$props) $$invalidate(31, selectedSourceId = $$props.selectedSourceId);
-    		if ("pctH_below60" in $$props) $$invalidate(32, pctH_below60 = $$props.pctH_below60);
-    		if ("totalInfected" in $$props) $$invalidate(33, totalInfected = $$props.totalInfected);
-    		if ("totalDeaths" in $$props) $$invalidate(34, totalDeaths = $$props.totalDeaths);
-    		if ("totalYearsLost" in $$props) $$invalidate(35, totalYearsLost = $$props.totalYearsLost);
-    		if ("totalMoneyLost" in $$props) $$invalidate(36, totalMoneyLost = $$props.totalMoneyLost);
-    		if ("selectedId" in $$props) $$invalidate(86, selectedId = $$props.selectedId);
-    		if ("demographics" in $$props) $$invalidate(90, demographics = $$props.demographics);
-    		if ("fatalitiesBaseline" in $$props) $$invalidate(91, fatalitiesBaseline = $$props.fatalitiesBaseline);
-    		if ("popSize" in $$props) $$invalidate(92, popSize = $$props.popSize);
-    		if ("d_60plus" in $$props) $$invalidate(93, d_60plus = $$props.d_60plus);
-    		if ("lowerBound" in $$props) $$invalidate(37, lowerBound = $$props.lowerBound);
-    		if ("upperBound" in $$props) $$invalidate(38, upperBound = $$props.upperBound);
-    		if ("prElim" in $$props) $$invalidate(94, prElim = $$props.prElim);
-    		if ("pctU_60plus" in $$props) $$invalidate(95, pctU_60plus = $$props.pctU_60plus);
-    		if ("pctU_below60" in $$props) $$invalidate(96, pctU_below60 = $$props.pctU_below60);
+    		if ("povertyProjRegions" in $$props) $$invalidate(37, povertyProjRegions = $$props.povertyProjRegions);
+    		if ("mainProjCountries" in $$props) $$invalidate(38, mainProjCountries = $$props.mainProjCountries);
+    		if ("nameProjCountries" in $$props) $$invalidate(39, nameProjCountries = $$props.nameProjCountries);
+    		if ("numberProjCountries" in $$props) $$invalidate(40, numberProjCountries = $$props.numberProjCountries);
+    		if ("mainProjRegions" in $$props) $$invalidate(41, mainProjRegions = $$props.mainProjRegions);
+    		if ("nameProjRegions" in $$props) $$invalidate(42, nameProjRegions = $$props.nameProjRegions);
+    		if ("numberProjRegions" in $$props) $$invalidate(43, numberProjRegions = $$props.numberProjRegions);
+    		if ("colorsProjRegions" in $$props) $$invalidate(62, colorsProjRegions = $$props.colorsProjRegions);
+    		if ("colorsProjCountries" in $$props) $$invalidate(63, colorsProjCountries = $$props.colorsProjCountries);
+    		if ("pctH_60plus" in $$props) $$invalidate(44, pctH_60plus = $$props.pctH_60plus);
+    		if ("translations" in $$props) $$invalidate(45, translations = $$props.translations);
+    		if ("selectedSourceId" in $$props) $$invalidate(46, selectedSourceId = $$props.selectedSourceId);
+    		if ("pctH_below60" in $$props) $$invalidate(47, pctH_below60 = $$props.pctH_below60);
+    		if ("totalInfected" in $$props) $$invalidate(48, totalInfected = $$props.totalInfected);
+    		if ("totalDeaths" in $$props) $$invalidate(49, totalDeaths = $$props.totalDeaths);
+    		if ("totalYearsLost" in $$props) $$invalidate(50, totalYearsLost = $$props.totalYearsLost);
+    		if ("totalMoneyLost" in $$props) $$invalidate(51, totalMoneyLost = $$props.totalMoneyLost);
+    		if ("tabItems" in $$props) $$invalidate(52, tabItems = $$props.tabItems);
+    		if ("selectedId" in $$props) $$invalidate(87, selectedId = $$props.selectedId);
+    		if ("demographics" in $$props) $$invalidate(91, demographics = $$props.demographics);
+    		if ("fatalitiesBaseline" in $$props) $$invalidate(92, fatalitiesBaseline = $$props.fatalitiesBaseline);
+    		if ("popSize" in $$props) $$invalidate(93, popSize = $$props.popSize);
+    		if ("d_60plus" in $$props) $$invalidate(94, d_60plus = $$props.d_60plus);
+    		if ("lowerBound" in $$props) $$invalidate(53, lowerBound = $$props.lowerBound);
+    		if ("upperBound" in $$props) $$invalidate(54, upperBound = $$props.upperBound);
+    		if ("prElim" in $$props) $$invalidate(95, prElim = $$props.prElim);
+    		if ("pctU_60plus" in $$props) $$invalidate(96, pctU_60plus = $$props.pctU_60plus);
+    		if ("pctU_below60" in $$props) $$invalidate(97, pctU_below60 = $$props.pctU_below60);
     		if ("lowerBoundUntil" in $$props) lowerBoundUntil = $$props.lowerBoundUntil;
     		if ("upperBoundUntil" in $$props) upperBoundUntil = $$props.upperBoundUntil;
-    		if ("fatalities" in $$props) $$invalidate(99, fatalities = $$props.fatalities);
-    		if ("majorCauses" in $$props) $$invalidate(100, majorCauses = $$props.majorCauses);
-    		if ("majorDeaths" in $$props) $$invalidate(101, majorDeaths = $$props.majorDeaths);
-    		if ("diseaseNames" in $$props) $$invalidate(102, diseaseNames = $$props.diseaseNames);
-    		if ("diseaseDALYs" in $$props) $$invalidate(103, diseaseDALYs = $$props.diseaseDALYs);
-    		if ("riskFactors" in $$props) $$invalidate(104, riskFactors = $$props.riskFactors);
-    		if ("riskDALYs" in $$props) $$invalidate(105, riskDALYs = $$props.riskDALYs);
-    		if ("majorCausesEng" in $$props) $$invalidate(106, majorCausesEng = $$props.majorCausesEng);
-    		if ("exportedData" in $$props) $$invalidate(39, exportedData = $$props.exportedData);
+    		if ("fatalities" in $$props) $$invalidate(100, fatalities = $$props.fatalities);
+    		if ("majorCauses" in $$props) $$invalidate(101, majorCauses = $$props.majorCauses);
+    		if ("majorDeaths" in $$props) $$invalidate(102, majorDeaths = $$props.majorDeaths);
+    		if ("diseaseNames" in $$props) $$invalidate(103, diseaseNames = $$props.diseaseNames);
+    		if ("diseaseDALYs" in $$props) $$invalidate(104, diseaseDALYs = $$props.diseaseDALYs);
+    		if ("riskFactors" in $$props) $$invalidate(105, riskFactors = $$props.riskFactors);
+    		if ("riskDALYs" in $$props) $$invalidate(106, riskDALYs = $$props.riskDALYs);
+    		if ("majorCausesEng" in $$props) $$invalidate(107, majorCausesEng = $$props.majorCausesEng);
+    		if ("exportedData" in $$props) $$invalidate(55, exportedData = $$props.exportedData);
+    		if ("povertyProjCountryNames" in $$props) $$invalidate(108, povertyProjCountryNames = $$props.povertyProjCountryNames);
+    		if ("povertyProjRegionNames" in $$props) $$invalidate(109, povertyProjRegionNames = $$props.povertyProjRegionNames);
     	};
 
+    	let tabItems;
     	let translations;
     	let selectedId;
     	let selectedSourceId;
@@ -16427,104 +16727,140 @@ var app = (function () {
     	let riskDALYs;
     	let majorCausesEng;
     	let exportedData;
+    	let povertyProjCountryNames;
+    	let povertyProjRegionNames;
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[2] & /*language*/ 2) {
-    			 $$invalidate(30, translations = translationMap[language]);
+    		if ($$self.$$.dirty[0] & /*language*/ 16) {
+    			 $$invalidate(45, translations = translationMap[language]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedObject*/ 16) {
-    			 $$invalidate(86, selectedId = selectedObject.id);
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			// tab items with labels and values
+    			 $$invalidate(52, tabItems = [
+    				{
+    					label: translations.app.tabItem0,
+    					value: 0
+    				},
+    				{
+    					label: translations.app.tabItem1, // "Mortality by Age"
+    					value: 1
+    				},
+    				{
+    					label: translations.app.tabItem2, // "Estimates in Context"
+    					value: 2
+    				},
+    				{
+    					label: translations.app.tabItem3, // "Risks by Country"
+    					value: 3
+    				},
+    				{
+    					label: translations.app.tabItem4, // "Poverty Proj."
+    					value: 4
+    				},
+    				{
+    					label: translations.app.tabItem5, // "Deaths Proj."
+    					value: 5
+    				},
+    				{
+    					label: translations.app.tabItem6, // "Hyp. Scenarios"
+    					value: 6
+    				}
+    			]); // "Ex. Interpretations"
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
+    		if ($$self.$$.dirty[0] & /*selectedObject*/ 32) {
+    			 $$invalidate(87, selectedId = selectedObject.id);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
     			 $$invalidate(2, selectedLocation = translations.countries[selectedId].name);
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedSourceObject*/ 32) {
-    			 $$invalidate(31, selectedSourceId = selectedSourceObject.id);
+    		if ($$self.$$.dirty[0] & /*selectedSourceObject*/ 64) {
+    			 $$invalidate(46, selectedSourceId = selectedSourceObject.id);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
-    			 $$invalidate(90, demographics = translations.countries[selectedId].demographics);
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    			 $$invalidate(91, demographics = translations.countries[selectedId].demographics);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[1] & /*selectedSourceId*/ 1) {
-    			 $$invalidate(91, fatalitiesBaseline = translations.fatalityRisks[selectedSourceId].ftr);
+    		if ($$self.$$.dirty[1] & /*translations, selectedSourceId*/ 49152) {
+    			 $$invalidate(92, fatalitiesBaseline = translations.fatalityRisks[selectedSourceId].ftr);
     		}
 
-    		if ($$self.$$.dirty[2] & /*demographics*/ 268435456) {
+    		if ($$self.$$.dirty[2] & /*demographics*/ 536870912) {
     			/***
      * PARAMETERS H, pctOfChange, H_60+, H_below60, Pr(Elimination), H_until
      *
     */
-    			 $$invalidate(92, popSize = demographics.reduce((a, b) => a + b, 0)); // population size of the chosen location
+    			 $$invalidate(93, popSize = demographics.reduce((a, b) => a + b, 0)); // population size of the chosen location
     		}
 
-    		if ($$self.$$.dirty[2] & /*demographics, popSize*/ 1342177280) {
-    			 $$invalidate(93, d_60plus = (demographics[6] + demographics[7] + demographics[8]) / popSize); // proportion of people over 60
+    		if ($$self.$$.dirty[2] & /*demographics*/ 536870912 | $$self.$$.dirty[3] & /*popSize*/ 1) {
+    			 $$invalidate(94, d_60plus = (demographics[6] + demographics[7] + demographics[8]) / popSize); // proportion of people over 60
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 128) {
-    			 $$invalidate(29, pctH_60plus = Math.round(pctH)); // proportion of people over 60 infected
+    		if ($$self.$$.dirty[0] & /*pctH*/ 256) {
+    			 $$invalidate(44, pctH_60plus = Math.round(pctH)); // proportion of people over 60 infected
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH, pctH_60plus*/ 536871040 | $$self.$$.dirty[3] & /*d_60plus*/ 1) {
+    		if ($$self.$$.dirty[0] & /*pctH*/ 256 | $$self.$$.dirty[1] & /*pctH_60plus*/ 8192 | $$self.$$.dirty[3] & /*d_60plus*/ 2) {
     			// if we decrease proportion of 60+ infected, then proportion of younger people infected increases keeping H_overall fixed
-    			 $$invalidate(32, pctH_below60 = Math.round((pctH - pctH_60plus * d_60plus) / (1 - d_60plus)));
+    			 $$invalidate(47, pctH_below60 = Math.round((pctH - pctH_60plus * d_60plus) / (1 - d_60plus)));
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 128 | $$self.$$.dirty[3] & /*d_60plus*/ 1) {
+    		if ($$self.$$.dirty[0] & /*pctH*/ 256 | $$self.$$.dirty[3] & /*d_60plus*/ 2) {
     			// derived bounds for pctH_plus based on: 0 <= pctH_below60 <= 1
-    			 $$invalidate(37, lowerBound = Math.max(1, (pctH - 100 * (1 - d_60plus)) / d_60plus)); // has to be more than 0 and ...derive
+    			 $$invalidate(53, lowerBound = Math.max(1, (pctH - 100 * (1 - d_60plus)) / d_60plus)); // has to be more than 0 and ...derive
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 128 | $$self.$$.dirty[3] & /*d_60plus*/ 1) {
-    			 $$invalidate(38, upperBound = Math.min(pctH / d_60plus, 99)); // can't be more than 100% and pctH / d60_plus
+    		if ($$self.$$.dirty[0] & /*pctH*/ 256 | $$self.$$.dirty[3] & /*d_60plus*/ 2) {
+    			 $$invalidate(54, upperBound = Math.min(pctH / d_60plus, 99)); // can't be more than 100% and pctH / d60_plus
     		}
 
-    		if ($$self.$$.dirty[0] & /*prElimTimes100*/ 256) {
-    			 $$invalidate(94, prElim = prElimTimes100 / 100);
+    		if ($$self.$$.dirty[0] & /*prElimTimes100*/ 512) {
+    			 $$invalidate(95, prElim = prElimTimes100 / 100);
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH, pctU*/ 640) {
+    		if ($$self.$$.dirty[0] & /*pctH, pctU*/ 1280) {
     			 if (pctH < pctU) {
-    				$$invalidate(9, pctU = pctH);
+    				$$invalidate(10, pctU = pctH);
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH_60plus, pctH, pctU*/ 536871552) {
+    		if ($$self.$$.dirty[0] & /*pctH, pctU*/ 1280 | $$self.$$.dirty[1] & /*pctH_60plus*/ 8192) {
     			// derive from pctH_60plus to keep the number of parameters low
     			// then from U_60+/U = H_60+/H we get:
-    			 $$invalidate(95, pctU_60plus = pctH_60plus / pctH * pctU); // proportion of 60+ people that are infected until elimination
+    			 $$invalidate(96, pctU_60plus = pctH_60plus / pctH * pctU); // proportion of 60+ people that are infected until elimination
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctU*/ 512 | $$self.$$.dirty[3] & /*pctU_60plus, d_60plus*/ 5) {
-    			 $$invalidate(96, pctU_below60 = (pctU - pctU_60plus * d_60plus) / (1 - d_60plus)); // pct of people below 60 infected until elimination
+    		if ($$self.$$.dirty[0] & /*pctU*/ 1024 | $$self.$$.dirty[3] & /*pctU_60plus, d_60plus*/ 10) {
+    			 $$invalidate(97, pctU_below60 = (pctU - pctU_60plus * d_60plus) / (1 - d_60plus)); // pct of people below 60 infected until elimination
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctU*/ 512 | $$self.$$.dirty[3] & /*d_60plus*/ 1) {
+    		if ($$self.$$.dirty[0] & /*pctU*/ 1024 | $$self.$$.dirty[3] & /*d_60plus*/ 2) {
     			 lowerBoundUntil = Math.max(1, (pctU - 100 * (1 - d_60plus)) / d_60plus);
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctU*/ 512 | $$self.$$.dirty[3] & /*d_60plus*/ 1) {
+    		if ($$self.$$.dirty[0] & /*pctU*/ 1024 | $$self.$$.dirty[3] & /*d_60plus*/ 2) {
     			 upperBoundUntil = Math.min(pctU / d_60plus, 99);
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctOfChange*/ 64 | $$self.$$.dirty[2] & /*fatalitiesBaseline*/ 536870912) {
+    		if ($$self.$$.dirty[0] & /*pctOfChange*/ 128 | $$self.$$.dirty[2] & /*fatalitiesBaseline*/ 1073741824) {
     			/***
      * CALCULATION of infected, deaths, ... totals
      *
      */
     			// use pctOfChange to increase / decrease the fatality risks
-    			 $$invalidate(99, fatalities = fatalitiesBaseline.map(fat => fat * (1 + pctOfChange / 100)));
+    			 $$invalidate(100, fatalities = fatalitiesBaseline.map(fat => fat * (1 + pctOfChange / 100)));
     		}
 
-    		if ($$self.$$.dirty[1] & /*pctH_below60*/ 2 | $$self.$$.dirty[2] & /*i, demographics*/ 268435464 | $$self.$$.dirty[3] & /*prElim, pctU_below60*/ 10) {
+    		if ($$self.$$.dirty[1] & /*pctH_below60*/ 65536 | $$self.$$.dirty[2] & /*i, demographics*/ 536870920 | $$self.$$.dirty[3] & /*prElim, pctU_below60*/ 20) {
     			// multiply below60 demographics by pctH_below60 selected proportion of infected
     			 for ($$invalidate(65, i = 0); i < 6; $$invalidate(65, i++, i)) {
     				$$invalidate(64, infected[i] = Math.round(prElim * demographics[i] * pctU_below60 / 100 + (1 - prElim) * demographics[i] * pctH_below60 / 100), infected); // infections in case of elimination for below 60
@@ -16532,7 +16868,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH_60plus*/ 536870912 | $$self.$$.dirty[2] & /*i, demographics*/ 268435464 | $$self.$$.dirty[3] & /*prElim, pctU_60plus*/ 6) {
+    		if ($$self.$$.dirty[1] & /*pctH_60plus*/ 8192 | $$self.$$.dirty[2] & /*i, demographics*/ 536870920 | $$self.$$.dirty[3] & /*prElim, pctU_60plus*/ 12) {
     			// multiply 60plus demographics by pctH_60plus selected proportion of infected
     			 for ($$invalidate(65, i = 6); i < 9; $$invalidate(65, i++, i)) {
     				$$invalidate(64, infected[i] = Math.round(prElim * demographics[i] * pctU_60plus / 100 + (1 - prElim) * demographics[i] * pctH_60plus / 100), infected); // infections in case of elimination for 60 plus
@@ -16540,7 +16876,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*i, deaths, infected*/ 28 | $$self.$$.dirty[3] & /*fatalities*/ 64) {
+    		if ($$self.$$.dirty[2] & /*i, deaths, infected*/ 28 | $$self.$$.dirty[3] & /*fatalities*/ 128) {
     			 for ($$invalidate(65, i = 0); i < deaths.length; $$invalidate(65, i++, i)) {
     				$$invalidate(66, deaths[i] = Math.round(infected[i] * fatalities[i] / 100), deaths);
     			}
@@ -16554,66 +16890,83 @@ var app = (function () {
 
     		if ($$self.$$.dirty[2] & /*infected*/ 4) {
     			// sum vectors to get totals
-    			 $$invalidate(33, totalInfected = Math.round(infected.reduce((a, b) => a + b, 0)));
+    			 $$invalidate(48, totalInfected = Math.round(infected.reduce((a, b) => a + b, 0)));
     		}
 
     		if ($$self.$$.dirty[2] & /*deaths*/ 16) {
-    			 $$invalidate(34, totalDeaths = Math.round(deaths.reduce((a, b) => a + b, 0)));
+    			 $$invalidate(49, totalDeaths = Math.round(deaths.reduce((a, b) => a + b, 0)));
     		}
 
     		if ($$self.$$.dirty[2] & /*yearsLost*/ 32) {
-    			 $$invalidate(35, totalYearsLost = Math.round(yearsLost.reduce((a, b) => a + b, 0)));
+    			 $$invalidate(50, totalYearsLost = Math.round(yearsLost.reduce((a, b) => a + b, 0)));
     		}
 
-    		if ($$self.$$.dirty[1] & /*totalYearsLost*/ 16) {
-    			 $$invalidate(36, totalMoneyLost = Math.round(129000 * totalYearsLost / Math.pow(10, 9)));
+    		if ($$self.$$.dirty[1] & /*totalYearsLost*/ 524288) {
+    			 $$invalidate(51, totalMoneyLost = Math.round(129000 * totalYearsLost / Math.pow(10, 9)));
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
     			// push estimated coronavirus deaths to majorCauses
-    			 $$invalidate(100, majorCauses = [
+    			 $$invalidate(101, majorCauses = [
     				translations.app.covid19Cause,
     				...translations.countries[selectedId].majorCauses
     			]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[1] & /*totalDeaths*/ 8 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
-    			 $$invalidate(101, majorDeaths = [totalDeaths, ...translations.countries[selectedId].majorDeaths]);
+    		if ($$self.$$.dirty[1] & /*totalDeaths, translations*/ 278528 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    			 $$invalidate(102, majorDeaths = [totalDeaths, ...translations.countries[selectedId].majorDeaths]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
     			// push estimated totalYearsLost TODO: DALYs of coronavirus deaths to diseaseNames
-    			 $$invalidate(102, diseaseNames = [
+    			 $$invalidate(103, diseaseNames = [
     				translations.app.covid19Cause,
     				...translations.countries[selectedId].diseaseNames
     			]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[1] & /*totalYearsLost*/ 16 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
-    			 $$invalidate(103, diseaseDALYs = [totalYearsLost, ...translations.countries[selectedId].diseaseDALYs]);
+    		if ($$self.$$.dirty[1] & /*totalYearsLost, translations*/ 540672 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    			 $$invalidate(104, diseaseDALYs = [totalYearsLost, ...translations.countries[selectedId].diseaseDALYs]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
     			// push estimated totalYearsLost TODO: DALYs of coronavirus deaths to riskCauses
-    			 $$invalidate(104, riskFactors = [
+    			 $$invalidate(105, riskFactors = [
     				translations.app.covid19Cause,
     				...translations.countries[selectedId].riskFactors
     			]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*translations*/ 1073741824 | $$self.$$.dirty[1] & /*totalYearsLost*/ 16 | $$self.$$.dirty[2] & /*selectedId*/ 16777216) {
-    			 $$invalidate(105, riskDALYs = [totalYearsLost, ...translations.countries[selectedId].riskDALYs]);
+    		if ($$self.$$.dirty[1] & /*totalYearsLost, translations*/ 540672 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    			 $$invalidate(106, riskDALYs = [totalYearsLost, ...translations.countries[selectedId].riskDALYs]);
     		}
 
-    		if ($$self.$$.dirty[2] & /*selectedId*/ 16777216) {
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(11, compareItems = [
+    				{
+    					label: translations.app.compareItems0,
+    					value: 0
+    				},
+    				{
+    					label: translations.app.compareItems1, // "Causes of Death"
+    					value: 1
+    				},
+    				{
+    					label: translations.app.compareItems2, // "Causes of Years of Life Lost"
+    					value: 2
+    				}
+    			]); // "Risk Factors in Years of Life Lost"
+    		}
+
+    		if ($$self.$$.dirty[2] & /*selectedId*/ 33554432) {
     			// to extract types for colors
-    			 $$invalidate(106, majorCausesEng = [
+    			 $$invalidate(107, majorCausesEng = [
     				translationMap["en"].app.covid19Cause,
     				...translationMap["en"].countries[selectedId].majorCauses
     			]);
     		}
 
-    		if ($$self.$$.dirty[3] & /*majorCausesEng*/ 8192) {
+    		if ($$self.$$.dirty[3] & /*majorCausesEng*/ 16384) {
     			 for (let i = 0; i < majorCausesEng.length; i++) {
     				if (majorCausesEng[i].includes("estimate")) {
     					$$invalidate(68, compareTypes[i] = "estimate", compareTypes);
@@ -16623,7 +16976,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*majorCauses, majorDeaths*/ 384) {
+    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*majorCauses, majorDeaths*/ 768) {
     			 for (let i = 0; i < majorCauses.length; i++) {
     				$$invalidate(
     					69,
@@ -16637,7 +16990,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*diseaseNames, diseaseDALYs*/ 1536) {
+    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*diseaseNames, diseaseDALYs*/ 3072) {
     			 for (let i = 0; i < diseaseNames.length; i++) {
     				$$invalidate(
     					70,
@@ -16651,7 +17004,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*riskFactors, riskDALYs*/ 6144) {
+    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*riskFactors, riskDALYs*/ 12288) {
     			 for (let i = 0; i < riskFactors.length; i++) {
     				$$invalidate(
     					71,
@@ -16665,40 +17018,40 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*currentCompare*/ 1024 | $$self.$$.dirty[2] & /*compareCauses, compareDiseases, compareRisks*/ 896) {
+    		if ($$self.$$.dirty[0] & /*currentCompare*/ 4096 | $$self.$$.dirty[2] & /*compareCauses, compareDiseases, compareRisks*/ 896) {
     			 switch (currentCompare) {
     				case 0:
-    					$$invalidate(11, compareList = compareCauses);
+    					$$invalidate(13, compareList = compareCauses);
     					break;
     				case 1:
-    					$$invalidate(11, compareList = compareDiseases);
+    					$$invalidate(13, compareList = compareDiseases);
     					break;
     				default:
-    					$$invalidate(11, compareList = compareRisks);
+    					$$invalidate(13, compareList = compareRisks);
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*currentCompare, selectedLocation*/ 1028) {
-    			 $$invalidate(14, titleListMain = "How COVID-19 Compare With " + compareItems[currentCompare].label + " in " + selectedLocation); // TODO: translations
+    		if ($$self.$$.dirty[0] & /*compareItems, currentCompare, selectedLocation*/ 6148 | $$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(16, titleListMain = translations.app.titleListMain + compareItems[currentCompare].label + translations.app.inCountry + selectedLocation);
     		}
 
-    		if ($$self.$$.dirty[0] & /*currentCompare*/ 1024) {
+    		if ($$self.$$.dirty[0] & /*currentCompare*/ 4096 | $$self.$$.dirty[1] & /*translations*/ 16384) {
     			 if (currentCompare === 0) {
-    				$$invalidate(12, titleListName = "Cause");
-    				$$invalidate(13, titleListNumber = "Deaths");
+    				$$invalidate(14, titleListName = translations.app.titleListName);
+    				$$invalidate(15, titleListNumber = translations.app.deaths);
     			} else if (currentCompare === 1) {
-    				$$invalidate(12, titleListName = "Cause");
-    				$$invalidate(13, titleListNumber = "Yrs of Life Lost");
+    				$$invalidate(14, titleListName = translations.app.titleListName);
+    				$$invalidate(15, titleListNumber = translations.app.yearsOfLifeLost);
     			} else {
-    				$$invalidate(12, titleListName = "Risk");
-    				$$invalidate(13, titleListNumber = "Yrs of Life Lost");
+    				$$invalidate(14, titleListName = translations.app.titleListRisk);
+    				$$invalidate(15, titleListNumber = translations.app.yearsOfLifeLost);
     			}
     		}
 
     		if ($$self.$$.dirty[2] & /*infected, ageTypes, deaths*/ 1044) {
     			 for (let i = 0; i < infected.length; i++) {
     				$$invalidate(
-    					15,
+    					17,
     					infectedData[i] = {
     						name: ageGroups[i],
     						number: infected[i],
@@ -16708,7 +17061,7 @@ var app = (function () {
     				);
 
     				$$invalidate(
-    					16,
+    					18,
     					deathsData[i] = {
     						name: ageGroups[i],
     						number: deaths[i],
@@ -16719,49 +17072,120 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedLocation*/ 4) {
-    			 $$invalidate(17, infectedTitle = "Potential Infected by Age" + " in " + selectedLocation); // TODO: translations.app.infectedTitle
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(19, infectedTitle = translations.app.infectedTitle);
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedLocation*/ 4) {
-    			 $$invalidate(18, deathsTitle = "Potential Deaths by Age" + " in " + selectedLocation); // TODO: translations.app.deathsTitle
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(20, deathsTitle = translations.app.deathsTitle);
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedLocation, translations*/ 1073741828 | $$self.$$.dirty[1] & /*selectedSourceId*/ 1 | $$self.$$.dirty[2] & /*i, pctU_60plusExample, fatalitiesBaseline, j, prElimExample, demographics, pctU_below60Example, pctH_below60Example, deathsExample, infectedExample, fatalitiesExample, yearsLostExample, totalYearsLostExample, totalInfectedExample, totalDeathsExample, totalMoneyLostExample*/ 822081544 | $$self.$$.dirty[3] & /*d_60plus*/ 1) {
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(21, infectedTitleListName = translations.app.age);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(22, infectedTitleListNumber = translations.app.infected);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(23, deathsTitleListName = translations.app.age);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(24, deathsTitleListNumber = translations.app.age);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(25, projectionsTitle = translations.app.projectionsTitle);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(26, projectionsXAxisLabel = translations.app.date);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(27, projectionsYAxisLabel = translations.app.totDeaths);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(28, projectionsLegendDeaths = translations.app.totDeaths);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(29, projectionsLegendDeathsProjected = translations.app.totDeathsProj);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(73, inputs = [
+    				{
+    					id: 0,
+    					pctH: 60,
+    					pctH_60plus: 60,
+    					pctOfChange: 0,
+    					prElim100: 0,
+    					pctU: 0,
+    					comments: translations.app.exampleScenario0
+    				},
+    				// "Scenario 0: Do nothing, as a baseline"
+    				{
+    					id: 1,
+    					pctH: 60,
+    					pctH_60plus: 20,
+    					pctOfChange: 0,
+    					prElim100: 0,
+    					pctU: 0,
+    					comments: translations.app.exampleScenario1
+    				},
+    				// "Scenario 1: Protect people over 60, compensate by exposing those 
+    				// below 60, consider also years of life lost"
+    				{
+    					id: 2,
+    					pctH: 60,
+    					pctH_60plus: 60,
+    					pctOfChange: 0,
+    					prElim100: 90,
+    					pctU: 10,
+    					comments: translations.app.exampleScenario2
+    				}
+    			]); // "Scenario 2: Elimination to 90%, consider also money saved"
+    		}
+
+    		if ($$self.$$.dirty[0] & /*selectedLocation*/ 4 | $$self.$$.dirty[1] & /*translations, selectedSourceId*/ 49152 | $$self.$$.dirty[2] & /*i, inputs, pctU_60plusExample, fatalitiesBaseline, j, prElimExample, demographics, pctU_below60Example, pctH_below60Example, deathsExample, infectedExample, fatalitiesExample, yearsLostExample, totalYearsLostExample, totalInfectedExample, totalDeathsExample, totalMoneyLostExample*/ 1644165128 | $$self.$$.dirty[3] & /*d_60plus*/ 2) {
     			 for ($$invalidate(65, i = 0); i < 3; $$invalidate(65, i++, i)) {
     				// d_60plus does not depend on input parameters
-    				$$invalidate(73, pctH_below60Example = Math.round((inputs[i].pctH - inputs[i].pctH_60plus * d_60plus) / (1 - d_60plus)));
+    				$$invalidate(74, pctH_below60Example = Math.round((inputs[i].pctH - inputs[i].pctH_60plus * d_60plus) / (1 - d_60plus)));
 
     				// pctU_60plusExample = proportion of 60+ people that are infected until elimination
-    				$$invalidate(75, pctU_60plusExample = inputs[i].pctH_60plus / inputs[i].pctH * inputs[i].pctU);
+    				$$invalidate(76, pctU_60plusExample = inputs[i].pctH_60plus / inputs[i].pctH * inputs[i].pctU);
 
-    				$$invalidate(74, pctU_below60Example = (inputs[i].pctU - pctU_60plusExample * d_60plus) / (1 - d_60plus));
-    				$$invalidate(77, fatalitiesExample = fatalitiesBaseline.map(fat => fat * (1 + inputs[i].pctOfChange / 100)));
-    				$$invalidate(76, prElimExample = inputs[i].prElim100 / 100);
+    				$$invalidate(75, pctU_below60Example = (inputs[i].pctU - pctU_60plusExample * d_60plus) / (1 - d_60plus));
+    				$$invalidate(78, fatalitiesExample = fatalitiesBaseline.map(fat => fat * (1 + inputs[i].pctOfChange / 100)));
+    				$$invalidate(77, prElimExample = inputs[i].prElim100 / 100);
 
-    				for ($$invalidate(85, j = 0); j < 6; $$invalidate(85, j++, j)) {
-    					$$invalidate(78, infectedExample[j] = Math.round(prElimExample * demographics[j] * pctU_below60Example / 100 + (1 - prElimExample) * demographics[j] * pctH_below60Example / 100), infectedExample);
+    				for ($$invalidate(86, j = 0); j < 6; $$invalidate(86, j++, j)) {
+    					$$invalidate(79, infectedExample[j] = Math.round(prElimExample * demographics[j] * pctU_below60Example / 100 + (1 - prElimExample) * demographics[j] * pctH_below60Example / 100), infectedExample);
     				}
 
-    				for ($$invalidate(85, j = 6); j < 9; $$invalidate(85, j++, j)) {
-    					$$invalidate(78, infectedExample[j] = Math.round(prElimExample * demographics[j] * pctU_60plusExample / 100 + (1 - prElimExample) * demographics[j] * inputs[i].pctH_60plus / 100), infectedExample);
+    				for ($$invalidate(86, j = 6); j < 9; $$invalidate(86, j++, j)) {
+    					$$invalidate(79, infectedExample[j] = Math.round(prElimExample * demographics[j] * pctU_60plusExample / 100 + (1 - prElimExample) * demographics[j] * inputs[i].pctH_60plus / 100), infectedExample);
     				}
 
-    				for ($$invalidate(85, j = 0); j < deathsExample.length; $$invalidate(85, j++, j)) {
-    					$$invalidate(79, deathsExample[j] = Math.round(infectedExample[j] * fatalitiesExample[j] / 100), deathsExample);
+    				for ($$invalidate(86, j = 0); j < deathsExample.length; $$invalidate(86, j++, j)) {
+    					$$invalidate(80, deathsExample[j] = Math.round(infectedExample[j] * fatalitiesExample[j] / 100), deathsExample);
     				}
 
-    				for ($$invalidate(85, j = 0); j < yearsLostExample.length; $$invalidate(85, j++, j)) {
-    					$$invalidate(80, yearsLostExample[j] = Math.round(deathsExample[j] * lifeExpectanciesGlobal[j]), yearsLostExample);
+    				for ($$invalidate(86, j = 0); j < yearsLostExample.length; $$invalidate(86, j++, j)) {
+    					$$invalidate(81, yearsLostExample[j] = Math.round(deathsExample[j] * lifeExpectanciesGlobal[j]), yearsLostExample);
     				}
 
-    				$$invalidate(81, totalInfectedExample = Math.round(infectedExample.reduce((a, b) => a + b, 0)));
-    				$$invalidate(82, totalDeathsExample = Math.round(deathsExample.reduce((a, b) => a + b, 0)));
-    				$$invalidate(83, totalYearsLostExample = Math.round(yearsLostExample.reduce((a, b) => a + b, 0)));
-    				$$invalidate(84, totalMoneyLostExample = Math.round(129000 * totalYearsLostExample / Math.pow(10, 9))); // in $< >B or billion format
+    				$$invalidate(82, totalInfectedExample = Math.round(infectedExample.reduce((a, b) => a + b, 0)));
+    				$$invalidate(83, totalDeathsExample = Math.round(deathsExample.reduce((a, b) => a + b, 0)));
+    				$$invalidate(84, totalYearsLostExample = Math.round(yearsLostExample.reduce((a, b) => a + b, 0)));
+    				$$invalidate(85, totalMoneyLostExample = Math.round(129000 * totalYearsLostExample / Math.pow(10, 9))); // in $< >B or billion format
 
     				$$invalidate(
-    					24,
+    					30,
     					rowsOfScenarios[i] = {
     						id: inputs[i].id,
     						loc: selectedLocation,
@@ -16783,9 +17207,122 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*rowsOfScenarios*/ 16777216) {
+    		if ($$self.$$.dirty[0] & /*rowsOfScenarios*/ 1073741824) {
     			// to export scenarios, countries population properties, etc. we just pretty print the JSONs
-    			 $$invalidate(39, exportedData = "\"Scenarios\": " + JSON.stringify(rowsOfScenarios, null, 2));
+    			 $$invalidate(55, exportedData = "\"Scenarios\": " + JSON.stringify(rowsOfScenarios, null, 2));
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(31, mapTitle = translations.app.mapTitle);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(32, mapItems = [
+    				{
+    					label: translations.app.mapItems0,
+    					value: 0
+    				},
+    				{
+    					label: translations.app.mapItems1, // "Proportion of people over 60 by Country"
+    					value: 1
+    				}
+    			]); // "Income by Country"
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(34, povertyItems = [
+    				{
+    					label: translations.app.povertyItems0,
+    					value: 0
+    				},
+    				{
+    					label: translations.app.povertyItems1, // "By Country"
+    					value: 1
+    				}
+    			]); // "By Region"
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			// poverty increases by country:
+    			 $$invalidate(108, povertyProjCountryNames = [
+    				translations.app.india,
+    				translations.app.nigeria,
+    				translations.app.drCongo,
+    				translations.app.ethiopia,
+    				translations.app.bangladesh,
+    				translations.app.tanzania,
+    				translations.app.madagascar,
+    				translations.app.indonesia,
+    				translations.app.kenya,
+    				translations.app.mozambique,
+    				translations.app.uganda,
+    				translations.app.southAfrica
+    			]);
+    		}
+
+    		if ($$self.$$.dirty[3] & /*povertyProjCountryNames*/ 32768) {
+    			 for (let i = 0; i < povertyProjCountryNames.length; i++) {
+    				$$invalidate(
+    					36,
+    					povertyProjCountries[i] = {
+    						name: povertyProjCountryNames[i],
+    						number: povertyProjCountryNumbers[i],
+    						type: "poverty"
+    					},
+    					povertyProjCountries
+    				);
+    			}
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			// poverty increases by region:
+    			 $$invalidate(109, povertyProjRegionNames = [
+    				translations.app.subSahAfrica,
+    				translations.app.southAsia,
+    				translations.app.eastAsiaPacific,
+    				translations.app.latinCaribbean,
+    				translations.app.middleEastNorthAfrica,
+    				translations.app.europeCentralAsia,
+    				translations.app.northAmerica
+    			]);
+    		}
+
+    		if ($$self.$$.dirty[3] & /*povertyProjRegionNames*/ 65536) {
+    			 for (let i = 0; i < povertyProjRegionNames.length; i++) {
+    				$$invalidate(
+    					37,
+    					povertyProjRegions[i] = {
+    						name: povertyProjRegionNames[i],
+    						number: povertyProjRegionNumbers[i],
+    						type: "poverty"
+    					},
+    					povertyProjRegions
+    				);
+    			}
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(38, mainProjCountries = translations.app.projectionsTitle + translations.app.country);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(39, nameProjCountries = translations.app.country);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(40, numberProjCountries = translations.app.people);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(41, mainProjRegions = translations.app.projectionsTitle + translations.app.region);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(42, nameProjRegions = translations.app.region);
+    		}
+
+    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    			 $$invalidate(43, numberProjRegions = translations.app.people);
     		}
     	};
 
@@ -16797,47 +17334,19 @@ var app = (function () {
     		}
     	}
 
-    	 $$invalidate(19, projectionsTitle = "Projections of Total Deaths over Time by Country");
-    	 $$invalidate(20, projectionsXAxisLabel = "Date");
-    	 $$invalidate(21, projectionsYAxisLabel = "Total deaths");
-    	 $$invalidate(22, projectionsLegendDeaths = "Total deaths");
-    	 $$invalidate(23, projectionsLegendDeathsProjected = "Total deaths (projected)");
-
-    	 for (let i = 0; i < povertyProjCountryNames.length; i++) {
-    		$$invalidate(
-    			27,
-    			povertyProjCountries[i] = {
-    				name: povertyProjCountryNames[i],
-    				number: povertyProjCountryNumbers[i],
-    				type: "poverty"
-    			},
-    			povertyProjCountries
-    		);
-    	}
-
-    	 for (let i = 0; i < povertyProjRegionNames.length; i++) {
-    		$$invalidate(
-    			28,
-    			povertyProjRegions[i] = {
-    				name: povertyProjRegionNames[i],
-    				number: povertyProjRegionNumbers[i],
-    				type: "poverty"
-    			},
-    			povertyProjRegions
-    		);
-    	}
-
     	return [
     		currentTab,
     		userNeeds,
     		selectedLocation,
     		desc,
+    		language,
     		selectedObject,
     		selectedSourceObject,
     		pctOfChange,
     		pctH,
     		prElimTimes100,
     		pctU,
+    		compareItems,
     		currentCompare,
     		compareList,
     		titleListName,
@@ -16847,16 +17356,29 @@ var app = (function () {
     		deathsData,
     		infectedTitle,
     		deathsTitle,
+    		infectedTitleListName,
+    		infectedTitleListNumber,
+    		deathsTitleListName,
+    		deathsTitleListNumber,
     		projectionsTitle,
     		projectionsXAxisLabel,
     		projectionsYAxisLabel,
     		projectionsLegendDeaths,
     		projectionsLegendDeathsProjected,
     		rowsOfScenarios,
+    		mapTitle,
+    		mapItems,
     		selectedRisk,
+    		povertyItems,
     		currentPoverty,
     		povertyProjCountries,
     		povertyProjRegions,
+    		mainProjCountries,
+    		nameProjCountries,
+    		numberProjCountries,
+    		mainProjRegions,
+    		nameProjRegions,
+    		numberProjRegions,
     		pctH_60plus,
     		translations,
     		selectedSourceId,
@@ -16865,6 +17387,7 @@ var app = (function () {
     		totalDeaths,
     		totalYearsLost,
     		totalMoneyLost,
+    		tabItems,
     		lowerBound,
     		upperBound,
     		exportedData,
@@ -16873,25 +17396,9 @@ var app = (function () {
     		changeLanguageTo,
     		addScenario,
     		deleteScenario,
-    		tabItems,
     		toggleExportData,
-    		compareItems,
-    		infectedTitleListName,
-    		infectedTitleListNumber,
-    		deathsTitleListName,
-    		deathsTitleListNumber,
-    		mapTitle,
-    		mapItems,
-    		povertyItems,
-    		mainProjCountries,
-    		nameProjCountries,
-    		numberProjCountries,
-    		mainProjRegions,
-    		nameProjRegions,
-    		numberProjRegions,
     		colorsProjRegions,
     		colorsProjCountries,
-    		language,
     		infected,
     		i,
     		deaths,
@@ -16901,6 +17408,7 @@ var app = (function () {
     		compareDiseases,
     		compareRisks,
     		ageTypes,
+    		inputs,
     		pctH_below60Example,
     		pctU_below60Example,
     		pctU_60plusExample,
@@ -16935,6 +17443,8 @@ var app = (function () {
     		riskFactors,
     		riskDALYs,
     		majorCausesEng,
+    		povertyProjCountryNames,
+    		povertyProjRegionNames,
     		english,
     		chinese,
     		spanish,
@@ -16944,10 +17454,7 @@ var app = (function () {
     		ageGroups,
     		lifeExpectanciesGlobal,
     		projectionsCaption,
-    		inputs,
-    		povertyProjCountryNames,
     		povertyProjCountryNumbers,
-    		povertyProjRegionNames,
     		povertyProjRegionNumbers,
     		click_handler,
     		click_handler_1,
