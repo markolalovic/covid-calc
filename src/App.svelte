@@ -683,7 +683,7 @@
 				<span class="parameter-text">
 					{translations.app.proportionIsThen}
 				</span>
-				<span class="parameter">{pctH_below60}%</span>
+				<span class="parameter">{pctH_below60}%</span>.
 				<span class="parameter-text">
 					{translations.app.proportionIsThenDescription}
 				</span>

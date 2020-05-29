@@ -109,7 +109,8 @@ Hide Export,隐藏导出,Export1
 "Scenario 2: Elimination to 90%, consider also money saved",方案2：消除90％，同时考虑剩下的钱,Example scenario2
 COVID-19 Risks by Country,COVID-19各国风险,Map title
 Proportion of people over 60 by Country,按国家划分的60岁以上人口的比例,Map items0
-Low Income Risk by Country,按国家划分的60岁以上人口的比例,Map items1
+Low Income Risk by Country,"低收入风险（按国家/地区）
+",Map items1
 By Country,按国家,Poverty items0
 By Region,按地区,Poverty items1
 Imperial College - IFR,帝国理工学院-IFR,Sources of Fatality Rates
