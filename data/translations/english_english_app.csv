@@ -20,7 +20,7 @@ The proportion of people below 60 infected is then,The proportion of people belo
 Since it depends on both overall infection rate and infection rate of people over 60.,Since it depends on both overall infection rate and infection rate of people over 60.,Proportion is then description
 Based on,Based on,Based on
 fatality rates and ,fatality rates and ,Based on continued1
-"s age distribution and other selected input parameters, the potential expected numbers","s age distribution and other selected input parameters, the potential expected numbers",Based on continued2
+"age distribution and other selected input parameters, we can expect: ","age distribution and other selected input parameters, we can expect: ",Based on continued2
 infected and ,infected and ,Based on continued3
 deaths or ,deaths or ,Based on continued4
 years of life lost in ,years of life lost in ,Based on continued5
@@ -40,8 +40,8 @@ Projected poverty increases by region due to coronavirus impact on world economy
 Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.,Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.,Projections caption
 Source:,Source:,Source
 Reset,Reset,Reset
-Potential Infected by Age,Potential Infected by Age,Infected title
-Potential Deaths by Age,Potential Deaths by Age,Deaths title
+Expected Number of Infected by Age,Expected Number of Infected by Age,Infected title
+Expected Number of Deaths by Age,Expected Number of Deaths by Age,Deaths title
 Age,Age,Age
 Infected,Infected,Infected
 Deaths,Deaths,Deaths
@@ -89,27 +89,27 @@ Causes of Death,Causes of Death,Main proj regions
 Causes of Years of Life Lost,Causes of Years of Life Lost,Name proj regions
 Risk Factors in Years of Life Lost,Risk Factors in Years of Life Lost,Number proj regions
 Fatality rates,Fatality rates,Fatality rates
-Select estimates of risk of death from infection with the novel coronavirus.Estimates vary between countries and over time.Wider testing can reduce CFR estimates.,Select estimates of risk of death from infection with the novel coronavirus.Estimates vary between countries and over time.Wider testing can reduce CFR estimates.,Fatality rates description
+Select estimates of risk of death from infection with the novel coronavirus. Estimates vary between countries and over time. Wider testing can reduce CFR estimates.,Select estimates of risk of death from infection with the novel coronavirus. Estimates vary between countries and over time. Wider testing can reduce CFR estimates.,Fatality rates description
 Vary selected fatality rates,Vary selected fatality rates,Vary f rs
-"Try increasing the risk of deaths, e.g. to 50%,for low-income country or overwhelmed healthcare.","Try increasing the risk of deaths, e.g. to 50%,for low-income country or overwhelmed healthcare.",Vary f rs description1
-"Or decreasing, e.g. to -50%,for expected improved treatments and better healthcare.","Or decreasing, e.g. to -50%,for expected improved treatments and better healthcare.",Vary f rs description2
+"Try increasing the risk of deaths, e.g. to 50%,  for low-income country or overwhelmed healthcare.","Try increasing the risk of deaths, e.g. to 50%,  for low-income country or overwhelmed healthcare.",Vary f rs description1
+"Or decreasing, e.g. to -50%,  for expected improved treatments and better healthcare.","Or decreasing, e.g. to -50%,  for expected improved treatments and better healthcare.",Vary f rs description2
 Set all input parameters back to their initial values.,Set all input parameters back to their initial values.,Reset description
 Probability of eliminating COVID-19,Probability of eliminating COVID-19,Elimination
-Probability of achieving complete eliminationof COVID-19 disease before it manages to infect,Probability of achieving complete eliminationof COVID-19 disease before it manages to infect,Elimination description1
+Probability of achieving complete elimination  of COVID-19 disease before it manages to infect,Probability of achieving complete elimination  of COVID-19 disease before it manages to infect,Elimination description1
 of population.,of population.,Elimination description2
 Infection rate until elimination,Infection rate until elimination,Infection until
-Proportion of population that still gets infected even in the eventof achieving complete elimination.Note: First increase the probability of eliminationfor this parameter to take effect.,Proportion of population that still gets infected even in the eventof achieving complete elimination.Note: First increase the probability of eliminationfor this parameter to take effect.,Infection until description
+Proportion of population that still gets infected even in the event of achieving complete elimination. Note: First increase the probability of elimination for this parameter to take effect.,Proportion of population that still gets infected even in the event of achieving complete elimination. Note: First increase the probability of elimination for this parameter to take effect.,Infection until description
 Hide Export,Hide Export,Hide export
 Export,Export,Export
 Export Hypothetical COVID-19 Scenarios in JSON format.,Export Hypothetical COVID-19 Scenarios in JSON format.,Export description
 Hide Export,Hide Export,Export1
-"You can set input parameters that describe a hypothetical scenario and add it tothe table for comparison.There are 3 examples of hypothetical scenarios for the selected location and fatality risks.Results should be interpreted with caution, see Example Interpretations.","You can set input parameters that describe a hypothetical scenario and add it tothe table for comparison.There are 3 examples of hypothetical scenarios for the selected location and fatality risks.Results should be interpreted with caution, see Example Interpretations.",Scenarios caption
+"You can set input parameters that describe a hypothetical scenario and add it to the table for comparison. There are 3 examples of hypothetical scenarios for the selected location and fatality risks. Results should be interpreted with caution, see Example Interpretations.","You can set input parameters that describe a hypothetical scenario and add it to the table for comparison. There are 3 examples of hypothetical scenarios for the selected location and fatality risks. Results should be interpreted with caution, see Example Interpretations.",Scenarios caption
 "Scenario 0: Do nothing, as a baseline","Scenario 0: Do nothing, as a baseline",Example scenario0
-"Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost","Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost",Example scenario1
+"Scenario 1: Protect people over 60,  compensate by exposing those below 60, consider also years of life lost","Scenario 1: Protect people over 60,  compensate by exposing those below 60, consider also years of life lost",Example scenario1
 "Scenario 2: Elimination to 90%, consider also money saved","Scenario 2: Elimination to 90%, consider also money saved",Example scenario2
 COVID-19 Risks by Country,COVID-19 Risks by Country,Map title
 Proportion of people over 60 by Country,Proportion of people over 60 by Country,Map items0
-Proportion of people over 60 by Country,Proportion of people over 60 by Country,Map items1
+Low Income Risk by Country,Low Income Risk by Country,Map items1
 By Country,By Country,Poverty items0
 By Region,By Region,Poverty items1
 Imperial College - IFR,Imperial College - IFR,Sources of Fatality Rates
@@ -121,73 +121,73 @@ Other Major Causes Of Death,Other Major Causes Of Death,Option to compare with
 Diseases in Years of Life Lost,Diseases in Years of Life Lost,Option to compare with
 Risk Factors in Years of Life Lost,Risk Factors in Years of Life Lost,Option to compare with
 Other Countries in the World,Other Countries in the World,Option to compare with
-Drug use disorders,Drug use disorders,"Cause of death, e.g. homicide"
-Parkinson disease,Parkinson disease,"Cause of death, e.g. homicide"
-Digestive diseases,Digestive diseases,"Cause of death, e.g. homicide"
-HIV/AIDS,HIV/AIDS,"Cause of death, e.g. homicide"
-Dementia,Dementia,"Cause of death, e.g. homicide"
-Meningitis,Meningitis,"Cause of death, e.g. homicide"
-Alcohol use disorders,Alcohol use disorders,"Cause of death, e.g. homicide"
-Malaria,Malaria,"Cause of death, e.g. homicide"
-Natural disasters,Natural disasters,"Cause of death, e.g. homicide"
-Respiratory diseases,Respiratory diseases,"Cause of death, e.g. homicide"
-Diabetes,Diabetes,"Cause of death, e.g. homicide"
 Terrorism,Terrorism,"Cause of death, e.g. homicide"
-Nutritional deficiencies,Nutritional deficiencies,"Cause of death, e.g. homicide"
-Lower respiratory infections,Lower respiratory infections,"Cause of death, e.g. homicide"
 Protein-energy malnutrition,Protein-energy malnutrition,"Cause of death, e.g. homicide"
-Homicide,Homicide,"Cause of death, e.g. homicide"
-Suicide,Suicide,"Cause of death, e.g. homicide"
-Liver diseases,Liver diseases,"Cause of death, e.g. homicide"
-"COVID-19 until May 27, 2020","COVID-19 until May 27, 2020","Cause of death, e.g. homicide"
-Cancers,Cancers,"Cause of death, e.g. homicide"
-Conflict,Conflict,"Cause of death, e.g. homicide"
-Cardiovascular diseases,Cardiovascular diseases,"Cause of death, e.g. homicide"
-Neonatal disorders,Neonatal disorders,"Cause of death, e.g. homicide"
-Kidney disease,Kidney disease,"Cause of death, e.g. homicide"
 Diarrheal diseases,Diarrheal diseases,"Cause of death, e.g. homicide"
-Tuberculosis,Tuberculosis,"Cause of death, e.g. homicide"
+Natural disasters,Natural disasters,"Cause of death, e.g. homicide"
+Alcohol use disorders,Alcohol use disorders,"Cause of death, e.g. homicide"
+Suicide,Suicide,"Cause of death, e.g. homicide"
+Drug use disorders,Drug use disorders,"Cause of death, e.g. homicide"
+Nutritional deficiencies,Nutritional deficiencies,"Cause of death, e.g. homicide"
+Dementia,Dementia,"Cause of death, e.g. homicide"
+Lower respiratory infections,Lower respiratory infections,"Cause of death, e.g. homicide"
+Parkinson disease,Parkinson disease,"Cause of death, e.g. homicide"
+Homicide,Homicide,"Cause of death, e.g. homicide"
+Diabetes,Diabetes,"Cause of death, e.g. homicide"
+Conflict,Conflict,"Cause of death, e.g. homicide"
 Maternal disorders,Maternal disorders,"Cause of death, e.g. homicide"
+Respiratory diseases,Respiratory diseases,"Cause of death, e.g. homicide"
+Tuberculosis,Tuberculosis,"Cause of death, e.g. homicide"
+Meningitis,Meningitis,"Cause of death, e.g. homicide"
+Kidney disease,Kidney disease,"Cause of death, e.g. homicide"
+Digestive diseases,Digestive diseases,"Cause of death, e.g. homicide"
+Malaria,Malaria,"Cause of death, e.g. homicide"
+Cardiovascular diseases,Cardiovascular diseases,"Cause of death, e.g. homicide"
+Cancers,Cancers,"Cause of death, e.g. homicide"
+"COVID-19 until May 27, 2020","COVID-19 until May 27, 2020","Cause of death, e.g. homicide"
+Liver diseases,Liver diseases,"Cause of death, e.g. homicide"
 Road injuries,Road injuries,"Cause of death, e.g. homicide"
-Transport injuries,Transport injuries,"Cause of years of life lost, e.g. cancer"
-HIV/AIDS and tuberculosis,HIV/AIDS and tuberculosis,"Cause of years of life lost, e.g. cancer"
-Interpersonal violence,Interpersonal violence,"Cause of years of life lost, e.g. cancer"
-Digestive diseases,Digestive diseases,"Cause of years of life lost, e.g. cancer"
-Malaria & neglected tropical diseases,Malaria & neglected tropical diseases,"Cause of years of life lost, e.g. cancer"
-Unintentional injuries,Unintentional injuries,"Cause of years of life lost, e.g. cancer"
-Respiratory diseases,Respiratory diseases,"Cause of years of life lost, e.g. cancer"
-Self-harm,Self-harm,"Cause of years of life lost, e.g. cancer"
-Musculoskeletal disorders,Musculoskeletal disorders,"Cause of years of life lost, e.g. cancer"
-Neurological disorders,Neurological disorders,"Cause of years of life lost, e.g. cancer"
-Nutritional deficiencies,Nutritional deficiencies,"Cause of years of life lost, e.g. cancer"
+HIV/AIDS,HIV/AIDS,"Cause of death, e.g. homicide"
+Neonatal disorders,Neonatal disorders,"Cause of death, e.g. homicide"
 Other NCDs,Other NCDs,"Cause of years of life lost, e.g. cancer"
+Transport injuries,Transport injuries,"Cause of years of life lost, e.g. cancer"
+Nutritional deficiencies,Nutritional deficiencies,"Cause of years of life lost, e.g. cancer"
+Interpersonal violence,Interpersonal violence,"Cause of years of life lost, e.g. cancer"
+Unintentional injuries,Unintentional injuries,"Cause of years of life lost, e.g. cancer"
 Other communicable diseases,Other communicable diseases,"Cause of years of life lost, e.g. cancer"
-Liver diseases,Liver diseases,"Cause of years of life lost, e.g. cancer"
-"COVID-19 until May 27, 2020","COVID-19 until May 27, 2020","Cause of years of life lost, e.g. cancer"
-Cancers,Cancers,"Cause of years of life lost, e.g. cancer"
-Cardiovascular diseases,Cardiovascular diseases,"Cause of years of life lost, e.g. cancer"
-Conflict and terrorism,Conflict and terrorism,"Cause of years of life lost, e.g. cancer"
-Mental and substance use disorders,Mental and substance use disorders,"Cause of years of life lost, e.g. cancer"
-Neonatal disorders,Neonatal disorders,"Cause of years of life lost, e.g. cancer"
+Respiratory diseases,Respiratory diseases,"Cause of years of life lost, e.g. cancer"
 Diarrhea & common infectious diseases,Diarrhea & common infectious diseases,"Cause of years of life lost, e.g. cancer"
+Digestive diseases,Digestive diseases,"Cause of years of life lost, e.g. cancer"
+Mental and substance use disorders,Mental and substance use disorders,"Cause of years of life lost, e.g. cancer"
+Neurological disorders,Neurological disorders,"Cause of years of life lost, e.g. cancer"
+Cardiovascular diseases,Cardiovascular diseases,"Cause of years of life lost, e.g. cancer"
+Cancers,Cancers,"Cause of years of life lost, e.g. cancer"
+Musculoskeletal disorders,Musculoskeletal disorders,"Cause of years of life lost, e.g. cancer"
+HIV/AIDS and tuberculosis,HIV/AIDS and tuberculosis,"Cause of years of life lost, e.g. cancer"
+"COVID-19 until May 27, 2020","COVID-19 until May 27, 2020","Cause of years of life lost, e.g. cancer"
+Liver diseases,Liver diseases,"Cause of years of life lost, e.g. cancer"
 "Diabetes, blood, & endocrine diseases","Diabetes, blood, & endocrine diseases","Cause of years of life lost, e.g. cancer"
-Diet low in fruits,Diet low in fruits,"Risk factor, e.g. smoking"
-Low physical activity,Low physical activity,"Risk factor, e.g. smoking"
-Vitamin A deficiency,Vitamin A deficiency,"Risk factor, e.g. smoking"
-High cholesterol,High cholesterol,"Risk factor, e.g. smoking"
-Secondhand smoke,Secondhand smoke,"Risk factor, e.g. smoking"
-High blood pressure,High blood pressure,"Risk factor, e.g. smoking"
-Diet low in vegetables,Diet low in vegetables,"Risk factor, e.g. smoking"
-Child stunting,Child stunting,"Risk factor, e.g. smoking"
-High blood sugar,High blood sugar,"Risk factor, e.g. smoking"
-Non-exclusive breastfeeding,Non-exclusive breastfeeding,"Risk factor, e.g. smoking"
-Child wasting,Child wasting,"Risk factor, e.g. smoking"
-"COVID-19 until May 27, 2020","COVID-19 until May 27, 2020","Risk factor, e.g. smoking"
+Self-harm,Self-harm,"Cause of years of life lost, e.g. cancer"
+Neonatal disorders,Neonatal disorders,"Cause of years of life lost, e.g. cancer"
+Conflict and terrorism,Conflict and terrorism,"Cause of years of life lost, e.g. cancer"
+Malaria & neglected tropical diseases,Malaria & neglected tropical diseases,"Cause of years of life lost, e.g. cancer"
 Air pollution (outdoor & indoor),Air pollution (outdoor & indoor),"Risk factor, e.g. smoking"
-Unsafe sanitation,Unsafe sanitation,"Risk factor, e.g. smoking"
-Obesity,Obesity,"Risk factor, e.g. smoking"
-Smoking,Smoking,"Risk factor, e.g. smoking"
-Unsafe water source,Unsafe water source,"Risk factor, e.g. smoking"
-Diet high in salt,Diet high in salt,"Risk factor, e.g. smoking"
-Iron deficiency,Iron deficiency,"Risk factor, e.g. smoking"
 Drug use,Drug use,"Risk factor, e.g. smoking"
+Smoking,Smoking,"Risk factor, e.g. smoking"
+High blood sugar,High blood sugar,"Risk factor, e.g. smoking"
+High blood pressure,High blood pressure,"Risk factor, e.g. smoking"
+Secondhand smoke,Secondhand smoke,"Risk factor, e.g. smoking"
+Diet low in vegetables,Diet low in vegetables,"Risk factor, e.g. smoking"
+Non-exclusive breastfeeding,Non-exclusive breastfeeding,"Risk factor, e.g. smoking"
+Child stunting,Child stunting,"Risk factor, e.g. smoking"
+Obesity,Obesity,"Risk factor, e.g. smoking"
+Vitamin A deficiency,Vitamin A deficiency,"Risk factor, e.g. smoking"
+Diet high in salt,Diet high in salt,"Risk factor, e.g. smoking"
+Child wasting,Child wasting,"Risk factor, e.g. smoking"
+Unsafe sanitation,Unsafe sanitation,"Risk factor, e.g. smoking"
+"COVID-19 until May 27, 2020","COVID-19 until May 27, 2020","Risk factor, e.g. smoking"
+Iron deficiency,Iron deficiency,"Risk factor, e.g. smoking"
+Low physical activity,Low physical activity,"Risk factor, e.g. smoking"
+High cholesterol,High cholesterol,"Risk factor, e.g. smoking"
+Unsafe water source,Unsafe water source,"Risk factor, e.g. smoking"
+Diet low in fruits,Diet low in fruits,"Risk factor, e.g. smoking"

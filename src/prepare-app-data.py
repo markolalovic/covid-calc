@@ -91,10 +91,10 @@ def get_app_dict():
     app_dict['over60Description'] = "Proportion of all people over the age of 60 contracting the novel coronavirus."
     app_dict['proportionIsThen'] = "The proportion of people below 60 infected is then"
     app_dict['proportionIsThenDescription'] = "Since it depends on both overall infection rate and infection rate of people over 60."
-    app_dict['basedOn'] = "Based on"
 
+    app_dict['basedOn'] = "Based on"
     app_dict['basedOnContinued1'] = "fatality rates and "
-    app_dict['basedOnContinued2'] = "s age distribution and other selected input parameters, the potential expected numbers"
+    app_dict['basedOnContinued2'] = "age distribution and other selected input parameters, we can expect: "
     app_dict['basedOnContinued3'] = "infected and "
     app_dict['basedOnContinued4'] = "deaths or "
     app_dict['basedOnContinued5'] = "years of life lost in "
@@ -125,8 +125,8 @@ def get_app_dict():
 
     app_dict['reset'] = "Reset"
 
-    app_dict['infectedTitle'] = "Potential Infected by Age"
-    app_dict['deathsTitle'] = "Potential Deaths by Age"
+    app_dict['infectedTitle'] = "Expected Number of Infected by Age"
+    app_dict['deathsTitle'] = "Expected Number of Deaths by Age"
     app_dict['age'] = "Age"
     app_dict['infected'] = "Infected"
     app_dict['deaths'] = "Deaths"
@@ -190,27 +190,27 @@ def get_app_dict():
     # rest of parameters
     app_dict['fatalityRates'] = "Fatality rates"
     app_dict['fatalityRatesDescription'] = "Select estimates of risk of death from infection with the novel coronavirus."\
-    "Estimates vary between countries and over time."\
-    "Wider testing can reduce CFR estimates."
+    " Estimates vary between countries and over time."\
+    " Wider testing can reduce CFR estimates."
 
     app_dict['varyFRs'] = "Vary selected fatality rates"
-    app_dict['varyFRsDescription1'] = "Try increasing the risk of deaths, e.g. to 50%,"\
-    "for low-income country or overwhelmed healthcare."
-    app_dict['varyFRsDescription2'] = "Or decreasing, e.g. to -50%,"\
-    "for expected improved treatments and better healthcare."
+    app_dict['varyFRsDescription1'] = "Try increasing the risk of deaths, e.g. to 50%, "\
+    " for low-income country or overwhelmed healthcare."
+    app_dict['varyFRsDescription2'] = "Or decreasing, e.g. to -50%, "\
+    " for expected improved treatments and better healthcare."
 
     app_dict['resetDescription'] = "Set all input parameters back to their initial values."
 
     app_dict['elimination'] = "Probability of eliminating COVID-19"
-    app_dict['eliminationDescription1'] = "Probability of achieving complete elimination"\
-    "of COVID-19 disease before it manages to infect"
+    app_dict['eliminationDescription1'] = "Probability of achieving complete elimination "\
+    " of COVID-19 disease before it manages to infect"
     app_dict['eliminationDescription2'] = "of population."
 
     app_dict['infectionUntil'] = "Infection rate until elimination"
     app_dict['infectionUntilDescription'] = "Proportion of population that still gets infected even in the event"\
-    "of achieving complete elimination."\
-    "Note: First increase the probability of elimination"\
-    "for this parameter to take effect."
+    " of achieving complete elimination."\
+    " Note: First increase the probability of elimination"\
+    " for this parameter to take effect."
 
     app_dict['hideExport'] = "Hide Export"
     app_dict['export'] = "Export"
@@ -219,19 +219,19 @@ def get_app_dict():
     app_dict['export1'] = "Hide Export"
 
     app_dict['scenariosCaption'] = "You can set input parameters that describe a hypothetical scenario and add it to"\
-    "the table for comparison."\
-    "There are 3 examples of hypothetical scenarios for the selected location and fatality risks."\
-    "Results should be interpreted with caution, see Example Interpretations."
+    " the table for comparison."\
+    " There are 3 examples of hypothetical scenarios for the selected location and fatality risks."\
+    " Results should be interpreted with caution, see Example Interpretations."
 
     app_dict['exampleScenario0'] = "Scenario 0: Do nothing, as a baseline"
     app_dict['exampleScenario1'] = "Scenario 1: Protect people over 60, "\
-    "compensate by exposing those below 60, consider also years of life lost"
+    " compensate by exposing those below 60, consider also years of life lost"
     app_dict['exampleScenario2'] = "Scenario 2: Elimination to 90%, consider also money saved"
 
 
     app_dict['mapTitle'] = "COVID-19 Risks by Country"
     app_dict['mapItems0'] = "Proportion of people over 60 by Country"
-    app_dict['mapItems1'] = "Proportion of people over 60 by Country"
+    app_dict['mapItems1'] = "Low Income Risk by Country"
 
     app_dict['povertyItems0'] = "By Country"
     app_dict['povertyItems1'] = "By Region"

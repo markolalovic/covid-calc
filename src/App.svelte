@@ -726,19 +726,19 @@
 								{numberFormatter(totalInfected)}
 							</span>
 							<span class="parameter-text">
-								{translations.app.basedOnContinued2}  
+								{translations.app.basedOnContinued3}  
 							</span>
 							<span class="emphasize-text">								
 								{numberFormatter(totalDeaths)}
 							</span>
 							<span class="parameter-text">
-								{translations.app.basedOnContinued3}
+								{translations.app.basedOnContinued4}
 							</span>
 							<span class="emphasize-text">								
 								{numberFormatter(totalYearsLost)}
 							</span>	
 							<span class="parameter-text">						
-								{translations.app.basedOnContinued4}
+								{translations.app.basedOnContinued5}
 								<span class="parameter">{selectedLocation}</span>.
 							</span>
 						</div>
