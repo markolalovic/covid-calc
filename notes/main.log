@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.5.27)  3 JUN 2020 11:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.5.27)  3 JUN 2020 13:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -128,6 +128,52 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2859.
 LaTeX Info: Redefining \] on input line 2860.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count189
+\float@exts=\toks22
+\float@box=\box47
+\@float@everytoks=\toks23
+\@floatcapt=\box48
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks24
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/usepackage.4ht
+version 2019-12-19-14:27
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen145
+\Gin@req@width=\dimen146
 ) (./url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -151,10 +197,6 @@ Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode is ignored in DVI mode.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks22
 )
 (/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
@@ -181,9 +223,9 @@ Package auxhook Warning: Cannot patch \document,
 ) (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
-\@linkdim=\dimen145
-\Hy@linkcounter=\count189
-\Hy@pagecounter=\count190
+\@linkdim=\dimen147
+\Hy@linkcounter=\count190
+\Hy@pagecounter=\count191
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
@@ -196,8 +238,8 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count191
-\pdfmajorversion=\count192
+\Hy@SavedSpaceFactor=\count192
+\pdfmajorversion=\count193
 Package hyperref Info: Option `colorlinks' set `true' on input line 4421.
 Package hyperref Info: Hyper figures OFF on input line 4547.
 Package hyperref Info: Link nesting OFF on input line 4552.
@@ -206,9 +248,9 @@ Package hyperref Info: Plain pages OFF on input line 4562.
 Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count193
+\c@Hy@tempcnt=\count194
 LaTeX Info: Redefining \url on input line 5159.
-\XeTeXLinkMargin=\dimen146
+\XeTeXLinkMargin=\dimen148
 
 (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -217,10 +259,10 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count194
-\Field@Width=\dimen147
-\Fld@charsize=\dimen148
-\Field@toks=\toks23
+\Fld@menulength=\count195
+\Field@Width=\dimen149
+\Fld@charsize=\dimen150
+\Field@toks=\toks25
 Package hyperref Info: Hyper figures OFF on input line 6430.
 Package hyperref Info: Link nesting OFF on input line 6435.
 Package hyperref Info: Hyper index ON on input line 6438.
@@ -234,7 +276,7 @@ LaTeX Info: Redefining \pageref on input line 6504.
 (/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count195
+\Hy@abspage=\count196
 
 
 Package hyperref Message: Stopped early.
@@ -245,7 +287,7 @@ Package hyperref Info: Driver: htex4ht.
 File: htex4ht.def 2020/01/14 v7.00d Hyperref driver for TeX4ht
 Package hyperref Info: tex4ht is already loaded.
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 16.
+Package hyperref Info: Option `colorlinks' set `true' on input line 18.
 
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/tex4ht.4ht
 version 2018-12-30-09:29
@@ -267,14 +309,11 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: dvips.def on input line 147.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
-File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
-)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 ))
 --- needs --- tex4ht main ---
-\tmp:cnt=\count196
+\tmp:cnt=\count197
 \openout15 = `main.tmp'.
 
 (./main.tmp)
@@ -371,8 +410,8 @@ on `imgdir:.../'
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
 version 2019-12-16-15:21
 )
-\:tokwrite=\toks24
-\:tokpage=\toks25
+\:tokwrite=\toks26
+\:tokpage=\toks27
 --------------------------------------
 --- Note --- for back links to toc, use the command line option `sections+'
 --------------------------------------
@@ -472,7 +511,7 @@ version 2019-05-14-15:32
 
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count197
+\etb@tempcnta=\count198
 )
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/usepackage.4ht
 version 2019-12-19-14:27
@@ -482,13 +521,13 @@ Package: expl3 2020-02-14 L3 programming layer (loader)
 
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
 File: l3backend-dvips.def 2020-02-03 L3 backend support: dvips
-\l__pdf_internal_box=\box47
-\g__pdf_backend_object_int=\count198
-\l__pdf_backend_content_box=\box48
-\l__pdf_backend_model_box=\box49
-\g__pdf_backend_annotation_int=\count199
-\g__pdf_backend_link_int=\count266
-\g__pdf_backend_link_sf_int=\count267
+\l__pdf_internal_box=\box49
+\g__pdf_backend_object_int=\count199
+\l__pdf_backend_content_box=\box50
+\l__pdf_backend_model_box=\box51
+\g__pdf_backend_annotation_int=\count266
+\g__pdf_backend_link_int=\count267
+\g__pdf_backend_link_sf_int=\count268
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
@@ -586,6 +625,67 @@ version 2020-02-14-14:21
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
 version 2019-12-16-15:21
 ))
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/amssymb.4ht
+version 2009-05-21-09:32
+
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
+version 2020-02-14-14:21
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
+version 2019-12-16-15:21
+))
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/amsfonts.4ht
+version 2009-05-21-09:32
+
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
+version 2020-02-14-14:21
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
+version 2019-12-16-15:21
+))
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/float.4ht
+version 2009-05-21-09:32
+
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
+version 2020-02-14-14:21
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
+version 2019-12-16-15:21
+))
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/graphicx.4ht
+version 2018-10-01-14:24
+
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
+version 2020-02-14-14:21
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
+version 2019-12-16-15:21
+))
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/graphics.4ht
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
+version 2020-02-14-14:21
+--------------------------------------
+--- Note --- if included graphics are of degraded quality, try the command line
+ options `graphics-num' or `graphics-'. The `num' should provide the density of
+ pixels in the bitmaps (e.g., 110). 
+--------------------------------------
+--------------------------------------
+--- Note --- for key dimensions try the option `Gin-dim'; for key dimensions wh
+en bounding box is unavailable try `Gin-dim+'; neither is recommended
+--------------------------------------
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
+version 2019-12-16-15:21
+))
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/dvips.4ht
+version 2009-05-21-09:32
+
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
+version 2020-02-14-14:21
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
+version 2019-12-16-15:21
+))
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/url.4ht
 version 2009-05-21-09:32
 
@@ -611,7 +711,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count268
+\c@section@level=\count269
 )
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/nameref.4ht
 version 2019-12-23-13:36
@@ -647,15 +747,6 @@ version 2020-02-14-14:21
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
 version 2019-12-16-15:21
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/dvips.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4.4ht
-version 2020-02-14-14:21
-)
-(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
-version 2019-12-16-15:21
-))
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/dvipsnam.4ht
 version 2009-05-21-09:32
 
@@ -674,38 +765,50 @@ version 2019-12-16-15:21
 )) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-\AtBeginShipoutBox=\box50
-Package hyperref Info: Link coloring ON on input line 24.
-LaTeX Info: Redefining \ref on input line 24.
-LaTeX Info: Redefining \pageref on input line 24.
-LaTeX Info: Redefining \nameref on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+\AtBeginShipoutBox=\box52
+Package hyperref Info: Link coloring ON on input line 26.
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
 --- file main.css ---
 [1
 
-] [2] [3] [4] [5] [6] [7] (./main.bbl [8] [9]) [10] (./main.aux) ) 
-Here is how much of TeX's memory you used:
- 10336 strings out of 483141
- 141042 string characters out of 5965177
- 540003 words of memory out of 5000000
- 25120 multiletter control sequences out of 15000+600000
- 539484 words of font info for 49 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 46i,6n,48p,1311b,608s stack positions out of 5000i,500n,10000p,200000b,80000s
+] [2]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
 
-Output written on main.dvi (10 pages, 36184 bytes).
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [3] [4] [5] [6]
+[7] [8] (./main.bbl [9]) [10] (./main.aux) ) 
+Here is how much of TeX's memory you used:
+ 11270 strings out of 483141
+ 153467 string characters out of 5965177
+ 547401 words of memory out of 5000000
+ 25990 multiletter control sequences out of 15000+600000
+ 541954 words of font info for 61 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 46i,6n,48p,1311b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on main.dvi (10 pages, 39320 bytes).

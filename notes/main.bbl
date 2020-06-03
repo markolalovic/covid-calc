@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{worldbank}
+W.~Bank.
+\newblock {\em World Bank}, 2020 (accessed May 27, 2020).
+\newblock \url{https://data.worldbank.org/indicator/SI.POV.DDA}.
+
 \bibitem{imperial}
 N.~M. Ferguson, D.~Laydon, G.~Nedjati-Gilani, N.~Imai, K.~Ainslie, S.~B.
   Marc~Baguelin, A.~Boonyasiri, Z.~Cucunub{\'a}, G.~Cuomo-Dannenburg, A.~Dighe,
@@ -13,17 +18,17 @@ N.~M. Ferguson, D.~Laydon, G.~Nedjati-Gilani, N.~Imai, K.~Ainslie, S.~B.
 \newblock
   \url{https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf}.
 
+\bibitem{IMF}
+IMF.
+\newblock {\em IMF}, 2020 (accessed May 27, 2020).
+\newblock
+  \url{https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en}.
+
 \bibitem{pyramids}
 P.~Pyramids.
 \newblock {\em Population Pyramids of the World from 1950 to 2100}, 2020
   (accessed May 27, 2020).
 \newblock \url{https://www.populationpyramid.net/}.
-
-\bibitem{major}
-H.~Ritchie and M.~Roser.
-\newblock Causes of death.
-\newblock {\em Our World in Data}, 2020 (accessed May 27, 2020).
-\newblock \url{https://ourworldindata.org/causes-of-death}.
 
 \bibitem{cfrs}
 M.~Roser, H.~Ritchie, E.~Ortiz-Ospina, and J.~Hasell.

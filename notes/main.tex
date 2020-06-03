@@ -2,7 +2,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb}
+\usepackage{float}
+\usepackage{graphicx}
 
 \usepackage{url}
 
@@ -16,7 +18,7 @@
 }
 \urlstyle{same}
 
-\title{Notes on COVID-19 Calculator}
+\title{Notes on COVID Calculator}
 \author{Marko Lalovic}
 \date{\today}
 
@@ -24,7 +26,7 @@
 \begin{document}
 \maketitle
 
-\noindent{\bf Summary.} At the time of writing, the impacts of COVID-2019 remain largely uncertain and depend on a whole range of possibilities.
+\noindent{\bf Summary.} At the time of writing, the impacts of COVID-19 remain largely uncertain and depend on a whole range of possibilities.
 
 Organizing the overwhelming mass of the available information in the media and literature,
 coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
@@ -90,21 +92,21 @@ d_{60+} = \sum_{g \text{ in } G_{60+}} N(g) / N
 
 We use estimates of IFR(g) by age group from ~\cite{imperial} by default. Users can select to use estimates of CFR(g) by age group based on data from different countries, source ~\cite{cfrs}.
 
-For example if in some particular time frame we had 5 confirmed cases of people infected and 2 confirmed deaths. Then $CFR = 2/5 = 0.4$. But if, based on some other data and not only on confirmed cases, we know that there are actually more people infected, than our estimated IFR will be smaller than CFR.
+There is a big difference between the two measures. For example if in some particular time frame we had 5 confirmed cases of people infected and 2 confirmed deaths, then $CFR = 2/5 = 0.4$. But if, based on some other data and not only on confirmed cases, we know that there are actually more people infected, than our estimated IFR will be smaller than CFR.
 
 Users can also adjust fatality rate of each age group by input parameter $F$. It represents percent of increase or decrease.
 
-To get {\it Fatality Rate by age group} $FR(g)$, we multiply selected estimates of fatality rate for each age group $g$ in $G$ by $1 + F/100$ and use it as an estimate of true IFR:
+We get {\it Fatality Rate by age group} $FR(g)$ by multiplying selected estimates of fatality rate for each age group $g$ in $G$ by $1 + F/100$ and use it as an estimate of true IFR:
 
 \begin{align*}
 \text{FR}(g) &=
    \text{*FR}(g) \cdot (1 + F/100)
 \end{align*}
-where $\text{*FR}$ is user selected FR estimates (IFR or CFR).
+where $\text{*FR}$ is estimated IFR or user selected CFR estimates for a particular country.
 
 Notes:
 \begin{itemize}
-\item Since $\text{confirmed cases of infected} \subseteq \text{infected}$, wider testing can reduce CFR estimates.
+\item Since $\text{confirmed cases of infected}$ is a subset of $\text{infected}$, wider testing can reduce CFR estimates.
 \item When using CFR, the expected number of deaths in age group 0-9 is always 0 since no children under 10 appear to have died from COVID-19 until this data was aquired.
 \item Our proposed approach for later estimation assumes that the fatality rate by age in selected location has distribution similar to that estimated by~\cite{imperial} or observed in the country of selected CFR~\cite{cfrs}.
 \end{itemize}
@@ -147,50 +149,88 @@ U &= (1 - d_{60+}) \cdot U_{<60} + d_{60+} \cdot U_{60+}
 \subsection*{Expected Number of Infected and Expected Number of Deaths}
 We estimate expected number of infected in age group $g$ in $G$ as
 \begin{align*}
-  \text{E} n(\text{infected in age group g})  &=
+  \mathbb{E} \left[ n(\text{infected in age group g}) \right] &=
     (1 - E/100) \cdot N(g) \cdot H_{\text{*}} + E/100 \cdot N(g) \cdot U_{\text{*}}
 \end{align*}
 where $\text{*}$ is $<60$ or $60+$.
 
 Expected number of deaths in age group $g$ in $G$ as
-\begin{align*}
-  \text{E} n(\text{deaths in age group g})  &=
-    \text{E} n(\text{infected in age group g})  \cdot FR(g)
-\end{align*}
+\begin{equation*}
+  \mathbb{E} \left[ n(\text{deaths in age group g}) \right]  =
+  \mathbb{E} \left[ n(\text{infected in age group g}) \right]  \cdot FR(g)
+\end{equation*}
 
 Total expected numbers are simply sums over all age groups
 \begin{align*}
-  \text{E} n(\text{infected})  &= \sum_{g \text{ in } G} \text{E} n(\text{infected in age group g})  \\
-  \text{E} n(\text{deaths})  &= \sum_{g \text{ in } G} \text{E} n(\text{deaths in age group g}) 
+  \mathbb{E} \left[ n(\text{infected}) \right] &= \sum_{g \text{ in } G} 
+  \mathbb{E} \left[  n(\text{infected in age group g}) \right]  \\
+  \mathbb{E} \left[  n(\text{deaths}) \right] &= \sum_{g \text{ in } G} 
+  \mathbb{E} \left[  n(\text{deaths in age group g}) \right]
 \end{align*}
 
-\subsection*{Expected Years of Life Lost}
+
+\subsection*{Years of Life Lost}
+
+\subsubsection*{Expected}
 We used the life table for global population~\cite{expectancies} for 2016 with estimates about expected number of life years left for all ages in 2016. E.g. a person at the age of 60 had 20.5 expected number of life years left in 2016.
 
-We use it as an estimate of {\it Expected Years of Life Lost}. E.g. if a person dies at the age of 60 this means we estimate 20.5 of expected years of life lost.
+We take average by gender and by age in a specific 10 year age group $g \text{ in } G$ as an estimate of life expectancy of a person from particular age group to get 
 
-We use an average EYLL by age and gender in a specific 10 year age group $g \text{ in } G$ as an estimate
-for all deaths in each age group.
+\begin{equation*}
+	\text{life exp}_g
+\end{equation*}
 
-\subsection*{Costs}
+
+We then estimate {\it expected years of life lost} EYLL due to COVID-19 as:
+
+\begin{equation*}
+	\text{EYLL} = 
+	\sum_{g \text{ in } G}
+	\mathbb{E} \left[  n(\text{deaths in age group g}) \right] \cdot \text{life exp}_g
+\end{equation*}
+
+\subsubsection*{Actual}
+We estimate years of life lost from confirmed deaths due to COVID-19 in the following way. 
+
+First we calculate mean CFR by age group from all the CFR estimates by age group from countries as presented in Table~(1).
+
+Then let $D$ be the event that a person died from COVID-19 and let $A_g$ be the event that this persons age is in the age group $g$.
+
+Then if we have $n(\text{deaths})$ in selected country from COVID-19, we estimate years of life lost (YLL) due to COVID-19 as:
+\begin{equation*}
+	\text{YLL} = n(\text{deaths}) \cdot \sum_{g \text{ in } G} Pr(A_g | D) \cdot \text{life exp}_g
+\end{equation*}
+
+We estimate the probability of a person who died in a particular country being in age group $g$:
+\begin{equation*}
+Pr(A_g | D) = \frac{Pr(D | A_g) Pr(A_g)}{P(D)}
+\end{equation*}
+
+Where
+\begin{align*}
+Pr(D | A_g) &= \text{estimated mean } \text{CFR}_g \\
+Pr(A_g) &= \text{proportion of people in age group } g \text{ in particular population} \\
+Pr(D) &= \sum_{g \text{ in } G} Pr(D | A_g) Pr(A_g)
+\end{align*}
+
+For example in Italy there were 24114 confirmed deaths from COVID until the end of May. And based on demographics and life expectancies of Italy and explanation above, we estimate 294369.66 years of life lost in Italy from COVID-19.
+
+
+\subsubsection*{Costs}
 A figure of \$129,000 represents what it would cost to give a person an additional {\it quality-of-life adjusted} year of life~\cite{price}. We multiply this figure with years of life lost to get estimated costs or money saved.
 
-\subsection*{TODO}
-\begin{itemize}
-\item Years of life lost until
-\item Poverty
-\end{itemize}
- 
+\subsection*{Projected Poverty Increases Due to COVID-19}
+We take the difference between the IMF's GDP growth forecasts~\cite{IMF} for April 2020 and forecasts from October 2019. We take estimates of how many people lived in extreme poverty (income below \$1.9 per day) by country from 2015 from World Bank~\cite{worldbank}. Then estimate the projected poverty increases by country by multiplying this number and minus the difference in GDB growth forecasts.
 
-\section*{Data Sources}
-\begin{itemize}
-\item Case Fatality Risk (CFR) by age group estimates. From: 17th February (China), 17th March (Italy), 24th March (Spain, South Korea), source~\cite{cfrs}.
-\item Infection Fatality Risk (CFR) by age group estimates are from~\cite{imperial}.
-\item Deaths from major causes (from 2016) are from~\cite{major}.
-\item Global life tables are from~\cite{expectancies}.
-\item Estimated price of year of life from~\cite{price}.
-\item Data about age is from 2019, source~\cite{pyramids}.
-\end{itemize}
+For example in Nigeria the difference between IMF's GDP growth forecasts is –5.9 percent and World Bank estimated that there were 85.15 million people living in extreme poverty. So we estimate there will be 
+
+\begin{equation*}
+	85.15M (5.9 / 100) \approx 5.02M
+\end{equation*}
+
+additional people living in extreme poverty in Nigeria due to COVID-19 pandemic.
+
+Note: This are crude estimats of COVID-19 effect on poverty because not only COVID-19 pandemic has caused the IMF to alter its forecasts.
 
 \section*{Acknowledgements}
 Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
@@ -200,7 +240,7 @@ The source code is licensed \href{http://opensource.org/licenses/mit-license.php
 
 
 \section*{Disclaimer}
-The author of this website is not a health expert or an epidemiologist and disclaims responsibility for any adverse effect resulting, directly or indirectly, from information contained in this website. For health, safety, and medical emergencies or updates on the novel coronavirus pandemic, you can get the latest information from \href{https://www.who.int/emergencies/diseases/novel-coronavirus-2019}{WHO} or search for official public health information for your country on \href{https://www.google.com/search?q=Coronavirus}{Google} or \href{https://www.baidu.com/}{Baidu}.
+The author of this website is not a health expert or an epidemiologist and disclaims responsibility for any adverse effect resulting, directly or indirectly, from information contained in this website. For health, safety, and medical emergencies or updates on the novel coronavirus pandemic, you can get the latest information from \href{https://www.who.int/emergencies/diseases/novel-coronavirus-2019}{WHO} or search for official public health information for your country.
 
 \bibliographystyle{abbrv}
 \bibliography{main}

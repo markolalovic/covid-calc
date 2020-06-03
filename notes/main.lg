@@ -130,10 +130,13 @@ Css: table.multline, table.multline-star {width:100%;}
 Css: td.gather {text-align:center; }
 Css: table.gather {width:100%;}
 Css: div.gather-star {text-align:center;}
+Css: .rotatebox{display: inline-block;}
+Css: .figure img.graphics {margin-left:10%;}
 --- characters ---
 Font("cmr","12","12","100")
 Font("cmr","17","17","120")
 Font("cmr","12","12","120")
 Font("cmbx","12","12","100")
 Font("cmti","12","12","100")
+Font("cmsy","8","8","100")
 Font("tcrm","1200","12","100")
