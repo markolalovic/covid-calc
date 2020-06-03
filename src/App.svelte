@@ -922,7 +922,7 @@
 								</div>
 								<div class='parameter-text'>
 									{translations.app.sources}
-									<a href="https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en">IFM</a>, 
+									<a href="https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en">IMF</a>, 
 									<a href="https://data.worldbank.org/indicator/SI.POV.DDA">POVCAL</a> 
 									{translations.app.authorsCalculations}
 								</div>
