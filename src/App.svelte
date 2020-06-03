@@ -570,13 +570,11 @@
 	let nameProjRegions = '';
 	let numberProjRegions = '';
 
-	$: mainProjCountries = translations.app.projectionsTitle + 
-		translations.app.country;
+	$: mainProjCountries = translations.app.povertyTitle + translations.app.country;
 	$: nameProjCountries = translations.app.country;
 	$: numberProjCountries = translations.app.people;
 
-	$: mainProjRegions = translations.app.projectionsTitle + 
-		translations.app.region;
+	$: mainProjRegions = translations.app.povertyTitle + translations.app.region;
 	$: nameProjRegions = translations.app.region;
 	$: numberProjRegions = translations.app.people;
 

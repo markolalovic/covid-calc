@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-05-29 13:02:59;
+// version = 2020-06-03 10:38:33;
 
 export const spanishDictStore = readable({ 
 	app: {
@@ -50,7 +50,7 @@ export const spanishDictStore = readable({
 		 age: "Años",
 		 infected: "Infectado",
 		 deaths: "Fallecidos",
-		 projectionsTitle: "Millones potenciales empujados a la pobreza extrema debido a COVID-19 por",
+		 projectionsTitle: "Proyecciones de muertes totales a lo largo del tiempo por país",
 		 date: "Fecha",
 		 totDeaths: "Muertes totales",
 		 totDeathsProj: "Muertes totales (proyectadas)",
@@ -68,6 +68,7 @@ export const spanishDictStore = readable({
 		 yrsOfLifeLost: "Años esperados de vida perdidos",
 		 yrsOfLifeLostCosts: "Costos potenciales",
 		 scenariosDescription: "Descripción del escenario",
+		 povertyTitle: "Millones potenciales empujados a la pobreza extrema debido a COVID-19 por",
 		 country: "País",
 		 region: "Región",
 		 people: "Personas",

@@ -131,7 +131,7 @@ def get_app_dict():
     app_dict['infected'] = "Infected"
     app_dict['deaths'] = "Deaths"
 
-    app_dict['projectionsTitle'] = "Projections of Total Deaths over Time by Country"
+    app_dict['projectionsTitle'] = "Projections of Total Deaths Over Time by Country"
     app_dict['date'] = "Date"
     app_dict['totDeaths'] = "Total deaths"
     app_dict['totDeathsProj'] = "Total deaths (projected)"
@@ -154,7 +154,7 @@ def get_app_dict():
     app_dict['yrsOfLifeLostCosts'] = "Potential Costs"
     app_dict['scenariosDescription'] = "Description of scenario"
 
-    app_dict['projectionsTitle'] = "Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by"
+    app_dict['povertyTitle'] = "Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by "
     app_dict['country'] = "Country"
     app_dict['region'] = "Region"
     app_dict['people'] = "People"

@@ -16,7 +16,7 @@ Proportion of all people contracting the novel coronavirus.,感染新型冠状�
 Over 60 infection rate,60岁以上感染率,Over60infection rate
 Below 60 infection rate,60岁以下感染率,Below60infection rate
 Proportion of all people over the age of 60 contracting the novel coronavirus.,60岁以上感染新型冠状病毒的人口比例。,Over60description
-The proportion of people below 60 infected is then,60岁以下感染的人口比例,Proportion is then
+The proportion of people below 60 infected is then,然后，将60岁以下的人口比例,Proportion is then
 Since it depends on both overall infection rate and infection rate of people over 60.,因为这取决于总体感染率和60岁以上人群的感染率。,Proportion is then description
 Based on,基于,Based on
 fatality rates and ,死亡率和,Based on continued1
@@ -45,16 +45,16 @@ Expected Number of Deaths by Age,按年龄划分潜在死亡人口,Deaths title
 Age,年龄,Age
 Infected,已感染,Infected
 Deaths,死亡人数,Deaths
-Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by,由于COVID-19，潜在的数百万人陷入极端贫困,Projections title
+Projections of Total Deaths Over Time by Country,各个国家随时间推移的总死亡人数预测,Projections title
 Date,日期,Date
 Total deaths,死亡总数,Tot deaths
 Total deaths (projected),总死亡人数（预计）,Tot deaths proj
 How COVID-19 Compare With,与COVID-19比较,Title list main
 Cause,原因,Title list name
 Risk,风险,Title list risk
- in ,在,Title list number
+ in , 在,Title list number
 Yrs of Life Lost,损失寿命年数,Years of life lost
- in ,在,In country
+ in , 在,In country
 Causes of Death,死亡原因,Compare items0
 Causes of Years of Life Lost,导致失去寿命年数原因,Compare items1
 Risk Factors in Years of Life Lost,导致失去寿命年数的风险,Compare items2
@@ -63,6 +63,7 @@ Enter description,输入,Enter describtion
 Expected Years of Life Lost,预期寿命损失,Yrs of life lost
 Potential Costs,潜在成本,Yrs of life lost costs
 Description of scenario,场景描述,Scenarios description
+Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by ,由于COVID-19，潜在的数百万人陷入极端贫困,Poverty title
 Country,国家,Country
 Region,区域,Region
 People,人,People
@@ -85,32 +86,31 @@ Latin America & Caribbean,拉丁美洲和加勒比海,Latin caribbean
 Middle East & North Africa,中东和北非,Middle east north africa
 Europe & Central Asia,欧洲与中亚,Europe central asia
 North America,北美,North america
-Causes of Death,死亡原因,Main proj regions
-Causes of Years of Life Lost,损失寿命原因,Name proj regions
-Risk Factors in Years of Life Lost,导致损失寿命的风险,Number proj regions
+Causes of Death,损失寿命原因,Main proj regions
+Causes of Years of Life Lost,导致损失寿命的风险,Name proj regions
+Risk Factors in Years of Life Lost,多年生命中的危险因素,Number proj regions
 Fatality rates,死亡率,Fatality rates
-Select estimates of risk of death from infection with the novel coronavirus. Estimates vary between countries and over time. Wider testing can reduce CFR estimates.,选择新的冠状病毒感染导致死亡的风险的估计值，各国之间的估计值会随时间而变化，更广泛的测试可以降低CFR值。,Fatality rates description
+Select estimates of risk of death from infection with the novel coronavirus. Estimates vary between countries and over time. Wider testing can reduce CFR estimates.,选择因新型冠状病毒感染而导致死亡的估计风险。估算值因国家和地区而异。更广泛的测试可以降低CFR估算值。,Fatality rates description
 Vary selected fatality rates,改变选择的死亡率,Vary f rs
 "Try increasing the risk of deaths, e.g. to 50%,  for low-income country or overwhelmed healthcare.",尝试增加死亡风险，例如到50％，适用于低收入国家或不堪重负的医疗保健。,Vary f rs description1
-"Or decreasing, e.g. to -50%,  for expected improved treatments and better healthcare.",或减少，例如达到-50％，以期望得到更好的治疗和更好的医疗保健。,Vary f rs description2
+"Or decreasing, e.g. to -50%,  for expected improved treatments and better healthcare.",或减少，例如达到-50％，以期望得到更好的治疗和更好的医疗保健,Vary f rs description2
 Set all input parameters back to their initial values.,将所有输入参数设置回其初始值。,Reset description
 Probability of eliminating COVID-19,消除COVID-19的可能性,Elimination
 Probability of achieving complete elimination  of COVID-19 disease before it manages to infect,在感染前完全消除COVID-19疾病的可能性,Elimination description1
 of population.,人口。,Elimination description2
 Infection rate until elimination,直至消除的感染率,Infection until
-Proportion of population that still gets infected even in the event of achieving complete elimination. Note: First increase the probability of elimination for this parameter to take effect.,甚至在完全消除的情况下仍然受到感染的人口比例。注意：首先要增加消除的可能性，此参数才能生效。,Infection until description
+Proportion of population that still gets infected even in the event of achieving complete elimination. Note: First increase the probability of elimination for this parameter to take effect.,甚至在完全消除的情况下仍然受到感染的人口比例。注意：首先增加消除此参数的可能性。,Infection until description
 Hide Export,隐藏导出,Hide export
 Export,导出,Export
 Export Hypothetical COVID-19 Scenarios in JSON format.,以JSON格式导出COVID-19的假设情景,Export description
 Hide Export,隐藏导出,Export1
-"You can set input parameters that describe a hypothetical scenario and add it to the table for comparison. There are 3 examples of hypothetical scenarios for the selected location and fatality risks. Results should be interpreted with caution, see Example Interpretations.",您可以设置描述假设情景的输入参数，并将其添加到表格中进行比较，其中有3个针对所选位置和死亡风险的假设情景示例，应谨慎解释结果，请参阅示例解释。,Scenarios caption
+"You can set input parameters that describe a hypothetical scenario and add it to the table for comparison. There are 3 examples of hypothetical scenarios for the selected location and fatality risks. Results should be interpreted with caution, see Example Interpretations.",您可以设置描述一个假设情景的输入参数，并将其添加到表中进行比较。对于选定的位置和死亡风险，有3个假设场景的示例。应谨慎解释结果，请参见示例解释。,Scenarios caption
 "Scenario 0: Do nothing, as a baseline",场景0：不做任何事情，作为基准,Example scenario0
 "Scenario 1: Protect people over 60,  compensate by exposing those below 60, consider also years of life lost",方案1：保护60岁以上的人们，通过暴露60岁以下的人们进行补偿，同时考虑失去的寿命,Example scenario1
-"Scenario 2: Elimination to 90%, consider also money saved",方案2：消除90％，同时考虑剩下的钱,Example scenario2
+"Scenario 2: Elimination to 90%, consider also money saved",方案2：消除90％，同时考虑省钱,Example scenario2
 COVID-19 Risks by Country,COVID-19各国风险,Map title
 Proportion of people over 60 by Country,按国家划分的60岁以上人口的比例,Map items0
-Low Income Risk by Country,"低收入风险（按国家/地区）
-",Map items1
+Low Income Risk by Country,低收入风险（按国家/地区）,Map items1
 By Country,按国家,Poverty items0
 By Region,按地区,Poverty items1
 Imperial College - IFR,帝国理工学院-IFR,Sources of Fatality Rates
@@ -122,73 +122,73 @@ Other Major Causes Of Death,其他主要死因,Option to compare with
 Diseases in Years of Life Lost,疾病与寿命减短,Option to compare with
 Risk Factors in Years of Life Lost,风险与寿命减短,Option to compare with
 Other Countries in the World,世界其他国家,Option to compare with
-Terrorism,吸毒障碍,"Cause of death, e.g. homicide"
-Protein-energy malnutrition,帕金森氏病,"Cause of death, e.g. homicide"
-Diarrheal diseases,消化系统疾病,"Cause of death, e.g. homicide"
-Natural disasters,HIV爱滋病,"Cause of death, e.g. homicide"
-Alcohol use disorders,痴呆,"Cause of death, e.g. homicide"
-Suicide,脑膜炎,"Cause of death, e.g. homicide"
-Drug use disorders,饮酒障碍,"Cause of death, e.g. homicide"
-Nutritional deficiencies,疟疾,"Cause of death, e.g. homicide"
-Dementia,自然灾害,"Cause of death, e.g. homicide"
-Lower respiratory infections,呼吸疾病,"Cause of death, e.g. homicide"
-Parkinson disease,糖尿病,"Cause of death, e.g. homicide"
-Homicide,恐怖主义,"Cause of death, e.g. homicide"
-Diabetes,营养不足,"Cause of death, e.g. homicide"
-Conflict,下呼吸道感染,"Cause of death, e.g. homicide"
-Maternal disorders,蛋白质能量营养不良,"Cause of death, e.g. homicide"
-Respiratory diseases,杀人,"Cause of death, e.g. homicide"
-Tuberculosis,自杀,"Cause of death, e.g. homicide"
-Meningitis,肝病,"Cause of death, e.g. homicide"
-Kidney disease,COVID-19，直到2020年5月27日,"Cause of death, e.g. homicide"
-Digestive diseases,癌症,"Cause of death, e.g. homicide"
-Malaria,冲突,"Cause of death, e.g. homicide"
+Nutritional deficiencies,营养不足,"Cause of death, e.g. homicide"
+HIV/AIDS,HIV爱滋病,"Cause of death, e.g. homicide"
+"COVID-19 until May 27, 2020",COVID-19，直到2020年5月27日,"Cause of death, e.g. homicide"
+Neonatal disorders,新生儿疾病,"Cause of death, e.g. homicide"
+Respiratory diseases,呼吸疾病,"Cause of death, e.g. homicide"
+Diabetes,糖尿病,"Cause of death, e.g. homicide"
+Kidney disease,肾脏疾病,"Cause of death, e.g. homicide"
+Digestive diseases,消化系统疾病,"Cause of death, e.g. homicide"
+Conflict,冲突,"Cause of death, e.g. homicide"
+Malaria,疟疾,"Cause of death, e.g. homicide"
+Drug use disorders,吸毒障碍,"Cause of death, e.g. homicide"
+Road injuries,道路伤害,"Cause of death, e.g. homicide"
+Lower respiratory infections,下呼吸道感染,"Cause of death, e.g. homicide"
+Homicide,杀人,"Cause of death, e.g. homicide"
 Cardiovascular diseases,心血管疾病,"Cause of death, e.g. homicide"
-Cancers,新生儿疾病,"Cause of death, e.g. homicide"
-"COVID-19 until May 27, 2020",肾脏疾病,"Cause of death, e.g. homicide"
-Liver diseases,腹泻病,"Cause of death, e.g. homicide"
-Road injuries,结核,"Cause of death, e.g. homicide"
-HIV/AIDS,产妇疾病,"Cause of death, e.g. homicide"
-Neonatal disorders,道路伤害,"Cause of death, e.g. homicide"
-Other NCDs,运输伤害,"Cause of years of life lost, e.g. cancer"
-Transport injuries,艾滋病毒/艾滋病与结核病,"Cause of years of life lost, e.g. cancer"
-Nutritional deficiencies,人际暴力,"Cause of years of life lost, e.g. cancer"
-Interpersonal violence,消化系统疾病,"Cause of years of life lost, e.g. cancer"
-Unintentional injuries,疟疾和被忽视的热带病,"Cause of years of life lost, e.g. cancer"
-Other communicable diseases,意外伤害,"Cause of years of life lost, e.g. cancer"
-Respiratory diseases,呼吸疾病,"Cause of years of life lost, e.g. cancer"
-Diarrhea & common infectious diseases,自残,"Cause of years of life lost, e.g. cancer"
-Digestive diseases,肌肉骨骼疾病,"Cause of years of life lost, e.g. cancer"
-Mental and substance use disorders,神经系统疾病,"Cause of years of life lost, e.g. cancer"
-Neurological disorders,营养不足,"Cause of years of life lost, e.g. cancer"
-Cardiovascular diseases,其他非传染性疾病,"Cause of years of life lost, e.g. cancer"
-Cancers,其他传染病,"Cause of years of life lost, e.g. cancer"
-Musculoskeletal disorders,肝病,"Cause of years of life lost, e.g. cancer"
-HIV/AIDS and tuberculosis,COVID-19，直到2020年5月27日,"Cause of years of life lost, e.g. cancer"
-"COVID-19 until May 27, 2020",癌症,"Cause of years of life lost, e.g. cancer"
-Liver diseases,心血管疾病,"Cause of years of life lost, e.g. cancer"
-"Diabetes, blood, & endocrine diseases",冲突与恐怖主义,"Cause of years of life lost, e.g. cancer"
-Self-harm,精神和物质使用障碍,"Cause of years of life lost, e.g. cancer"
+Parkinson disease,帕金森综合症,"Cause of death, e.g. homicide"
+Suicide,自杀,"Cause of death, e.g. homicide"
+Maternal disorders,产妇疾病,"Cause of death, e.g. homicide"
+Meningitis,脑膜炎,"Cause of death, e.g. homicide"
+Diarrheal diseases,腹泻病,"Cause of death, e.g. homicide"
+Protein-energy malnutrition,蛋白质能量营养不良,"Cause of death, e.g. homicide"
+Dementia,痴呆,"Cause of death, e.g. homicide"
+Natural disasters,自然灾害,"Cause of death, e.g. homicide"
+Cancers,癌症,"Cause of death, e.g. homicide"
+Liver diseases,肝病,"Cause of death, e.g. homicide"
+Tuberculosis,结核,"Cause of death, e.g. homicide"
+Terrorism,恐怖主义,"Cause of death, e.g. homicide"
+Alcohol use disorders,饮酒障碍,"Cause of death, e.g. homicide"
+Malaria & neglected tropical diseases,疟疾和被忽视的热带病,"Cause of years of life lost, e.g. cancer"
+Nutritional deficiencies,营养不足,"Cause of years of life lost, e.g. cancer"
+Other communicable diseases,其他传染病,"Cause of years of life lost, e.g. cancer"
+Interpersonal violence,人际暴力,"Cause of years of life lost, e.g. cancer"
+Conflict and terrorism,冲突与恐怖主义,"Cause of years of life lost, e.g. cancer"
+"COVID-19 until May 27, 2020",COVID-19，直到2020年5月27日,"Cause of years of life lost, e.g. cancer"
+Transport injuries,运输伤害,"Cause of years of life lost, e.g. cancer"
 Neonatal disorders,新生儿疾病,"Cause of years of life lost, e.g. cancer"
-Conflict and terrorism,腹泻和常见传染病,"Cause of years of life lost, e.g. cancer"
-Malaria & neglected tropical diseases,糖尿病，血液和内分泌疾病,"Cause of years of life lost, e.g. cancer"
-Air pollution (outdoor & indoor),水果饮食偏少,"Risk factor, e.g. smoking"
-Drug use,低体力活动,"Risk factor, e.g. smoking"
-Smoking,维生素A缺乏症,"Risk factor, e.g. smoking"
-High blood sugar,高胆固醇,"Risk factor, e.g. smoking"
-High blood pressure,二手烟,"Risk factor, e.g. smoking"
-Secondhand smoke,高血压,"Risk factor, e.g. smoking"
+Respiratory diseases,呼吸疾病,"Cause of years of life lost, e.g. cancer"
+HIV/AIDS and tuberculosis,艾滋病毒/艾滋病与结核病,"Cause of years of life lost, e.g. cancer"
+Digestive diseases,消化系统疾病,"Cause of years of life lost, e.g. cancer"
+Neurological disorders,神经系统疾病,"Cause of years of life lost, e.g. cancer"
+Diarrhea & common infectious diseases,腹泻和常见传染病,"Cause of years of life lost, e.g. cancer"
+Mental and substance use disorders,精神和物质使用障碍,"Cause of years of life lost, e.g. cancer"
+Self-harm,自残,"Cause of years of life lost, e.g. cancer"
+Cardiovascular diseases,心血管疾病,"Cause of years of life lost, e.g. cancer"
+Unintentional injuries,意外伤害,"Cause of years of life lost, e.g. cancer"
+Other NCDs,其他非传染性疾病,"Cause of years of life lost, e.g. cancer"
+Musculoskeletal disorders,肌肉骨骼疾病,"Cause of years of life lost, e.g. cancer"
+Cancers,癌症,"Cause of years of life lost, e.g. cancer"
+Liver diseases,肝病,"Cause of years of life lost, e.g. cancer"
+"Diabetes, blood, & endocrine diseases",糖尿病，血液和内分泌疾病,"Cause of years of life lost, e.g. cancer"
+High cholesterol,高胆固醇,"Risk factor, e.g. smoking"
 Diet low in vegetables,饮食中蔬菜含量低,"Risk factor, e.g. smoking"
-Non-exclusive breastfeeding,儿童发育迟缓,"Risk factor, e.g. smoking"
-Child stunting,高血糖,"Risk factor, e.g. smoking"
-Obesity,非独家母乳喂养,"Risk factor, e.g. smoking"
-Vitamin A deficiency,儿童发育不良,"Risk factor, e.g. smoking"
-Diet high in salt,COVID-19，直到2020年5月27日,"Risk factor, e.g. smoking"
-Child wasting,空气污染（室内和室外）,"Risk factor, e.g. smoking"
+Smoking,抽烟,"Risk factor, e.g. smoking"
+"COVID-19 until May 27, 2020",COVID-19，直到2020年5月27日,"Risk factor, e.g. smoking"
+Secondhand smoke,二手烟,"Risk factor, e.g. smoking"
+Child stunting,儿童发育迟缓,"Risk factor, e.g. smoking"
 Unsafe sanitation,不安全的卫生,"Risk factor, e.g. smoking"
-"COVID-19 until May 27, 2020",肥胖,"Risk factor, e.g. smoking"
-Iron deficiency,抽烟,"Risk factor, e.g. smoking"
-Low physical activity,不安全的水源,"Risk factor, e.g. smoking"
-High cholesterol,饮食含盐量高,"Risk factor, e.g. smoking"
-Unsafe water source,缺铁,"Risk factor, e.g. smoking"
-Diet low in fruits,用药,"Risk factor, e.g. smoking"
+Non-exclusive breastfeeding,非独家母乳喂养,"Risk factor, e.g. smoking"
+High blood pressure,高血压,"Risk factor, e.g. smoking"
+Iron deficiency,缺铁,"Risk factor, e.g. smoking"
+Diet low in fruits,水果饮食偏少,"Risk factor, e.g. smoking"
+Vitamin A deficiency,儿童发育不良,"Risk factor, e.g. smoking"
+Air pollution (outdoor & indoor),空气污染（室内和室外）,"Risk factor, e.g. smoking"
+Unsafe water source,不安全的水源,"Risk factor, e.g. smoking"
+Obesity,肥胖,"Risk factor, e.g. smoking"
+Drug use,用药,"Risk factor, e.g. smoking"
+Child wasting,浪费孩子,"Risk factor, e.g. smoking"
+Diet high in salt,饮食含盐量高,"Risk factor, e.g. smoking"
+Low physical activity,低体力活动,"Risk factor, e.g. smoking"
+High blood sugar,高血糖,"Risk factor, e.g. smoking"
