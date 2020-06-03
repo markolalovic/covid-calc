@@ -30,7 +30,7 @@ Organizing the overwhelming mass of the available information in the media and l
 coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
 
 As an attempt to address this problem I used publicly available data and published information
-to create an international tool called {\it COVID-19 Calculator} that allows users to derive their own country-specific estimates available at: \url{https://markolalovic.github.io/covid-calc}
+to create an international tool called {\it COVID Calculator} that allows users to derive their own country-specific estimates available at: \url{https://markolalovic.github.io/covid-calc}
 
 Users should be aware this tool is focused on simple presentation and pedagogical aspects and only offers crude estimates. It uses relatively simplistic methodology outlined in Technical Details~\ref{details} below.
 
@@ -46,7 +46,7 @@ G =
   \{ \text{0-9}, \text{10-19}, \ldots, \text{70-79}, \text{80+} \}
 \end{align*}
 
-{\it Age structure} $N(g)$ is the size of population by age group $g \in G$. We estimate it by counting how many people fall into each age group $g \in G$
+{\it Age structure} $N(g)$ is the size of population by age group $g$ in $G$. We estimate it by counting how many people fall into each age group $g$ in $G$
 
 \begin{align*}
 N(g) &=
@@ -56,7 +56,7 @@ N(g) &=
 We estimate {\it total population size} $N$ by
 
 \begin{align*}
-N = \sum_{g \in G}
+N = \sum_{g \text{ in } G}
   n(\text{people in age group g})
 \end{align*}
 
@@ -70,7 +70,7 @@ G_{60+} &=
 
 and estimate the proportion of people over 60 in selected population as
 \begin{align*}
-d_{60+} = \sum_{g \in G_{60+}} N(g) / N
+d_{60+} = \sum_{g \text{ in } G_{60+}} N(g) / N
 \end{align*}
 
 \subsection*{Fatality Rates}
@@ -118,11 +118,12 @@ H &= n(\text{infected}) \cdot 100 / N
 
 Users can adjust the proportion of people over 60 infected using $H_{60+}$. The overall $H$ can be decomposed as:
 
-\begin{align}\label{eq: H}
-H = (1 - d_{60+}) \cdot H_{<60} + d_{60+} \cdot H_{60+}
-\end{align}
+\begin{equation*}
+	H = (1 - d_{60+}) \cdot H_{<60} + d_{60+} \cdot H_{60+}
+	\tag{1}
+\end{equation*}
 
-where $H_{<60}$ is proportion of people below 60 infected and is calculated from~\ref{eq: H}.
+where $H_{<60}$ is proportion of people below 60 infected and is calculated from Eq.~(1).
 
 \subsection*{Probability of Eliminating COVID-19}
 Let $A$ be the event of achieving complete elimination of COVID-19 disease before it manages to infect $H$ percent of population. And let $I_{A}$ be the indicator variable for event $A$. Then
@@ -132,18 +133,19 @@ U &= n(\text{infected until elimination}) \cdot 100 / N
 \end{align*}
 
 To keep the number of parameters low let
-\begin{align}\label{eq: U}
-U_{60+} / U = H_{60+} / H
-\end{align}
+\begin{equation*}
+	U_{60+} / U = H_{60+} / H
+	\tag{2}
+\end{equation*}
 
-so we calculate proportion of people over 60 infected until elimination $U_{60+}$ from Eq.~\ref{eq: U} and proportion of people below 60 infected until elimination $U_{<60}$ from decomposition of $U$, i.e. equation
+so we calculate proportion of people over 60 infected until elimination $U_{60+}$ from Eq.~(2) and proportion of people below 60 infected until elimination $U_{<60}$ from decomposition of $U$, i.e. equation
 
 \begin{align*}
 U &= (1 - d_{60+}) \cdot U_{<60} + d_{60+} \cdot U_{60+}
 \end{align*}
 
 \subsection*{Expected Number of Infected and Expected Number of Deaths}
-We estimate expected number of infected in age group $g \in G$ as
+We estimate expected number of infected in age group $g$ in $G$ as
 \begin{align*}
   \text{E} n(\text{infected in age group g})  &=
     (1 - E/100) \cdot N(g) \cdot H_{\text{*}} + E/100 \cdot N(g) \cdot U_{\text{*}}
@@ -158,8 +160,8 @@ Expected number of deaths in age group $g$ in $G$ as
 
 Total expected numbers are simply sums over all age groups
 \begin{align*}
-  \text{E} n(\text{infected})  &= \sum_{g \in G} \text{E} n(\text{infected in age group g})  \\
-  \text{E} n(\text{deaths})  &= \sum_{g \in G} \text{E} n(\text{deaths in age group g}) 
+  \text{E} n(\text{infected})  &= \sum_{g \text{ in } G} \text{E} n(\text{infected in age group g})  \\
+  \text{E} n(\text{deaths})  &= \sum_{g \text{ in } G} \text{E} n(\text{deaths in age group g}) 
 \end{align*}
 
 \subsection*{Expected Years of Life Lost}
@@ -167,7 +169,7 @@ We used the life table for global population~\cite{expectancies} for 2016 with e
 
 We use it as an estimate of {\it Expected Years of Life Lost}. E.g. if a person dies at the age of 60 this means we estimate 20.5 of expected years of life lost.
 
-We use an average EYLL by age and gender in a specific 10 year age group $g \in G$ as an estimate
+We use an average EYLL by age and gender in a specific 10 year age group $g \text{ in } G$ as an estimate
 for all deaths in each age group.
 
 \subsection*{Costs}

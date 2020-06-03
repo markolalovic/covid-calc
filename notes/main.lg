@@ -1,5 +1,3 @@
-htfcss: cmmi font-style: italic;
-htfcss: cmmib font-style: italic; font-weight: bold;
 htfcss: cmti  font-style: italic;
 htfcss: cmbx  font-weight: bold;
 htfcss: cmbxsl  font-weight: bold; font-style: oblique;
@@ -138,11 +136,4 @@ Font("cmr","17","17","120")
 Font("cmr","12","12","120")
 Font("cmbx","12","12","100")
 Font("cmti","12","12","100")
-Font("cmr","8","8","100")
-Font("cmr","6","6","100")
-Font("cmmi","12","12","100")
-Font("cmmi","8","8","100")
-Font("cmsy","10","10","120")
-Font("cmsy","8","8","100")
-Font("cmex","10","10","120")
 Font("tcrm","1200","12","100")

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.5.27)  28 MAY 2020 13:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.5.27)  3 JUN 2020 11:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7,7 +7,8 @@ de"##1"{\Link##1}\expandafter\HCode\else\expandafter\Link\fi}\def\Link#1.a.b.c.
 {\g@addto@macro\@documentclasshook{\RequirePackage[#1,html]{tex4ht}}\let\HCode\
 documentstyle\def\documentstyle{\let\documentstyle\HCode\expandafter\def\csname
  tex4ht\endcsname{#1,html}\def\HCode####1{\documentstyle[tex4ht,}\@ifnextchar[{
-\HCode}{\documentstyle[tex4ht]}}}\makeatother\HCode .a.b.c.\input  main.tex
+\HCode}{\documentstyle[tex4ht]}}}\makeatother\HCode html,mathjax.a.b.c.\input  
+main.tex
  (./main.tex
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
@@ -348,7 +349,7 @@ option `frames-fn'
 --------------------------------------
 --- Note --- for file extension name xht, use the command line option `xht'
 --------------------------------------
-TeX4ht package options: html
+TeX4ht package options: html,mathjax
 --------------------------------------
 --- Note --- To print a timestamp, use the command line option timestamp
 --------------------------------------
@@ -465,7 +466,36 @@ he command line option `pic-m+' (not safe!!)
 --------------------------------------
 --- Note --- for pictorial array, use the command line option `pic-array'
 --------------------------------------
+
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/mathjax-latex-4ht.4ht
+version 2019-05-14-15:32
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count197
+)
+(/usr/share/texlive/texmf-dist/tex/generic/tex4ht/usepackage.4ht
+version 2019-12-19-14:27
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2020-02-14 L3 programming layer (loader) 
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
+File: l3backend-dvips.def 2020-02-03 L3 backend support: dvips
+\l__pdf_internal_box=\box47
+\g__pdf_backend_object_int=\count198
+\l__pdf_backend_content_box=\box48
+\l__pdf_backend_model_box=\box49
+\g__pdf_backend_annotation_int=\count199
+\g__pdf_backend_link_int=\count266
+\g__pdf_backend_link_sf_int=\count267
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)))))
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/fontmath.4ht
 version 2018-11-06-15:55
 
@@ -581,7 +611,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count197
+\c@section@level=\count268
 )
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/nameref.4ht
 version 2019-12-23-13:36
@@ -641,18 +671,7 @@ version 2020-02-14-14:21
 )
 (/usr/share/texlive/texmf-dist/tex/generic/tex4ht/html4-math.4ht
 version 2019-12-16-15:21
-))
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
-File: l3backend-dvips.def 2020-02-03 L3 backend support: dvips
-\l__pdf_internal_box=\box47
-\g__pdf_backend_object_int=\count198
-\l__pdf_backend_content_box=\box48
-\l__pdf_backend_model_box=\box49
-\g__pdf_backend_annotation_int=\count199
-\g__pdf_backend_link_int=\count266
-\g__pdf_backend_link_sf_int=\count267
-)
-(./main.aux)
+)) (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -677,17 +696,16 @@ LaTeX Info: Redefining \ref on input line 24.
 LaTeX Info: Redefining \pageref on input line 24.
 LaTeX Info: Redefining \nameref on input line 24.
 --- file main.css ---
- [1
+[1
 
-] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
-(./main.bbl [15] [16]) [17] (./main.aux) ) 
+] [2] [3] [4] [5] [6] [7] (./main.bbl [8] [9]) [10] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 9837 strings out of 483141
- 134350 string characters out of 5965177
- 527299 words of memory out of 5000000
- 24640 multiletter control sequences out of 15000+600000
+ 10336 strings out of 483141
+ 141042 string characters out of 5965177
+ 540003 words of memory out of 5000000
+ 25120 multiletter control sequences out of 15000+600000
  539484 words of font info for 49 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 41i,13n,39p,1324b,604s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,6n,48p,1311b,608s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.dvi (17 pages, 42932 bytes).
+Output written on main.dvi (10 pages, 36184 bytes).
