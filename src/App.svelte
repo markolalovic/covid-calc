@@ -374,7 +374,7 @@
   $: infectedTitleListNumber = translations.app.infected;
 
   $: deathsTitleListName = translations.app.age;
-  $: deathsTitleListNumber = translations.app.age;
+  $: deathsTitleListNumber = translations.app.deaths;
 
 	// projections component 
 	let projectionsTitle = '';
