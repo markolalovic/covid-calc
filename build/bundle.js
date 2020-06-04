@@ -13258,7 +13258,7 @@ var app = (function () {
 						<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>.
 						
 						or email me:
-						<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20analyzer" target="_top">here</a>.
+						<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">here</a>.
 					</p> 
 					<p>
 						For technical details please refer to:
