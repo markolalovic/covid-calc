@@ -14682,7 +14682,7 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(24, deathsTitleListNumber = translations.app.age);
+    			 $$invalidate(24, deathsTitleListNumber = translations.app.deaths);
     		}
 
     		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
