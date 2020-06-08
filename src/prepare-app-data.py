@@ -136,7 +136,7 @@ def get_app_dict():
     app_dict['totDeaths'] = "Total deaths"
     app_dict['totDeathsProj'] = "Total deaths (projected)"
 
-    app_dict['titleListMain'] = "How COVID-19 Compare With"
+    app_dict['titleListMain'] = "How COVID-19 Compares With "
     app_dict['titleListName'] = "Cause"
     app_dict['titleListRisk'] = "Risk"
     app_dict['titleListNumber'] = " in "

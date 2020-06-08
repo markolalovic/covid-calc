@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-06-03 10:38:33;
+// version = 2020-06-08 14:25:09;
 
 export const englishDictStore = readable({ 
 	app: {
@@ -54,7 +54,7 @@ export const englishDictStore = readable({
 		 date: "Date",
 		 totDeaths: "Total deaths",
 		 totDeathsProj: "Total deaths (projected)",
-		 titleListMain: "How COVID-19 Compare With",
+		 titleListMain: "How COVID-19 Compares With ",
 		 titleListName: "Cause",
 		 titleListRisk: "Risk",
 		 titleListNumber: " in ",

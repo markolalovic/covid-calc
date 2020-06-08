@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-06-03 10:38:33;
+// version = 2020-06-08 14:25:09;
 
 export const chineseDictStore = readable({ 
 	app: {
@@ -54,7 +54,7 @@ export const chineseDictStore = readable({
 		 date: "日期",
 		 totDeaths: "死亡总数",
 		 totDeathsProj: "总死亡人数（预计）",
-		 titleListMain: "与COVID-19比较",
+		 titleListMain: "与COVID-19比较 ",
 		 titleListName: "原因",
 		 titleListRisk: "风险",
 		 titleListNumber: " 在",
