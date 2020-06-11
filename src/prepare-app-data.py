@@ -133,7 +133,7 @@ def get_app_dict():
 
     app_dict['projectionsTitle'] = "Projections of Total Deaths Over Time by Country"
     app_dict['date'] = "Date"
-    app_dict['totDeaths'] = "Total deaths"
+    app_dict['totDeaths'] = "Total deaths (per 100,000)"
     app_dict['totDeathsProj'] = "Total deaths (projected)"
 
     app_dict['titleListMain'] = "How COVID-19 Compares With "

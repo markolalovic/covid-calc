@@ -47,7 +47,7 @@ Infected,Infected,Infected
 Deaths,Deaths,Deaths
 Projections of Total Deaths Over Time by Country,Projections of Total Deaths Over Time by Country,Projections title
 Date,Date,Date
-Total deaths,Total deaths,Tot deaths
+"Total deaths (per 100,000)","Total deaths (per 100,000)",Tot deaths
 Total deaths (projected),Total deaths (projected),Tot deaths proj
 How COVID-19 Compares With ,How COVID-19 Compares With ,Title list main
 Cause,Cause,Title list name

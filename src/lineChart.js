@@ -16,16 +16,18 @@ export const lineChart = (selection, props) => {
     selectedCountries,
   } = props;
 
-  const splitIndexes = {'Brazil': 68,
-    'Colombia': 77,
-    'Egypt': 77,
-    'France': 76,
-    'Germany': 67,
-    'Italy': 68,
-    'Philippines': 77,
-    'Turkey': 77,
-    'United Kingdom': 77,
-    'United States': 67};
+  const splitIndexes = {
+    'Brazil': 91,
+    'Egypt': 92,
+    'France': 91,
+    'Germany': 92,
+    'Italy': 92,
+    'Japan': 91,
+    'Philippines': 92,
+    'Turkey': 92,
+    'United Kingdom': 92,
+    'United States': 96};
+   
 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;

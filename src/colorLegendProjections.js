@@ -10,7 +10,7 @@ export const colorLegendProjections = (selection, props) => {
   } = props;
 
   const enToZh = {'Brazil': '巴西',
-                  'Colombia': '哥伦比亚',
+                  'Japan': '日本',
                   'Egypt': '埃及',
                   'France': '法国',
                   'Germany': '德国',
@@ -21,7 +21,7 @@ export const colorLegendProjections = (selection, props) => {
                   'United States': '美国'};
 
   const enToEs = {'Brazil': 'Brasil',
-                  'Colombia': 'Colombia',
+                  'Japan': 'Japón',
                   'Egypt': 'Egipto',
                   'France': 'Francia',
                   'Germany': 'Alemania',

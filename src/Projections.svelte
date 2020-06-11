@@ -14,7 +14,7 @@
   let svg;
 
   // state   
-  let selectedColorValues = ['United States', 'Brazil', 'Italy']; // 9, 0, 5
+  let selectedColorValues = ['United States', 'Brazil', 'Italy'];
   let selectedCountries = ['United States', 'Brazil', 'Italy'];
   let data;
   let doAnimation = true;
@@ -30,6 +30,9 @@
         });
         data = inData;
 
+        console.log('projections.csv')
+        console.log(data);
+        
         render();
       });
   }); 

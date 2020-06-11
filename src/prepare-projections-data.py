@@ -46,14 +46,14 @@ def split(y, split_index):
 
 
 def join_population_sizes(num_of_countries=7):
-    ihme_df = pd.read_csv('data/Hospitalization_all_locs.csv',
+    ihme_df = pd.read_csv('../data/Hospitalization_all_locs.csv',
                           usecols = ['location_name',
                                     'date',
                                     'totdea_mean',
                                     'totdea_lower',
                                     'totdea_upper'])
 
-    pop_df = pd.read_csv('data/country_population_size.csv') # get population sizes
+    pop_df = pd.read_csv('../data/country_population_size.csv') # get population sizes
 
     # fix names in ihme_df to match those in pop_df
     ihme_df.loc[ihme_df['location_name'] == 'United States of America', 'location_name'] = 'United States'
@@ -89,6 +89,7 @@ def export_to_csv(num_of_countries, start_end_dates):
     dates = []
     totdea_means = []
     names = []
+    populations = []
 
     for cname in head_countries:
         proj = head_joined[ head_joined['location_name'] == cname ]
@@ -100,17 +101,31 @@ def export_to_csv(num_of_countries, start_end_dates):
         totdea_means += proj[start_index:(end_index + 1)]['totdea_mean'].tolist()
         size = len(proj[start_index:(end_index + 1)]['date'].tolist())
         names += [cname for _ in range(size)]
+        populations += proj[start_index:(end_index + 1)]['population'].tolist()
 
         y1 = proj[start_index:(end_index + 1)]['totdea_lower'].tolist()
         y2 = proj[start_index:(end_index + 1)]['totdea_upper'].tolist()
 
         split_indexes[cname] = get_split_index(y1, y2)
 
-    projections_df = pd.DataFrame(list(zip(dates, names, totdea_means)),
-                columns=['date', 'country', 'totdea_mean'])
 
-    print('Saving projections.csv to ./data/')
-    projections_df.to_csv(r'./data/projections.csv', index = False)
+
+    projections_df = pd.DataFrame(list(zip(dates, names, totdea_means, populations)),
+                columns=['date', 'country', 'totdea_mean', 'population'])
+
+    # calculate total deaths per 100k
+    # totdea_* = totdea_* / population * 100000
+    projections_df = projections_df.assign(totdea_mean=lambda x: x.totdea_mean / x.population * 100000)
+    # we don't need upper and lower
+    # projections_df = projections_df.assign(totdea_lower=lambda x: x.totdea_lower / x.population * 100000)
+    # projections_df = projections_df.assign(totdea_upper=lambda x: x.totdea_upper / x.population * 100000)
+
+    print('projections_df: ')
+    print(projections_df[ projections_df['country'] == 'United States' ]['totdea_mean'])
+    print('\n')
+
+    print('Saving projections.csv to ../data/')
+    projections_df.to_csv(r'../data/projections.csv', index = False)
 
     print('const splitIndexes = ')
     pprint.pprint(split_indexes)

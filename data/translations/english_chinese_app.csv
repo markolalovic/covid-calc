@@ -47,7 +47,7 @@ Infected,已感染,Infected
 Deaths,死亡人数,Deaths
 Projections of Total Deaths Over Time by Country,各个国家随时间推移的总死亡人数预测,Projections title
 Date,日期,Date
-Total deaths,死亡总数,Tot deaths
+"Total deaths (per 100,000)",死亡总数 (每十万人口),Tot deaths
 Total deaths (projected),总死亡人数（预计）,Tot deaths proj
 How COVID-19 Compares With ,与COVID-19比较 ,Title list main
 Cause,原因,Title list name
