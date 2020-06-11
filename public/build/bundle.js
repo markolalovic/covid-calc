@@ -7905,11 +7905,11 @@ var app = (function () {
     			svg_1 = svg_element("svg");
     			style = svg_element("style");
     			t = text(".line {\n      fill: none;\n      stroke-width: 5;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .continuous {\n      fill: none;  \n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;  \n    }\n    .dashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      /* stroke-dasharray: 8 8; */\n    }\n    .alldashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    .legend-continuous {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .legend-dashed {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    text {\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick-colorlegend {\n      cursor: pointer;\n    }\n    .tick text {\n      font-weight: normal;\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick line {\n      stroke: #C0C0BB;\n    }\n    .axis-label {\n      font-size: 15px;\n      font-weight: 800;\n      fill: rgba(72,72,72,1);\n      font-family: 'Roboto', sans-serif;\n    }\n    .title {\n      font-weight: 800;\n      font-family: 'Roboto', sans-serif;\n      fill: rgba(72,72,72,1);\n      font-size: 17px;\n    }");
-    			add_location(style, file$4, 140, 2, 3473);
+    			add_location(style, file$4, 137, 2, 3436);
     			attr_dev(svg_1, "class", "projections");
     			attr_dev(svg_1, "width", "960");
     			attr_dev(svg_1, "height", "450");
-    			add_location(svg_1, file$4, 138, 0, 3418);
+    			add_location(svg_1, file$4, 135, 0, 3381);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7960,7 +7960,6 @@ var app = (function () {
 
     	let selectedCountries = ["United States", "Brazil", "Italy"];
     	let data;
-    	let doAnimation = true;
 
     	afterUpdate(() => {
     		svg = d3.select("svg.projections");
@@ -7993,7 +7992,7 @@ var app = (function () {
     	}
 
     	const render = () => {
-    		// projections lince chart
+    		// projections line chart
     		let lineChartG = svg.selectAll("g.line-chart").data([null]);
 
     		lineChartG = lineChartG.enter().append("g").attr("class", "line-chart").merge(lineChartG);
@@ -8085,7 +8084,6 @@ var app = (function () {
     		selectedColorValues,
     		selectedCountries,
     		data,
-    		doAnimation,
     		removeItemOnce,
     		onClick,
     		render
@@ -8100,7 +8098,6 @@ var app = (function () {
     		if ("selectedColorValues" in $$props) selectedColorValues = $$props.selectedColorValues;
     		if ("selectedCountries" in $$props) selectedCountries = $$props.selectedCountries;
     		if ("data" in $$props) data = $$props.data;
-    		if ("doAnimation" in $$props) doAnimation = $$props.doAnimation;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -15280,7 +15277,7 @@ var app = (function () {
     			div36.textContent = "Acknowledgements";
     			t109 = space();
     			p10 = element("p");
-    			p10.textContent = "Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.";
+    			p10.textContent = "Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.\n\t\t\t\t\t\tYao Cheng for help with Chinese translations.";
     			attr_dev(h3, "class", "title svelte-1havf7j");
     			add_location(h3, file$a, 598, 4, 21142);
     			attr_dev(h6, "class", "parameter-text svelte-1havf7j");

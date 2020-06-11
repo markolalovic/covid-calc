@@ -17,7 +17,6 @@
   let selectedColorValues = ['United States', 'Brazil', 'Italy'];
   let selectedCountries = ['United States', 'Brazil', 'Italy'];
   let data;
-  let doAnimation = true;
 
   afterUpdate(() => {
     svg = d3.select('svg.projections');
@@ -32,7 +31,7 @@
 
         console.log('projections.csv')
         console.log(data);
-        
+
         render();
       });
   }); 
@@ -44,8 +43,6 @@
     }
     return arr;
   }
-
-
 
   function onClick(cname) {
     if (selectedColorValues.includes(cname)
@@ -63,7 +60,7 @@
 
   const render = () => {
 
-    // projections lince chart
+    // projections line chart
     let lineChartG = svg.selectAll('g.line-chart').data([null]);
     lineChartG = lineChartG
       .enter()

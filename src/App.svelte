@@ -1393,8 +1393,8 @@
 					<div class="wtitle">Acknowledgements</div>
 					<p>
 						Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
+						Yao Cheng for help with Chinese translations.
 					</p>
-					<!-- TODO: references here? -->
 				</div>
 			</div>
 		</div>
