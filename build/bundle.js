@@ -7467,7 +7467,7 @@ var app = (function () {
     	}
 
     	const render = () => {
-    		// projections lince chart
+    		// projections line chart
     		let lineChartG = svg.selectAll("g.line-chart").data([null]);
 
     		lineChartG = lineChartG.enter().append("g").attr("class", "line-chart").merge(lineChartG);
@@ -13275,6 +13275,7 @@ var app = (function () {
 					<div class="wtitle svelte-1havf7j">Acknowledgements</div> 
 					<p>
 						Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
+						Yao Cheng for help with Chinese translations.
 					</p></div></div>`;
 
     			attr(h3, "class", "title svelte-1havf7j");
