@@ -656,7 +656,7 @@ var app = (function () {
         return { set, update, subscribe };
     }
 
-    // version = 2020-06-08 14:25:09;
+    // version = 2020-06-11 18:32:42;
 
     const englishDictStore = readable({ 
     	app: {
@@ -708,7 +708,7 @@ var app = (function () {
     		 deaths: "Deaths",
     		 projectionsTitle: "Projections of Total Deaths Over Time by Country",
     		 date: "Date",
-    		 totDeaths: "Total deaths",
+    		 totDeaths: "Total deaths (per 100,000)",
     		 totDeathsProj: "Total deaths (projected)",
     		 titleListMain: "How COVID-19 Compares With ",
     		 titleListName: "Cause",
@@ -2476,7 +2476,7 @@ var app = (function () {
     		],
       });
 
-    // version = 2020-06-08 14:25:09;
+    // version = 2020-06-11 18:32:42;
 
     const chineseDictStore = readable({ 
     	app: {
@@ -2528,7 +2528,7 @@ var app = (function () {
     		 deaths: "死亡人数",
     		 projectionsTitle: "各个国家随时间推移的总死亡人数预测",
     		 date: "日期",
-    		 totDeaths: "死亡总数",
+    		 totDeaths: "死亡总数 (每十万人口)",
     		 totDeathsProj: "总死亡人数（预计）",
     		 titleListMain: "与COVID-19比较 ",
     		 titleListName: "原因",
@@ -4296,7 +4296,7 @@ var app = (function () {
     		],
       });
 
-    // version = 2020-06-08 14:25:09;
+    // version = 2020-06-11 18:32:42;
 
     const spanishDictStore = readable({ 
     	app: {
@@ -4348,7 +4348,7 @@ var app = (function () {
     		 deaths: "Fallecidos",
     		 projectionsTitle: "Proyecciones de muertes totales a lo largo del tiempo por país",
     		 date: "Fecha",
-    		 totDeaths: "Muertes totales",
+    		 totDeaths: "Muertes totales (por 100,000)",
     		 totDeathsProj: "Muertes totales (proyectadas)",
     		 titleListMain: "Cómo se compara COVID-19 con ",
     		 titleListName: "Porque",
@@ -7047,16 +7047,18 @@ var app = (function () {
         selectedCountries,
       } = props;
 
-      const splitIndexes = {'Brazil': 68,
-        'Colombia': 77,
-        'Egypt': 77,
-        'France': 76,
-        'Germany': 67,
-        'Italy': 68,
-        'Philippines': 77,
-        'Turkey': 77,
-        'United Kingdom': 77,
-        'United States': 67};
+      const splitIndexes = {
+        'Brazil': 91,
+        'Egypt': 92,
+        'France': 91,
+        'Germany': 92,
+        'Italy': 92,
+        'Japan': 91,
+        'Philippines': 92,
+        'Turkey': 92,
+        'United Kingdom': 92,
+        'United States': 96};
+       
 
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
@@ -7316,7 +7318,7 @@ var app = (function () {
       } = props;
 
       const enToZh = {'Brazil': '巴西',
-                      'Colombia': '哥伦比亚',
+                      'Japan': '日本',
                       'Egypt': '埃及',
                       'France': '法国',
                       'Germany': '德国',
@@ -7327,7 +7329,7 @@ var app = (function () {
                       'United States': '美国'};
 
       const enToEs = {'Brazil': 'Brasil',
-                      'Colombia': 'Colombia',
+                      'Japan': 'Japón',
                       'Egypt': 'Egipto',
                       'France': 'Francia',
                       'Germany': 'Alemania',
@@ -7429,7 +7431,7 @@ var app = (function () {
     	let svg;
 
     	// state   
-    	let selectedColorValues = ["United States", "Brazil", "Italy"]; // 9, 0, 5
+    	let selectedColorValues = ["United States", "Brazil", "Italy"];
 
     	let selectedCountries = ["United States", "Brazil", "Italy"];
     	let data;
@@ -7444,6 +7446,8 @@ var app = (function () {
     			});
 
     			data = inData;
+    			console.log("projections.csv");
+    			console.log(data);
     			render();
     		});
     	});
