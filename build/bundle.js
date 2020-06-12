@@ -7298,10 +7298,10 @@ var app = (function () {
 
       gEnter
         .append('text')
-          .attr('class', 'title')
+          .attr('class', 'title-proj')
           .attr('x', -100)
           .attr('y', -30)
-        .merge(g.select('.title'))
+        .merge(g.select('.title-proj'))
           .text(title);
     };
 
@@ -7393,7 +7393,7 @@ var app = (function () {
     		c() {
     			svg_1 = svg_element("svg");
     			style = svg_element("style");
-    			t = text(".line {\n      fill: none;\n      stroke-width: 5;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .continuous {\n      fill: none;  \n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;  \n    }\n    .dashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      /* stroke-dasharray: 8 8; */\n    }\n    .alldashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    .legend-continuous {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .legend-dashed {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    text {\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick-colorlegend {\n      cursor: pointer;\n    }\n    .tick text {\n      font-weight: normal;\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick line {\n      stroke: #C0C0BB;\n    }\n    .axis-label {\n      font-size: 15px;\n      font-weight: 800;\n      fill: rgba(72,72,72,1);\n      font-family: 'Roboto', sans-serif;\n    }\n    .title {\n      font-weight: 800;\n      font-family: 'Roboto', sans-serif;\n      fill: rgba(72,72,72,1);\n      font-size: 17px;\n    }");
+    			t = text(".line {\n      fill: none;\n      stroke-width: 5;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .continuous {\n      fill: none;  \n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;  \n    }\n    .dashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      /* stroke-dasharray: 8 8; */\n    }\n    .alldashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    .legend-continuous {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .legend-dashed {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    text {\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick-colorlegend {\n      cursor: pointer;\n    }\n    .tick text {\n      font-weight: normal;\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick line {\n      stroke: #C0C0BB;\n    }\n    .axis-label {\n      font-size: 15px;\n      font-weight: 800;\n      fill: rgba(72,72,72,1);\n      font-family: 'Roboto', sans-serif;\n    }\n    .title-proj {\n      font-weight: 800;\n      font-family: 'Roboto', sans-serif;\n      fill: rgba(72,72,72,1);\n      font-size: 17px;\n    }");
     			attr(svg_1, "class", "projections");
     			attr(svg_1, "width", "960");
     			attr(svg_1, "height", "450");
