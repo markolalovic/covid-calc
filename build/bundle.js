@@ -7200,7 +7200,6 @@ var app = (function () {
         let filterRange = [];
         let allCountries = [];
 
-        // TODO: show only paths from selectedColorValues!
         // filter on selectedColorValues
         allCountries = getIndexes(nested, type);
         allCountries.forEach(i => { 
@@ -7366,7 +7365,7 @@ var app = (function () {
           .attr('opacity', d =>
           selectedColorValues.includes(d)
             ? 1
-            : 0.1
+            : 0.25
           )
           .on('click', d => onClick(d));
         groups.exit().remove();
@@ -7439,7 +7438,6 @@ var app = (function () {
     	afterUpdate(() => {
     		svg = d3.select("svg.projections");
 
-    		// TODO: create csv upload to github gist
     		d3.csv("projections.csv").then(inData => {
     			inData.forEach(d => {
     				d.totdea_mean = +d.totdea_mean;
