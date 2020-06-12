@@ -7707,7 +7707,6 @@ var app = (function () {
         let filterRange = [];
         let allCountries = [];
 
-        // TODO: show only paths from selectedColorValues!
         // filter on selectedColorValues
         allCountries = getIndexes(nested, type);
         allCountries.forEach(i => { 
@@ -7873,7 +7872,7 @@ var app = (function () {
           .attr('opacity', d =>
           selectedColorValues.includes(d)
             ? 1
-            : 0.1
+            : 0.25
           )
           .on('click', d => onClick(d));
         groups.exit().remove();
@@ -7905,11 +7904,11 @@ var app = (function () {
     			svg_1 = svg_element("svg");
     			style = svg_element("style");
     			t = text(".line {\n      fill: none;\n      stroke-width: 5;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .continuous {\n      fill: none;  \n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;  \n    }\n    .dashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      /* stroke-dasharray: 8 8; */\n    }\n    .alldashed {\n      fill: none;\n      stroke-width: 4.5px;\n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    .legend-continuous {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n    }\n    .legend-dashed {\n      fill: none;\n      stroke: black;\n      stroke-width: 4.5px;  \n      stroke-linejoin: round;\n      stroke-linecap: round;\n      mix-blend-mode: multiply;\n      stroke-dasharray: 8 8;\n    }\n    text {\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick-colorlegend {\n      cursor: pointer;\n    }\n    .tick text {\n      font-weight: normal;\n      font-family: 'Roboto', sans-serif;\n      font-size: 14px;\n    }\n    .tick line {\n      stroke: #C0C0BB;\n    }\n    .axis-label {\n      font-size: 15px;\n      font-weight: 800;\n      fill: rgba(72,72,72,1);\n      font-family: 'Roboto', sans-serif;\n    }\n    .title {\n      font-weight: 800;\n      font-family: 'Roboto', sans-serif;\n      fill: rgba(72,72,72,1);\n      font-size: 17px;\n    }");
-    			add_location(style, file$4, 137, 2, 3436);
+    			add_location(style, file$4, 136, 2, 3390);
     			attr_dev(svg_1, "class", "projections");
     			attr_dev(svg_1, "width", "960");
     			attr_dev(svg_1, "height", "450");
-    			add_location(svg_1, file$4, 135, 0, 3381);
+    			add_location(svg_1, file$4, 134, 0, 3335);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7964,7 +7963,6 @@ var app = (function () {
     	afterUpdate(() => {
     		svg = d3.select("svg.projections");
 
-    		// TODO: create csv upload to github gist
     		d3.csv("projections.csv").then(inData => {
     			inData.forEach(d => {
     				d.totdea_mean = +d.totdea_mean;

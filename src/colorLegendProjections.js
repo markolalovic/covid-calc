@@ -61,7 +61,7 @@ export const colorLegendProjections = (selection, props) => {
       .attr('opacity', d =>
       selectedColorValues.includes(d)
         ? 1
-        : 0.1
+        : 0.25
       )
       .on('click', d => onClick(d));
     groups.exit().remove();

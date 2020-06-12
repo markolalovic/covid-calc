@@ -169,7 +169,6 @@ export const lineChart = (selection, props) => {
     let filterRange = [];
     let allCountries = [];
 
-    // TODO: show only paths from selectedColorValues!
     // filter on selectedColorValues
     allCountries = getIndexes(nested, type);
     allCountries.forEach(i => { 

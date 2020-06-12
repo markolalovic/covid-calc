@@ -21,7 +21,6 @@
   afterUpdate(() => {
     svg = d3.select('svg.projections');
   
-    // TODO: create csv upload to github gist
     d3.csv('projections.csv')
       .then(inData => {
         inData.forEach(d => {
