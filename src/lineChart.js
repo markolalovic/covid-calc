@@ -268,9 +268,9 @@ export const lineChart = (selection, props) => {
 
   gEnter
     .append('text')
-      .attr('class', 'title')
+      .attr('class', 'title-proj')
       .attr('x', -100)
       .attr('y', -30)
-    .merge(g.select('.title'))
+    .merge(g.select('.title-proj'))
       .text(title);
 }

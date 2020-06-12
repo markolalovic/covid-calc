@@ -203,7 +203,7 @@
       fill: rgba(72,72,72,1);
       font-family: 'Roboto', sans-serif;
     }
-    .title {
+    .title-proj {
       font-weight: 800;
       font-family: 'Roboto', sans-serif;
       fill: rgba(72,72,72,1);
