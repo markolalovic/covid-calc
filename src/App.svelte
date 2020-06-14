@@ -2,7 +2,7 @@
 
 	/***
 	* App.svelte - web app in Svelte for the user interface:
-	  - imports data from stores.js previously created by prepare_data.py
+	  - imports data from stores.js previously created by prepare_*_data.py
 	  - reactively calculates estimates for chosen parameters
 	  - visualizations using d3
 	Compile in order to convert to JavaScript.
@@ -12,6 +12,7 @@
 	import { englishDictStore } from './store_english.js';
 	import { chineseDictStore } from './store_chinese.js';
 	import { spanishDictStore } from './store_spanish.js';
+	import { portugueseDictStore } from './store_portuguese.js';
 
 	// main components
 	import CompareByAge from './CompareByAge.svelte'; // Mortality by Age
@@ -153,11 +154,13 @@
 	let english = $englishDictStore;
 	let chinese = $chineseDictStore;
 	let spanish = $spanishDictStore;
+	let portuguese = $portugueseDictStore;
 
 	let translationMap = {
 		'en': english,
 		'zh': chinese,
-		'es': spanish };
+		'es': spanish,
+		'pt': portuguese};
 
 	let language = 'en';
 	$: translations = translationMap[language];
@@ -610,6 +613,9 @@
 					</a>
 				<a href="#en" class="lang-link" on:click="{
 					() => changeLanguageTo('en')}">English
+				</a>
+				<a href="#pt" class="lang-link" on:click="{
+					() => changeLanguageTo('pt')}">Português
 				</a>
 			</div>
 		</div>
@@ -1363,38 +1369,75 @@
 
 		<div class="row">
 			<div class="twelve columns">
-				<div class="child parameter-text"> 
-					<div class="wtitle">About</div>
-					<p>
-						At the time of writing, the impacts of COVID-2019 
-						remain largely uncertain and depend on a whole range of possibilities.
+				<div class="child parameter-text">
+					{#if language === 'en'}
+						<div class="wtitle">About</div>
+						<p>
+							At the time of writing, the impacts of COVID-2019 
+							remain largely uncertain and depend on a whole range of possibilities.
 
-						Organizing the overwhelming mass of the available information in the media and literature, 
-						coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
+							Organizing the overwhelming mass of the available information in the media and literature, 
+							coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
 
-						As an attempt to address this problem I used publicly available data and published information 
-						to create this international tool that allows users to derive their own country-specific estimates.
-					</p>
-					<p>
-						Please send me feedback:
-						<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>.
-						
-						or email me:
-						<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">here</a>.
-					</p>
-					<p>
-						For technical details please refer to:
-						<a href="notes.html">notes</a>
-						
-						or the:
-						<a href="https://github.com/markolalovic/covid-calc">source code</a>.
-					</p>
+							As an attempt to address this problem I used publicly available data and published information 
+							to create this international tool that allows users to derive their own country-specific estimates.
+						</p>
+						<p>
+							Please send me feedback:
+							<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>.
+							
+							or email me:
+							<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">here</a>.
+						</p>
+						<p>
+							For technical details please refer to:
+							<a href="notes.html">notes</a>
+							
+							or the:
+							<a href="https://github.com/markolalovic/covid-calc">source code</a>.
+						</p>
 
-					<div class="wtitle">Acknowledgements</div>
-					<p>
-						Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
-						Yao Cheng for help with Chinese translations.
-					</p>
+						<div class="wtitle">Acknowledgements</div>
+						<p>
+							Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
+							Yao Cheng for help with Chinese translations.
+							Lucas Sanders for help with Portuguese translations.
+						</p>
+					{/if}
+					{#if language === 'pt'}
+						<div class="wtitle">Sobre</div>
+						<p>
+							No momento da redação deste artigo, os impactos do COVID-2019 permanecem incertos e dependem de uma gama de possibilidades. 
+							
+							Organizar essa gigantesca massa de informações disponíveis na mídia e na literatura, 
+							afim de obter uma estimativa razoável, comparando vários cenários, pode ser um desafio. 
+							
+							Como tentativa de solucionar esse problema, usei dados publicamente disponíveis e publiquei algumas informações 
+							para criar essa ferramenta internacional que permite aos usuários obter suas próprias estimativas específicas 
+							para cada país.
+						</p>
+						<p>
+							Envie-me um feedback:
+							<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">aqui</a>.
+							
+							ou envie um email:
+							<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">aqui</a>.
+						</p>
+						<p>
+							Para detalhes técnicos, veja as
+							<a href="notes.html">notas</a>
+							
+							ou o:
+							<a href="https://github.com/markolalovic/covid-calc">código fonte</a>.
+						</p>
+
+						<div class="wtitle">Agradecimentos</div>
+						<p>
+							Tjaša Kovačević pela ajuda no cálculo de perdas de anos esperados e dos impactos econômicos na pobreza.
+							Yao Cheng pela ajuda com traduções para o chinês.
+							Lucas Sanders pela ajuda com traduções para o português.
+						</p>
+					{/if}
 				</div>
 			</div>
 		</div>

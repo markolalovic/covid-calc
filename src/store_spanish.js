@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-06-11 18:32:42;
+// version = 2020-06-14 11:17:38;
 
 export const spanishDictStore = readable({ 
 	app: {

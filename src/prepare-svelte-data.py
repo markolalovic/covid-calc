@@ -57,7 +57,7 @@ from datetime import datetime
 import os
 import pprint
 
-languages = ['english', 'spanish', 'chinese']
+languages = ['english', 'spanish', 'chinese', 'portuguese']
 
 def get_translate_to():
     '''

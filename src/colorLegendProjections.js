@@ -31,6 +31,17 @@ export const colorLegendProjections = (selection, props) => {
                   'United Kingdom': 'Reino Unido',
                   'United States': 'Estados Unidos'};
 
+  const enToPt = {'Brazil': 'Brasil',
+                  'Japan': 'Japão',
+                  'Egypt': 'Egito',
+                  'France': 'França',
+                  'Germany': 'Alemanha',
+                  'Italy': 'Itália',
+                  'Philippines': 'Filipinas',
+                  'Turkey': 'Turquia',
+                  'United Kingdom': 'Reino Unido',
+                  'United States': 'Estados Unidos'};                  
+
   function getText(d) {
     switch(language) {
       case 'en':
@@ -41,6 +52,9 @@ export const colorLegendProjections = (selection, props) => {
         break;
       case 'zh':
         return enToZh[d];
+        break;
+      case 'pt':
+        return enToPt[d];
         break;
       default:
         console.log(d);  

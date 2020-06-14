@@ -1,0 +1,238 @@
+english,portuguese,description
+COVID Calculator,Calculadora de dados COVID,Main title
+A visual tool to explore and analyze the potential impacts of COVID-19,Uma ferramenta visual para explorar e analisar os possíveis impactos do COVID-19,Subtitle
+Mortality by Age,Mortalidade por Idade,Tab item0
+Estimates in Context,Estimativas em Dado Contexto,Tab item1
+Risks by Country,Riscos por País,Tab item2
+Poverty Proj.,Proj. de Pobreza,Tab item3
+Deaths Proj.,Mortes Proj,Tab item4
+Hyp. Scenarios,Cenários Hipotéticos,Tab item5
+Ex. Interpretations,Interpretações,Tab item6
+Location,Localização,Location
+Select location,Selecionar local,Select location
+The impact of COVID-19 varies between countries.,O impacto do COVID-19 varia entre países.,Location description
+Infection rate,Taxa de infecção,Infection rate
+Proportion of all people contracting the novel coronavirus.,Proporção de todas as pessoas contraírem o novo coronavírus.,Infection rate description
+Over 60 infection rate,Taxa de infecção superior a 60 anos,Over60infection rate
+Below 60 infection rate,Taxa de infecção abaixo de 60 anos,Below60infection rate
+Proportion of all people over the age of 60 contracting the novel coronavirus.,Proporção de todas as pessoas com mais de 60 anos contraírem o novo coronavírus.,Over60description
+The proportion of people below 60 infected is then,A proporção de pessoas abaixo de 60 anos serem infectadas é de,Proportion is then
+Since it depends on both overall infection rate and infection rate of people over 60.,Uma vez que depende de ambas taxas de infecções.,Proportion is then description
+Based on,Baseado nas taxas de mortalide de,Based on
+fatality rates and,e distribuição de idade do,Based on continued1
+"age distribution and other selected input parameters, we can expect:",", além de outros parâmetros de entrada, podemos esperar:",Based on continued2
+infected and,de infectados e,Based on continued3
+deaths or,de mortes ou,Based on continued4
+years of life lost in,anos de vida potencialmente perdido em,Based on continued5
+It is possible that estimated coronavirus deaths will span multiple years.,É possível que as mortes estimadas por coronavírus abranjam vários anos.,Compare with other caption1
+Deaths due to other causes are for the year of 2017. Source:,As mortes por outras causas são do ano de 2017. Fonte:,Compare with other caption2
+"Confirmed deaths due to COVID-19 until May 27, 2020. Source:",Mortes confirmadas por COVID-19 até 27 de maio de 2020. Fonte:,Compare with other caption3
+Years of life lost due to other causes are for the year of 2017. Source:,Os anos de vida potencialmente perdidos por outras causas são do ano de 2017. Fonte:,Compare with other caption4
+"Years of life lost due to COVID-19 until May 27, 2020. Source:",Anos de vida potencialmente perdidos devido ao COVID-19 correspondem até 27 de maio de 2020. Fonte:,Compare with other caption5
+and authors calculations.,e cálculos dos autores.,Authors calculations
+Years of life lost due to other risk factors are for the year of 2017. Source:,Os anos de vida perdidos devido a outros fatores de risco são do ano de 2017. Fonte:,Compare with other caption7
+Proportion of People Over 60 Risk by Country,Proporção de pessoas acima de 60 anos por país,Proportion over60by country
+Low Income Risk by Country,Risco para pessoas com baixa renda por país,Low income risk by country
+You can hover over legend items to select. You can zoom in and out of map. And hover over map to get information about the country it represents.,Você pode passar o mouse sobre os itens da legenda para selecionar. Você pode ampliar e reduzir o mapa. E passe o mouse sobre o mapa para obter informações sobre o país selecionado.,Map caption
+"Projected increases by country due to coronavirus impact on the world economy in the number of people living in extreme poverty, that is an income below the international poverty line of $1.90 per day.","Projeção por país, devido ao impacto do coronavírus na economia mundial, no número de pessoas que vivem em extrema pobreza, no qual possuem uma renda abaixo da linha de pobreza internacional de US $ 1,90 por dia.",Projected povery
+Sources:,Fontes:,Sources
+Projected poverty increases by region due to coronavirus impact on world economy.,Projeção do aumento de pobreza por região devido ao impacto do coronavírus na economia mundial.,Projected povery by region
+Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.,Projeção do total de mortes por COVID-19. Clique na legenda para selecionar ou desselecionar um país.,Projections caption
+Source:,Fonte:,Source
+Reset,Redefinir,Reset
+Expected Number of Infected by Age,Número esperado de infectados por idade,Infected title
+Expected Number of Deaths by Age,Número esperado de óbitos por idade,Deaths title
+Age,Idade,Age
+Infected,Infetado,Infected
+Deaths,Mortes,Deaths
+Projections of Total Deaths Over Time by Country,Projeções do total de óbitos ao longo do tempo por país,Projections title
+Date,Data,Date
+"Total deaths (per 100,000)",Total de mortes (por 100.000),Tot deaths
+Total deaths (projected),Total de mortes (projetadas),Tot deaths proj
+How COVID-19 Compares With,Como o COVID-19 se compara com,Title list main
+Cause,Causa,Title list name
+Risk,Risco,Title list risk
+in,no,Title list number
+Yrs of Life Lost,Anos de vida perdidos,Years of life lost
+in,no,In country
+Causes of Death,Causas de morte,Compare items0
+Causes of Years of Life Lost,Causas de anos de vida perdidos,Compare items1
+Risk Factors in Years of Life Lost,Fatores de risco em anos de vida perdidos,Compare items2
+COVID-19 (estimate),COVID-19 (estimativa),Covid19cause
+Enter description,Digite a descrição,Enter describtion
+Expected Years of Life Lost,Anos Esperados de Vida Perdidos,Yrs of life lost
+Potential Costs,Potenciais gastos,Yrs of life lost costs
+Description of scenario,Descrição do cenário,Scenarios description
+Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by,Milhões que potencialmente entrarão para a extrema pobreza devido ao COVID-19 por,Poverty title
+Country,País,Country
+Region,Região,Region
+People,Pessoas,People
+India,Índia,India
+Nigeria,Nigéria,Nigeria
+Democratic Republic of Congo,República Democrática do Congo,Dr congo
+Ethiopia,Etiópia,Ethiopia
+Bangladesh,Bangladesh,Bangladesh
+Tanzania,Tanzânia,Tanzania
+Madagascar,Madagáscar,Madagascar
+Indonesia,Indonésia,Indonesia
+Kenya,Quênia,Kenya
+Mozambique,Moçambique,Mozambique
+Uganda,Uganda,Uganda
+South Africa,África do Sul,South africa
+Sub-Saharan Africa,África Subsaariana,Sub sah africa
+South Asia,Sul da Asia,South asia
+East Asia & Pacific,Extremo Oriente e Pacífico,East asia pacific
+Latin America & Caribbean,América Latina e Caribe,Latin caribbean
+Middle East & North Africa,Oriente Médio e Norte da África,Middle east north africa
+Europe & Central Asia,Europa e Ásia Central,Europe central asia
+North America,América do Norte,North america
+Causes of Death,Causas de morte,Main proj regions
+Causes of Years of Life Lost,Causas de anos de vida perdidos,Name proj regions
+Risk Factors in Years of Life Lost,Fatores de risco em anos de vida perdidos,Number proj regions
+Fatality rates,Taxa de mortalidade,Fatality rates
+Select estimates of risk of death from infection with the novel coronavirus. Estimates vary between countries and over time. Wider testing can reduce CFR estimates.,Selecione a fonte de estimativas de risco de morte por infecção pelo novo coronavírus. As estimativas variam entre os países e ao longo do tempo. Testes mais completos podem reduzir as estimativas de CFR.,Fatality rates description
+Vary selected fatality rates,Varie a taxa de mortalidade selecionada,Vary f rs
+"Try increasing the risk of deaths, e.g. to 50%, for low-income country or overwhelmed healthcare.","Tente aumentar o risco de mortes, por exemplo 50%, para países de baixa renda ou com sistemas de saúde sobrecarregados.",Vary f rs description1
+"Or decreasing, e.g. to -50%, for expected improved treatments and better healthcare.","Ou diminuir, por exemplo a -50%, para tratamentos aprimorados e melhores sistemas de saúde.",Vary f rs description2
+Set all input parameters back to their initial values.,Redefina todos os parâmetros de entrada de volta aos seus valores iniciais.,Reset description
+Probability of eliminating COVID-19,Probabilidade de erradicação do COVID-19,Elimination
+Probability of achieving complete elimination of COVID-19 disease before it manages to infect,Probabilidade de conseguir a eliminação completa da doença de COVID-19 antes que ela consiga infectar,Elimination description1
+of population.,da população.,Elimination description2
+Infection rate until elimination,Taxa de infecção até a erradicação.,Infection until
+Proportion of population that still gets infected even in the event of achieving complete elimination. Note: First increase the probability of elimination for this parameter to take effect.,"Proporção da população que ainda será infectada, mesmo conseguindo uma erradicação completa. Nota: Primeiro aumente a probabilidade de erradicação para que esse parâmetro aja.",Infection until description
+Hide Export,Ocultar exportação,Hide export
+Export,Exportar,Export
+Export Hypothetical COVID-19 Scenarios in JSON format.,Exportar cenários hipotéticos COVID-19 no formato JSON.,Export description
+Hide Export,Ocultar exportação,Export1
+"You can set input parameters that describe a hypothetical scenario and add it to the table for comparison. There are 3 examples of hypothetical scenarios for the selected location and fatality risks. Results should be interpreted with caution, see Example Interpretations.","Você pode definir parâmetros de entrada que descrevem um cenário hipotético e adicioná-lo à tabela para comparação. Existem 3 exemplos de cenários hipotéticos para os riscos por localização e de fatalidade. Os resultados devem ser interpretados com cautela, por isso analise os exemplos.",Scenarios caption
+"Scenario 0: Do nothing, as a baseline","Cenário 0: Não fazer nada, como parâmetro de base.",Example scenario0
+"Scenario 1: Protect people over 60, compensate by exposing those below 60, consider also years of life lost","Cenário 1: Proteger as pessoas com mais de 60 anos, permitindo exposição de pessoas com menos de 60 anos, considerando também anos de vida perdidos",Example scenario1
+"Scenario 2: Elimination to 90%, consider also money saved","Cenário 2: Erradicação de 90%, considerando também o dinheiro economizado",Example scenario2
+COVID-19 Risks by Country,Risco do COVID-19 por país,Map title
+Proportion of people over 60 by Country,Proporção de pessoas com mais de 60 anos por país,Map items0
+Low Income Risk by Country,Risco para pessoas com baixa renda por país,Map items1
+By Country,Por país,Poverty items0
+By Region,Por região,Poverty items1
+Imperial College - IFR,Imperial College - IFR,Sources of Fatality Rates
+China CDC - CFR,China CDC - CFR,Sources of Fatality Rates
+Korea CDC - CFR,CDC da Coreia - CFR,Sources of Fatality Rates
+JAMA Italy - CFR,JAMA Itália - CFR,Sources of Fatality Rates
+MISAN Spain - CFR,MISAN Espanha - CFR,Sources of Fatality Rates
+Other Major Causes Of Death,Ouras principais causas de mortes,Option to compare with
+Diseases in Years of Life Lost,Doenças em anos de vida perdidos,Option to compare with
+Risk Factors in Years of Life Lost,Fatores de risco em anos de vida perdidos,Option to compare with
+Other Countries in the World,Outros países do mundo,Option to compare with
+Nutritional deficiencies,Deficiências nutricionais,"Cause of death, e.g. homicide"
+HIV/AIDS,HIV / AIDS,"Cause of death, e.g. homicide"
+"COVID-19 until May 27, 2020",COVID-19 até 27 de maio de 2020,"Cause of death, e.g. homicide"
+Neonatal disorders,Doenças neonatais,"Cause of death, e.g. homicide"
+Respiratory diseases,Doenças respiratórias,"Cause of death, e.g. homicide"
+Diabetes,Diabetes,"Cause of death, e.g. homicide"
+Kidney disease,Doença renal,"Cause of death, e.g. homicide"
+Digestive diseases,Doenças digestivas,"Cause of death, e.g. homicide"
+Conflict,Conflitos armados,"Cause of death, e.g. homicide"
+Malaria,Malária,"Cause of death, e.g. homicide"
+Drug use disorders,Distúrbios pelo uso de drogas,"Cause of death, e.g. homicide"
+Road injuries,Acidentes de trânsito,"Cause of death, e.g. homicide"
+Lower respiratory infections,Doenças respiratórias,"Cause of death, e.g. homicide"
+Homicide,Homicídio,"Cause of death, e.g. homicide"
+Cardiovascular diseases,Doenças cardiovasculares,"Cause of death, e.g. homicide"
+Parkinson disease,Mal de Parkinson,"Cause of death, e.g. homicide"
+Suicide,Suicídio,"Cause of death, e.g. homicide"
+Maternal disorders,Problemas relacionados à gestação,"Cause of death, e.g. homicide"
+Meningitis,Meningite,"Cause of death, e.g. homicide"
+Diarrheal diseases,Doenças diarréicas,"Cause of death, e.g. homicide"
+Protein-energy malnutrition,Desnutrição,"Cause of death, e.g. homicide"
+Dementia,Demência,"Cause of death, e.g. homicide"
+Natural disasters,Desastres naturais,"Cause of death, e.g. homicide"
+Cancers,Cânceres,"Cause of death, e.g. homicide"
+Liver diseases,Doenças hepáticas,"Cause of death, e.g. homicide"
+Tuberculosis,Tuberculose,"Cause of death, e.g. homicide"
+Terrorism,Terrorismo,"Cause of death, e.g. homicide"
+Alcohol use disorders,Transtornos por uso de álcool,"Cause of death, e.g. homicide"
+Malaria & neglected tropical diseases,Malária e doenças tropicais negligenciadas,"Cause of years of life lost, e.g. cancer"
+Nutritional deficiencies,Deficiências nutricionais,"Cause of years of life lost, e.g. cancer"
+Other communicable diseases,Outras doenças transmissíveis,"Cause of years of life lost, e.g. cancer"
+Interpersonal violence,Violência interpessoal,"Cause of years of life lost, e.g. cancer"
+Conflict and terrorism,Conflito e terrorismo,"Cause of years of life lost, e.g. cancer"
+"COVID-19 until May 27, 2020",COVID-19 até 27 de maio de 2020,"Cause of years of life lost, e.g. cancer"
+Transport injuries,Acidentes de trânsito,"Cause of years of life lost, e.g. cancer"
+Neonatal disorders,Problemas neonatais,"Cause of years of life lost, e.g. cancer"
+Respiratory diseases,Doenças respiratórias,"Cause of years of life lost, e.g. cancer"
+HIV/AIDS and tuberculosis,HIV / AIDS e tuberculose,"Cause of years of life lost, e.g. cancer"
+Digestive diseases,Doenças digestivas,"Cause of years of life lost, e.g. cancer"
+Neurological disorders,Problemas neurológicos,"Cause of years of life lost, e.g. cancer"
+Diarrhea & common infectious diseases,Diarréia e doenças infecciosas comuns,"Cause of years of life lost, e.g. cancer"
+Mental and substance use disorders,Transtornos mentais e de uso de substâncias,"Cause of years of life lost, e.g. cancer"
+Self-harm,Auto-mutilação,"Cause of years of life lost, e.g. cancer"
+Cardiovascular diseases,Doenças cardiovasculares,"Cause of years of life lost, e.g. cancer"
+Unintentional injuries,Lesões não intencionais,"Cause of years of life lost, e.g. cancer"
+Other NCDs,Outras DNTs,"Cause of years of life lost, e.g. cancer"
+Musculoskeletal disorders,Distúrbios músculo-esqueléticos,"Cause of years of life lost, e.g. cancer"
+Cancers,Cânceres,"Cause of years of life lost, e.g. cancer"
+Liver diseases,Doenças hepáticas,"Cause of years of life lost, e.g. cancer"
+"Diabetes, blood, & endocrine diseases","Diabetes, sangue e doenças endócrinas","Cause of years of life lost, e.g. cancer"
+High cholesterol,Colesterol alto,"Risk factor, e.g. smoking"
+Diet low in vegetables,Dieta pobre em vegetais,"Risk factor, e.g. smoking"
+Smoking,Tabagismo,"Risk factor, e.g. smoking"
+"COVID-19 until May 27, 2020",COVID-19 até 27 de maio de 2020,"Risk factor, e.g. smoking"
+Secondhand smoke,Fumo passivo,"Risk factor, e.g. smoking"
+Child stunting,Nanismo infantil,"Risk factor, e.g. smoking"
+Unsafe sanitation,Saneamento inseguro,"Risk factor, e.g. smoking"
+Non-exclusive breastfeeding,Amamentação não exclusiva,"Risk factor, e.g. smoking"
+High blood pressure,Pressão alta,"Risk factor, e.g. smoking"
+Iron deficiency,Falta de ferro,"Risk factor, e.g. smoking"
+Diet low in fruits,Dieta pobre em frutas,"Risk factor, e.g. smoking"
+Vitamin A deficiency,Deficiência de vitamina A,"Risk factor, e.g. smoking"
+Air pollution (outdoor & indoor),Poluição do ar (interior e exterior),"Risk factor, e.g. smoking"
+Unsafe water source,Fonte de água insegura,"Risk factor, e.g. smoking"
+Obesity,Obesidade,"Risk factor, e.g. smoking"
+Drug use,Uso de drogas,"Risk factor, e.g. smoking"
+Child wasting,Desnutrição infantil,"Risk factor, e.g. smoking"
+Diet high in salt,Dieta rica em sal,"Risk factor, e.g. smoking"
+Low physical activity,Baixa atividade física,"Risk factor, e.g. smoking"
+High blood sugar,Açúcar alto no sangue,"Risk factor, e.g. smoking"
+,,
+,,
+,,
+,,
+Example Interpretations,Interpretação dos exemplos,
+"Scenario 0: Do nothing, as a baseline","Cenário 0: Não fazer nada, como parâmetro de base.",
+Scenario 1: Decrease infection rate for people over 60 and increase for those below 60,"Cenário 1: Proteger as pessoas com mais de 60 anos, permitindo exposição de pessoas com menos de 60 anos, considerando também anos de vida perdidos",
+Scenario 2: Increase the probability of elimination,"Cenário 2: Erradicação de 90%, considerando também o dinheiro economizado",
+If by the pandemic's end 60% of all age groups are infected in: ,Se ao fim da pandemia 60% de toda a população ter sido infectado em:,
+. Then we can expect:,. Então podemos esperar que:,
+infected., foram infectados.,
+Based on selected fatality risks,Baseado na fonte de taxa de fatalidade,
+and, e na distribuição de idade em,
+s age distribution we can expect: ,", podemos esperar:",
+lifes lost.,de vidas perdidas.,
+Based on global life expectancies and number of deaths across age groups we can expect:,"Baseado expectativa de vida global e número de mortes através dos grupos de idade, podemos esperar: ",
+expected years of life lost. We can also estimate expected amount of money lost based on expected years of life lost:,de anos de vida perdidos. Também podemos esperar uma perda monetária com base nos anos de vida perdidos em: ,
+If by the pandemic's end only,Se ao fim da pandemia apenas ,
+20% of people over 60 have been infected. Then to compensate 66% of people below 60 need to be infected to achieve the 60% overall proportion of infected.,"da população acima de 60 anos tenha sido infectada, então ",
+of people below 60 need to be infected to achieve the 60% overall proportion of infected.,da população com menos de 60 deverão ter sido infectadas para que taxa de infecção toda feche em 60% como dito.,
+Then we can expect to save: ,Então podemos esperar uma economia de :,
+lifes or achieve ,de vidas salvas ou ,
+decrease in risk of death.,de redução do risco de morte.,
+"Since younger people have higher life expectancy than older people, increasing the proportion of infected people below 60, increases the number of deaths among young people. Based on selected fatality risks we can expect to save:","Como pessoas mais jovens possuem expectativas de vida mais altas do que pessoas mais velhas, aumentar o risco de infecção ente pessoas abaixo de 60 anos aumenta o número de mortes entre os mais jovens. Baseado na fonte de taxa de fatalidade selecionado, podemos esperar ",
+ears of potential life or achieve,de anos de vidas perdidos salvos ou uma redução de,
+decrease in expected years of life lost.,de anos de vida perdidos. ,
+Say we manage to increase the probability of achieving COVID-19 elimination from 0 to 90% and say that 10% of people get infected until elimination is achieved.,"Digamos que conseguimos aumentar a porcentagem de erradicação de doença de 0% a 90%, e digamos que 10% da população se contaminou até haver a erradicação.",
+Then we can expect to save:,"Assim, podemos esperar salvar:",
+lifes or achieve ,de vidas ou reduzir em ,
+decrease in risk of death.,o risco de morte.,
+Based on expected years of life lost we can expect to save:,"Baseado nos anos de vida potencialmente perdidos, podemos esperar uma economia de:",
+This is also a crude estimate of what a society could aim to invest in such a life-saving treatments (e.g. development of vaccines) or life-saving interventions (e.g. social distancing).,Isso também é uma estimativa crua do quanto os governos podem pensar em investir em tratamentos (como vacinas) ou intervenções (como distanciamento social).,
+Estimates should be interpreted with caution. This tool is focused on simple presentation and pedagogical aspects and only offers crude estimates. It uses relatively simplistic methodology outlined in the Notes below.,Estimativas devem ser analisadas com cautela. Essa ferramente fornece uma apresentação simples e pedagógica dos dados e apenas oferece uma projeção crua. Ela utiliza apenas metodologias descritas nas Notas abaixo.,
+About,Sobre,
+"At the time of writing, the impacts of COVID-2019 remain largely uncertain and depend on a whole range of possibilities. Organizing the overwhelming mass of the available information in the media and literature, coming up with a reasonable working estimates and comparing multiple scenarios can be challenging. As an attempt to address this problem I used publicly available data and published information to create this international tool that allows users to derive their own country-specific estimates.","No momento da redação deste artigo, os impactos do COVID-2019 permanecem incertos e dependem de uma gama de possibilidades. Organizar essa gigantesca massa de informações disponíveis na mídia e na literatura, afim de obter uma estimativa razoável, comparando vários cenários, pode ser um desafio. Como tentativa de solucionar esse problema, usei dados publicamente disponíveis e publiquei algumas informações para criar essa ferramenta internacional que permite aos usuários obter suas próprias estimativas específicas para cada país.",
+Please send me feedback:,Envie-me um feedback:,
+or email me: ,ou envie um email:,
+here,aqui,
+For technical details please refer to:,"Para detalhes técnicos, veja as",
+notes,notas,
+or the:,ou o,
+Source code,Código fonte,
+Acknowledgements,Agradecimentos,
+Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty. Yao Cheng for help with Chinese translations.,Tjaša Kovačević pela ajuda no cálculo de perdas de anos esperados e dos impactos econômicos na pobreza. Yao Cheng pela ajuda com traduções para o chinês.,
