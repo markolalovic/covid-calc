@@ -120,7 +120,7 @@ def get_app_dict():
     app_dict['projectedPoveryByRegion'] = "Projected poverty increases by region due to coronavirus impact on world economy."
 
     app_dict['projectionsCaption'] = "Projections of total deaths from COVID-19. Click on the legend to select or deselect a country."
-    app_dict['source'] = "Source:"
+    app_dict['source'] = "Source: "
 
 
     app_dict['reset'] = "Reset"

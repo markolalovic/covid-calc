@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-06-14 11:17:38;
+// version = 2020-06-15 09:43:43;
 
 export const portugueseDictStore = readable({ 
 	app: {
@@ -40,10 +40,10 @@ export const portugueseDictStore = readable({
 		 lowIncomeRiskByCountry: "Risco para pessoas com baixa renda por país",
 		 mapCaption: "Você pode passar o mouse sobre os itens da legenda para selecionar. Você pode ampliar e reduzir o mapa. E passe o mouse sobre o mapa para obter informações sobre o país selecionado.",
 		 projectedPovery: "Projeção por país, devido ao impacto do coronavírus na economia mundial, no número de pessoas que vivem em extrema pobreza, no qual possuem uma renda abaixo da linha de pobreza internacional de US $ 1,90 por dia.",
-		 sources: "Fontes:",
+		 sources: "Fontes: ",
 		 projectedPoveryByRegion: "Projeção do aumento de pobreza por região devido ao impacto do coronavírus na economia mundial.",
 		 projectionsCaption: "Projeção do total de mortes por COVID-19. Clique na legenda para selecionar ou desselecionar um país.",
-		 source: "Fonte:",
+		 source: "Fonte: ",
 		 reset: "Redefinir",
 		 infectedTitle: "Número esperado de infectados por idade",
 		 deathsTitle: "Número esperado de óbitos por idade",
@@ -68,7 +68,7 @@ export const portugueseDictStore = readable({
 		 yrsOfLifeLost: "Anos Esperados de Vida Perdidos",
 		 yrsOfLifeLostCosts: "Potenciais gastos",
 		 scenariosDescription: "Descrição do cenário",
-		 povertyTitle: "Milhões que potencialmente entrarão para a extrema pobreza devido ao COVID-19 por",
+		 povertyTitle: "Milhões que entrarão para a extrema pobreza devido ao COVID-19 por ",
 		 country: "País",
 		 region: "Região",
 		 people: "Pessoas",

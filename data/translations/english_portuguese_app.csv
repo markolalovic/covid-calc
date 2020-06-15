@@ -35,10 +35,10 @@ Proportion of People Over 60 Risk by Country,Proporção de pessoas acima de 60 
 Low Income Risk by Country,Risco para pessoas com baixa renda por país,Low income risk by country
 You can hover over legend items to select. You can zoom in and out of map.         And hover over map to get information about the country it represents.,Você pode passar o mouse sobre os itens da legenda para selecionar. Você pode ampliar e reduzir o mapa. E passe o mouse sobre o mapa para obter informações sobre o país selecionado.,Map caption
 "Projected increases by country due to coronavirus impact on the world economy         in the number of people living in extreme poverty,         that is an income below the international poverty line of $1.90 per day.","Projeção por país, devido ao impacto do coronavírus na economia mundial, no número de pessoas que vivem em extrema pobreza, no qual possuem uma renda abaixo da linha de pobreza internacional de US $ 1,90 por dia.",Projected povery
-Sources: ,Fontes:,Sources
+Sources: ,Fontes: ,Sources
 Projected poverty increases by region due to coronavirus impact on world economy.,Projeção do aumento de pobreza por região devido ao impacto do coronavírus na economia mundial.,Projected povery by region
 Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.,Projeção do total de mortes por COVID-19. Clique na legenda para selecionar ou desselecionar um país.,Projections caption
-Source:,Fonte:,Source
+Source: ,Fonte: ,Source
 Reset,Redefinir,Reset
 Expected Number of Infected by Age,Número esperado de infectados por idade,Infected title
 Expected Number of Deaths by Age,Número esperado de óbitos por idade,Deaths title
@@ -63,7 +63,7 @@ Enter description,Digite a descrição,Enter describtion
 Expected Years of Life Lost,Anos Esperados de Vida Perdidos,Yrs of life lost
 Potential Costs,Potenciais gastos,Yrs of life lost costs
 Description of scenario,Descrição do cenário,Scenarios description
-Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by ,Milhões que potencialmente entrarão para a extrema pobreza devido ao COVID-19 por,Poverty title
+Potential Millions Pushed Into Extreme Poverty Due to COVID-19 by ,Milhões que entrarão para a extrema pobreza devido ao COVID-19 por ,Poverty title
 Country,País,Country
 Region,Região,Region
 People,Pessoas,People

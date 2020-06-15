@@ -880,14 +880,14 @@
 					<div class="row">
 						<div class="one columns">
 							<svg 
-							width="{90}" height="{90}"
+							width="{30}" height="{90}"
 							style="background-color: white">
 							</svg>
 						</div>							
 						<div class="three columns">
-							<Square text={translations.app.southAsia} color={'#377eb8'} factorWidth={8}/>
-							<Square text={translations.app.subSahAfrica} color={'#e41a1c'} factorWidth={8}/>
-							<Square text={translations.app.eastAsiaPacific} color={'#4daf4a'} factorWidth={8}/>
+							<Square text={translations.app.southAsia} color={'#377eb8'} factorWidth={10}/>
+							<Square text={translations.app.subSahAfrica} color={'#e41a1c'} factorWidth={10}/>
+							<Square text={translations.app.eastAsiaPacific} color={'#4daf4a'} factorWidth={11}/>
 						</div>
 						<div class="eight columns">
 							<div class='caption'>
@@ -1370,40 +1370,6 @@
 		<div class="row">
 			<div class="twelve columns">
 				<div class="child parameter-text">
-					{#if language === 'en'}
-						<div class="wtitle">About</div>
-						<p>
-							At the time of writing, the impacts of COVID-2019 
-							remain largely uncertain and depend on a whole range of possibilities.
-
-							Organizing the overwhelming mass of the available information in the media and literature, 
-							coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
-
-							As an attempt to address this problem I used publicly available data and published information 
-							to create this international tool that allows users to derive their own country-specific estimates.
-						</p>
-						<p>
-							Please send me feedback:
-							<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>.
-							
-							or email me:
-							<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">here</a>.
-						</p>
-						<p>
-							For technical details please refer to:
-							<a href="notes.html">notes</a>
-							
-							or the:
-							<a href="https://github.com/markolalovic/covid-calc">source code</a>.
-						</p>
-
-						<div class="wtitle">Acknowledgements</div>
-						<p>
-							Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
-							Yao Cheng for help with Chinese translations.
-							Lucas Sanders for help with Portuguese translations.
-						</p>
-					{/if}
 					{#if language === 'pt'}
 						<div class="wtitle">Sobre</div>
 						<p>
@@ -1436,7 +1402,42 @@
 							Tjaša Kovačević pela ajuda no cálculo de perdas de anos esperados e dos impactos econômicos na pobreza.
 							Yao Cheng pela ajuda com traduções para o chinês.
 							Lucas Sanders pela ajuda com traduções para o português.
+							Maria Dagounaki pela ajuda com traduções para o espanhol.
 						</p>
+					{:else}
+						<div class="wtitle">About</div>
+						<p>
+							At the time of writing, the impacts of COVID-2019 
+							remain largely uncertain and depend on a whole range of possibilities.
+
+							Organizing the overwhelming mass of the available information in the media and literature, 
+							coming up with a reasonable working estimates and comparing multiple scenarios can be challenging.
+
+							As an attempt to address this problem I used publicly available data and published information 
+							to create this international tool that allows users to derive their own country-specific estimates.
+						</p>
+						<p>
+							Please send me feedback:
+							<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>.
+							
+							or email me:
+							<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">here</a>.
+						</p>
+						<p>
+							For technical details please refer to:
+							<a href="notes.html">notes</a>
+							
+							or the:
+							<a href="https://github.com/markolalovic/covid-calc">source code</a>.
+						</p>
+
+						<div class="wtitle">Acknowledgements</div>
+						<p>
+							Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
+							Yao Cheng for help with Chinese translations.
+							Lucas Sanders for help with Portuguese translations.
+							Maria Dagounaki for help with Spanish translations. 
+						</p>					
 					{/if}
 				</div>
 			</div>

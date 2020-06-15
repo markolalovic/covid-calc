@@ -748,7 +748,7 @@ var app = (function () {
         return { set, update, subscribe };
     }
 
-    // version = 2020-06-14 11:17:38;
+    // version = 2020-06-15 09:43:43;
 
     const englishDictStore = readable({ 
     	app: {
@@ -791,7 +791,7 @@ var app = (function () {
     		 sources: "Sources: ",
     		 projectedPoveryByRegion: "Projected poverty increases by region due to coronavirus impact on world economy.",
     		 projectionsCaption: "Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.",
-    		 source: "Source:",
+    		 source: "Source: ",
     		 reset: "Reset",
     		 infectedTitle: "Expected Number of Infected by Age",
     		 deathsTitle: "Expected Number of Deaths by Age",
@@ -2568,7 +2568,7 @@ var app = (function () {
     		],
       });
 
-    // version = 2020-06-14 11:17:38;
+    // version = 2020-06-15 09:43:43;
 
     const chineseDictStore = readable({ 
     	app: {
@@ -4388,30 +4388,30 @@ var app = (function () {
     		],
       });
 
-    // version = 2020-06-14 11:17:38;
+    // version = 2020-06-15 09:43:43;
 
     const spanishDictStore = readable({ 
     	app: {
-    		 mainTitle: "Calculadora COVID",
+    		 mainTitle: "Estadísticas de COVID-19",
     		 subtitle: "Una herramienta visual para explorar y analizar los posibles impactos de COVID-19",
     		 tabItem0: "Mortalidad por edad",
     		 tabItem1: "Estimaciones en contexto",
     		 tabItem2: "Riesgos por pais",
-    		 tabItem3: "Proyecto de pobreza",
-    		 tabItem4: "Proj. De muertes",
-    		 tabItem5: "Hyp Escenarios",
-    		 tabItem6: "Ex. Interpretaciones",
+    		 tabItem3: "Proyección de pobreza",
+    		 tabItem4: "Proyección de muertes",
+    		 tabItem5: "Escenarios Hipotéticos",
+    		 tabItem6: "Ejemplos de interpretaciones",
     		 location: "Ubicación",
-    		 selectLocation: "Seleccione ubicación",
-    		 locationDescription: "El impacto de COVID-19 varía entre países.",
+    		 selectLocation: "Elige la ubicación",
+    		 locationDescription: "El impacto de COVID-19 puede variar entre los países.",
     		 infectionRate: "Tasa de infección",
-    		 infectionRateDescription: "Proporción de todas las personas que contraen el nuevo coronavirus.",
-    		 over60InfectionRate: "Más de 60 tasa de infección",
-    		 below60InfectionRate: "Por debajo de 60 tasa de infección",
-    		 over60Description: "Proporción de todas las personas mayores de 60 años que contraen el nuevo coronavirus.",
-    		 proportionIsThen: "La proporción de personas menores de 60 años infectadas es entonces",
+    		 infectionRateDescription: "El porcentaje de las personas afectadas por el COVID-19",
+    		 over60InfectionRate: "Tasa de infección superior al 60",
+    		 below60InfectionRate: "Tasa de infección por debajo del 60",
+    		 over60Description: "Porcentaje de las personas de más de 60 años que están contagiados con COVID-19",
+    		 proportionIsThen: "El porcentaje de las personas contagiadas con COVID-19 sería",
     		 proportionIsThenDescription: "Dado que depende tanto de la tasa de infección general como de la tasa de infección de las personas mayores de 60 años.",
-    		 basedOn: "Residencia en",
+    		 basedOn: "Según ",
     		 basedOnContinued1: "tasas de mortalidad y",
     		 basedOnContinued2: "distribución de edad y otros parámetros de entrada seleccionados, podemos esperar:",
     		 basedOnContinued3: "infectado y",
@@ -4419,44 +4419,44 @@ var app = (function () {
     		 basedOnContinued5: "años de vida perdidos en",
     		 compareWithOtherCaption1: "Es posible que las muertes estimadas de coronavirus abarquen varios años.",
     		 compareWithOtherCaption2: "Las muertes por otras causas son para el año 2017. Fuente:",
-    		 compareWithOtherCaption3: "Muertes confirmadas por COVID-19 hasta el 27 de mayo de 2020. Fuente:",
+    		 compareWithOtherCaption3: "Muertes confirmadas por COVID-19 hasta el día 27 de mayo de 2020. Fuente:",
     		 compareWithOtherCaption4: "Los años de vida perdidos por otras causas son para el año 2017. Fuente:",
     		 compareWithOtherCaption5: "Años de vida perdidos debido a COVID-19 hasta el 27 de mayo de 2020. Fuente:",
     		 authorsCalculations: "y cálculos de autores.",
     		 compareWithOtherCaption7: "Los años de vida perdidos debido a otros factores de riesgo son para el año 2017. Fuente:",
     		 proportionOver60ByCountry: "Proporción de personas mayores de 60 años de riesgo por país",
     		 lowIncomeRiskByCountry: "Riesgo de bajos ingresos por país",
-    		 mapCaption: "Puede pasar el cursor sobre los elementos de leyenda para seleccionar. Puede acercar y alejar el mapa. Y pase el mouse sobre el mapa para obtener información sobre el país que representa.",
+    		 mapCaption: "Puede pasar el cursor sobre los elementos de leyenda para seleccionar. Puede acercar y alejar el mapa.Pase el mouse sobre el mapa para obtener información sobre el país que representa.",
     		 projectedPovery: "Los aumentos proyectados por país debido al impacto del coronavirus en la economía mundial en el número de personas que viven en la pobreza extrema, es decir, un ingreso por debajo de la línea internacional de pobreza de $ 1.90 por día.",
-    		 sources: "Fuentes:",
+    		 sources: "Fuentes: ",
     		 projectedPoveryByRegion: "La pobreza proyectada aumenta por región debido al impacto del coronavirus en la economía mundial.",
     		 projectionsCaption: "Proyecciones del total de muertes por COVID-19. Haga clic en la leyenda para seleccionar o anular la selección de un país.",
-    		 source: "Fuente:",
+    		 source: "Fuente: ",
     		 reset: "Reiniciar",
-    		 infectedTitle: "Número esperado de infectados por edad",
-    		 deathsTitle: "Número esperado de muertes por edad",
+    		 infectedTitle: "Número estimado de infectados por edad",
+    		 deathsTitle: "Número estimado de muertes por edad",
     		 age: "Años",
-    		 infected: "Infectado",
+    		 infected: "Infectados",
     		 deaths: "Fallecidos",
     		 projectionsTitle: "Proyecciones de muertes totales a lo largo del tiempo por país",
     		 date: "Fecha",
-    		 totDeaths: "Muertes totales (por 100,000)",
+    		 totDeaths: "Muertes totales",
     		 totDeathsProj: "Muertes totales (proyectadas)",
-    		 titleListMain: "Cómo se compara COVID-19 con ",
-    		 titleListName: "Porque",
+    		 titleListMain: "Cómo se compara COVID-19 con",
+    		 titleListName: "Causa",
     		 titleListRisk: "Riesgo",
-    		 titleListNumber: " en",
+    		 titleListNumber: "en",
     		 yearsOfLifeLost: "Años de vida perdida",
-    		 inCountry: " en",
+    		 inCountry: "en",
     		 compareItems0: "Causas de la muerte",
     		 compareItems1: "Causas de años de vida perdidos",
     		 compareItems2: "Factores de riesgo en años de vida perdidos",
     		 covid19Cause: "COVID-19 (estimado)",
-    		 enterDescribtion: "Ingrese la descripción",
-    		 yrsOfLifeLost: "Años esperados de vida perdidos",
+    		 enterDescribtion: "Introduzca la descripción ",
+    		 yrsOfLifeLost: "Años estimados de vida perdidos",
     		 yrsOfLifeLostCosts: "Costos potenciales",
-    		 scenariosDescription: "Descripción del escenario",
-    		 povertyTitle: "Millones potenciales empujados a la pobreza extrema debido a COVID-19 por",
+    		 scenariosDescription: "Descripción del hipothesis",
+    		 povertyTitle: "Millones de personas empujadas en la pobreza extrema debido a COVID-19 por ",
     		 country: "País",
     		 region: "Región",
     		 people: "Personas",
@@ -4482,24 +4482,24 @@ var app = (function () {
     		 mainProjRegions: "Causas de la muerte",
     		 nameProjRegions: "Causas de años de vida perdidos",
     		 numberProjRegions: "Factores de riesgo en años de vida perdidos",
-    		 fatalityRates: "Tasas de fatalidad",
-    		 fatalityRatesDescription: "Seleccione estimaciones del riesgo de muerte por infección con el nuevo coronavirus. Las estimaciones varían entre países y con el tiempo. Las pruebas más amplias pueden reducir las estimaciones de CFR.",
-    		 varyFRs: "Variar las tasas de mortalidad seleccionadas",
-    		 varyFRsDescription1: "Intente aumentar el riesgo de muerte, p. al 50%, para países de bajos ingresos o asistencia sanitaria abrumada.",
-    		 varyFRsDescription2: "O disminuyendo, p. hasta -50%, para tratamientos mejorados esperados y mejor atención médica.",
-    		 resetDescription: "Regrese todos los parámetros de entrada a sus valores iniciales.",
+    		 fatalityRates: "Tasas de factores fatales",
+    		 fatalityRatesDescription: "Elija estimaciones del riesgo de muerte por infección del nuevo coronavirus. Las estimaciones varían entre países y con el tiempo. Las pruebas más amplias pueden reducir la projección de CFR.",
+    		 varyFRs: "Variedad de las tasas de mortalidad seleccionadas",
+    		 varyFRsDescription1: "Intento de aumentar el riesgo de muerte, p. al 50%, para países de bajos ingresos o asistencia sanitaria debilitada.",
+    		 varyFRsDescription2: "O disminuir, p. hasta -50%, para tratamientos avanzados y mejor atención médica.",
+    		 resetDescription: "Añadir todos los parámetros de entrada a sus valores originales.",
     		 elimination: "Probabilidad de eliminar COVID-19",
     		 eliminationDescription1: "Probabilidad de lograr la eliminación completa de la enfermedad COVID-19 antes de que pueda infectar",
     		 eliminationDescription2: "de población.",
-    		 infectionUntil: "Tasa de infección hasta la eliminación",
-    		 infectionUntilDescription: "Proporción de la población que aún se infecta incluso en caso de lograr la eliminación completa. Nota: Primero aumente la probabilidad de eliminación para que este parámetro surta efecto.",
+    		 infectionUntil: "Tasa de infección hasta la desapareción",
+    		 infectionUntilDescription: "Proporción de la población que aún está infectada ,incluso en caso de lograr la eliminación completa. Nota: Primero aumente la probabilidad de eliminación para que este parámetro surga efecto.",
     		 hideExport: "Ocultar exportación",
     		 export: "Exportar",
-    		 exportDescription: "Exporte escenarios hipotéticos de COVID-19 en formato JSON.",
+    		 exportDescription: "Exportar escenarios hipotéticos de COVID-19 en formato JSON.",
     		 export1: "Ocultar exportación",
     		 scenariosCaption: "Puede establecer parámetros de entrada que describan un escenario hipotético y agregarlo a la tabla para comparar. Hay 3 ejemplos de escenarios hipotéticos para la ubicación seleccionada y los riesgos de mortalidad. Los resultados deben interpretarse con cautela; consulte las Interpretaciones de ejemplo.",
-    		 exampleScenario0: "Escenario 0: no hacer nada, como referencia",
-    		 exampleScenario1: "Escenario 1: Proteja a las personas mayores de 60 años, compense exponiendo a los menores de 60 años, considere también los años de vida perdidos",
+    		 exampleScenario0: "Escenario 0: no hacer nada, como nuestra base ",
+    		 exampleScenario1: "Escenario 1: Proteja a las personas mayores de 60 años y exponga a los menores de 60 años, considerando también los años de vida perdidos",
     		 exampleScenario2: "Escenario 2: eliminación al 90%, considere también el dinero ahorrado",
     		 mapTitle: "COVID-19 Riesgos por país",
     		 mapItems0: "Proporción de personas mayores de 60 años por país",
@@ -4526,7 +4526,7 @@ var app = (function () {
     		],
     	compareOptions: [
     		 {id: 0,
-    		  compareWith: "Otras causas importantes de muerte" },
+    		  compareWith: "Otras causas importantes de la muerte" },
     		 {id: 1,
     		  compareWith: "Enfermedades en años de vida perdidos" },
     		 {id: 2,
@@ -4539,9 +4539,9 @@ var app = (function () {
     		  name: "Afganistán",
     		  lifeExpectancy: 64.83,
     		  demographics: [11040694, 9635671, 6779023, 4381488, 2846500, 1773768, 1020779, 458747, 105087],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'Cánceres', 'Lesiones viales', 'Enfermedades respiratorias', 'Meningitis', 'Enfermedades diarreicas', 'Terrorismo', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'Cánceres', 'Accidentes', 'Enfermedades respiratorias', 'Meningitis', 'Enfermedades diarreicas', 'Terrorismo', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [56119, 27522, 21431, 16670, 8692, 6917, 6589, 6176, 6092, 5978, 220],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Conflicto y terrorismo', 'Enfermedades cardiovasculares', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Cánceres', 'Lesiones de transporte', 'VIH / SIDA y tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Conflicto y terrorismo', 'Enfermedades cardiovasculares', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Cánceres', 'Accidentes de tráfico', 'VIH / SIDA y tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2949759, 2461244, 2128416, 1596954, 1539479, 975117, 797604, 601374, 551807, 542777, 4967],
     		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Obesidad', 'Fuente de agua insegura', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1341395, 1306178, 901181, 866085, 807902, 689543, 523650, 475516, 455174, 378229, 4967] },
@@ -4549,41 +4549,41 @@ var app = (function () {
     		  name: "Albania",
     		  lifeExpectancy: 78.57,
     		  demographics: [333920, 375307, 481846, 377350, 330419, 392129, 317994, 189973, 81975],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'Lesiones viales', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'Accidentes', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [12145, 4345, 1337, 736, 489, 382, 363, 309, 248, 234, 33],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [206331, 100981, 64286, 53506, 51865, 38507, 37568, 35191, 27693, 24834, 483],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [128064, 99946, 69372, 57453, 55471, 37120, 29156, 16674, 13809, 10129, 483] },
     		 {id: 2,
     		  name: "Argelia",
     		  lifeExpectancy: 76.88,
     		  demographics: [9533023, 6466198, 6759761, 7193824, 5249023, 3682969, 2430965, 1179741, 557550],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Lesiones viales', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Diabetes', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Accidentes', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Diabetes', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [79389, 21656, 8175, 6905, 6511, 5508, 5202, 4800, 4724, 4577, 617],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Cánceres', 'Desórdenes neurológicos', 'Lesiones de transporte', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Cánceres', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1577873, 857655, 809853, 773630, 767622, 694410, 601103, 581302, 441546, 404974, 10657],
-    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [956409, 835084, 810448, 541145, 412426, 388376, 354830, 213070, 163252, 146851, 10657] },
     		 {id: 3,
     		  name: "Angola",
     		  lifeExpectancy: 61.15,
     		  demographics: [10645848, 7583998, 5137763, 3567431, 2316948, 1419872, 744701, 323212, 85526],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Enfermedades diarreicas', 'VIH / SIDA', 'Infecciones respiratorias inferiores', 'Cánceres', 'Tuberculosis', 'Malaria', 'Enfermedades digestivas', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Enfermedades diarreicas', 'VIH / SIDA', 'Infecciones respiratorias inferiores', 'Cánceres', 'Tuberculosis', 'Malaria', 'Enfermedades digestivas', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [21785, 17882, 17390, 14585, 14508, 12040, 11409, 8431, 8274, 6781, 4],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Malaria y enfermedades tropicales desatendidas', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Lesiones no intencionales', 'Lesiones de transporte', 'Cánceres', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Malaria y enfermedades tropicales desatendidas', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Lesiones no intencionales', 'Accidentes de tráfico', 'Cánceres', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2327125, 1715532, 1024134, 829609, 816838, 737124, 587699, 479827, 474564, 395113, 91],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Hipertensión', 'Retraso del crecimiento infantil', 'Deficiencia de hierro', 'De fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Hipertensión', 'Retraso del crecimiento infantil', 'Deficiencia de hierro', 'Fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1441565, 1065429, 706854, 558639, 474834, 471166, 388213, 342714, 308832, 291488, 91] },
     		 {id: 4,
     		  name: "Argentina",
     		  lifeExpectancy: 76.67,
     		  demographics: [7431085, 7110303, 6989730, 6393900, 5596155, 4365874, 3478296, 2234324, 1181008],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Demencia', 'Enfermedades digestivas', 'Nefropatía', 'Diabetes', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Demencia', 'Enfermedades digestivas', 'Nefropatía', 'Diabetes', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [105777, 74066, 31058, 18992, 18617, 14906, 10834, 9345, 7346, 6457, 484],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1850384, 1636213, 1070031, 821073, 755647, 600218, 586346, 572018, 566705, 485965, 7111],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en vegetales', 'Dieta baja en frutas', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en vegetales', 'Dieta baja en frutas', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1377562, 1041499, 1039208, 849828, 466427, 374352, 209665, 188972, 182487, 181170, 7111] },
     		 {id: 5,
     		  name: "Armenia",
@@ -4593,7 +4593,7 @@ var app = (function () {
     		  majorDeaths: [13631, 5756, 1720, 1357, 1311, 1142, 1107, 501, 430, 302, 91],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [232712, 134659, 70952, 55930, 50354, 50085, 45363, 45321, 42045, 33336, 1338],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [150086, 147509, 126246, 106265, 76463, 61605, 33567, 31703, 26363, 17455, 1338] },
     		 {id: 6,
     		  name: "Australia",
@@ -4603,7 +4603,7 @@ var app = (function () {
     		  majorDeaths: [52101, 50254, 17119, 10822, 6112, 4455, 4451, 3755, 3055, 2328, 102],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [970836, 694335, 645111, 549355, 438634, 432478, 305003, 292021, 244224, 147752, 1386],
-    		  riskFactors: ['De fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [522203, 490967, 365301, 358549, 199475, 186884, 93142, 87901, 63860, 58260, 1386] },
     		 {id: 7,
     		  name: "Austria",
@@ -4613,7 +4613,7 @@ var app = (function () {
     		  majorDeaths: [31386, 21745, 7481, 3383, 3227, 2754, 2059, 1860, 1422, 994, 643],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [412725, 410715, 249516, 205240, 164586, 148028, 122133, 119273, 104957, 103622, 8364],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'El consumo de drogas', 'Baja actividad física', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Consumo de drogas', 'Baja actividad física', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [289316, 247866, 234711, 198890, 118630, 69586, 40222, 38446, 32621, 32476, 8364] },
     		 {id: 8,
     		  name: "Azerbaiyán",
@@ -4623,27 +4623,27 @@ var app = (function () {
     		  majorDeaths: [40266, 10954, 3940, 3141, 3055, 2482, 2340, 2274, 1752, 1169, 52],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [821522, 314922, 242153, 241789, 193598, 185831, 167301, 151704, 146958, 135223, 929],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Humo de segunda mano', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Fumador pasivo', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [510416, 425013, 362881, 334822, 279459, 197950, 127029, 125321, 104163, 86129, 929] },
     		 {id: 9,
     		  name: "Bahamas",
     		  lifeExpectancy: 73.92,
     		  demographics: [54179, 64391, 65619, 54838, 56558, 48211, 27694, 13163, 4833],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'VIH / SIDA', 'Homicidio', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Nefropatía', 'Demencia', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'VIH / SIDA', 'Homicidio', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Nefropatía', 'Demencia', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [801, 530, 128, 114, 107, 105, 104, 93, 92, 60, 11],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Violencia interpersonal', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'VIH / SIDA y tuberculosis', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [18194, 13979, 12275, 6281, 6124, 6111, 5713, 5541, 5507, 4614, 192],
-    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'El consumo de drogas', 'Baja actividad física', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'Consumo de drogas', 'Baja actividad física', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [13121, 11928, 10905, 4719, 4611, 3432, 1440, 1366, 1195, 982, 192] },
     		 {id: 10,
     		  name: "Baréin",
     		  lifeExpectancy: 77.29,
     		  demographics: [215191, 177424, 318510, 464806, 244359, 137046, 61268, 16906, 5654],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Enfermedades digestivas', 'Nefropatía', 'Lesiones viales', 'Enfermedades respiratorias', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Enfermedades digestivas', 'Nefropatía', 'Accidentes', 'Enfermedades respiratorias', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [961, 553, 529, 143, 133, 128, 114, 110, 95, 84, 14],
     		  diseaseNames: ['Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades cardiovasculares', 'Desórdenes neurológicos', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [39073, 32240, 29024, 26949, 19107, 18531, 15791, 10408, 10052, 9970, 339],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'De fumar', 'Colesterol alto', 'Humo de segunda mano', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Fumar', 'Colesterol alto', 'Fumador pasivo', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [36296, 34551, 18126, 14303, 14207, 12588, 11243, 3904, 3635, 3064, 339] },
     		 {id: 11,
     		  name: "Bangladés",
@@ -4653,7 +4653,7 @@ var app = (function () {
     		  majorDeaths: [320563, 99302, 82276, 53449, 44992, 38521, 34564, 30147, 26390, 17256, 522],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos musculoesqueléticos', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [7263655, 5707014, 4266872, 2891058, 2718396, 2592864, 2488098, 2370531, 2224279, 2204327, 9574],
-    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Dieta baja en frutas', 'Colesterol alto', 'Obesidad', 'Emaciación infantil', 'Dieta baja en vegetales', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Dieta baja en frutas', 'Colesterol alto', 'Obesidad', 'Emaciación infantil', 'Dieta baja en vegetales', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [3871076, 3578773, 2726100, 2320793, 1895086, 1668575, 1459444, 1428511, 1260828, 998683, 9574] },
     		 {id: 12,
     		  name: "Barbados",
@@ -4663,17 +4663,17 @@ var app = (function () {
     		  majorDeaths: [840, 677, 242, 183, 171, 94, 90, 63, 39, 32, 7],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades digestivas', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [14552, 14043, 11241, 6037, 5473, 5081, 4386, 3631, 2854, 2533, 94],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [12710, 11385, 9034, 4139, 3869, 2945, 1803, 1372, 1259, 883, 94] },
     		 {id: 13,
     		  name: "Bielorrusia",
     		  lifeExpectancy: 74.79,
     		  demographics: [1134208, 910479, 1147255, 1510155, 1278833, 1374474, 1190629, 533029, 373347],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Trastornos por consumo de alcohol.', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Trastornos por consumo de alcohol.', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [73014, 18558, 6550, 4498, 2803, 2533, 2357, 2065, 1175, 990, 208],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Autolesiones', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1238969, 440057, 285451, 218899, 197375, 168700, 162164, 123781, 114503, 89387, 2938],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Colesterol alto', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Colesterol alto', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [813813, 576719, 492857, 471979, 288461, 176297, 173117, 143406, 89321, 62880, 2938] },
     		 {id: 14,
     		  name: "Bélgica",
@@ -4683,27 +4683,27 @@ var app = (function () {
     		  majorDeaths: [32194, 30782, 10550, 9334, 6804, 5669, 5111, 2132, 2097, 2004, 1436],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades digestivas'],
     		  diseaseDALYs: [577400, 454391, 354782, 293127, 224452, 180671, 164776, 158502, 140478, 119438, 118342],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'El consumo de drogas', 'Humo de segunda mano'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Consumo de drogas', 'Fumador pasivo'],
     		  riskDALYs: [473420, 278047, 257958, 227091, 119438, 118510, 99170, 66362, 38847, 38280, 34819] },
     		 {id: 15,
     		  name: "Belice",
     		  lifeExpectancy: 74.62,
     		  demographics: [77702, 78150, 74346, 57769, 42878, 30626, 16843, 7912, 4124],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Infecciones respiratorias inferiores', 'Homicidio', 'Enfermedades digestivas', 'Nefropatía', 'VIH / SIDA', 'Lesiones viales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Infecciones respiratorias inferiores', 'Homicidio', 'Enfermedades digestivas', 'Nefropatía', 'VIH / SIDA', 'Accidentes', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [424, 277, 126, 111, 106, 92, 84, 81, 72, 69, 2],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos neonatales', 'Otras ENT', 'Violencia interpersonal', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Diarrea y enfermedades infecciosas comunes.', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [9830, 9614, 7583, 7367, 6049, 6027, 5975, 5561, 5539, 4996, 36],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Deficiencia de hierro', 'Dieta baja en frutas', 'Emaciación infantil', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Deficiencia de hierro', 'Dieta baja en frutas', 'Emaciación infantil', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [9631, 9251, 5961, 3571, 3449, 2288, 1745, 1482, 1423, 1253, 36] },
     		 {id: 16,
     		  name: "Benín",
     		  lifeExpectancy: 61.77,
     		  demographics: [3529739, 2708314, 2001076, 1389287, 950137, 627369, 364348, 179593, 51287],
-    		  majorCauses: ['Trastornos neonatales', 'Malaria', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Cánceres', 'Lesiones viales', 'Tuberculosis', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Trastornos neonatales', 'Malaria', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Cánceres', 'Accidentes', 'Tuberculosis', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [9627, 9433, 9221, 7565, 6383, 5434, 3093, 2890, 2629, 1983, 3],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'VIH / SIDA y tuberculosis', 'Lesiones de transporte', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'VIH / SIDA y tuberculosis', 'Accidentes de tráfico', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1295131, 899739, 783500, 359850, 253199, 238944, 238353, 218491, 192950, 180157, 62],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Retraso del crecimiento infantil', 'Obesidad', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Retraso del crecimiento infantil', 'Obesidad', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [589619, 357407, 310177, 279407, 201743, 145002, 138640, 123773, 117511, 109285, 62] },
     		 {id: 17,
     		  name: "Bután",
@@ -4713,7 +4713,7 @@ var app = (function () {
     		  majorDeaths: [1156, 488, 446, 255, 205, 180, 157, 136, 132, 125, 0],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Cánceres', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [26845, 24060, 23302, 15553, 14573, 14249, 13641, 13614, 13469, 12218, 0],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Colesterol alto', 'Deficiencia de hierro', 'De fumar', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Colesterol alto', 'Deficiencia de hierro', 'Fumar', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [15575, 12298, 11644, 10068, 9089, 8988, 7745, 5274, 4216, 3631, 0] },
     		 {id: 18,
     		  name: "Bolivia",
@@ -4723,7 +4723,7 @@ var app = (function () {
     		  majorDeaths: [15275, 12195, 5360, 4078, 3165, 3122, 2903, 2826, 2651, 2215, 274],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [360435, 323003, 304397, 303329, 214670, 213058, 172883, 163508, 161009, 146546, 4392],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Emaciación infantil', 'Colesterol alto', 'Deficiencia de hierro', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Emaciación infantil', 'Colesterol alto', 'Deficiencia de hierro', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [255825, 202319, 174854, 127408, 100318, 89251, 76483, 70730, 54745, 46823, 4392] },
     		 {id: 19,
     		  name: "Bosnia-Herzegovina",
@@ -4733,7 +4733,7 @@ var app = (function () {
     		  majorDeaths: [18107, 8950, 2293, 1991, 1310, 1136, 604, 577, 360, 324, 149],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [314480, 202956, 96087, 76811, 71590, 67986, 49804, 45325, 40933, 39556, 2127],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [215413, 199141, 198050, 137744, 93564, 77913, 45939, 41923, 29708, 23846, 2127] },
     		 {id: 20,
     		  name: "Botsuana",
@@ -4743,17 +4743,17 @@ var app = (function () {
     		  majorDeaths: [4102, 2548, 1487, 768, 668, 577, 510, 444, 438, 436, 1],
     		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [290480, 73500, 56387, 54317, 47687, 39229, 34628, 25707, 25706, 25228, 20],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Fuente de agua insegura', 'Emaciación infantil', 'Saneamiento inseguro', 'El consumo de drogas', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Fuente de agua insegura', 'Emaciación infantil', 'Sistema del sanidad inseguro', 'Consumo de drogas', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [50246, 44707, 38344, 27484, 26951, 23734, 22767, 16393, 13684, 13563, 20] },
     		 {id: 21,
     		  name: "Brasil",
     		  lifeExpectancy: 75.88,
     		  demographics: [29188180, 31633075, 34181400, 34436184, 28902917, 24026608, 16292185, 8401090, 3987880],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Homicidio', 'Diabetes', 'Lesiones viales', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Homicidio', 'Diabetes', 'Accidentes', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [388268, 244969, 84073, 73419, 72746, 72556, 63825, 56474, 46282, 36269, 24512],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Violencia interpersonal', 'Desórdenes neurológicos', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [8160380, 5945407, 4516692, 4060910, 3687892, 3645543, 3611498, 3460212, 2648390, 2616371, 395930],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'El consumo de drogas', 'Dieta rica en sal', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'Consumo de drogas', 'Dieta rica en sal', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [4906211, 4890017, 4562909, 3414338, 2207263, 1617178, 1049247, 1024329, 949371, 845115, 395930] },
     		 {id: 22,
     		  name: "Bulgaria",
@@ -4763,7 +4763,7 @@ var app = (function () {
     		  majorDeaths: [65619, 18734, 5945, 3543, 3299, 2043, 1584, 1549, 1447, 995, 133],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1099367, 435223, 175641, 170811, 161624, 144882, 116883, 107938, 107874, 89058, 1768],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [722666, 559068, 443763, 326529, 319257, 174256, 168051, 167959, 67965, 64921, 1768] },
     		 {id: 23,
     		  name: "Burundi",
@@ -4773,17 +4773,17 @@ var app = (function () {
     		  majorDeaths: [9099, 9011, 8659, 7482, 7407, 5397, 4711, 3412, 2620, 2603, 1],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1763666, 679542, 674414, 626305, 406552, 266914, 246428, 161672, 160437, 152196, 22],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Retraso del crecimiento infantil', 'Deficiencia de vitamina A', 'De fumar', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Retraso del crecimiento infantil', 'Deficiencia de vitamina A', 'Fumar', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [610582, 323545, 313197, 240297, 154991, 152765, 145961, 133758, 91457, 55690, 22] },
     		 {id: 24,
     		  name: "Camboya",
     		  lifeExpectancy: 69.82,
     		  demographics: [3522160, 3065792, 3101389, 2840783, 1393829, 1350228, 783099, 334192, 95070],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Lesiones viales', 'Tuberculosis', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Accidentes', 'Tuberculosis', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [24913, 12663, 11446, 9866, 9018, 4429, 4094, 3981, 2998, 2756, 0],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Cánceres', 'Otras ENT', 'Enfermedades del HIGADO', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [721621, 585245, 411142, 364324, 360494, 352544, 302834, 275523, 252164, 243279, 0],
-    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Hipertensión', 'Emaciación infantil', 'Dieta baja en frutas', 'Obesidad', 'Colesterol alto', 'Deficiencia de hierro', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Hipertensión', 'Emaciación infantil', 'Dieta baja en frutas', 'Obesidad', 'Colesterol alto', 'Deficiencia de hierro', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [397320, 362958, 344974, 277013, 190587, 155655, 138476, 122622, 112834, 98497, 0] },
     		 {id: 25,
     		  name: "Camerún",
@@ -4793,7 +4793,7 @@ var app = (function () {
     		  majorDeaths: [22803, 22663, 22041, 16148, 14658, 13311, 12644, 8077, 7474, 5096, 175],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Otras ENT', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2368903, 1813493, 1710349, 1262545, 629329, 618008, 525557, 445027, 407151, 397774, 3900],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Hipertensión', 'Deficiencia de vitamina A', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Deficiencia de hierro', 'Lactancia no exclusiva', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Hipertensión', 'Deficiencia de vitamina A', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Deficiencia de hierro', 'Lactancia no exclusiva', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [951069, 787773, 595132, 577616, 384797, 349035, 336907, 335000, 196545, 181684, 3900] },
     		 {id: 26,
     		  name: "Canadá",
@@ -4803,17 +4803,17 @@ var app = (function () {
     		  majorDeaths: [86229, 80838, 25219, 16133, 11283, 9048, 6959, 6639, 6087, 4845, 4616],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1683333, 1259054, 1089020, 735538, 692030, 563635, 421128, 407422, 385240, 280539, 90250],
-    		  riskFactors: ['De fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'El consumo de drogas', 'Colesterol alto', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Consumo de drogas', 'Colesterol alto', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1164013, 882678, 772461, 676655, 327167, 324651, 177023, 159411, 127590, 99110, 90250] },
     		 {id: 27,
     		  name: "República Centroafricana",
     		  lifeExpectancy: 53.28,
     		  demographics: [1426413, 1237990, 809868, 493393, 336400, 228493, 135393, 60949, 16279],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Tuberculosis', 'Enfermedades diarreicas', 'VIH / SIDA', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Malaria', 'Lesiones viales', 'Cánceres', 'Conflicto', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Tuberculosis', 'Enfermedades diarreicas', 'VIH / SIDA', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Malaria', 'Accidentes', 'Cánceres', 'Conflicto', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [7278, 6728, 5983, 5319, 5021, 4770, 3849, 3495, 2695, 1879, 1],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Lesiones de transporte', 'Enfermedades cardiovasculares', 'Otras enfermedades transmisibles', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Accidentes de tráfico', 'Enfermedades cardiovasculares', 'Otras enfermedades transmisibles', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1079157, 873581, 436725, 335234, 229369, 223308, 209221, 166194, 163616, 111740, 21],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'De fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'Fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [535834, 377491, 290329, 249265, 190556, 155425, 134033, 121888, 93807, 87791, 21] },
     		 {id: 28,
     		  name: "Chad",
@@ -4823,67 +4823,67 @@ var app = (function () {
     		  majorDeaths: [24903, 19421, 17167, 13094, 7679, 6649, 6620, 4926, 4336, 4232, 62],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Malaria y enfermedades tropicales desatendidas', 'Deficiencias nutricionales', 'Otras ENT', 'Otras enfermedades transmisibles', 'Enfermedades cardiovasculares', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3324967, 1521033, 739523, 714037, 630767, 494126, 389858, 358655, 346981, 278749, 1378],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [2694326, 1652727, 1287466, 880045, 768811, 604902, 418815, 253170, 187689, 160699, 1378] },
     		 {id: 29,
     		  name: "Chile",
     		  lifeExpectancy: 80.18,
     		  demographics: [2450918, 2505672, 3020205, 2878807, 2556775, 2328585, 1737346, 950339, 523388],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Diabetes', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Diabetes', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [30116, 29906, 8340, 7955, 6141, 4980, 4588, 4225, 3331, 2281, 806],
     		  diseaseNames: ['Cánceres', 'Trastornos musculoesqueléticos', 'Enfermedades cardiovasculares', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Otras ENT', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [614838, 545626, 526835, 355493, 276342, 266925, 226976, 218323, 201592, 155243, 12027],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta rica en sal', 'Dieta baja en frutas', 'El consumo de drogas', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta rica en sal', 'Dieta baja en frutas', 'Consumo de drogas', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [400583, 369036, 365753, 335786, 129290, 123346, 98530, 87272, 86161, 46336, 12027] },
     		 {id: 30,
     		  name: "China",
     		  lifeExpectancy: 76.91,
     		  demographics: [171585833, 166513709, 192891037, 223506345, 223201182, 214623812, 148420591, 66894771, 26146412],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Demencia', 'Enfermedades digestivas', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Demencia', 'Enfermedades digestivas', 'Accidentes', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [4377972, 2606907, 1009685, 490210, 283662, 261802, 179390, 175891, 153769, 153185, 4638],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Enfermedades respiratorias', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Lesiones de transporte', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Enfermedades respiratorias', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Accidentes de tráfico', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [85319394, 63203596, 25138911, 23223150, 22139741, 20302946, 16758994, 16453012, 14994208, 14865833, 75805],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Colesterol alto', 'Humo de segunda mano', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Colesterol alto', 'Fumador pasivo', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [51286559, 50724732, 38074126, 28361531, 25733491, 25669596, 18622122, 16998810, 9416153, 8365260, 75805] },
     		 {id: 31,
     		  name: "Colombia",
     		  lifeExpectancy: 77.29,
     		  demographics: [7448799, 8231614, 8779218, 7667022, 6339173, 5445614, 3633308, 1882391, 912304],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Homicidio', 'Demencia', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Homicidio', 'Demencia', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Accidentes', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [68023, 46576, 15303, 15053, 15050, 10847, 8502, 7851, 7437, 6155, 776],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Violencia interpersonal', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1258942, 1121602, 851013, 792895, 731688, 684779, 672924, 646324, 636887, 414242, 12593],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'El consumo de drogas', 'Dieta baja en vegetales', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Consumo de drogas', 'Dieta baja en vegetales', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [824543, 729807, 553419, 521123, 301768, 295755, 201572, 177867, 169492, 113277, 12593] },
     		 {id: 32,
     		  name: "Comoras",
     		  lifeExpectancy: 64.32,
     		  demographics: [234784, 187246, 148281, 114000, 74321, 49408, 28300, 11291, 3260],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Trastornos neonatales', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Diabetes', 'Enfermedades respiratorias', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Trastornos neonatales', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Diabetes', 'Enfermedades respiratorias', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [982, 565, 384, 305, 286, 272, 235, 151, 144, 113, 1],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Cánceres', 'Otras ENT', 'VIH / SIDA y tuberculosis', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Otras enfermedades transmisibles', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [58275, 29193, 22929, 16910, 15236, 11967, 10010, 9808, 9388, 8770, 21],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Obesidad', 'De fumar', 'Dieta baja en frutas', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Obesidad', 'Fumar', 'Dieta baja en frutas', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [15143, 14657, 13840, 13011, 10983, 8619, 7850, 5708, 5074, 4641, 21] },
     		 {id: 33,
     		  name: "República del Congo",
     		  lifeExpectancy: 64.57,
     		  demographics: [1570520, 1217193, 848863, 672432, 520344, 312337, 156783, 66533, 15498],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'VIH / SIDA', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Malaria', 'Enfermedades diarreicas', 'Trastornos neonatales', 'Enfermedades digestivas', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'VIH / SIDA', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Malaria', 'Enfermedades diarreicas', 'Trastornos neonatales', 'Enfermedades digestivas', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [6527, 5571, 3275, 2308, 2279, 2244, 2107, 1717, 1615, 1229, 19],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Enfermedades cardiovasculares', 'Otras ENT', 'Cánceres', 'Lesiones de transporte', 'Deficiencias nutricionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Enfermedades cardiovasculares', 'Otras ENT', 'Cánceres', 'Accidentes de tráfico', 'Deficiencias nutricionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [325799, 322346, 171187, 167855, 162431, 107522, 100822, 78622, 73269, 70131, 426],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'De fumar', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Fumar', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [124326, 112354, 106554, 95933, 90427, 86646, 71649, 50058, 49945, 41776, 426] },
     		 {id: 34,
     		  name: "Costa Rica",
     		  lifeExpectancy: 80.28,
     		  demographics: [708607, 724264, 833947, 812730, 638064, 598490, 403726, 219837, 107896],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades del HIGADO', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Homicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades del HIGADO', 'Accidentes', 'Infecciones respiratorias inferiores', 'Homicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [6852, 5717, 1546, 1458, 1331, 1265, 840, 782, 521, 484, 10],
-    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Otras ENT', 'Enfermedades digestivas', 'Trastornos neonatales', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Otras ENT', 'Enfermedades digestivas', 'Trastornos neonatales', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [129752, 127974, 71800, 69245, 69175, 68520, 55612, 45180, 44686, 40129, 156],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [91847, 83330, 60423, 52627, 34589, 25963, 19624, 16119, 16042, 11088, 156] },
     		 {id: 35,
     		  name: "Croacia",
@@ -4893,7 +4893,7 @@ var app = (function () {
     		  majorDeaths: [23426, 13549, 3369, 2105, 1890, 1095, 999, 829, 708, 562, 101],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [350896, 277822, 115566, 95306, 90347, 71504, 67555, 59045, 57095, 50719, 1305],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [236270, 221560, 184287, 175349, 111451, 66726, 54483, 41805, 33657, 32700, 1305] },
     		 {id: 36,
     		  name: "Cuba",
@@ -4903,17 +4903,17 @@ var app = (function () {
     		  majorDeaths: [37598, 26203, 6988, 5678, 4406, 3969, 2340, 1869, 1791, 1769, 82],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [642754, 559920, 213593, 206468, 200596, 196844, 135526, 125201, 124433, 120958, 1157],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Humo de segunda mano', 'Dieta baja en frutas', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Fumador pasivo', 'Dieta baja en frutas', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [438389, 343228, 312365, 276017, 153908, 137799, 59008, 43727, 40328, 38862, 1157] },
     		 {id: 37,
     		  name: "Chipre",
     		  lifeExpectancy: 80.98,
     		  demographics: [132700, 142584, 194044, 188609, 163509, 145402, 117232, 75969, 38524],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Diabetes', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Diabetes', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Accidentes', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [2705, 2058, 483, 474, 401, 288, 256, 177, 152, 123, 17],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [44787, 43465, 37224, 23489, 22987, 18671, 14397, 12683, 12131, 9314, 244],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [39657, 31547, 27432, 24115, 10889, 10563, 6165, 4247, 4166, 3965, 244] },
     		 {id: 38,
     		  name: "República Checa",
@@ -4923,17 +4923,17 @@ var app = (function () {
     		  majorDeaths: [48960, 28927, 7581, 4520, 3864, 3222, 2958, 2175, 1517, 1257, 317],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [767029, 588271, 299173, 266439, 218376, 192175, 161210, 142372, 138323, 117131, 4313],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [534077, 464396, 417162, 396780, 244021, 141737, 120526, 108619, 81237, 58791, 4313] },
     		 {id: 39,
     		  name: "República Democrática del Congo",
     		  lifeExpectancy: 60.68,
     		  demographics: [28801093, 20234100, 13690339, 9435368, 6384869, 4195557, 2494965, 1224414, 329862],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Malaria', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Tuberculosis', 'Enfermedades diarreicas', 'Cánceres', 'Enfermedades digestivas', 'Lesiones viales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Malaria', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Tuberculosis', 'Enfermedades diarreicas', 'Cánceres', 'Enfermedades digestivas', 'Accidentes', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [83261, 81226, 58587, 53950, 53304, 36660, 33983, 24612, 20502, 16529, 67],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'Lesiones de transporte', 'Otras enfermedades transmisibles', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'Accidentes de tráfico', 'Otras enfermedades transmisibles', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [7863311, 7196932, 5077139, 4008675, 3345697, 2134794, 1817886, 1436816, 1426298, 1298704, 1403],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Obesidad', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Obesidad', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [4257878, 2771806, 2150401, 1590217, 1570390, 1320957, 1304840, 963409, 585796, 579539, 1403] },
     		 {id: 40,
     		  name: "Dinamarca",
@@ -4943,37 +4943,37 @@ var app = (function () {
     		  majorDeaths: [17404, 14525, 4477, 4319, 2530, 2377, 1294, 968, 947, 807, 563],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [327456, 205301, 194924, 120546, 105512, 93110, 85962, 68094, 66681, 58050, 7430],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [245839, 174984, 123682, 118127, 54793, 47590, 26013, 20933, 17766, 15494, 7430] },
     		 {id: 41,
     		  name: "Ecuador",
     		  lifeExpectancy: 77.01,
     		  demographics: [3260635, 3116390, 2997435, 2540942, 2046448, 1546300, 1047152, 545637, 272718],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Demencia', 'Lesiones viales', 'Diabetes', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Demencia', 'Accidentes', 'Diabetes', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [19679, 16097, 6155, 5739, 5149, 4971, 4465, 4389, 3457, 3387, 3203],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Trastornos neonatales', 'Lesiones no intencionales', 'Lesiones de transporte', 'Trastornos musculoesqueléticos', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Trastornos neonatales', 'Lesiones no intencionales', 'Accidentes de tráfico', 'Trastornos musculoesqueléticos', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [396000, 384366, 300660, 261958, 248588, 242400, 240306, 240294, 239834, 234280, 53061],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Emaciación infantil', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta rica en sal', 'Dieta baja en vegetales'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Emaciación infantil', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta rica en sal', 'Dieta baja en vegetales'],
     		  riskDALYs: [348663, 321389, 246503, 119257, 105392, 85569, 58040, 54693, 53061, 53036, 52491] },
     		 {id: 42,
     		  name: "Egipto",
     		  lifeExpectancy: 71.99,
     		  demographics: [24622198, 17968738, 16473942, 14922068, 10574668, 7677870, 4957959, 2412411, 778221],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Enfermedades digestivas', 'Cánceres', 'Enfermedades del HIGADO', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Diabetes', 'Nefropatía', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Enfermedades digestivas', 'Cánceres', 'Enfermedades del HIGADO', 'Accidentes', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Diabetes', 'Nefropatía', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [232675, 50101, 48024, 44692, 26946, 23097, 19990, 13836, 13115, 9852, 797],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos musculoesqueléticos', 'Lesiones de transporte', 'Enfermedades digestivas', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos musculoesqueléticos', 'Accidentes de tráfico', 'Enfermedades digestivas', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [5910574, 2376177, 2004534, 1779497, 1734654, 1639386, 1638469, 1585928, 1499388, 1236761, 14855],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Colesterol alto', 'Emaciación infantil', 'Humo de segunda mano', 'Dieta baja en frutas', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Colesterol alto', 'Emaciación infantil', 'Fumador pasivo', 'Dieta baja en frutas', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [3669121, 3557105, 3101643, 2195056, 2164638, 1845428, 916224, 664061, 658551, 595808, 14855] },
     		 {id: 43,
     		  name: "Eritrea",
     		  lifeExpectancy: 66.32,
     		  demographics: [978748, 830029, 574495, 446287, 274976, 167460, 127422, 75264, 22435],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Tuberculosis', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Trastornos neonatales', 'Enfermedades digestivas', 'VIH / SIDA', 'Lesiones viales', 'Deficiencias nutricionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Tuberculosis', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Trastornos neonatales', 'Enfermedades digestivas', 'VIH / SIDA', 'Accidentes', 'Deficiencias nutricionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [5211, 5072, 3968, 3737, 3723, 3013, 2104, 1521, 1287, 1147, 0],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Otras ENT', 'Deficiencias nutricionales', 'Cánceres', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Otras ENT', 'Deficiencias nutricionales', 'Cánceres', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [480274, 297214, 197674, 154881, 152787, 147554, 146554, 98581, 91972, 79943, 0],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Retraso del crecimiento infantil', 'De fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Retraso del crecimiento infantil', 'Fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [297140, 197758, 159271, 153111, 101300, 84060, 67867, 63384, 53520, 53356, 0] },
     		 {id: 44,
     		  name: "Estonia",
@@ -4983,7 +4983,7 @@ var app = (function () {
     		  majorDeaths: [7744, 3461, 1118, 602, 293, 292, 268, 220, 217, 217, 65],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [113906, 70732, 31560, 31446, 30926, 22291, 22035, 20576, 14972, 11179, 829],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta rica en sal', 'Dieta baja en frutas', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta rica en sal', 'Dieta baja en frutas', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [80846, 58304, 56332, 48633, 37388, 15952, 12597, 12529, 9917, 7623, 829] },
     		 {id: 45,
     		  name: "Etiopía",
@@ -4993,7 +4993,7 @@ var app = (function () {
     		  majorDeaths: [68899, 58719, 58105, 47564, 42795, 35598, 27760, 17181, 16069, 12681, 6],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [8628459, 6657770, 2988580, 1923960, 1872827, 1526604, 1414986, 1356684, 1343853, 1309199, 121],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'Contaminación del aire (exterior e interior)', 'Retraso del crecimiento infantil', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de hierro', 'Lactancia no exclusiva', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Contaminación del aire (exterior e interior)', 'Retraso del crecimiento infantil', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de hierro', 'Lactancia no exclusiva', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [4547197, 3145313, 2543816, 2068085, 2019593, 1169571, 907469, 798529, 547656, 524032, 121] },
     		 {id: 46,
     		  name: "Fiyi",
@@ -5003,7 +5003,7 @@ var app = (function () {
     		  majorDeaths: [2553, 1578, 739, 378, 312, 278, 175, 169, 133, 86, 0],
     		  diseaseNames: ['Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Cánceres', 'Trastornos neonatales', 'Otras ENT', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [81934, 69931, 22502, 22019, 17626, 16262, 16096, 15187, 14204, 12061, 0],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Humo de segunda mano', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Fumador pasivo', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [80830, 74137, 44313, 28763, 25566, 22452, 17909, 10712, 10082, 9252, 0] },
     		 {id: 47,
     		  name: "Finlandia",
@@ -5013,7 +5013,7 @@ var app = (function () {
     		  majorDeaths: [21359, 13089, 8546, 2416, 1784, 1178, 868, 713, 682, 598, 312],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [297803, 244327, 168915, 159341, 109069, 95183, 67129, 65492, 57755, 56824, 3999],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Dieta baja en frutas', 'El consumo de drogas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Dieta baja en frutas', 'Consumo de drogas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [177418, 161016, 139500, 134558, 81929, 35314, 31633, 27778, 27062, 25187, 3999] },
     		 {id: 48,
     		  name: "Francia",
@@ -5023,17 +5023,17 @@ var app = (function () {
     		  majorDeaths: [182241, 155683, 70567, 28530, 27350, 20917, 20732, 11067, 10621, 10579, 9279],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3380270, 2121253, 1815206, 1555743, 1407146, 999326, 828873, 686563, 601963, 532875, 357532],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'El consumo de drogas', 'Dieta rica en sal', 'Baja actividad física'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Consumo de drogas', 'Dieta rica en sal', 'Baja actividad física'],
     		  riskDALYs: [1910863, 1144792, 1069097, 1035904, 529536, 357532, 346605, 266385, 261196, 186249, 167243] },
     		 {id: 49,
     		  name: "Gabón",
     		  lifeExpectancy: 66.47,
     		  demographics: [586583, 410229, 369653, 340542, 222608, 126869, 68865, 35920, 11309],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Malaria', 'VIH / SIDA', 'Trastornos neonatales', 'Enfermedades digestivas', 'Tuberculosis', 'Diabetes', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Malaria', 'VIH / SIDA', 'Trastornos neonatales', 'Enfermedades digestivas', 'Tuberculosis', 'Diabetes', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [2230, 1240, 756, 705, 644, 630, 601, 569, 447, 435, 14],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Enfermedades cardiovasculares', 'Otras ENT', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones de transporte', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Enfermedades cardiovasculares', 'Otras ENT', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Accidentes de tráfico', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [81025, 76009, 63650, 53830, 50948, 36479, 34988, 30639, 28574, 25521, 287],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Deficiencia de hierro', 'Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Deficiencia de hierro', 'Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [45650, 35609, 33446, 22861, 20977, 16066, 13877, 13686, 9638, 9322, 287] },
     		 {id: 50,
     		  name: "Gambia",
@@ -5043,17 +5043,17 @@ var app = (function () {
     		  majorDeaths: [2686, 1235, 1216, 1090, 883, 616, 604, 564, 402, 312, 1],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Otras ENT', 'Enfermedades cardiovasculares', 'VIH / SIDA y tuberculosis', 'Deficiencias nutricionales', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [158130, 117340, 74485, 64688, 63678, 49673, 33379, 28846, 28696, 27958, 22],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fuente de agua insegura', 'Deficiencia de hierro', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'De fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fuente de agua insegura', 'Deficiencia de hierro', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [55905, 47203, 43352, 33016, 32534, 30844, 25630, 24125, 21488, 21141, 22] },
     		 {id: 51,
     		  name: "Georgia",
     		  lifeExpectancy: 73.77,
     		  demographics: [555503, 462513, 517237, 565027, 516086, 532797, 450191, 245487, 151920],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Diabetes', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Diabetes', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [29989, 7926, 2291, 1938, 1776, 1381, 1210, 785, 767, 724, 12],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [492777, 199176, 77350, 71942, 71878, 66363, 61436, 52174, 50743, 49258, 167],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [330197, 249730, 207106, 181728, 112711, 96544, 85246, 73731, 53296, 37918, 167] },
     		 {id: 52,
     		  name: "Alemania",
@@ -5063,37 +5063,37 @@ var app = (function () {
     		  majorDeaths: [356362, 252763, 83782, 46375, 44735, 26754, 25237, 19558, 19133, 12716, 8349],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4855900, 4820928, 2911225, 2149784, 1683775, 1498390, 1240818, 1133138, 1077631, 979500, 103590],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [3414722, 2775807, 2418682, 2199578, 1294183, 787908, 609964, 445019, 404628, 379320, 103590] },
     		 {id: 53,
     		  name: "Ghana",
     		  lifeExpectancy: 64.07,
     		  demographics: [7954883, 6496468, 5300953, 4080533, 2958700, 2058206, 1030760, 439902, 97453],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Malaria', 'Infecciones respiratorias inferiores', 'Cánceres', 'Trastornos neonatales', 'VIH / SIDA', 'Tuberculosis', 'Enfermedades digestivas', 'Enfermedades diarreicas', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Malaria', 'Infecciones respiratorias inferiores', 'Cánceres', 'Trastornos neonatales', 'VIH / SIDA', 'Tuberculosis', 'Enfermedades digestivas', 'Enfermedades diarreicas', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [36615, 18757, 17761, 17559, 16951, 13878, 9142, 8541, 7309, 5381, 34],
     		  diseaseNames: ['Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Deficiencias nutricionales', 'Cánceres', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1654622, 1394112, 1250172, 952830, 938267, 741457, 564721, 546793, 529975, 408703, 745],
-    		  riskFactors: ['Hipertensión', 'Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fuente de agua insegura', 'Deficiencia de hierro', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'De fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fuente de agua insegura', 'Deficiencia de hierro', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [588032, 571389, 561136, 521296, 439123, 427879, 305486, 303853, 231330, 180575, 745] },
     		 {id: 54,
     		  name: "Grecia",
     		  lifeExpectancy: 82.24,
     		  demographics: [910515, 1071214, 1068916, 1384511, 1584912, 1489576, 1243217, 940663, 779928],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedad de Parkinson', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedad de Parkinson', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [50895, 31245, 11489, 6069, 4269, 3582, 3579, 1460, 1308, 1221, 173],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [687099, 569885, 326957, 284049, 219619, 153164, 151809, 133281, 120023, 89730, 2100],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Humo de segunda mano', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Fumador pasivo', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [560222, 357593, 314662, 288302, 216660, 129722, 59070, 56707, 53709, 52342, 2100] },
     		 {id: 55,
     		  name: "Granada",
     		  lifeExpectancy: 72.4,
     		  demographics: [18172, 16008, 18677, 17858, 12661, 12282, 9161, 4727, 2456],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Infecciones respiratorias inferiores', 'Demencia', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Infecciones respiratorias inferiores', 'Demencia', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [411, 228, 95, 83, 51, 51, 41, 30, 19, 12, 0],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Lesiones no intencionales', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [7147, 4824, 3842, 1912, 1911, 1843, 1805, 1620, 1510, 1282, 0],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en vegetales', 'Dieta baja en frutas', 'Baja actividad física', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en vegetales', 'Dieta baja en frutas', 'Baja actividad física', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [5685, 4337, 3932, 2146, 1782, 1177, 766, 746, 589, 399, 0] },
     		 {id: 56,
     		  name: "Guatemala",
@@ -5103,7 +5103,7 @@ var app = (function () {
     		  majorDeaths: [15009, 11034, 9695, 7300, 6193, 5531, 5065, 4623, 3675, 2957, 63],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Violencia interpersonal', 'Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Otras ENT', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [602755, 403822, 382601, 338262, 335440, 294204, 269396, 267082, 252017, 228858, 1128],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Emaciación infantil', 'Hipertensión', 'Fuente de agua insegura', 'El consumo de drogas', 'De fumar', 'Saneamiento inseguro', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Emaciación infantil', 'Hipertensión', 'Fuente de agua insegura', 'Consumo de drogas', 'Fumar', 'Sistema del sanidad inseguro', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [402592, 269293, 262556, 226714, 226087, 161136, 102818, 100650, 95949, 81342, 1128] },
     		 {id: 57,
     		  name: "Guinea",
@@ -5113,7 +5113,7 @@ var app = (function () {
     		  majorDeaths: [16151, 12033, 11355, 10012, 8125, 5917, 5287, 3131, 2989, 2898, 20],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Otras ENT', 'Deficiencias nutricionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1570992, 929025, 915842, 474268, 405634, 401375, 329709, 268882, 248388, 223100, 435],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Hipertensión', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'Nivel alto de azúcar en la sangre', 'Retraso del crecimiento infantil', 'Deficiencia de hierro', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Hipertensión', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Nivel alto de azúcar en la sangre', 'Retraso del crecimiento infantil', 'Deficiencia de hierro', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [731514, 509268, 290067, 232709, 216134, 197656, 172770, 143237, 135493, 114120, 435] },
     		 {id: 58,
     		  name: "Guyana",
@@ -5123,27 +5123,27 @@ var app = (function () {
     		  majorDeaths: [2034, 621, 425, 281, 248, 196, 194, 189, 181, 174, 11],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [48488, 29028, 20211, 17630, 13647, 13225, 12727, 12670, 11948, 10822, 189],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Emaciación infantil', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Emaciación infantil', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [35463, 29423, 27805, 13961, 12513, 10968, 9387, 5708, 4171, 4063, 189] },
     		 {id: 59,
     		  name: "Haití",
     		  lifeExpectancy: 64.0,
     		  demographics: [2503602, 2334380, 2030254, 1702688, 1062317, 774512, 506169, 253257, 95900],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Lesiones viales', 'Diabetes', 'VIH / SIDA', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Accidentes', 'Diabetes', 'VIH / SIDA', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [23978, 10065, 6003, 4793, 4487, 4003, 3850, 3703, 3619, 3134, 33],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Otras ENT', 'Lesiones no intencionales', 'VIH / SIDA y tuberculosis', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Lesiones de transporte', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Otras ENT', 'Lesiones no intencionales', 'VIH / SIDA y tuberculosis', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Accidentes de tráfico', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [734644, 612671, 458390, 384494, 368148, 340215, 313273, 291429, 265724, 171517, 613],
-    		  riskFactors: ['Emaciación infantil', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Obesidad', 'Colesterol alto', 'De fumar', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Obesidad', 'Colesterol alto', 'Fumar', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [382608, 367485, 324753, 312815, 295182, 220161, 210943, 155160, 116590, 113575, 613] },
     		 {id: 60,
     		  name: "Honduras",
     		  lifeExpectancy: 75.27,
     		  demographics: [2006000, 2073497, 1868035, 1435980, 1009908, 653401, 402303, 195289, 101701],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Homicidio', 'Demencia', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Lesiones viales', 'Enfermedades diarreicas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Homicidio', 'Demencia', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Accidentes', 'Enfermedades diarreicas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [13117, 5431, 4449, 4154, 2408, 2388, 2056, 1464, 1294, 1229, 188],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Violencia interpersonal', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Cánceres', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [282192, 228670, 180903, 164244, 156390, 152814, 133332, 128019, 126607, 118070, 3444],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [159975, 146377, 133796, 103459, 99629, 85602, 51514, 43189, 41993, 40037, 3444] },
     		 {id: 61,
     		  name: "Hungría",
@@ -5153,7 +5153,7 @@ var app = (function () {
     		  majorDeaths: [57212, 32138, 7064, 5879, 5457, 3228, 2063, 2025, 1553, 1016, 505],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades digestivas', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [948587, 719728, 271875, 246768, 206846, 180409, 179146, 177834, 153606, 115640, 6850],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Baja actividad física', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Baja actividad física', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [680552, 655486, 476990, 428625, 339453, 181526, 170125, 141183, 64658, 59660, 6850] },
     		 {id: 62,
     		  name: "Islandia",
@@ -5163,7 +5163,7 @@ var app = (function () {
     		  majorDeaths: [738, 652, 236, 114, 95, 65, 40, 39, 27, 22, 10],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [12927, 10060, 9227, 7061, 6135, 3992, 3785, 3121, 3018, 1716, 139],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en vegetales', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [7646, 6360, 6244, 5408, 3428, 1198, 1195, 1008, 1005, 925, 139] },
     		 {id: 63,
     		  name: "India",
@@ -5173,7 +5173,7 @@ var app = (function () {
     		  majorDeaths: [2632780, 1271687, 929500, 719083, 507364, 449794, 428672, 419545, 254555, 223821, 4337],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Lesiones no intencionales', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [64219262, 59105453, 46464098, 33125142, 26160476, 25772512, 23310913, 22563499, 22096435, 21348307, 79240],
-    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Emaciación infantil', 'Fuente de agua insegura', 'Colesterol alto', 'Obesidad', 'Deficiencia de hierro', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Emaciación infantil', 'Fuente de agua insegura', 'Colesterol alto', 'Obesidad', 'Deficiencia de hierro', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [39210284, 37485408, 28068070, 23841107, 20642364, 19658345, 19264482, 17663196, 13222380, 11852430, 79240] },
     		 {id: 64,
     		  name: "Indonesia",
@@ -5183,27 +5183,27 @@ var app = (function () {
     		  majorDeaths: [597995, 198835, 121488, 97005, 96316, 82219, 82145, 68636, 47869, 43764, 1418],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos neonatales', 'Trastornos musculoesqueléticos', 'Enfermedades digestivas', 'VIH / SIDA y tuberculosis', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [14436782, 6040809, 5756326, 5576287, 4267523, 4266640, 3709473, 3525877, 3510134, 3397022, 26400],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [10343485, 10011664, 6688501, 5556192, 4014640, 3476122, 3100077, 2859877, 2375858, 2098071, 26400] },
     		 {id: 65,
     		  name: "Irán",
     		  lifeExpectancy: 76.68,
     		  demographics: [14377200, 11531256, 12885389, 16623647, 11185873, 8029753, 5126544, 2239919, 914312],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Lesiones viales', 'Diabetes', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Accidentes', 'Diabetes', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [161330, 60600, 21435, 21124, 16033, 14948, 10163, 9907, 9553, 9315, 7508],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos neonatales', 'Lesiones de transporte', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos neonatales', 'Accidentes de tráfico', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3176330, 1904817, 1783780, 1616255, 1592320, 1514747, 1355368, 1339143, 1271439, 924674, 136251],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Dieta rica en sal', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Dieta rica en sal', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1878213, 1713915, 1700004, 1081718, 1077120, 991126, 795938, 360228, 282413, 272788, 136251] },
     		 {id: 66,
     		  name: "Irak",
     		  lifeExpectancy: 70.6,
     		  demographics: [10485112, 8550850, 7013811, 5252557, 3814033, 2191874, 1261768, 552034, 187749],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Conflicto', 'Cánceres', 'Trastornos neonatales', 'Terrorismo', 'Nefropatía', 'Diabetes', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Conflicto', 'Cánceres', 'Trastornos neonatales', 'Terrorismo', 'Nefropatía', 'Diabetes', 'Accidentes', 'Infecciones respiratorias inferiores', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [43072, 33240, 13780, 12278, 6476, 4706, 4281, 3773, 3628, 3600, 169],
     		  diseaseNames: ['Conflicto y terrorismo', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Diarrea y enfermedades infecciosas comunes.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2065047, 1276888, 1114616, 980591, 977639, 881383, 669242, 592465, 587218, 499474, 3560],
-    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'De fumar', 'El consumo de drogas', 'Dieta baja en frutas', 'Emaciación infantil', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Consumo de drogas', 'Dieta baja en frutas', 'Emaciación infantil', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [728011, 713340, 686531, 653682, 367011, 365292, 285716, 232404, 175962, 155092, 3560] },
     		 {id: 67,
     		  name: "Irlanda",
@@ -5213,17 +5213,17 @@ var app = (function () {
     		  majorDeaths: [9681, 9581, 2698, 2226, 1615, 1372, 1145, 579, 453, 420, 393],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [189194, 145789, 126929, 99180, 95089, 61214, 54913, 51616, 50239, 32460, 23153],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020', 'El consumo de drogas', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020', 'Consumo de drogas', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física'],
     		  riskDALYs: [132906, 99314, 90195, 83764, 45699, 24227, 23153, 22113, 15034, 14695, 13727] },
     		 {id: 68,
     		  name: "Israel",
     		  lifeExpectancy: 82.97,
     		  demographics: [1654530, 1377821, 1178880, 1117905, 1019070, 779142, 702437, 430872, 258715],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Diabetes', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Diabetes', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [12966, 11849, 4658, 2276, 2242, 2141, 1812, 1808, 707, 632, 281],
     		  diseaseNames: ['Cánceres', 'Trastornos musculoesqueléticos', 'Enfermedades cardiovasculares', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [253956, 211092, 175059, 151116, 143230, 134764, 98294, 80106, 63869, 51274, 3978],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'El consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [167092, 158896, 121800, 113120, 52609, 45088, 19532, 17738, 16242, 14827, 3978] },
     		 {id: 69,
     		  name: "Italia",
@@ -5233,7 +5233,7 @@ var app = (function () {
     		  majorDeaths: [216585, 180577, 73339, 32955, 29044, 26403, 18551, 14292, 13167, 11695, 7557],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3227357, 2648270, 1971740, 1748118, 1191659, 1020109, 703647, 597865, 593953, 578073, 402295],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020', 'El consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'Dieta baja en frutas'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020', 'Consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'Dieta baja en frutas'],
     		  riskDALYs: [1879616, 1702367, 1518935, 1310480, 648326, 522561, 402295, 271922, 267823, 220006, 207156] },
     		 {id: 70,
     		  name: "Jamaica",
@@ -5243,7 +5243,7 @@ var app = (function () {
     		  majorDeaths: [6279, 3975, 2516, 1253, 887, 810, 695, 504, 503, 440, 9],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos neonatales', 'Violencia interpersonal', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [116834, 107775, 96171, 48412, 48126, 45159, 45023, 44712, 37202, 29423, 141],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Deficiencia de hierro', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Deficiencia de hierro', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [121104, 90114, 75774, 55231, 29649, 20221, 16755, 10866, 10335, 9483, 141] },
     		 {id: 71,
     		  name: "Japón",
@@ -5253,27 +5253,27 @@ var app = (function () {
     		  majorDeaths: [414698, 368091, 198556, 109534, 56334, 53739, 35709, 28819, 25352, 15613, 858],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [6647076, 5124426, 4181686, 3088970, 2174030, 2146019, 2122420, 1348675, 1284802, 1131219, 10052],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Dieta rica en sal', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Dieta rica en sal', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [4211397, 3003185, 2241447, 1385128, 1315624, 987828, 839089, 819971, 423681, 412535, 10052] },
     		 {id: 72,
     		  name: "Jordania",
     		  lifeExpectancy: 74.53,
     		  demographics: [2257019, 2159817, 1780641, 1468830, 1117097, 720652, 348029, 187481, 62131],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Diabetes', 'Demencia', 'Nefropatía', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Diabetes', 'Demencia', 'Nefropatía', 'Accidentes', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [9018, 4502, 2023, 1516, 1299, 1281, 1110, 1014, 822, 730, 9],
-    		  diseaseNames: ['Trastornos neonatales', 'Enfermedades cardiovasculares', 'Otras ENT', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Desórdenes neurológicos', 'Lesiones de transporte', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Trastornos neonatales', 'Enfermedades cardiovasculares', 'Otras ENT', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [231744, 205154, 200157, 171916, 170292, 144906, 129454, 128076, 79489, 77320, 180],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'El consumo de drogas', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Deficiencia de hierro', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Consumo de drogas', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Deficiencia de hierro', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [186863, 157454, 137643, 109142, 70998, 70022, 67410, 40454, 32995, 28236, 180] },
     		 {id: 73,
     		  name: "Kazajistán",
     		  lifeExpectancy: 73.6,
     		  demographics: [3854928, 2574607, 2706361, 2919045, 2254076, 2041467, 1366464, 538921, 295558],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Demencia', 'Suicidio', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Demencia', 'Suicidio', 'Infecciones respiratorias inferiores', 'Accidentes', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [67339, 18400, 9115, 6849, 5615, 4481, 4263, 3624, 2767, 2047, 37],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Otras ENT', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1423967, 499547, 385355, 337080, 287137, 261389, 253852, 251712, 250447, 228854, 620],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'El consumo de drogas', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Consumo de drogas', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [790109, 644782, 598318, 495839, 469206, 263862, 212036, 208316, 129363, 105151, 620] },
     		 {id: 74,
     		  name: "Kenia",
@@ -5283,7 +5283,7 @@ var app = (function () {
     		  majorDeaths: [48502, 35993, 23268, 21373, 20835, 18893, 16978, 14881, 10398, 6871, 52],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Otras ENT', 'Enfermedades digestivas', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4434222, 2835626, 1764456, 930002, 926142, 685728, 669334, 637402, 541192, 506020, 1221],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Obesidad', 'De fumar', 'Retraso del crecimiento infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Obesidad', 'Fumar', 'Retraso del crecimiento infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1098902, 1013002, 819127, 765692, 621159, 595363, 539569, 373205, 315363, 263262, 1221] },
     		 {id: 75,
     		  name: "Kiribati",
@@ -5293,37 +5293,37 @@ var app = (function () {
     		  majorDeaths: [270, 121, 93, 63, 57, 54, 44, 41, 33, 30],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Otras ENT', 'Cánceres', 'Enfermedades respiratorias', 'Deficiencias nutricionales', 'Enfermedades digestivas', 'Autolesiones'],
     		  diseaseDALYs: [8817, 6413, 5760, 5386, 3723, 3039, 2700, 2106, 1748, 1689],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Emaciación infantil', 'Colesterol alto', 'Dieta baja en vegetales', 'Humo de segunda mano'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Emaciación infantil', 'Colesterol alto', 'Dieta baja en vegetales', 'Fumador pasivo'],
     		  riskDALYs: [9248, 7767, 6072, 4513, 3980, 2668, 2375, 2255, 1629, 1457] },
     		 {id: 76,
     		  name: "Kuwait",
     		  lifeExpectancy: 75.49,
     		  demographics: [615731, 509329, 462476, 916067, 936319, 514790, 197771, 44686, 9908],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'Demencia', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades respiratorias'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Accidentes', 'Demencia', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020', 'Enfermedades respiratorias'],
     		  majorDeaths: [3094, 1233, 573, 529, 324, 262, 217, 177, 173, 172, 166],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Lesiones de transporte', 'Trastornos neonatales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Accidentes de tráfico', 'Trastornos neonatales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [87091, 83602, 79495, 50897, 48788, 48403, 35261, 33603, 32252, 28823, 4153],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'Colesterol alto', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Humo de segunda mano', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Colesterol alto', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Fumador pasivo', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [83006, 51389, 51249, 42806, 39135, 35312, 31345, 16962, 10359, 9365, 4153] },
     		 {id: 77,
     		  name: "Kirguistán",
     		  lifeExpectancy: 71.45,
     		  demographics: [1513166, 1067795, 1104469, 977554, 673651, 576005, 340820, 103872, 58519],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Demencia', 'Suicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Accidentes', 'Infecciones respiratorias inferiores', 'Demencia', 'Suicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [16557, 3709, 2495, 2159, 1842, 1393, 884, 854, 824, 594, 16],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades digestivas', 'Cánceres', 'Otras ENT', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [343877, 188505, 131432, 109728, 108236, 97255, 94677, 80365, 79860, 79635, 305],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Deficiencia de hierro', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Deficiencia de hierro', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [181555, 131066, 125338, 114377, 105735, 81421, 71032, 38858, 38235, 35181, 305] },
     		 {id: 78,
     		  name: "Laos",
     		  lifeExpectancy: 67.92,
     		  demographics: [1565148, 1456114, 1358326, 1054965, 749666, 509532, 304392, 130858, 40455],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Lesiones viales', 'Enfermedades del HIGADO', 'Enfermedades diarreicas', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Accidentes', 'Enfermedades del HIGADO', 'Enfermedades diarreicas', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [13145, 4735, 3756, 3542, 2605, 2540, 1690, 1595, 1582, 1551, 0],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Otras ENT', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones de transporte', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Otras ENT', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Accidentes de tráfico', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [580354, 342443, 337627, 192109, 144731, 136833, 112789, 104873, 103883, 97528, 0],
-    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Emaciación infantil', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Fuente de agua insegura', 'Colesterol alto', 'Humo de segunda mano', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Emaciación infantil', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Fuente de agua insegura', 'Colesterol alto', 'Fumador pasivo', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [222829, 198600, 192745, 190221, 155967, 110542, 87473, 84290, 67491, 64915, 0] },
     		 {id: 79,
     		  name: "Letonia",
@@ -5333,27 +5333,27 @@ var app = (function () {
     		  majorDeaths: [15463, 5621, 1740, 998, 438, 434, 434, 379, 320, 294, 22],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [251875, 119164, 56908, 52574, 46943, 35877, 33911, 31469, 25380, 17912, 282],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Baja actividad física', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Baja actividad física', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [155232, 109735, 105412, 89377, 81725, 38011, 31230, 29007, 19450, 18458, 282] },
     		 {id: 80,
     		  name: "Líbano",
     		  lifeExpectancy: 78.93,
     		  demographics: [1183784, 1159529, 1186188, 1009919, 862619, 713217, 433181, 202860, 104411],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Lesiones viales', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Accidentes', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [14094, 7703, 1866, 1614, 1175, 833, 739, 594, 562, 557, 26],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [277882, 211228, 156612, 131367, 117713, 93176, 89925, 82542, 73834, 60861, 440],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Hipertensión', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Humo de segunda mano', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Hipertensión', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Fumador pasivo', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [210233, 191855, 176671, 168709, 98764, 78426, 69882, 33327, 32854, 29616, 440] },
     		 {id: 81,
     		  name: "Lesoto",
     		  lifeExpectancy: 54.33,
     		  demographics: [476585, 430608, 395150, 322798, 202120, 139177, 94839, 47103, 16887],
-    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Tuberculosis', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Diabetes', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Tuberculosis', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Diabetes', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [6331, 4007, 1932, 1798, 1573, 1225, 1114, 1046, 866, 803, 0],
-    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Lesiones de transporte', 'Violencia interpersonal', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Accidentes de tráfico', 'Violencia interpersonal', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [699820, 221340, 98860, 82394, 66194, 53096, 49314, 47954, 41436, 36752, 0],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Fuente de agua insegura', 'Obesidad', 'Emaciación infantil', 'Saneamiento inseguro', 'Dieta baja en frutas', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Fuente de agua insegura', 'Obesidad', 'Emaciación infantil', 'Sistema del sanidad inseguro', 'Dieta baja en frutas', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [90169, 65890, 64292, 61167, 60136, 57484, 50694, 45920, 26756, 19203, 0] },
     		 {id: 82,
     		  name: "Liberia",
@@ -5363,27 +5363,27 @@ var app = (function () {
     		  majorDeaths: [4414, 2810, 2503, 2442, 2317, 2118, 1840, 1495, 1232, 733, 26],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [488681, 293930, 236278, 153800, 136832, 115273, 90505, 80720, 63432, 59778, 547],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Hipertensión', 'Deficiencia de vitamina A', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Deficiencia de hierro', 'Retraso del crecimiento infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Hipertensión', 'Deficiencia de vitamina A', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Deficiencia de hierro', 'Retraso del crecimiento infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [174555, 143231, 106021, 103123, 75963, 69593, 62246, 56236, 54699, 41929, 547] },
     		 {id: 83,
     		  name: "Libia",
     		  lifeExpectancy: 72.91,
     		  demographics: [1291223, 1165300, 1102957, 1165502, 1020549, 574557, 269932, 135923, 51510],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones viales', 'Conflicto', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Accidentes', 'Conflicto', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [13334, 5586, 1701, 1525, 1508, 1405, 1205, 1181, 878, 842, 3],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Lesiones de transporte', 'Cánceres', 'Conflicto y terrorismo', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Otras ENT', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Accidentes de tráfico', 'Cánceres', 'Conflicto y terrorismo', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Otras ENT', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [328433, 169622, 169432, 129405, 125922, 124647, 122767, 101482, 88270, 72970, 59],
-    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Colesterol alto', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Colesterol alto', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [227177, 216077, 193983, 113035, 94613, 86942, 83501, 55052, 34933, 31056, 59] },
     		 {id: 84,
     		  name: "Lituania",
     		  lifeExpectancy: 75.93,
     		  demographics: [296367, 248144, 341343, 336898, 366880, 428804, 342601, 228011, 170583],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Suicidio', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Trastornos por consumo de alcohol.', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Suicidio', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Trastornos por consumo de alcohol.', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [22251, 8075, 2024, 1997, 1033, 942, 782, 704, 359, 325, 65],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Enfermedades digestivas', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Autolesiones', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [345229, 175044, 92378, 76396, 65565, 65345, 50956, 40077, 40052, 37358, 824],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [228930, 150010, 137263, 122854, 106816, 46928, 43265, 41843, 30148, 28203, 824] },
     		 {id: 85,
     		  name: "Luxemburgo",
@@ -5393,17 +5393,17 @@ var app = (function () {
     		  majorDeaths: [1397, 1306, 440, 237, 227, 146, 110, 99, 85, 69, 64],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [25726, 20631, 17093, 13528, 11354, 7441, 7178, 6819, 5929, 5905, 1533],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta baja en vegetales'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta baja en vegetales'],
     		  riskDALYs: [16915, 13697, 12220, 12139, 4597, 3660, 2657, 2172, 1544, 1533, 1412] },
     		 {id: 86,
     		  name: "República de Macedonia",
     		  lifeExpectancy: 75.8,
     		  demographics: [228330, 236205, 290417, 326362, 297862, 282001, 240622, 129154, 52505],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades del HIGADO', 'Suicidio', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades del HIGADO', 'Suicidio', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [10518, 4378, 848, 745, 534, 465, 309, 235, 191, 161, 116],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Trastornos neonatales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [190895, 108056, 46978, 44928, 42217, 37051, 31369, 24413, 23155, 22465, 1757],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [122094, 120255, 100479, 90355, 48532, 41927, 28845, 24530, 17622, 11510, 1757] },
     		 {id: 87,
     		  name: "Madagascar",
@@ -5413,7 +5413,7 @@ var app = (function () {
     		  majorDeaths: [34526, 23378, 19854, 17584, 11740, 11669, 11453, 6402, 6017, 5799, 2],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Otras ENT', 'Otras enfermedades transmisibles', 'Malaria y enfermedades tropicales desatendidas', 'Cánceres', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3237251, 1641588, 1063864, 999114, 725114, 604605, 488825, 407861, 343230, 335685, 42],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Nivel alto de azúcar en la sangre', 'Lactancia no exclusiva', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Nivel alto de azúcar en la sangre', 'Lactancia no exclusiva', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [2307218, 1393535, 1116685, 947467, 593032, 568745, 523072, 348713, 273471, 213170, 42] },
     		 {id: 88,
     		  name: "Malaui",
@@ -5423,27 +5423,27 @@ var app = (function () {
     		  majorDeaths: [21935, 15006, 11082, 10093, 9426, 7225, 7061, 6884, 5616, 2642, 4],
     		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Enfermedades cardiovasculares', 'Cánceres', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2089369, 1833682, 1055239, 543959, 500729, 362649, 352625, 337524, 227082, 224552, 88],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Obesidad', 'De fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Obesidad', 'Fumar', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [451940, 381809, 343107, 264097, 259254, 251827, 190735, 145811, 121910, 107264, 88] },
     		 {id: 89,
     		  name: "Malasia",
     		  lifeExpectancy: 76.16,
     		  demographics: [5098216, 5185143, 5784427, 5525337, 3884381, 3080289, 2069406, 965368, 357222],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Lesiones viales', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades del HIGADO', 'Suicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Accidentes', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades del HIGADO', 'Suicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [57288, 27057, 23692, 7061, 6946, 5887, 5770, 4731, 3082, 2281, 115],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Lesiones de transporte', 'Otras ENT', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Accidentes de tráfico', 'Otras ENT', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1352218, 699187, 489333, 485542, 473585, 444888, 418419, 359023, 356901, 242767, 2050],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [906745, 677680, 648420, 597790, 488883, 311272, 290148, 231226, 192134, 155544, 2050] },
     		 {id: 90,
     		  name: "Maldivas",
     		  lifeExpectancy: 78.92,
     		  demographics: [73852, 60061, 140970, 127233, 62492, 35683, 17665, 8722, 4278],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Nefropatía', 'Demencia', 'Diabetes', 'Lesiones viales', 'Enfermedades digestivas', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Nefropatía', 'Demencia', 'Diabetes', 'Accidentes', 'Enfermedades digestivas', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [422, 163, 102, 68, 68, 36, 33, 31, 28, 28, 5],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [9055, 6687, 6304, 5798, 4981, 4681, 4195, 3731, 3720, 2289, 103],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Colesterol alto', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Deficiencia de hierro', 'Humo de segunda mano', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Colesterol alto', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Deficiencia de hierro', 'Fumador pasivo', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [6038, 6025, 4954, 4660, 3006, 1777, 1700, 1432, 1253, 1218, 103] },
     		 {id: 91,
     		  name: "Malí",
@@ -5453,7 +5453,7 @@ var app = (function () {
     		  majorDeaths: [26640, 25080, 18035, 15386, 11586, 10410, 6686, 6478, 5807, 5728, 70],
     		  diseaseNames: ['Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Deficiencias nutricionales', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades cardiovasculares', 'Otras enfermedades transmisibles', 'Cánceres', 'VIH / SIDA y tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2363306, 2339166, 2198476, 960655, 917119, 505199, 497276, 461405, 345514, 340900, 1574],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1632950, 852513, 654240, 636002, 421451, 335071, 240844, 216570, 200341, 175715, 1574] },
     		 {id: 92,
     		  name: "Malta",
@@ -5463,27 +5463,27 @@ var app = (function () {
     		  majorDeaths: [1569, 1042, 331, 173, 172, 127, 117, 94, 54, 44, 6],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [22705, 20259, 14018, 9810, 8075, 6672, 5952, 5074, 4816, 3573, 79],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'De fumar', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta rica en sal', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Fumar', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta rica en sal', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [17301, 15351, 13755, 12623, 6457, 4612, 2916, 2501, 2303, 1637, 79] },
     		 {id: 93,
     		  name: "Mauritania",
     		  lifeExpectancy: 64.92,
     		  demographics: [1282240, 981572, 770505, 601045, 405733, 256724, 144249, 64944, 18685],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Lesiones viales', 'Enfermedades respiratorias', 'Demencia', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Accidentes', 'Enfermedades respiratorias', 'Demencia', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [3924, 2309, 1998, 1895, 1490, 900, 674, 600, 559, 542, 9],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Otras ENT', 'Deficiencias nutricionales', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [254069, 196903, 90510, 73989, 65102, 62379, 61153, 50133, 45926, 43310, 191],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Deficiencia de hierro', 'Deficiencia de vitamina A', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Deficiencia de hierro', 'Deficiencia de vitamina A', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [110162, 75285, 63864, 58706, 57685, 53308, 49965, 35213, 28530, 21226, 191] },
     		 {id: 94,
     		  name: "Mauricio",
     		  lifeExpectancy: 74.99,
     		  demographics: [135453, 179059, 197068, 175844, 179920, 176623, 134345, 64819, 26539],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Diabetes', 'Cánceres', 'Nefropatía', 'Enfermedades respiratorias', 'Demencia', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Diabetes', 'Cánceres', 'Nefropatía', 'Enfermedades respiratorias', 'Demencia', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [3310, 1729, 1394, 1070, 498, 454, 364, 307, 238, 165, 10],
     		  diseaseNames: ['Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [79944, 70327, 35256, 26345, 20285, 20158, 16221, 15583, 12012, 11526, 158],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Humo de segunda mano', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fumador pasivo', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [102301, 63996, 57090, 32659, 22601, 21407, 18203, 17779, 11031, 8333, 158] },
     		 {id: 95,
     		  name: "México",
@@ -5493,57 +5493,57 @@ var app = (function () {
     		  majorDeaths: [161783, 97282, 65033, 64067, 62517, 43160, 40509, 34316, 32865, 21838, 8134],
     		  diseaseNames: ['Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Cánceres', 'Otras ENT', 'Enfermedades digestivas', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos neonatales', 'Violencia interpersonal', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4498557, 3180705, 2495963, 1967719, 1871651, 1793491, 1775959, 1617529, 1585274, 1544903, 135796],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Colesterol alto', 'El consumo de drogas', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Colesterol alto', 'Consumo de drogas', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Emaciación infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [4873713, 3759331, 2371373, 1354813, 1278981, 923310, 644737, 513416, 413363, 360087, 135796] },
     		 {id: 96,
     		  name: "Moldavia",
     		  lifeExpectancy: 71.9,
     		  demographics: [429166, 418687, 608197, 760165, 548003, 534327, 475100, 177807, 91806],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Suicidio', 'Trastornos por consumo de alcohol.', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Demencia', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Suicidio', 'Trastornos por consumo de alcohol.', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [23194, 6307, 3863, 3094, 1340, 949, 916, 650, 485, 442, 267],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Enfermedades del HIGADO', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [426732, 173334, 133420, 101346, 92512, 83133, 65702, 59834, 58427, 56486, 4246],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en vegetales', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [297875, 188075, 179833, 147746, 135227, 77300, 69090, 40474, 39500, 29548, 4246] },
     		 {id: 97,
     		  name: "Mongolia",
     		  lifeExpectancy: 69.87,
     		  demographics: [727414, 480990, 518734, 551697, 414977, 305432, 147247, 58191, 20484],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'Suicidio', 'Trastornos por consumo de alcohol.', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Trastornos neonatales', 'Infecciones respiratorias inferiores', 'Accidentes', 'Suicidio', 'Trastornos por consumo de alcohol.', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [7770, 4811, 1835, 1374, 941, 660, 546, 525, 487, 367, 0],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Diarrea y enfermedades infecciosas comunes.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades del HIGADO', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [198831, 129353, 97033, 84895, 66416, 57022, 55155, 44909, 43044, 41857, 0],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [132567, 95931, 89189, 66733, 60963, 54502, 54205, 32968, 30890, 17372, 0] },
     		 {id: 98,
     		  name: "Montenegro",
     		  lifeExpectancy: 76.88,
     		  demographics: [74487, 78919, 84827, 88916, 82984, 81320, 75907, 38922, 21706],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades respiratorias', 'Suicidio', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades respiratorias', 'Suicidio', 'Infecciones respiratorias inferiores', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [3737, 1401, 354, 162, 156, 127, 86, 77, 68, 57, 9],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades digestivas', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [62760, 31982, 14414, 13327, 11507, 10931, 9243, 6119, 6077, 4768, 128],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Humo de segunda mano', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Fumador pasivo', 'Dieta baja en frutas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [44250, 38418, 31099, 25922, 13968, 11166, 8611, 5067, 3646, 2982, 128] },
     		 {id: 99,
     		  name: "Marruecos",
     		  lifeExpectancy: 76.68,
     		  demographics: [6750500, 6039210, 5923781, 5535929, 4352251, 3698794, 2589647, 1147171, 434483],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Lesiones viales', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Diabetes', 'Enfermedades respiratorias', 'Accidentes', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [115124, 24505, 9343, 8062, 7680, 7264, 5932, 5846, 5596, 4883, 202],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'Desórdenes neurológicos', 'Lesiones de transporte', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2424457, 822462, 762679, 753673, 718496, 694746, 650262, 533369, 427572, 422025, 3522],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'El consumo de drogas', 'Dieta baja en frutas', 'Baja actividad física', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Consumo de drogas', 'Dieta baja en frutas', 'Baja actividad física', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1611294, 1230615, 1207573, 567167, 556488, 542224, 288828, 236464, 232814, 201191, 3522] },
     		 {id: 100,
     		  name: "Mozambique",
     		  lifeExpectancy: 60.85,
     		  demographics: [9513591, 7385303, 5101440, 3473273, 2201317, 1354583, 822822, 408321, 105393],
-    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Tuberculosis', 'Malaria', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Tuberculosis', 'Malaria', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [62135, 29833, 19375, 19234, 18423, 15826, 13895, 10689, 7118, 5078, 1],
     		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Enfermedades cardiovasculares', 'Cánceres', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'Otras enfermedades transmisibles', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4502707, 2510552, 1803582, 1444655, 942494, 816402, 533977, 526835, 446614, 439306, 21],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fuente de agua insegura', 'Nivel alto de azúcar en la sangre', 'Saneamiento inseguro', 'De fumar', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fuente de agua insegura', 'Nivel alto de azúcar en la sangre', 'Sistema del sanidad inseguro', 'Fumar', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [645149, 639320, 587290, 562820, 476274, 431306, 322649, 292189, 289796, 232296, 21] },
     		 {id: 101,
     		  name: "Birmania",
@@ -5553,7 +5553,7 @@ var app = (function () {
     		  majorDeaths: [77463, 60066, 55535, 28411, 27217, 23171, 22582, 14445, 13540, 13244, 6],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1819145, 1696478, 1482854, 1458830, 1337542, 1201088, 1073858, 1048747, 837214, 815314, 114],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Obesidad', 'Emaciación infantil', 'Dieta baja en frutas', 'Humo de segunda mano', 'Dieta rica en sal', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Obesidad', 'Emaciación infantil', 'Dieta baja en frutas', 'Fumador pasivo', 'Dieta rica en sal', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1926019, 1681663, 1423169, 1219220, 753714, 522751, 500424, 376337, 349445, 347466, 114] },
     		 {id: 102,
     		  name: "Namibia",
@@ -5561,19 +5561,19 @@ var app = (function () {
     		  demographics: [647177, 516584, 469261, 345891, 230228, 146063, 83896, 40705, 14719],
     		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Trastornos neonatales', 'Enfermedades diarreicas', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [3960, 3003, 1554, 1148, 869, 830, 813, 652, 595, 546, 0],
-    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Lesiones de transporte', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Accidentes de tráfico', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [288137, 136433, 77834, 60792, 43694, 43575, 32037, 27889, 27786, 27353, 0],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Emaciación infantil', 'Hipertensión', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'De fumar', 'Saneamiento inseguro', 'Dieta baja en frutas', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Emaciación infantil', 'Hipertensión', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Fumar', 'Sistema del sanidad inseguro', 'Dieta baja en frutas', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [49467, 46679, 39352, 37616, 35866, 34031, 29709, 26189, 13623, 13050, 0] },
     		 {id: 103,
     		  name: "Nepal",
     		  lifeExpectancy: 70.78,
     		  demographics: [5479855, 6205791, 5664808, 3628380, 2958204, 2219564, 1443408, 791816, 216888],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Enfermedades respiratorias', 'Cánceres', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Lesiones viales', 'Enfermedades del HIGADO', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Enfermedades respiratorias', 'Cánceres', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Trastornos neonatales', 'Accidentes', 'Enfermedades del HIGADO', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [49248, 23583, 18315, 10796, 9756, 9297, 8577, 6787, 5671, 5248, 4],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Trastornos musculoesqueléticos', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Trastornos musculoesqueléticos', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1237825, 1131125, 930734, 657083, 546530, 492945, 492677, 450672, 440915, 371137, 74],
-    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Obesidad', 'Fuente de agua insegura', 'Emaciación infantil', 'Dieta baja en frutas', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Obesidad', 'Fuente de agua insegura', 'Emaciación infantil', 'Dieta baja en frutas', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [783254, 589863, 585357, 475856, 323761, 308529, 253407, 217534, 215390, 157424, 74] },
     		 {id: 104,
     		  name: "Países Bajos",
@@ -5583,7 +5583,7 @@ var app = (function () {
     		  majorDeaths: [51854, 40564, 14836, 10109, 6178, 5856, 5649, 2729, 2683, 2066, 1792],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [987417, 581670, 576427, 405596, 365519, 255064, 246098, 201647, 181251, 123640, 77616],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Humo de segunda mano', 'Dieta rica en sal'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Fumador pasivo', 'Dieta rica en sal'],
     		  riskDALYs: [694184, 425666, 349213, 329885, 146262, 137009, 77616, 66875, 48295, 45238, 45173] },
     		 {id: 105,
     		  name: "Nueva Zelanda",
@@ -5591,9 +5591,9 @@ var app = (function () {
     		  demographics: [618147, 620994, 673857, 604748, 598468, 627307, 511426, 346232, 181883],
     		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Diabetes', 'Suicidio', 'Enfermedad de Parkinson', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [10898, 9838, 2975, 2143, 1000, 773, 728, 556, 537, 377, 21],
-    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [196818, 157168, 133048, 98229, 96355, 81421, 57606, 52563, 48073, 35614, 289],
-    		  riskFactors: ['De fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'El consumo de drogas', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Consumo de drogas', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física', 'Contaminación del aire (exterior e interior)', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [106064, 93286, 82829, 71540, 40974, 18972, 17437, 17432, 15989, 13982, 289] },
     		 {id: 106,
     		  name: "Nicaragua",
@@ -5603,7 +5603,7 @@ var app = (function () {
     		  majorDeaths: [6033, 3289, 2292, 1579, 1231, 1173, 1127, 877, 849, 848, 35],
     		  diseaseNames: ['Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Diarrea y enfermedades infecciosas comunes.', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [137933, 118992, 110320, 89278, 87937, 85514, 76249, 75694, 75208, 59384, 630],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Colesterol alto', 'Dieta baja en frutas', 'El consumo de drogas', 'Emaciación infantil', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Colesterol alto', 'Dieta baja en frutas', 'Consumo de drogas', 'Emaciación infantil', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [124835, 104480, 103370, 50125, 42168, 32233, 25596, 24331, 20732, 19942, 630] },
     		 {id: 107,
     		  name: "Níger",
@@ -5613,7 +5613,7 @@ var app = (function () {
     		  majorDeaths: [30485, 21955, 19710, 16202, 13967, 8177, 7815, 5809, 4412, 3053, 63],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'Otras ENT', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'Enfermedades cardiovasculares', 'VIH / SIDA y tuberculosis', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3596300, 2479474, 1471369, 640298, 508046, 424815, 402079, 394453, 357992, 262404, 1392],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Contaminación del aire (exterior e interior)', 'Deficiencia de vitamina A', 'Retraso del crecimiento infantil', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [2391690, 1451900, 1142631, 955333, 727289, 600184, 312924, 235597, 219262, 186065, 1392] },
     		 {id: 108,
     		  name: "Nigeria",
@@ -5623,17 +5623,17 @@ var app = (function () {
     		  majorDeaths: [189930, 180355, 169103, 152240, 138359, 122519, 96555, 71076, 57219, 52948, 249],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Deficiencias nutricionales', 'Lesiones no intencionales', 'Cánceres', 'Enfermedades cardiovasculares', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [22428208, 16451503, 13621942, 8918085, 5304259, 5011258, 3191644, 3107214, 3006460, 2963064, 5630],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Retraso del crecimiento infantil', 'Deficiencia de vitamina A', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Retraso del crecimiento infantil', 'Deficiencia de vitamina A', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [17020469, 8920346, 7708156, 5675060, 4489373, 4065618, 2815935, 2442647, 1834799, 1307256, 5630] },
     		 {id: 109,
     		  name: "Corea del Norte",
     		  lifeExpectancy: 72.27,
     		  demographics: [3415644, 3619103, 3930083, 3583278, 3864207, 3498467, 2008869, 1321013, 425493],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Enfermedades respiratorias', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Nefropatía', 'Suicidio'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Enfermedades respiratorias', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Accidentes', 'Infecciones respiratorias inferiores', 'Enfermedades del HIGADO', 'Nefropatía', 'Suicidio'],
     		  majorDeaths: [90238, 44378, 41553, 8515, 7394, 5744, 5689, 4657, 3639, 3309],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Trastornos musculoesqueléticos', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones de transporte', 'Otras ENT'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Trastornos musculoesqueléticos', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'Accidentes de tráfico', 'Otras ENT'],
     		  diseaseDALYs: [1972988, 1136274, 1044331, 469098, 446368, 429775, 384677, 369114, 349473, 338617],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Dieta rica en sal', 'Colesterol alto', 'Humo de segunda mano', 'Obesidad', 'El consumo de drogas'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Dieta rica en sal', 'Colesterol alto', 'Fumador pasivo', 'Obesidad', 'Consumo de drogas'],
     		  riskDALYs: [1163781, 976860, 936794, 613016, 457399, 425374, 368085, 261550, 242889, 149500] },
     		 {id: 110,
     		  name: "Noruega",
@@ -5643,37 +5643,37 @@ var app = (function () {
     		  majorDeaths: [12886, 11611, 4465, 2639, 1840, 1388, 591, 590, 583, 465, 235],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [221284, 172270, 155719, 121986, 107914, 76659, 67981, 64332, 62429, 36676, 3177],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Dieta baja en vegetales', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Baja actividad física', 'Dieta baja en vegetales', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [141475, 111526, 100285, 89227, 52550, 24230, 22253, 17531, 16074, 15654, 3177] },
     		 {id: 111,
     		  name: "Omán",
     		  lifeExpectancy: 77.86,
     		  demographics: [819521, 514291, 1121755, 1363532, 647718, 301482, 134169, 51814, 20710],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Lesiones viales', 'Cánceres', 'Diabetes', 'Infecciones respiratorias inferiores', 'Demencia', 'Trastornos neonatales', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Accidentes', 'Cánceres', 'Diabetes', 'Infecciones respiratorias inferiores', 'Demencia', 'Trastornos neonatales', 'Nefropatía', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [4128, 1950, 1277, 538, 404, 403, 397, 253, 246, 176, 37],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Lesiones de transporte', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos neonatales', 'Otras ENT', 'Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Accidentes de tráfico', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos neonatales', 'Otras ENT', 'Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [117912, 110700, 88899, 79017, 78480, 54880, 53231, 50870, 41049, 33166, 887],
-    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'El consumo de drogas', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Consumo de drogas', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [87985, 77564, 73162, 48535, 46122, 34355, 33033, 11511, 10596, 10342, 887] },
     		 {id: 112,
     		  name: "Pakistán",
     		  lifeExpectancy: 67.27,
     		  demographics: [52774521, 44914765, 39377474, 29843795, 20586127, 14690100, 8500213, 4464790, 1413532],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades diarreicas', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'Enfermedades del HIGADO', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades diarreicas', 'Infecciones respiratorias inferiores', 'Accidentes', 'Enfermedades del HIGADO', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [381421, 185098, 170987, 72647, 69969, 59787, 59440, 53009, 45501, 44150, 1225],
-    		  diseaseNames: ['Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Cánceres', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones de transporte', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Cánceres', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Accidentes de tráfico', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [17719118, 9720916, 9486921, 5811824, 4382185, 3758170, 3457346, 3027349, 2997880, 2860291, 23742],
-    		  riskFactors: ['Hipertensión', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Fuente de agua insegura', 'Colesterol alto', 'Dieta baja en frutas', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Fuente de agua insegura', 'Colesterol alto', 'Dieta baja en frutas', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [5532401, 4903301, 4539357, 4506942, 3688735, 3414335, 3335793, 2999458, 2206292, 1817366, 23742] },
     		 {id: 113,
     		  name: "Palestina",
     		  lifeExpectancy: 74.05,
     		  demographics: [1349183, 1088552, 950260, 636206, 432598, 283953, 144571, 74627, 21472],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Diabetes', 'Demencia', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos neonatales', 'Diabetes', 'Demencia', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [5327, 2265, 1014, 763, 690, 624, 515, 411, 371, 355, 5],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Cánceres', 'Trastornos musculoesqueléticos', 'Diarrea y enfermedades infecciosas comunes.', 'Desórdenes neurológicos', 'Conflicto y terrorismo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [120854, 111822, 93873, 85527, 78395, 66839, 65093, 63404, 59321, 38914, 105],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'De fumar', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [86431, 77642, 68379, 65832, 35706, 33555, 28138, 23336, 13917, 13248, 105] },
     		 {id: 114,
     		  name: "Panamá",
@@ -5683,27 +5683,27 @@ var app = (function () {
     		  majorDeaths: [5246, 3519, 1291, 1068, 951, 897, 825, 767, 640, 526, 313],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Trastornos neonatales', 'Diarrea y enfermedades infecciosas comunes.', 'Violencia interpersonal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [96163, 84501, 76588, 58716, 53776, 52367, 51530, 51264, 51169, 36729, 4949],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [69997, 63877, 61938, 37342, 24272, 23091, 16591, 13138, 12850, 12570, 4949] },
     		 {id: 115,
     		  name: "Paraguay",
     		  lifeExpectancy: 74.25,
     		  demographics: [1381066, 1337773, 1316292, 1082701, 703289, 541135, 391066, 203938, 87379],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Nefropatía', 'Demencia', 'Enfermedades digestivas', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Homicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes', 'Nefropatía', 'Demencia', 'Enfermedades digestivas', 'Accidentes', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Homicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [9835, 5649, 2188, 1602, 1557, 1516, 1491, 1361, 1075, 845, 11],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'Otras ENT', 'Lesiones de transporte', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'Otras ENT', 'Accidentes de tráfico', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [200872, 144522, 142533, 117408, 108992, 98834, 89711, 88327, 81498, 61604, 189],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Deficiencia de hierro', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Deficiencia de hierro', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [158929, 137710, 133881, 107531, 57416, 57294, 34245, 27128, 26824, 22666, 189] },
     		 {id: 116,
     		  name: "Perú",
     		  lifeExpectancy: 76.74,
     		  demographics: [5489704, 5224879, 5423768, 5068397, 4191544, 3185093, 2171756, 1190014, 565307],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Nefropatía', 'Lesiones viales', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Enfermedades del HIGADO', 'Nefropatía', 'Accidentes', 'Diabetes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [28513, 27720, 16638, 10195, 9227, 7492, 5562, 5287, 4577, 4300, 3788],
     		  diseaseNames: ['Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos neonatales', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [677852, 608338, 554569, 481426, 479788, 470720, 444089, 407091, 402992, 401858, 61540],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Colesterol alto', 'Deficiencia de hierro', 'Emaciación infantil', 'El consumo de drogas', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Colesterol alto', 'Deficiencia de hierro', 'Emaciación infantil', 'Consumo de drogas', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [397073, 335162, 297615, 264551, 186595, 130609, 107063, 104592, 94360, 72302, 61540] },
     		 {id: 117,
     		  name: "Filipinas",
@@ -5713,7 +5713,7 @@ var app = (function () {
     		  majorDeaths: [217552, 79280, 68013, 34051, 33061, 29322, 26513, 26049, 24722, 15891, 886],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos musculoesqueléticos', 'Enfermedades respiratorias', 'Trastornos mentales y por abuso de sustancias.', 'VIH / SIDA y tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [5629957, 3099601, 2529191, 2433421, 2353436, 1866603, 1757721, 1660479, 1272495, 1191208, 16673],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Emaciación infantil', 'Dieta rica en sal', 'Humo de segunda mano', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Emaciación infantil', 'Dieta rica en sal', 'Fumador pasivo', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [3746813, 3404482, 2967393, 2483498, 2200537, 1467962, 1124433, 946863, 775342, 750053, 16673] },
     		 {id: 118,
     		  name: "Polonia",
@@ -5723,7 +5723,7 @@ var app = (function () {
     		  majorDeaths: [168709, 109266, 28753, 16843, 11826, 11096, 7788, 6778, 6655, 4457, 1024],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Enfermedades digestivas', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2771014, 2360949, 974998, 945960, 804552, 593513, 574896, 546687, 478036, 455361, 13890],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Baja actividad física', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [2063927, 1559349, 1413317, 1306415, 890803, 564674, 466544, 363580, 209552, 182665, 13890] },
     		 {id: 119,
     		  name: "Portugal",
@@ -5733,7 +5733,7 @@ var app = (function () {
     		  majorDeaths: [36943, 29600, 10795, 7160, 6598, 5111, 3769, 3109, 2133, 1359, 1342],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [556228, 483288, 348277, 258666, 226388, 202807, 150373, 118395, 117492, 113988, 16768],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta rica en sal', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta rica en sal', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [404257, 312988, 279203, 267234, 109389, 81137, 62114, 44482, 41270, 37113, 16768] },
     		 {id: 120,
     		  name: "Puerto Rico",
@@ -5743,17 +5743,17 @@ var app = (function () {
     		  majorDeaths: [8447, 6428, 3037, 2909, 2355, 1691, 1632, 1610, 1496, 953, 129],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Enfermedades respiratorias', 'Violencia interpersonal', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [138694, 137965, 124356, 74842, 70601, 63381, 47707, 44739, 43088, 40890, 1683],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [164852, 164445, 96268, 44280, 38035, 29022, 19794, 15811, 14987, 14416, 1683] },
     		 {id: 121,
     		  name: "Catar",
     		  lifeExpectancy: 80.23,
     		  demographics: [268598, 230385, 719809, 819308, 462935, 238779, 74010, 14279, 3968],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones viales', 'Diabetes', 'Enfermedades digestivas', 'Suicidio', 'Nefropatía', 'Enfermedades del HIGADO', 'Demencia', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Accidentes', 'Diabetes', 'Enfermedades digestivas', 'Suicidio', 'Nefropatía', 'Enfermedades del HIGADO', 'Demencia', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [918, 660, 574, 287, 159, 145, 115, 114, 95, 91, 28],
-    		  diseaseNames: ['Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones de transporte', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Enfermedades cardiovasculares', 'Lesiones no intencionales', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Accidentes de tráfico', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Enfermedades cardiovasculares', 'Lesiones no intencionales', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [51741, 51335, 34814, 33636, 31118, 30167, 25396, 22744, 21724, 15324, 800],
-    		  riskFactors: ['Obesidad', 'El consumo de drogas', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Colesterol alto', 'Dieta rica en sal', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Consumo de drogas', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Colesterol alto', 'Dieta rica en sal', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [44342, 35001, 33964, 18908, 16441, 14310, 10265, 3899, 3836, 3090, 800] },
     		 {id: 122,
     		  name: "Rumania",
@@ -5763,17 +5763,17 @@ var app = (function () {
     		  majorDeaths: [144849, 51229, 14456, 14232, 10114, 7448, 6207, 3043, 2364, 2260, 1210],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Enfermedades digestivas', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2293802, 1195901, 511173, 502200, 452352, 412973, 283885, 274588, 264969, 257818, 16197],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Baja actividad física', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1528585, 1142662, 972055, 625135, 616402, 354630, 337445, 314456, 148658, 139479, 16197] },
     		 {id: 123,
     		  name: "Rusia",
     		  lifeExpectancy: 72.58,
     		  demographics: [18561902, 14795855, 16599344, 24452747, 19983554, 19449736, 18094236, 8266872, 5668011],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Trastornos por consumo de alcohol.', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Demencia', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Trastornos por consumo de alcohol.', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [1000223, 291447, 94609, 84369, 50910, 43897, 38232, 35493, 28504, 24385, 3807],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Autolesiones', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [18699165, 7188475, 4457968, 3463448, 2949462, 2933286, 2337415, 2043512, 1947477, 1889160, 53680],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [10606447, 8613005, 7301942, 7040122, 5421036, 2729779, 2341390, 1971308, 1848572, 1705448, 53680] },
     		 {id: 124,
     		  name: "Ruanda",
@@ -5783,7 +5783,7 @@ var app = (function () {
     		  majorDeaths: [8125, 6441, 6308, 5923, 4856, 4564, 3896, 3052, 2963, 2668, 0],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Malaria y enfermedades tropicales desatendidas', 'Cánceres', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [879009, 571287, 382120, 331276, 226776, 204285, 197051, 185350, 180480, 167605, 0],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'Deficiencia de vitamina A', 'Obesidad', 'Retraso del crecimiento infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Deficiencia de vitamina A', 'Obesidad', 'Retraso del crecimiento infantil', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [331524, 249137, 204666, 158329, 133769, 120221, 100333, 87317, 65917, 63712, 0] },
     		 {id: 125,
     		  name: "Samoa",
@@ -5793,17 +5793,17 @@ var app = (function () {
     		  majorDeaths: [411, 118, 79, 64, 56, 53, 49, 46, 29, 23],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Diarrea y enfermedades infecciosas comunes.', 'Cánceres', 'Trastornos neonatales', 'Enfermedades respiratorias', 'Trastornos musculoesqueléticos', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos'],
     		  diseaseDALYs: [9472, 6698, 3935, 3305, 3090, 2883, 2803, 2705, 2396, 2140],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Humo de segunda mano', 'Dieta baja en vegetales', 'Deficiencia de hierro'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Fumador pasivo', 'Dieta baja en vegetales', 'Deficiencia de hierro'],
     		  riskDALYs: [7631, 6959, 5743, 5211, 3003, 2345, 1772, 1521, 1406, 758] },
     		 {id: 126,
     		  name: "Arabia Saudita",
     		  lifeExpectancy: 75.13,
     		  demographics: [5937284, 4817472, 5457856, 6886975, 6162478, 3055997, 1307059, 476138, 167270],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Lesiones viales', 'Cánceres', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Conflicto', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Accidentes', 'Cánceres', 'Nefropatía', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Conflicto', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [31569, 12039, 11843, 3818, 3505, 3371, 3109, 2665, 2589, 2461, 411],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Lesiones de transporte', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Accidentes de tráfico', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Otras ENT', 'Cánceres', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [888316, 650397, 637913, 629363, 484211, 464319, 451767, 390981, 379671, 314120, 9101],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'El consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'De fumar', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Consumo de drogas', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Fumar', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [743801, 575708, 539857, 320040, 306553, 274329, 222709, 158156, 111219, 101175, 9101] },
     		 {id: 127,
     		  name: "Senegal",
@@ -5813,7 +5813,7 @@ var app = (function () {
     		  majorDeaths: [14794, 8931, 7877, 7727, 7270, 5250, 3747, 2852, 2349, 2146, 37],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Otras ENT', 'Enfermedades cardiovasculares', 'VIH / SIDA y tuberculosis', 'Diabetes, sangre y enfermedades endocrinas.', 'Deficiencias nutricionales', 'Cánceres', 'Lesiones no intencionales', 'Malaria y enfermedades tropicales desatendidas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1228484, 760280, 387694, 358045, 289473, 277391, 264538, 248163, 210820, 206816, 785],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Deficiencia de hierro', 'Obesidad', 'Deficiencia de vitamina A', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Deficiencia de hierro', 'Obesidad', 'Deficiencia de vitamina A', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [437753, 350590, 319175, 261781, 239801, 227424, 178631, 155356, 155343, 87564, 785] },
     		 {id: 128,
     		  name: "Serbia",
@@ -5823,27 +5823,27 @@ var app = (function () {
     		  majorDeaths: [67115, 26965, 6512, 4234, 4160, 3445, 2386, 1601, 1512, 1304, 239],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1002625, 604601, 221677, 185794, 185145, 178140, 132892, 130607, 115168, 91317, 3298],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [641143, 638003, 527500, 440815, 249746, 211876, 138216, 126286, 80423, 76754, 3298] },
     		 {id: 129,
     		  name: "Seychelles",
     		  lifeExpectancy: 73.4,
     		  demographics: [15951, 13607, 13698, 14627, 14883, 12766, 7366, 3182, 1661],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Nefropatía', 'Demencia', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Diabetes', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Nefropatía', 'Demencia', 'Enfermedades del HIGADO', 'Enfermedades respiratorias', 'Diabetes', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [236, 162, 73, 48, 41, 33, 27, 27, 18, 14, 0],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Diarrea y enfermedades infecciosas comunes.', 'Otras ENT', 'Desórdenes neurológicos', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [5202, 4083, 2520, 1825, 1777, 1498, 1466, 1425, 1409, 1229, 0],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Humo de segunda mano', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fumador pasivo', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [4112, 3116, 2992, 2506, 1258, 1218, 1076, 653, 462, 422, 0] },
     		 {id: 130,
     		  name: "Singapur",
     		  lifeExpectancy: 83.62,
     		  demographics: [473440, 525276, 841606, 898862, 965359, 946886, 762636, 260127, 130150],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Suicidio', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Suicidio', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [6161, 5449, 2696, 1617, 614, 594, 554, 496, 254, 197, 23],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [131167, 124284, 117699, 96826, 61286, 58107, 49214, 45303, 37425, 28180, 371],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Obesidad', 'Dieta rica en sal', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'El consumo de drogas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Obesidad', 'Dieta rica en sal', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Consumo de drogas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [70498, 67953, 67867, 60133, 36052, 34968, 31284, 16570, 14955, 10389, 371] },
     		 {id: 131,
     		  name: "Eslovaquia",
@@ -5853,7 +5853,7 @@ var app = (function () {
     		  majorDeaths: [25216, 13227, 2992, 2748, 1680, 1527, 1107, 732, 713, 675, 28],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades digestivas', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [425950, 300811, 144022, 140687, 103170, 94371, 79871, 79683, 61368, 49558, 404],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [272632, 240554, 209249, 151462, 151283, 69635, 68488, 61685, 38061, 31734, 404] },
     		 {id: 132,
     		  name: "Eslovenia",
@@ -5863,37 +5863,37 @@ var app = (function () {
     		  majorDeaths: [7450, 5907, 1534, 1058, 630, 601, 541, 430, 300, 213, 106],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades digestivas', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [114870, 105868, 63618, 56464, 42850, 32756, 29060, 29039, 24407, 21852, 1388],
-    		  riskFactors: ['De fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'El consumo de drogas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Consumo de drogas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [82245, 64747, 60624, 48836, 28166, 19537, 17406, 9380, 9341, 8879, 1388] },
     		 {id: 133,
     		  name: "Somalia",
     		  lifeExpectancy: 57.4,
     		  demographics: [5094110, 3837600, 2580391, 1477525, 1036888, 713771, 450111, 201592, 50918],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Trastornos neonatales', 'Enfermedades diarreicas', 'Cánceres', 'Conflicto', 'Lesiones viales', 'Enfermedades digestivas', 'Deficiencias nutricionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Trastornos neonatales', 'Enfermedades diarreicas', 'Cánceres', 'Conflicto', 'Accidentes', 'Enfermedades digestivas', 'Deficiencias nutricionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [18048, 13033, 12697, 12265, 10548, 9299, 5445, 5154, 4786, 3435, 67],
-    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Otras ENT', 'Cánceres', 'Lesiones de transporte', 'Lesiones no intencionales', 'Otras enfermedades transmisibles', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Otras ENT', 'Cánceres', 'Accidentes de tráfico', 'Lesiones no intencionales', 'Otras enfermedades transmisibles', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1602542, 1125637, 532931, 506577, 500937, 389547, 329509, 315175, 283153, 241549, 1434],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Deficiencia de vitamina A', 'Saneamiento inseguro', 'Hipertensión', 'Retraso del crecimiento infantil', 'Nivel alto de azúcar en la sangre', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Deficiencia de vitamina A', 'Sistema del sanidad inseguro', 'Hipertensión', 'Retraso del crecimiento infantil', 'Nivel alto de azúcar en la sangre', 'Lactancia no exclusiva', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1406987, 647809, 644927, 524574, 496043, 313258, 304365, 296970, 210379, 188299, 1434] },
     		 {id: 134,
     		  name: "Sudáfrica",
     		  lifeExpectancy: 64.13,
     		  demographics: [11581615, 10240605, 10231760, 9942466, 6845747, 4794113, 3068429, 1430792, 422740],
-    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Diabetes', 'Tuberculosis', 'Enfermedades respiratorias', 'Homicidio', 'Lesiones viales', 'Enfermedades diarreicas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Diabetes', 'Tuberculosis', 'Enfermedades respiratorias', 'Homicidio', 'Accidentes', 'Enfermedades diarreicas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [135399, 76671, 48637, 26529, 22654, 19624, 18132, 15701, 15504, 14302, 524],
-    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos neonatales', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones de transporte', 'Violencia interpersonal', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos neonatales', 'Trastornos mentales y por abuso de sustancias.', 'Accidentes de tráfico', 'Violencia interpersonal', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [10033858, 2145400, 1721968, 1712504, 1275456, 1164989, 864880, 862779, 862716, 779758, 10024],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Fuente de agua insegura', 'Dieta baja en frutas', 'El consumo de drogas', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Emaciación infantil', 'Fuente de agua insegura', 'Dieta baja en frutas', 'Consumo de drogas', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1646278, 1454452, 1274406, 960155, 799354, 602865, 505677, 426733, 396322, 344011, 10024] },
     		 {id: 135,
     		  name: "Corea del Sur",
     		  lifeExpectancy: 83.03,
     		  demographics: [4240885, 4886624, 6797905, 7196849, 8330006, 8442921, 6135717, 3444643, 1749770],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades digestivas', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Diabetes', 'Enfermedades del HIGADO', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Demencia', 'Enfermedades digestivas', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Diabetes', 'Enfermedades del HIGADO', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [92548, 66787, 31554, 16084, 15228, 13973, 13444, 11719, 9447, 6643, 269],
     		  diseaseNames: ['Cánceres', 'Trastornos musculoesqueléticos', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Lesiones no intencionales', 'Autolesiones', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1936073, 1435379, 1193979, 898163, 883625, 861525, 659048, 527829, 491707, 453457, 3906],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Colesterol alto', 'Dieta baja en frutas', 'El consumo de drogas', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Colesterol alto', 'Dieta baja en frutas', 'Consumo de drogas', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1272299, 1121507, 575007, 528944, 422295, 305748, 271902, 206364, 158057, 115893, 3906] },
     		 {id: 136,
     		  name: "España",
@@ -5903,7 +5903,7 @@ var app = (function () {
     		  majorDeaths: [123577, 115657, 51759, 33490, 21593, 12941, 10605, 8292, 8132, 5808],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades respiratorias', 'Lesiones no intencionales', 'Otras ENT', 'Enfermedades digestivas'],
     		  diseaseDALYs: [2182632, 1682048, 1265974, 1243119, 950283, 660386, 588589, 549012, 475533, 448367],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'El consumo de drogas', 'Baja actividad física', 'Humo de segunda mano'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Consumo de drogas', 'Baja actividad física', 'Fumador pasivo'],
     		  riskDALYs: [1544708, 985420, 979221, 949682, 385742, 295600, 163174, 156687, 135357, 120071] },
     		 {id: 137,
     		  name: "Sri Lanka",
@@ -5913,17 +5913,17 @@ var app = (function () {
     		  majorDeaths: [41867, 16628, 12267, 11537, 5971, 5246, 4986, 4523, 4512, 4021, 10],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Desórdenes neurológicos', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [880238, 528668, 417142, 363658, 323956, 317010, 296913, 243702, 217443, 207042, 160],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Dieta baja en vegetales', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [776768, 569841, 392912, 342663, 285535, 251275, 189307, 182848, 122999, 85925, 160] },
     		 {id: 138,
     		  name: "Sudán",
     		  lifeExpectancy: 65.31,
     		  demographics: [11957900, 9925896, 7382380, 5059889, 3624817, 2465268, 1480214, 702966, 213907],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Enfermedades respiratorias', 'VIH / SIDA', 'Enfermedades digestivas', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Accidentes', 'Infecciones respiratorias inferiores', 'Enfermedades diarreicas', 'Enfermedades respiratorias', 'VIH / SIDA', 'Enfermedades digestivas', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [69012, 25224, 15171, 10692, 9402, 8236, 5902, 5296, 5148, 4396, 170],
-    		  diseaseNames: ['Trastornos neonatales', 'Otras ENT', 'Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Lesiones de transporte', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Trastornos neonatales', 'Otras ENT', 'Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Accidentes de tráfico', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2412123, 1787062, 1725565, 1342405, 726662, 718901, 647654, 608911, 559545, 487047, 3446],
-    		  riskFactors: ['Hipertensión', 'Emaciación infantil', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Saneamiento inseguro', 'Dieta baja en frutas', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Emaciación infantil', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Fuente de agua insegura', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Sistema del sanidad inseguro', 'Dieta baja en frutas', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1049467, 1019444, 733013, 703277, 649044, 624608, 517119, 512310, 304955, 281543, 3446] },
     		 {id: 139,
     		  name: "Surinam",
@@ -5933,17 +5933,17 @@ var app = (function () {
     		  majorDeaths: [1396, 666, 243, 226, 209, 182, 170, 147, 144, 124, 1],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Trastornos neonatales', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Diarrea y enfermedades infecciosas comunes.', 'Desórdenes neurológicos', 'Trastornos musculoesqueléticos', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [30501, 17214, 16906, 14702, 10533, 9951, 9783, 9038, 8792, 7928, 17],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'El consumo de drogas', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Consumo de drogas', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [22098, 21406, 17697, 13435, 7920, 6442, 4554, 4009, 2483, 2435, 17] },
     		 {id: 140,
     		  name: "Suazilandia",
     		  lifeExpectancy: 60.19,
     		  demographics: [288502, 273125, 212361, 158383, 99646, 50414, 36433, 22204, 7065],
-    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Diabetes', 'Enfermedades diarreicas', 'Tuberculosis', 'Lesiones viales', 'Trastornos neonatales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['VIH / SIDA', 'Enfermedades cardiovasculares', 'Cánceres', 'Infecciones respiratorias inferiores', 'Diabetes', 'Enfermedades diarreicas', 'Tuberculosis', 'Accidentes', 'Trastornos neonatales', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [2506, 1465, 844, 674, 584, 545, 521, 371, 360, 324, 2],
-    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Lesiones de transporte', 'Lesiones no intencionales', 'Otras ENT', 'Violencia interpersonal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Cánceres', 'Accidentes de tráfico', 'Lesiones no intencionales', 'Otras ENT', 'Violencia interpersonal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [277199, 120264, 39005, 38330, 36491, 26189, 23874, 18538, 16601, 16543, 39],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Fuente de agua insegura', 'Hipertensión', 'Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'De fumar', 'El consumo de drogas', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Fuente de agua insegura', 'Hipertensión', 'Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Fumar', 'Consumo de drogas', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [44001, 35825, 29513, 27107, 24991, 22925, 21591, 15768, 8741, 8128, 39] },
     		 {id: 141,
     		  name: "Suecia",
@@ -5953,7 +5953,7 @@ var app = (function () {
     		  majorDeaths: [34164, 24053, 9660, 4518, 4125, 3034, 2903, 1722, 1461, 1395, 1213],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [446549, 436415, 277268, 240709, 211399, 139367, 139276, 136083, 110778, 73435, 52985],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'El consumo de drogas', 'Baja actividad física'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Obesidad', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta rica en sal', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Consumo de drogas', 'Baja actividad física'],
     		  riskDALYs: [284244, 257193, 248332, 202521, 123616, 52985, 45905, 41439, 40058, 39436, 38229] },
     		 {id: 142,
     		  name: "Suiza",
@@ -5963,17 +5963,17 @@ var app = (function () {
     		  majorDeaths: [21280, 17882, 7597, 2816, 2641, 1697, 1647, 1558, 1133, 1123, 940],
     		  diseaseNames: ['Cánceres', 'Trastornos musculoesqueléticos', 'Enfermedades cardiovasculares', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [337817, 307335, 263828, 185793, 166939, 115288, 104830, 91308, 86577, 60915, 21509],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'El consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Consumo de drogas', 'Dieta rica en sal', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [242301, 180978, 138338, 135271, 84308, 47268, 32555, 30843, 25405, 23257, 21509] },
     		 {id: 143,
     		  name: "Siria",
     		  lifeExpectancy: 72.7,
     		  demographics: [3569815, 3299311, 3073670, 2832030, 1819810, 1234238, 769970, 334158, 137130],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Conflicto', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Terrorismo', 'Infecciones respiratorias inferiores', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Conflicto', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades digestivas', 'Terrorismo', 'Infecciones respiratorias inferiores', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [41380, 41378, 8795, 3157, 2994, 2257, 2139, 2026, 1946, 1748, 4],
     		  diseaseNames: ['Conflicto y terrorismo', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Cánceres', 'Otras ENT', 'Desórdenes neurológicos', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades respiratorias', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3450747, 966983, 302387, 301942, 252434, 252051, 237494, 235115, 169355, 164278, 77],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'El consumo de drogas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Consumo de drogas', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [568413, 461284, 369488, 308024, 302142, 225934, 164138, 128383, 106175, 89597, 77] },
     		 {id: 144,
     		  name: "Taiwán",
@@ -5981,9 +5981,9 @@ var app = (function () {
     		  demographics: [2037909, 2275933, 3158514, 3637865, 3739295, 3676703, 2995888, 1399598, 852176],
     		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Diabetes', 'Enfermedades respiratorias', 'Nefropatía', 'Enfermedades del HIGADO', 'Suicidio', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [53165, 40528, 13115, 12814, 10313, 9522, 9474, 6743, 6510, 4355, 7],
-    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Enfermedades respiratorias', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades digestivas', 'Otras ENT', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Enfermedades respiratorias', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades digestivas', 'Otras ENT', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1180273, 799276, 675740, 496956, 391306, 372657, 354883, 287510, 263068, 203754, 101],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'El consumo de drogas', 'Humo de segunda mano', 'Dieta rica en sal', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Consumo de drogas', 'Fumador pasivo', 'Dieta rica en sal', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [717421, 668199, 554479, 456764, 301189, 196544, 159397, 118790, 116679, 111020, 101] },
     		 {id: 145,
     		  name: "Tayikistán",
@@ -5993,7 +5993,7 @@ var app = (function () {
     		  majorDeaths: [18269, 4902, 4721, 3672, 2157, 1783, 1536, 1464, 1323, 1289, 46],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Enfermedades cardiovasculares', 'Trastornos neonatales', 'Otras ENT', 'Lesiones no intencionales', 'Cánceres', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [465754, 410475, 358569, 211958, 172689, 156895, 126736, 112026, 108010, 104828, 978],
-    		  riskFactors: ['Emaciación infantil', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Fuente de agua insegura', 'Dieta baja en frutas', 'Saneamiento inseguro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Fuente de agua insegura', 'Dieta baja en frutas', 'Sistema del sanidad inseguro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [324745, 259292, 240715, 228221, 143717, 126773, 104585, 103889, 93823, 93502, 978] },
     		 {id: 146,
     		  name: "Tanzania",
@@ -6003,17 +6003,17 @@ var app = (function () {
     		  majorDeaths: [44175, 34523, 33486, 28299, 27864, 20391, 15325, 15196, 12862, 7084, 21],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Otras ENT', 'Malaria y enfermedades tropicales desatendidas', 'Enfermedades cardiovasculares', 'Deficiencias nutricionales', 'Cánceres', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4552138, 3263525, 3045845, 2349773, 1408015, 1071877, 1055921, 930207, 781168, 744072, 470],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fuente de agua insegura', 'Nivel alto de azúcar en la sangre', 'Saneamiento inseguro', 'Deficiencia de hierro', 'De fumar', 'Obesidad', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Hipertensión', 'Fuente de agua insegura', 'Nivel alto de azúcar en la sangre', 'Sistema del sanidad inseguro', 'Deficiencia de hierro', 'Fumar', 'Obesidad', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1593860, 1303846, 708742, 677911, 596951, 509350, 490643, 425930, 416383, 366069, 470] },
     		 {id: 147,
     		  name: "Tailandia",
     		  lifeExpectancy: 77.15,
     		  demographics: [7548496, 8629471, 9617196, 9351071, 11070365, 10557509, 7301625, 3702813, 1847035],
-    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades respiratorias', 'VIH / SIDA', 'Lesiones viales', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Cánceres', 'Enfermedades cardiovasculares', 'Infecciones respiratorias inferiores', 'Demencia', 'Enfermedades digestivas', 'Nefropatía', 'Enfermedades respiratorias', 'VIH / SIDA', 'Accidentes', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [102596, 102583, 36188, 31550, 27266, 21922, 19813, 19372, 19183, 17239, 57],
-    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Lesiones de transporte', 'Trastornos mentales y por abuso de sustancias.', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades digestivas', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'Trastornos mentales y por abuso de sustancias.', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades digestivas', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2520200, 2359442, 1629403, 1474520, 1151289, 1131258, 1102666, 1030793, 842762, 795653, 867],
-    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'El consumo de drogas', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Hipertensión', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Consumo de drogas', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1544002, 1503953, 1495743, 1392361, 817709, 595479, 522351, 480904, 337081, 334390, 867] },
     		 {id: 148,
     		  name: "Togo",
@@ -6023,7 +6023,7 @@ var app = (function () {
     		  majorDeaths: [7581, 6904, 4066, 3875, 3742, 3619, 3202, 2349, 1728, 1294, 13],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'Malaria y enfermedades tropicales desatendidas', 'Trastornos neonatales', 'VIH / SIDA y tuberculosis', 'Enfermedades cardiovasculares', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Deficiencias nutricionales', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [537846, 508891, 393410, 341328, 204478, 196801, 129842, 113892, 110100, 95415, 290],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Obesidad', 'Deficiencia de hierro', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Obesidad', 'Deficiencia de hierro', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [220449, 185196, 160336, 135929, 134583, 94600, 76138, 68658, 58437, 51784, 290] },
     		 {id: 149,
     		  name: "Tonga",
@@ -6033,27 +6033,27 @@ var app = (function () {
     		  majorDeaths: [168, 130, 89, 42, 40, 38, 37, 30, 20, 15],
     		  diseaseNames: ['Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades cardiovasculares', 'Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'Enfermedades respiratorias', 'Trastornos musculoesqueléticos', 'Trastornos neonatales', 'Lesiones no intencionales', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.'],
     		  diseaseDALYs: [4546, 3934, 3332, 2361, 1709, 1669, 1572, 1366, 1351, 1273],
-    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Humo de segunda mano', 'Dieta rica en sal', 'Dieta baja en vegetales'],
+    		  riskFactors: ['Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Dieta baja en frutas', 'Fumador pasivo', 'Dieta rica en sal', 'Dieta baja en vegetales'],
     		  riskDALYs: [5164, 4209, 2848, 2083, 1566, 1338, 887, 702, 638, 590] },
     		 {id: 150,
     		  name: "Túnez",
     		  lifeExpectancy: 76.7,
     		  demographics: [2003420, 1617133, 1752255, 1915913, 1535771, 1342758, 920265, 405873, 201331],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Lesiones viales', 'Enfermedades respiratorias', 'Diabetes', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Accidentes', 'Enfermedades respiratorias', 'Diabetes', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Nefropatía', 'Enfermedades del HIGADO', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [34122, 9409, 3940, 3669, 2497, 1934, 1776, 1650, 1645, 1001, 48],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Lesiones de transporte', 'Otras ENT', 'Trastornos neonatales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos musculoesqueléticos', 'Cánceres', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'Otras ENT', 'Trastornos neonatales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [585199, 248559, 245020, 222652, 214692, 184184, 167150, 140000, 121829, 113084, 792],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en frutas', 'Humo de segunda mano', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en frutas', 'Fumador pasivo', 'Baja actividad física', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [340549, 294028, 293805, 263027, 156922, 137558, 97722, 75056, 53044, 46210, 792] },
     		 {id: 151,
     		  name: "Turquía",
     		  lifeExpectancy: 77.69,
     		  demographics: [13501499, 13585939, 13087611, 12748548, 11221844, 8664742, 5968559, 3216491, 1434374],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Demencia', 'Nefropatía', 'Diabetes', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Lesiones viales', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Demencia', 'Nefropatía', 'Diabetes', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Accidentes', 'Trastornos neonatales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [146584, 92760, 30377, 25063, 15153, 14803, 11029, 10147, 8604, 7759, 4397],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Trastornos neonatales', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2919631, 2354596, 1872089, 1592440, 1393202, 1299523, 1292062, 1093030, 967562, 663606, 71536],
-    		  riskFactors: ['De fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'El consumo de drogas', 'Humo de segunda mano', 'Baja actividad física', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Consumo de drogas', 'Fumador pasivo', 'Baja actividad física', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [2226441, 2042748, 1847649, 1636498, 1052115, 748929, 537754, 318850, 250390, 233411, 71536] },
     		 {id: 152,
     		  name: "Turkmenistán",
@@ -6063,37 +6063,37 @@ var app = (function () {
     		  majorDeaths: [17557, 3525, 2714, 2341, 1206, 1119, 1085, 699, 632, 515],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades digestivas', 'Cánceres', 'Otras ENT', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades del HIGADO', 'Lesiones no intencionales', 'Desórdenes neurológicos'],
     		  diseaseDALYs: [412359, 156211, 117894, 116563, 109893, 98719, 98581, 90861, 82484, 66974],
-    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Emaciación infantil', 'Humo de segunda mano'],
+    		  riskFactors: ['Hipertensión', 'Obesidad', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta rica en sal', 'Emaciación infantil', 'Fumador pasivo'],
     		  riskDALYs: [261803, 192851, 190537, 127973, 124986, 79461, 71543, 58734, 39112, 37650] },
     		 {id: 153,
     		  name: "Uganda",
     		  lifeExpectancy: 63.37,
     		  demographics: [14582039, 11067913, 7564888, 4881270, 2997016, 1765499, 930221, 391414, 89327],
-    		  majorCauses: ['Trastornos neonatales', 'VIH / SIDA', 'Enfermedades cardiovasculares', 'Malaria', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Trastornos neonatales', 'VIH / SIDA', 'Enfermedades cardiovasculares', 'Malaria', 'Cánceres', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Enfermedades diarreicas', 'Enfermedades digestivas', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [26523, 25920, 22888, 22237, 20659, 14831, 14181, 11833, 8742, 5826, 0],
     		  diseaseNames: ['Diarrea y enfermedades infecciosas comunes.', 'VIH / SIDA y tuberculosis', 'Trastornos neonatales', 'Malaria y enfermedades tropicales desatendidas', 'Otras ENT', 'Cánceres', 'Otras enfermedades transmisibles', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Trastornos mentales y por abuso de sustancias.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3490823, 3014071, 2525060, 1935911, 1064399, 733907, 669265, 596318, 591241, 543171, 0],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'De fumar', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Deficiencia de vitamina A', 'Deficiencia de hierro', 'Fumar', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [862388, 642771, 631450, 504195, 368985, 360544, 304798, 239348, 179745, 179650, 0] },
     		 {id: 154,
     		  name: "Ucrania",
     		  lifeExpectancy: 72.06,
     		  demographics: [4688013, 4279672, 5165651, 7259196, 6313137, 6006155, 5470675, 2961499, 1849645],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Trastornos por consumo de alcohol.', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Suicidio', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Trastornos por consumo de alcohol.', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [427321, 96034, 34913, 30537, 20083, 13679, 11366, 9215, 8270, 6681, 644],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Enfermedades del HIGADO', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Autolesiones', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [7982965, 2712757, 1323796, 1323359, 1163398, 1059750, 816301, 778737, 677804, 651836, 8904],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Baja actividad física', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Obesidad', 'Colesterol alto', 'Nivel alto de azúcar en la sangre', 'Dieta baja en frutas', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Baja actividad física', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [5022720, 3420787, 2728117, 2680474, 2115808, 1322553, 1176016, 772782, 738698, 510646, 8904] },
     		 {id: 155,
     		  name: "Emiratos Árabes Unidos",
     		  lifeExpectancy: 77.97,
     		  demographics: [1006422, 835037, 2150663, 3072012, 1655625, 777310, 209301, 52385, 11771],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Lesiones viales', 'Enfermedades respiratorias', 'Diabetes', 'Nefropatía', 'Trastornos por consumo de drogas.', 'Suicidio', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Accidentes', 'Enfermedades respiratorias', 'Diabetes', 'Nefropatía', 'Trastornos por consumo de drogas.', 'Suicidio', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [7347, 5107, 3649, 1554, 1145, 829, 629, 599, 589, 586, 253],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Lesiones de transporte', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Cánceres', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Accidentes de tráfico', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Cánceres', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Otras ENT', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [244834, 208816, 191799, 179512, 178787, 172241, 136126, 124005, 118059, 108280, 7365],
-    		  riskFactors: ['Obesidad', 'El consumo de drogas', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Colesterol alto', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Consumo de drogas', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Colesterol alto', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [250177, 220805, 177587, 159731, 151202, 116323, 92221, 46473, 33179, 30313, 7365] },
     		 {id: 156,
     		  name: "Reino Unido",
@@ -6103,7 +6103,7 @@ var app = (function () {
     		  majorDeaths: [179856, 176516, 63894, 47298, 37048, 36952, 29640, 9258, 7334, 6766, 5778],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Desórdenes neurológicos', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Otras ENT', 'Lesiones no intencionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [3323621, 2620719, 2099648, 1589106, 1296572, 1217869, 789427, 782490, 740272, 738202, 481718],
-    		  riskFactors: ['De fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020', 'Contaminación del aire (exterior e interior)', 'El consumo de drogas', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta baja en vegetales'],
+    		  riskFactors: ['Fumar', 'Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'COVID-19 hasta el 27 de mayo de 2020', 'Contaminación del aire (exterior e interior)', 'Consumo de drogas', 'Dieta baja en frutas', 'Baja actividad física', 'Dieta baja en vegetales'],
     		  riskDALYs: [2021182, 1448311, 1337544, 1293288, 752234, 481718, 480135, 424409, 362994, 219675, 219262] },
     		 {id: 157,
     		  name: "Estados Unidos",
@@ -6113,57 +6113,57 @@ var app = (function () {
     		  majorDeaths: [902270, 699394, 258587, 196983, 114419, 98916, 93792, 84944, 68558, 67629, 62493],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Enfermedades respiratorias', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [15273136, 14368167, 9550395, 7190242, 7176630, 6691294, 5887644, 3992949, 3787971, 3546678, 1363568],
-    		  riskFactors: ['Obesidad', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'El consumo de drogas', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta baja en vegetales'],
+    		  riskFactors: ['Obesidad', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Consumo de drogas', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020', 'Dieta baja en vegetales'],
     		  riskDALYs: [11440537, 10405127, 9566522, 7850854, 6465949, 4010823, 2432143, 1978011, 1966068, 1363568, 1249128] },
     		 {id: 158,
     		  name: "Uruguay",
     		  lifeExpectancy: 77.91,
     		  demographics: [473133, 483284, 512458, 458714, 451252, 390115, 321685, 216752, 154338],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Suicidio', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Demencia', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'Enfermedades digestivas', 'Diabetes', 'Nefropatía', 'Suicidio', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [9912, 9576, 2363, 2065, 1476, 1455, 796, 787, 676, 609, 22],
     		  diseaseNames: ['Cánceres', 'Enfermedades cardiovasculares', 'Trastornos musculoesqueléticos', 'Trastornos mentales y por abuso de sustancias.', 'Desórdenes neurológicos', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Enfermedades respiratorias', 'Otras ENT', 'Enfermedades digestivas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [191969, 155889, 81966, 64215, 59439, 57322, 54943, 48981, 48284, 34011, 292],
-    		  riskFactors: ['De fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Fumar', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Hipertensión', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta rica en sal', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [122819, 102193, 92697, 90942, 35618, 25552, 24250, 22019, 16300, 16013, 292] },
     		 {id: 159,
     		  name: "Uzbekistán",
     		  lifeExpectancy: 71.72,
     		  demographics: [6664494, 5370904, 6061979, 5409605, 3820670, 3028065, 1810321, 546389, 269288],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Infecciones respiratorias inferiores', 'Diabetes', 'Trastornos neonatales', 'Demencia', 'Enfermedades respiratorias', 'Lesiones viales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades digestivas', 'Enfermedades del HIGADO', 'Infecciones respiratorias inferiores', 'Diabetes', 'Trastornos neonatales', 'Demencia', 'Enfermedades respiratorias', 'Accidentes', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [115263, 19020, 12837, 10974, 9749, 6468, 5348, 4578, 4239, 3990, 14],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Cánceres', 'Trastornos neonatales', 'Diabetes, sangre y enfermedades endocrinas.', 'Enfermedades digestivas', 'Lesiones no intencionales', 'Desórdenes neurológicos', 'Otras ENT', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2443175, 886397, 597123, 595292, 558138, 526686, 503123, 443174, 434858, 410622, 275],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'De fumar', 'Dieta baja en frutas', 'Dieta rica en sal', 'Emaciación infantil', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Fumar', 'Dieta baja en frutas', 'Dieta rica en sal', 'Emaciación infantil', 'Deficiencia de hierro', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [1496057, 1280895, 1076363, 745685, 642961, 621056, 458090, 302480, 258512, 232779, 275] },
     		 {id: 160,
     		  name: "Vanuatu",
     		  lifeExpectancy: 70.47,
     		  demographics: [80126, 64634, 50207, 39556, 28333, 19760, 10910, 4727, 1629],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Diabetes', 'Trastornos neonatales', 'Nefropatía', 'Enfermedades del HIGADO', 'Lesiones viales'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Infecciones respiratorias inferiores', 'Diabetes', 'Trastornos neonatales', 'Nefropatía', 'Enfermedades del HIGADO', 'Accidentes'],
     		  majorDeaths: [797, 274, 146, 130, 120, 94, 87, 67, 59, 52],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Cánceres', 'Enfermedades respiratorias', 'Otras ENT', 'Lesiones no intencionales', 'Enfermedades digestivas', 'Trastornos musculoesqueléticos'],
     		  diseaseDALYs: [22223, 12105, 10112, 8331, 8231, 6302, 6104, 5833, 4745, 3980],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'De fumar', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Emaciación infantil', 'Dieta rica en sal'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Colesterol alto', 'Fumar', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Emaciación infantil', 'Dieta rica en sal'],
     		  riskDALYs: [14567, 13135, 10947, 8110, 7425, 7106, 4631, 3783, 3261, 2428] },
     		 {id: 161,
     		  name: "Venezuela",
     		  lifeExpectancy: 72.06,
     		  demographics: [5161179, 5131622, 4293108, 4112119, 3551367, 2964615, 1955306, 946456, 400056],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Homicidio', 'Diabetes', 'Nefropatía', 'Lesiones viales', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Homicidio', 'Diabetes', 'Nefropatía', 'Accidentes', 'Demencia', 'Enfermedades digestivas', 'Enfermedades respiratorias', 'Infecciones respiratorias inferiores', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [52708, 30238, 14760, 8670, 8403, 6988, 6898, 6881, 5694, 5184, 11],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Violencia interpersonal', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Desórdenes neurológicos', 'Lesiones de transporte', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Violencia interpersonal', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Trastornos neonatales', 'Trastornos mentales y por abuso de sustancias.', 'Otras ENT', 'Desórdenes neurológicos', 'Accidentes de tráfico', 'Trastornos musculoesqueléticos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1039079, 868219, 779521, 639505, 499148, 436324, 413955, 410885, 409658, 399136, 186],
-    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'El consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Obesidad', 'Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Colesterol alto', 'Contaminación del aire (exterior e interior)', 'Dieta baja en frutas', 'Dieta baja en vegetales', 'Dieta rica en sal', 'Consumo de drogas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [762035, 749717, 686646, 426608, 301614, 252091, 161369, 145538, 118144, 113563, 186] },
     		 {id: 162,
     		  name: "Vietnam",
     		  lifeExpectancy: 75.4,
     		  demographics: [15416497, 13451055, 15886425, 15977005, 13383787, 10911362, 6922468, 2640054, 1873454],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Demencia', 'Diabetes', 'Enfermedades del HIGADO', 'Lesiones viales', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Cánceres', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Demencia', 'Diabetes', 'Enfermedades del HIGADO', 'Accidentes', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [201137, 120617, 35946, 29614, 28274, 23439, 22607, 21431, 18137, 17594, 0],
-    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Otras ENT', 'Lesiones no intencionales', 'Lesiones de transporte', 'Trastornos mentales y por abuso de sustancias.', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Desórdenes neurológicos', 'Otras ENT', 'Lesiones no intencionales', 'Accidentes de tráfico', 'Trastornos mentales y por abuso de sustancias.', 'Diarrea y enfermedades infecciosas comunes.', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [4127692, 3149728, 1682582, 1573487, 1329423, 1253509, 1236854, 1231032, 1208151, 1133110, 0],
-    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'De fumar', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Dieta baja en frutas', 'Colesterol alto', 'Dieta rica en sal', 'El consumo de drogas', 'Humo de segunda mano', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Nivel alto de azúcar en la sangre', 'Fumar', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Dieta baja en frutas', 'Colesterol alto', 'Dieta rica en sal', 'Consumo de drogas', 'Fumador pasivo', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [2694716, 2423017, 2329745, 1363548, 953163, 929387, 794256, 787186, 650700, 441172, 0] },
     		 {id: 163,
     		  name: "Mundo",
@@ -6173,17 +6173,17 @@ var app = (function () {
     		  majorDeaths: [17790949, 9556245, 3914196, 2558606, 2514619, 2377685, 1783770, 1569556, 1369849, 1322868, 350212],
     		  diseaseNames: ['Enfermedades cardiovasculares', 'Cánceres', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Trastornos musculoesqueléticos', 'Diabetes, sangre y enfermedades endocrinas.', 'Otras ENT', 'Trastornos mentales y por abuso de sustancias.', 'Enfermedades respiratorias', 'Desórdenes neurológicos', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [362381389, 230815088, 229961383, 191193185, 136350616, 133747830, 123452995, 121240264, 111041442, 109462440, 5601995],
-    		  riskFactors: ['Hipertensión', 'De fumar', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Emaciación infantil', 'Colesterol alto', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fuente de agua insegura', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Hipertensión', 'Fumar', 'Nivel alto de azúcar en la sangre', 'Contaminación del aire (exterior e interior)', 'Obesidad', 'Emaciación infantil', 'Colesterol alto', 'Dieta rica en sal', 'Dieta baja en frutas', 'Fuente de agua insegura', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [215645558, 182157003, 167407681, 148834208, 144091083, 95632517, 93844026, 69981368, 64856023, 64282494, 5601995] },
     		 {id: 164,
     		  name: "Yemen",
     		  lifeExpectancy: 66.12,
     		  demographics: [7957248, 6628518, 5663615, 3953524, 2239232, 1382738, 848627, 387468, 100952],
-    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Conflicto', 'Cánceres', 'Lesiones viales', 'Enfermedades diarreicas', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  majorCauses: ['Enfermedades cardiovasculares', 'Trastornos neonatales', 'Conflicto', 'Cánceres', 'Accidentes', 'Enfermedades diarreicas', 'Infecciones respiratorias inferiores', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Demencia', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [53367, 18040, 16811, 11942, 9556, 8125, 6366, 4968, 3490, 2672, 49],
-    		  diseaseNames: ['Trastornos neonatales', 'Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Conflicto y terrorismo', 'Otras ENT', 'Deficiencias nutricionales', 'Lesiones de transporte', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['Trastornos neonatales', 'Enfermedades cardiovasculares', 'Diarrea y enfermedades infecciosas comunes.', 'Conflicto y terrorismo', 'Otras ENT', 'Deficiencias nutricionales', 'Accidentes de tráfico', 'Trastornos mentales y por abuso de sustancias.', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [1718808, 1355173, 1178751, 1006373, 896708, 855459, 598635, 485971, 459085, 415361, 1077],
-    		  riskFactors: ['Emaciación infantil', 'Hipertensión', 'Deficiencia de hierro', 'Fuente de agua insegura', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'De fumar', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Hipertensión', 'Deficiencia de hierro', 'Fuente de agua insegura', 'Obesidad', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Colesterol alto', 'Fumar', 'Deficiencia de vitamina A', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [831197, 701666, 686920, 546393, 459939, 459135, 435825, 422401, 370118, 365007, 1077] },
     		 {id: 165,
     		  name: "Zambia",
@@ -6193,7 +6193,7 @@ var app = (function () {
     		  majorDeaths: [21807, 12157, 9688, 8979, 8826, 8307, 7748, 5040, 4673, 3257, 7],
     		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Otras ENT', 'Malaria y enfermedades tropicales desatendidas', 'Deficiencias nutricionales', 'Enfermedades cardiovasculares', 'Cánceres', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2030052, 1707416, 900812, 502967, 391788, 334898, 319041, 302693, 253262, 234132, 164],
-    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Saneamiento inseguro', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Hipertensión', 'Retraso del crecimiento infantil', 'De fumar', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Fuente de agua insegura', 'Contaminación del aire (exterior e interior)', 'Sistema del sanidad inseguro', 'Nivel alto de azúcar en la sangre', 'Deficiencia de vitamina A', 'Hipertensión', 'Retraso del crecimiento infantil', 'Fumar', 'Obesidad', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [631163, 411032, 344582, 309455, 221962, 182199, 176329, 130440, 126593, 118268, 164] },
     		 {id: 166,
     		  name: "Zimbabue",
@@ -6201,14 +6201,14 @@ var app = (function () {
     		  demographics: [4312155, 3456516, 2462905, 1862792, 1205778, 674792, 410758, 196977, 62799],
     		  majorCauses: ['Enfermedades cardiovasculares', 'VIH / SIDA', 'Infecciones respiratorias inferiores', 'Tuberculosis', 'Cánceres', 'Trastornos neonatales', 'Enfermedades diarreicas', 'Enfermedades respiratorias', 'Enfermedades digestivas', 'Deficiencias nutricionales', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  majorDeaths: [16977, 16065, 12370, 11958, 11440, 8412, 4603, 3412, 3387, 3158, 4],
-    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Cánceres', 'Deficiencias nutricionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Lesiones de transporte', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  diseaseNames: ['VIH / SIDA y tuberculosis', 'Diarrea y enfermedades infecciosas comunes.', 'Trastornos neonatales', 'Enfermedades cardiovasculares', 'Cánceres', 'Deficiencias nutricionales', 'Diabetes, sangre y enfermedades endocrinas.', 'Lesiones no intencionales', 'Otras ENT', 'Accidentes de tráfico', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  diseaseDALYs: [2112674, 1418231, 804919, 470598, 358516, 324526, 300375, 249593, 240049, 180995, 84],
-    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'De fumar', 'Fuente de agua insegura', 'Obesidad', 'Saneamiento inseguro', 'Deficiencia de vitamina A', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
+    		  riskFactors: ['Emaciación infantil', 'Contaminación del aire (exterior e interior)', 'Nivel alto de azúcar en la sangre', 'Hipertensión', 'Fumar', 'Fuente de agua insegura', 'Obesidad', 'Sistema del sanidad inseguro', 'Deficiencia de vitamina A', 'Dieta baja en frutas', 'COVID-19 hasta el 27 de mayo de 2020'],
     		  riskDALYs: [543888, 428451, 339950, 279958, 268280, 263176, 204466, 181818, 115425, 102441, 84] },
     		],
       });
 
-    // version = 2020-06-14 11:17:38;
+    // version = 2020-06-15 09:43:43;
 
     const portugueseDictStore = readable({ 
     	app: {
@@ -6248,10 +6248,10 @@ var app = (function () {
     		 lowIncomeRiskByCountry: "Risco para pessoas com baixa renda por país",
     		 mapCaption: "Você pode passar o mouse sobre os itens da legenda para selecionar. Você pode ampliar e reduzir o mapa. E passe o mouse sobre o mapa para obter informações sobre o país selecionado.",
     		 projectedPovery: "Projeção por país, devido ao impacto do coronavírus na economia mundial, no número de pessoas que vivem em extrema pobreza, no qual possuem uma renda abaixo da linha de pobreza internacional de US $ 1,90 por dia.",
-    		 sources: "Fontes:",
+    		 sources: "Fontes: ",
     		 projectedPoveryByRegion: "Projeção do aumento de pobreza por região devido ao impacto do coronavírus na economia mundial.",
     		 projectionsCaption: "Projeção do total de mortes por COVID-19. Clique na legenda para selecionar ou desselecionar um país.",
-    		 source: "Fonte:",
+    		 source: "Fonte: ",
     		 reset: "Redefinir",
     		 infectedTitle: "Número esperado de infectados por idade",
     		 deathsTitle: "Número esperado de óbitos por idade",
@@ -6276,7 +6276,7 @@ var app = (function () {
     		 yrsOfLifeLost: "Anos Esperados de Vida Perdidos",
     		 yrsOfLifeLostCosts: "Potenciais gastos",
     		 scenariosDescription: "Descrição do cenário",
-    		 povertyTitle: "Milhões que potencialmente entrarão para a extrema pobreza devido ao COVID-19 por",
+    		 povertyTitle: "Milhões que entrarão para a extrema pobreza devido ao COVID-19 por ",
     		 country: "País",
     		 region: "Região",
     		 people: "Pessoas",
@@ -13032,7 +13032,7 @@ var app = (function () {
     }
 
     // (703:3) {#if 0 === currentTab}
-    function create_if_block_19(ctx) {
+    function create_if_block_18(ctx) {
     	let div2;
     	let div1;
     	let div0;
@@ -13309,7 +13309,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_19.name,
+    		id: create_if_block_18.name,
     		type: "if",
     		source: "(703:3) {#if 0 === currentTab}",
     		ctx
@@ -13319,7 +13319,7 @@ var app = (function () {
     }
 
     // (753:3) {#if 1 === currentTab}
-    function create_if_block_15(ctx) {
+    function create_if_block_14(ctx) {
     	let div0;
     	let updating_activeTabValue;
     	let t0;
@@ -13391,9 +13391,9 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	let if_block0 = 0 == /*currentCompare*/ ctx[12] && create_if_block_18(ctx);
-    	let if_block1 = 1 == /*currentCompare*/ ctx[12] && create_if_block_17(ctx);
-    	let if_block2 = 2 == /*currentCompare*/ ctx[12] && create_if_block_16(ctx);
+    	let if_block0 = 0 == /*currentCompare*/ ctx[12] && create_if_block_17(ctx);
+    	let if_block1 = 1 == /*currentCompare*/ ctx[12] && create_if_block_16(ctx);
+    	let if_block2 = 2 == /*currentCompare*/ ctx[12] && create_if_block_15(ctx);
 
     	const block = {
     		c: function create() {
@@ -13491,7 +13491,7 @@ var app = (function () {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_18(ctx);
+    					if_block0 = create_if_block_17(ctx);
     					if_block0.c();
     					if_block0.m(div5, t6);
     				}
@@ -13504,7 +13504,7 @@ var app = (function () {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block_17(ctx);
+    					if_block1 = create_if_block_16(ctx);
     					if_block1.c();
     					if_block1.m(div5, t7);
     				}
@@ -13517,7 +13517,7 @@ var app = (function () {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
-    					if_block2 = create_if_block_16(ctx);
+    					if_block2 = create_if_block_15(ctx);
     					if_block2.c();
     					if_block2.m(div5, null);
     				}
@@ -13562,7 +13562,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_15.name,
+    		id: create_if_block_14.name,
     		type: "if",
     		source: "(753:3) {#if 1 === currentTab}",
     		ctx
@@ -13572,7 +13572,7 @@ var app = (function () {
     }
 
     // (776:6) {#if 0 == currentCompare}
-    function create_if_block_18(ctx) {
+    function create_if_block_17(ctx) {
     	let div3;
     	let div0;
     	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
@@ -13647,7 +13647,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_18.name,
+    		id: create_if_block_17.name,
     		type: "if",
     		source: "(776:6) {#if 0 == currentCompare}",
     		ctx
@@ -13657,7 +13657,7 @@ var app = (function () {
     }
 
     // (791:6) {#if 1 == currentCompare}
-    function create_if_block_17(ctx) {
+    function create_if_block_16(ctx) {
     	let div3;
     	let div0;
     	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
@@ -13740,7 +13740,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_17.name,
+    		id: create_if_block_16.name,
     		type: "if",
     		source: "(791:6) {#if 1 == currentCompare}",
     		ctx
@@ -13750,7 +13750,7 @@ var app = (function () {
     }
 
     // (807:6) {#if 2 == currentCompare}
-    function create_if_block_16(ctx) {
+    function create_if_block_15(ctx) {
     	let div3;
     	let div0;
     	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
@@ -13833,7 +13833,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_16.name,
+    		id: create_if_block_15.name,
     		type: "if",
     		source: "(807:6) {#if 2 == currentCompare}",
     		ctx
@@ -13843,7 +13843,7 @@ var app = (function () {
     }
 
     // (827:3) {#if 2 === currentTab}
-    function create_if_block_12(ctx) {
+    function create_if_block_11(ctx) {
     	let div5;
     	let updating_activeTabValue;
     	let t0;
@@ -13880,8 +13880,8 @@ var app = (function () {
 
     	const subtabs = new Subtabs({ props: subtabs_props, $$inline: true });
     	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding_1));
-    	let if_block0 = 0 == /*selectedRisk*/ ctx[33] && create_if_block_14(ctx);
-    	let if_block1 = 1 == /*selectedRisk*/ ctx[33] && create_if_block_13(ctx);
+    	let if_block0 = 0 == /*selectedRisk*/ ctx[33] && create_if_block_13(ctx);
+    	let if_block1 = 1 == /*selectedRisk*/ ctx[33] && create_if_block_12(ctx);
 
     	const block = {
     		c: function create() {
@@ -13964,7 +13964,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_14(ctx);
+    					if_block0 = create_if_block_13(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(div3, t1);
@@ -13987,7 +13987,7 @@ var app = (function () {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_13(ctx);
+    					if_block1 = create_if_block_12(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(div3, t2);
@@ -14039,7 +14039,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_12.name,
+    		id: create_if_block_11.name,
     		type: "if",
     		source: "(827:3) {#if 2 === currentTab}",
     		ctx
@@ -14049,7 +14049,7 @@ var app = (function () {
     }
 
     // (832:7) {#if 0 == selectedRisk}
-    function create_if_block_14(ctx) {
+    function create_if_block_13(ctx) {
     	let div0;
     	let t0_value = /*translations*/ ctx[45].app.proportionOver60ByCountry + "";
     	let t0;
@@ -14112,7 +14112,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_14.name,
+    		id: create_if_block_13.name,
     		type: "if",
     		source: "(832:7) {#if 0 == selectedRisk}",
     		ctx
@@ -14122,7 +14122,7 @@ var app = (function () {
     }
 
     // (842:7) {#if 1 == selectedRisk}
-    function create_if_block_13(ctx) {
+    function create_if_block_12(ctx) {
     	let div0;
     	let t0_value = /*translations*/ ctx[45].app.lowIncomeRiskByCountry + "";
     	let t0;
@@ -14185,7 +14185,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_13.name,
+    		id: create_if_block_12.name,
     		type: "if",
     		source: "(842:7) {#if 1 == selectedRisk}",
     		ctx
@@ -14195,7 +14195,7 @@ var app = (function () {
     }
 
     // (868:3) {#if 3 === currentTab}
-    function create_if_block_9(ctx) {
+    function create_if_block_8(ctx) {
     	let updating_activeTabValue;
     	let t0;
     	let t1;
@@ -14214,8 +14214,8 @@ var app = (function () {
 
     	const subtabs = new Subtabs({ props: subtabs_props, $$inline: true });
     	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding_2));
-    	let if_block0 = 0 == /*currentPoverty*/ ctx[35] && create_if_block_11(ctx);
-    	let if_block1 = 1 == /*currentPoverty*/ ctx[35] && create_if_block_10(ctx);
+    	let if_block0 = 0 == /*currentPoverty*/ ctx[35] && create_if_block_10(ctx);
+    	let if_block1 = 1 == /*currentPoverty*/ ctx[35] && create_if_block_9(ctx);
 
     	const block = {
     		c: function create() {
@@ -14255,7 +14255,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_11(ctx);
+    					if_block0 = create_if_block_10(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(t1.parentNode, t1);
@@ -14278,7 +14278,7 @@ var app = (function () {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_10(ctx);
+    					if_block1 = create_if_block_9(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
@@ -14318,7 +14318,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_9.name,
+    		id: create_if_block_8.name,
     		type: "if",
     		source: "(868:3) {#if 3 === currentTab}",
     		ctx
@@ -14328,7 +14328,7 @@ var app = (function () {
     }
 
     // (870:4) {#if 0 == currentPoverty}
-    function create_if_block_11(ctx) {
+    function create_if_block_10(ctx) {
     	let div1;
     	let div0;
     	let t0;
@@ -14375,7 +14375,7 @@ var app = (function () {
     			props: {
     				text: /*translations*/ ctx[45].app.southAsia,
     				color: "#377eb8",
-    				factorWidth: 8
+    				factorWidth: 10
     			},
     			$$inline: true
     		});
@@ -14384,7 +14384,7 @@ var app = (function () {
     			props: {
     				text: /*translations*/ ctx[45].app.subSahAfrica,
     				color: "#e41a1c",
-    				factorWidth: 8
+    				factorWidth: 10
     			},
     			$$inline: true
     		});
@@ -14393,7 +14393,7 @@ var app = (function () {
     			props: {
     				text: /*translations*/ ctx[45].app.eastAsiaPacific,
     				color: "#4daf4a",
-    				factorWidth: 8
+    				factorWidth: 11
     			},
     			$$inline: true
     		});
@@ -14436,7 +14436,7 @@ var app = (function () {
     			set_style(div1, "text-align", "center");
     			set_style(div1, "margin-top", "25px");
     			add_location(div1, file$a, 870, 5, 29591);
-    			attr_dev(svg, "width", svg_width_value = 90);
+    			attr_dev(svg, "width", svg_width_value = 30);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
     			add_location(svg, file$a, 881, 7, 30020);
@@ -14445,17 +14445,17 @@ var app = (function () {
     			attr_dev(div3, "class", "three columns");
     			add_location(div3, file$a, 886, 6, 30140);
     			attr_dev(div4, "class", "parameter-text svelte-1havf7j");
-    			add_location(div4, file$a, 893, 8, 30516);
+    			add_location(div4, file$a, 893, 8, 30519);
     			attr_dev(a0, "href", "https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en");
-    			add_location(a0, file$a, 898, 9, 30686);
+    			add_location(a0, file$a, 898, 9, 30689);
     			attr_dev(a1, "href", "https://data.worldbank.org/indicator/SI.POV.DDA");
-    			add_location(a1, file$a, 899, 9, 30804);
+    			add_location(a1, file$a, 899, 9, 30807);
     			attr_dev(div5, "class", "parameter-text svelte-1havf7j");
-    			add_location(div5, file$a, 896, 8, 30612);
+    			add_location(div5, file$a, 896, 8, 30615);
     			attr_dev(div6, "class", "caption svelte-1havf7j");
-    			add_location(div6, file$a, 892, 7, 30486);
+    			add_location(div6, file$a, 892, 7, 30489);
     			attr_dev(div7, "class", "eight columns");
-    			add_location(div7, file$a, 891, 6, 30451);
+    			add_location(div7, file$a, 891, 6, 30454);
     			attr_dev(div8, "class", "row svelte-1havf7j");
     			add_location(div8, file$a, 879, 5, 29963);
     		},
@@ -14538,7 +14538,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_11.name,
+    		id: create_if_block_10.name,
     		type: "if",
     		source: "(870:4) {#if 0 == currentPoverty}",
     		ctx
@@ -14548,7 +14548,7 @@ var app = (function () {
     }
 
     // (907:4) {#if 1 == currentPoverty}
-    function create_if_block_10(ctx) {
+    function create_if_block_9(ctx) {
     	let div1;
     	let div0;
     	let t0;
@@ -14613,31 +14613,31 @@ var app = (function () {
     			t9 = space();
     			t10 = text(t10_value);
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 908, 6, 31101);
+    			add_location(div0, file$a, 908, 6, 31104);
     			attr_dev(div1, "class", "twelve columns");
     			set_style(div1, "text-align", "center");
     			set_style(div1, "margin-top", "25px");
-    			add_location(div1, file$a, 907, 5, 31021);
+    			add_location(div1, file$a, 907, 5, 31024);
     			attr_dev(svg, "width", svg_width_value = 90);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
-    			add_location(svg, file$a, 918, 7, 31444);
+    			add_location(svg, file$a, 918, 7, 31447);
     			attr_dev(div2, "class", "four columns");
-    			add_location(div2, file$a, 917, 6, 31410);
+    			add_location(div2, file$a, 917, 6, 31413);
     			attr_dev(div3, "class", "parameter-text svelte-1havf7j");
-    			add_location(div3, file$a, 925, 8, 31622);
+    			add_location(div3, file$a, 925, 8, 31625);
     			attr_dev(a0, "href", "https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en");
-    			add_location(a0, file$a, 930, 9, 31792);
+    			add_location(a0, file$a, 930, 9, 31795);
     			attr_dev(a1, "href", "https://data.worldbank.org/indicator/SI.POV.DDA");
-    			add_location(a1, file$a, 931, 9, 31910);
+    			add_location(a1, file$a, 931, 9, 31913);
     			attr_dev(div4, "class", "parameter-text svelte-1havf7j");
-    			add_location(div4, file$a, 928, 8, 31718);
+    			add_location(div4, file$a, 928, 8, 31721);
     			attr_dev(div5, "class", "caption svelte-1havf7j");
-    			add_location(div5, file$a, 924, 7, 31592);
+    			add_location(div5, file$a, 924, 7, 31595);
     			attr_dev(div6, "class", "eight columns");
-    			add_location(div6, file$a, 923, 6, 31557);
+    			add_location(div6, file$a, 923, 6, 31560);
     			attr_dev(div7, "class", "row svelte-1havf7j");
-    			add_location(div7, file$a, 916, 5, 31386);
+    			add_location(div7, file$a, 916, 5, 31389);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -14693,7 +14693,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_10.name,
+    		id: create_if_block_9.name,
     		type: "if",
     		source: "(907:4) {#if 1 == currentPoverty}",
     		ctx
@@ -14703,7 +14703,7 @@ var app = (function () {
     }
 
     // (941:3) {#if 4 === currentTab}
-    function create_if_block_8(ctx) {
+    function create_if_block_7(ctx) {
     	let div9;
     	let div1;
     	let div0;
@@ -14787,31 +14787,31 @@ var app = (function () {
     			a = element("a");
     			a.textContent = "IHME";
     			attr_dev(div0, "class", "child svelte-1havf7j");
-    			add_location(div0, file$a, 943, 6, 32273);
+    			add_location(div0, file$a, 943, 6, 32276);
     			attr_dev(div1, "class", "twelve columns");
-    			add_location(div1, file$a, 942, 5, 32238);
+    			add_location(div1, file$a, 942, 5, 32241);
     			attr_dev(svg, "width", svg_width_value = 90);
     			attr_dev(svg, "height", svg_height_value = 90);
     			set_style(svg, "background-color", "white");
-    			add_location(svg, file$a, 954, 7, 32591);
+    			add_location(svg, file$a, 954, 7, 32594);
     			attr_dev(div2, "class", "one columns");
-    			add_location(div2, file$a, 953, 6, 32558);
+    			add_location(div2, file$a, 953, 6, 32561);
     			attr_dev(div3, "class", "three columns");
-    			add_location(div3, file$a, 959, 6, 32711);
+    			add_location(div3, file$a, 959, 6, 32714);
     			attr_dev(div4, "class", "parameter-text svelte-1havf7j");
-    			add_location(div4, file$a, 967, 8, 33024);
+    			add_location(div4, file$a, 967, 8, 33027);
     			attr_dev(a, "href", "http://www.healthdata.org/");
-    			add_location(a, file$a, 972, 9, 33196);
+    			add_location(a, file$a, 972, 9, 33199);
     			attr_dev(div5, "class", "parameter-text svelte-1havf7j");
-    			add_location(div5, file$a, 970, 8, 33123);
+    			add_location(div5, file$a, 970, 8, 33126);
     			attr_dev(div6, "class", "caption svelte-1havf7j");
-    			add_location(div6, file$a, 966, 7, 32994);
+    			add_location(div6, file$a, 966, 7, 32997);
     			attr_dev(div7, "class", "eight columns");
-    			add_location(div7, file$a, 965, 6, 32959);
+    			add_location(div7, file$a, 965, 6, 32962);
     			attr_dev(div8, "class", "row svelte-1havf7j");
-    			add_location(div8, file$a, 952, 5, 32534);
+    			add_location(div8, file$a, 952, 5, 32537);
     			attr_dev(div9, "class", "row svelte-1havf7j");
-    			add_location(div9, file$a, 941, 4, 32141);
+    			add_location(div9, file$a, 941, 4, 32144);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div9, anchor);
@@ -14888,7 +14888,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_8.name,
+    		id: create_if_block_7.name,
     		type: "if",
     		source: "(941:3) {#if 4 === currentTab}",
     		ctx
@@ -14898,7 +14898,7 @@ var app = (function () {
     }
 
     // (981:3) {#if 5 == currentTab}
-    function create_if_block_6(ctx) {
+    function create_if_block_5(ctx) {
     	let div4;
     	let div3;
     	let div1;
@@ -15165,102 +15165,102 @@ var app = (function () {
     			div2 = element("div");
     			span12 = element("span");
     			attr_dev(div0, "class", "wtitle svelte-1havf7j");
-    			add_location(div0, file$a, 985, 7, 33520);
+    			add_location(div0, file$a, 985, 7, 33523);
     			attr_dev(th0, "class", "svelte-1havf7j");
-    			add_location(th0, file$a, 991, 10, 33665);
+    			add_location(th0, file$a, 991, 10, 33668);
     			attr_dev(th1, "class", "svelte-1havf7j");
-    			add_location(th1, file$a, 992, 10, 33712);
+    			add_location(th1, file$a, 992, 10, 33715);
     			attr_dev(th2, "class", "svelte-1havf7j");
-    			add_location(th2, file$a, 993, 10, 33764);
+    			add_location(th2, file$a, 993, 10, 33767);
     			attr_dev(th3, "class", "svelte-1havf7j");
-    			add_location(th3, file$a, 994, 10, 33810);
+    			add_location(th3, file$a, 994, 10, 33813);
     			attr_dev(th4, "class", "svelte-1havf7j");
-    			add_location(th4, file$a, 995, 10, 33862);
+    			add_location(th4, file$a, 995, 10, 33865);
     			attr_dev(th5, "class", "svelte-1havf7j");
-    			add_location(th5, file$a, 996, 10, 33920);
+    			add_location(th5, file$a, 996, 10, 33923);
     			attr_dev(th6, "class", "svelte-1havf7j");
-    			add_location(th6, file$a, 997, 10, 33978);
+    			add_location(th6, file$a, 997, 10, 33981);
     			attr_dev(th7, "class", "svelte-1havf7j");
-    			add_location(th7, file$a, 998, 10, 34028);
+    			add_location(th7, file$a, 998, 10, 34031);
     			attr_dev(th8, "class", "svelte-1havf7j");
-    			add_location(th8, file$a, 999, 10, 34081);
+    			add_location(th8, file$a, 999, 10, 34084);
     			attr_dev(th9, "class", "svelte-1havf7j");
-    			add_location(th9, file$a, 1000, 10, 34128);
+    			add_location(th9, file$a, 1000, 10, 34131);
     			attr_dev(th10, "class", "svelte-1havf7j");
-    			add_location(th10, file$a, 1001, 10, 34173);
+    			add_location(th10, file$a, 1001, 10, 34176);
     			attr_dev(th11, "class", "svelte-1havf7j");
-    			add_location(th11, file$a, 1002, 10, 34225);
+    			add_location(th11, file$a, 1002, 10, 34228);
     			attr_dev(th12, "class", "svelte-1havf7j");
-    			add_location(th12, file$a, 1003, 10, 34282);
-    			add_location(tr0, file$a, 990, 9, 33650);
-    			add_location(thead, file$a, 989, 8, 33633);
+    			add_location(th12, file$a, 1003, 10, 34285);
+    			add_location(tr0, file$a, 990, 9, 33653);
+    			add_location(thead, file$a, 989, 8, 33636);
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 1032, 13, 35299);
+    			add_location(span0, file$a, 1032, 13, 35302);
     			attr_dev(td0, "class", "svelte-1havf7j");
-    			add_location(td0, file$a, 1032, 9, 35295);
+    			add_location(td0, file$a, 1032, 9, 35298);
     			attr_dev(span1, "class", "parameter svelte-1havf7j");
-    			add_location(span1, file$a, 1033, 13, 35367);
+    			add_location(span1, file$a, 1033, 13, 35370);
     			attr_dev(td1, "class", "svelte-1havf7j");
-    			add_location(td1, file$a, 1033, 9, 35363);
+    			add_location(td1, file$a, 1033, 9, 35366);
     			attr_dev(span2, "class", "parameter svelte-1havf7j");
-    			add_location(span2, file$a, 1034, 13, 35470);
+    			add_location(span2, file$a, 1034, 13, 35473);
     			attr_dev(td2, "class", "svelte-1havf7j");
-    			add_location(td2, file$a, 1034, 9, 35466);
+    			add_location(td2, file$a, 1034, 9, 35469);
     			attr_dev(span3, "class", "parameter svelte-1havf7j");
-    			add_location(span3, file$a, 1035, 13, 35534);
+    			add_location(span3, file$a, 1035, 13, 35537);
     			attr_dev(td3, "class", "svelte-1havf7j");
-    			add_location(td3, file$a, 1035, 9, 35530);
+    			add_location(td3, file$a, 1035, 9, 35533);
     			attr_dev(span4, "class", "parameter svelte-1havf7j");
-    			add_location(span4, file$a, 1036, 13, 35591);
+    			add_location(span4, file$a, 1036, 13, 35594);
     			attr_dev(td4, "class", "svelte-1havf7j");
-    			add_location(td4, file$a, 1036, 9, 35587);
+    			add_location(td4, file$a, 1036, 9, 35590);
     			attr_dev(span5, "class", "parameter svelte-1havf7j");
-    			add_location(span5, file$a, 1037, 13, 35655);
+    			add_location(span5, file$a, 1037, 13, 35658);
     			attr_dev(td5, "class", "svelte-1havf7j");
-    			add_location(td5, file$a, 1037, 9, 35651);
+    			add_location(td5, file$a, 1037, 9, 35654);
     			attr_dev(span6, "class", "parameter svelte-1havf7j");
-    			add_location(span6, file$a, 1038, 13, 35720);
+    			add_location(span6, file$a, 1038, 13, 35723);
     			attr_dev(td6, "class", "svelte-1havf7j");
-    			add_location(td6, file$a, 1038, 9, 35716);
+    			add_location(td6, file$a, 1038, 9, 35719);
     			attr_dev(span7, "class", "parameter svelte-1havf7j");
-    			add_location(span7, file$a, 1039, 13, 35787);
+    			add_location(span7, file$a, 1039, 13, 35790);
     			attr_dev(td7, "class", "svelte-1havf7j");
-    			add_location(td7, file$a, 1039, 9, 35783);
+    			add_location(td7, file$a, 1039, 9, 35786);
     			attr_dev(span8, "class", "parameter svelte-1havf7j");
-    			add_location(span8, file$a, 1040, 13, 35844);
+    			add_location(span8, file$a, 1040, 13, 35847);
     			attr_dev(td8, "class", "svelte-1havf7j");
-    			add_location(td8, file$a, 1040, 9, 35840);
+    			add_location(td8, file$a, 1040, 9, 35843);
     			attr_dev(span9, "class", "parameter svelte-1havf7j");
-    			add_location(span9, file$a, 1041, 13, 35926);
+    			add_location(span9, file$a, 1041, 13, 35929);
     			attr_dev(td9, "class", "svelte-1havf7j");
-    			add_location(td9, file$a, 1041, 9, 35922);
+    			add_location(td9, file$a, 1041, 9, 35925);
     			attr_dev(span10, "class", "parameter svelte-1havf7j");
-    			add_location(span10, file$a, 1042, 13, 36006);
+    			add_location(span10, file$a, 1042, 13, 36009);
     			attr_dev(td10, "class", "svelte-1havf7j");
-    			add_location(td10, file$a, 1042, 9, 36002);
+    			add_location(td10, file$a, 1042, 9, 36005);
     			attr_dev(span11, "class", "parameter svelte-1havf7j");
-    			add_location(span11, file$a, 1043, 13, 36089);
+    			add_location(span11, file$a, 1043, 13, 36092);
     			attr_dev(td11, "class", "svelte-1havf7j");
-    			add_location(td11, file$a, 1043, 9, 36085);
-    			add_location(input, file$a, 1044, 13, 36174);
+    			add_location(td11, file$a, 1043, 9, 36088);
+    			add_location(input, file$a, 1044, 13, 36177);
     			attr_dev(button, "class", "button svelte-1havf7j");
-    			add_location(button, file$a, 1045, 10, 36210);
+    			add_location(button, file$a, 1045, 10, 36213);
     			attr_dev(td12, "class", "svelte-1havf7j");
-    			add_location(td12, file$a, 1044, 9, 36170);
-    			add_location(tr1, file$a, 1031, 8, 35281);
-    			add_location(tbody, file$a, 1006, 8, 34371);
+    			add_location(td12, file$a, 1044, 9, 36173);
+    			add_location(tr1, file$a, 1031, 8, 35284);
+    			add_location(tbody, file$a, 1006, 8, 34374);
     			attr_dev(table, "class", "table1 svelte-1havf7j");
-    			add_location(table, file$a, 988, 7, 33602);
+    			add_location(table, file$a, 988, 7, 33605);
     			attr_dev(div1, "class", "child parameter-text svelte-1havf7j");
-    			add_location(div1, file$a, 983, 6, 33477);
+    			add_location(div1, file$a, 983, 6, 33480);
     			attr_dev(span12, "class", "parameter-text svelte-1havf7j");
-    			add_location(span12, file$a, 1052, 7, 36379);
+    			add_location(span12, file$a, 1052, 7, 36382);
     			attr_dev(div2, "class", "caption svelte-1havf7j");
-    			add_location(div2, file$a, 1051, 6, 36350);
+    			add_location(div2, file$a, 1051, 6, 36353);
     			attr_dev(div3, "class", "twelve columns");
-    			add_location(div3, file$a, 982, 5, 33442);
+    			add_location(div3, file$a, 982, 5, 33445);
     			attr_dev(div4, "class", "row svelte-1havf7j");
-    			add_location(div4, file$a, 981, 4, 33347);
+    			add_location(div4, file$a, 981, 4, 33350);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div4, anchor);
@@ -15472,7 +15472,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_6.name,
+    		id: create_if_block_5.name,
     		type: "if",
     		source: "(981:3) {#if 5 == currentTab}",
     		ctx
@@ -15482,7 +15482,7 @@ var app = (function () {
     }
 
     // (1023:11) {#if scenario.id > 2}
-    function create_if_block_7(ctx) {
+    function create_if_block_6(ctx) {
     	let button;
     	let dispose;
 
@@ -15491,7 +15491,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Delete";
     			attr_dev(button, "class", "button svelte-1havf7j");
-    			add_location(button, file$a, 1023, 12, 35092);
+    			add_location(button, file$a, 1023, 12, 35095);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -15519,7 +15519,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_7.name,
+    		id: create_if_block_6.name,
     		type: "if",
     		source: "(1023:11) {#if scenario.id > 2}",
     		ctx
@@ -15593,7 +15593,7 @@ var app = (function () {
     	let t32_value = /*scenario*/ ctx[140].comments + "";
     	let t32;
     	let t33;
-    	let if_block = /*scenario*/ ctx[140].id > 2 && create_if_block_7(ctx);
+    	let if_block = /*scenario*/ ctx[140].id > 2 && create_if_block_6(ctx);
 
     	const block = {
     		c: function create() {
@@ -15649,36 +15649,36 @@ var app = (function () {
     			t33 = space();
     			if (if_block) if_block.c();
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 1009, 14, 34451);
+    			add_location(span0, file$a, 1009, 14, 34454);
     			attr_dev(td0, "class", "svelte-1havf7j");
-    			add_location(td0, file$a, 1009, 10, 34447);
+    			add_location(td0, file$a, 1009, 10, 34450);
     			attr_dev(span1, "class", "parameter svelte-1havf7j");
-    			add_location(span1, file$a, 1010, 14, 34516);
+    			add_location(span1, file$a, 1010, 14, 34519);
     			attr_dev(td1, "class", "svelte-1havf7j");
-    			add_location(td1, file$a, 1010, 10, 34512);
+    			add_location(td1, file$a, 1010, 10, 34515);
     			attr_dev(td2, "class", "svelte-1havf7j");
-    			add_location(td2, file$a, 1011, 10, 34577);
+    			add_location(td2, file$a, 1011, 10, 34580);
     			attr_dev(td3, "class", "svelte-1havf7j");
-    			add_location(td3, file$a, 1012, 10, 34610);
+    			add_location(td3, file$a, 1012, 10, 34613);
     			attr_dev(td4, "class", "svelte-1havf7j");
-    			add_location(td4, file$a, 1013, 10, 34643);
+    			add_location(td4, file$a, 1013, 10, 34646);
     			attr_dev(td5, "class", "svelte-1havf7j");
-    			add_location(td5, file$a, 1014, 10, 34679);
+    			add_location(td5, file$a, 1014, 10, 34682);
     			attr_dev(td6, "class", "svelte-1havf7j");
-    			add_location(td6, file$a, 1015, 10, 34718);
+    			add_location(td6, file$a, 1015, 10, 34721);
     			attr_dev(td7, "class", "svelte-1havf7j");
-    			add_location(td7, file$a, 1016, 10, 34754);
+    			add_location(td7, file$a, 1016, 10, 34757);
     			attr_dev(td8, "class", "svelte-1havf7j");
-    			add_location(td8, file$a, 1017, 10, 34787);
+    			add_location(td8, file$a, 1017, 10, 34790);
     			attr_dev(td9, "class", "svelte-1havf7j");
-    			add_location(td9, file$a, 1018, 10, 34841);
+    			add_location(td9, file$a, 1018, 10, 34844);
     			attr_dev(td10, "class", "svelte-1havf7j");
-    			add_location(td10, file$a, 1019, 10, 34898);
+    			add_location(td10, file$a, 1019, 10, 34901);
     			attr_dev(td11, "class", "svelte-1havf7j");
-    			add_location(td11, file$a, 1020, 10, 34957);
+    			add_location(td11, file$a, 1020, 10, 34960);
     			attr_dev(td12, "class", "svelte-1havf7j");
-    			add_location(td12, file$a, 1021, 10, 35023);
-    			add_location(tr, file$a, 1008, 9, 34432);
+    			add_location(td12, file$a, 1021, 10, 35026);
+    			add_location(tr, file$a, 1008, 9, 34435);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -15752,7 +15752,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_7(ctx);
+    					if_block = create_if_block_6(ctx);
     					if_block.c();
     					if_block.m(td12, null);
     				}
@@ -15779,7 +15779,7 @@ var app = (function () {
     }
 
     // (1062:3) {#if 6 == currentTab}
-    function create_if_block_5(ctx) {
+    function create_if_block_4$1(ctx) {
     	let div4;
     	let div3;
     	let div1;
@@ -16135,104 +16135,104 @@ var app = (function () {
     			span33 = element("span");
     			span33.textContent = "Estimates should be interpreted with caution.\n\t\t\t\t\t\t\t\tThis tool is focused on simple presentation and pedagogical aspects\n\t\t\t\t\t\t\t\tand only offers crude estimates. It uses relatively simplistic\n\t\t\t\t\t\t\t\tmethodology outlined in the Notes below.";
     			attr_dev(div0, "class", "wtitle svelte-1havf7j");
-    			add_location(div0, file$a, 1066, 7, 36659);
-    			add_location(th0, file$a, 1072, 10, 36820);
-    			add_location(th1, file$a, 1073, 10, 36877);
-    			add_location(th2, file$a, 1075, 10, 36994);
+    			add_location(div0, file$a, 1066, 7, 36662);
+    			add_location(th0, file$a, 1072, 10, 36823);
+    			add_location(th1, file$a, 1073, 10, 36880);
+    			add_location(th2, file$a, 1075, 10, 36997);
     			attr_dev(tr0, "class", "parameter-title svelte-1havf7j");
-    			add_location(tr0, file$a, 1071, 9, 36781);
-    			add_location(thead, file$a, 1070, 8, 36764);
+    			add_location(tr0, file$a, 1071, 9, 36784);
+    			add_location(thead, file$a, 1070, 8, 36767);
     			attr_dev(span0, "class", "parameter svelte-1havf7j");
-    			add_location(span0, file$a, 1084, 11, 37287);
+    			add_location(span0, file$a, 1084, 11, 37290);
     			attr_dev(span1, "class", "parameter-text svelte-1havf7j");
-    			add_location(span1, file$a, 1081, 10, 37140);
+    			add_location(span1, file$a, 1081, 10, 37143);
     			attr_dev(span2, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span2, file$a, 1087, 10, 37403);
+    			add_location(span2, file$a, 1087, 10, 37406);
     			attr_dev(span3, "class", "parameter-text svelte-1havf7j");
-    			add_location(span3, file$a, 1090, 10, 37517);
-    			add_location(td0, file$a, 1080, 9, 37125);
+    			add_location(span3, file$a, 1090, 10, 37520);
+    			add_location(td0, file$a, 1080, 9, 37128);
     			attr_dev(span4, "class", "parameter-text svelte-1havf7j");
-    			add_location(span4, file$a, 1095, 10, 37625);
-    			add_location(td1, file$a, 1094, 9, 37610);
+    			add_location(span4, file$a, 1095, 10, 37628);
+    			add_location(td1, file$a, 1094, 9, 37613);
     			attr_dev(span5, "class", "parameter-text svelte-1havf7j");
-    			add_location(span5, file$a, 1104, 10, 38021);
-    			add_location(td2, file$a, 1103, 9, 38006);
-    			add_location(tr1, file$a, 1079, 8, 37111);
+    			add_location(span5, file$a, 1104, 10, 38024);
+    			add_location(td2, file$a, 1103, 9, 38009);
+    			add_location(tr1, file$a, 1079, 8, 37114);
     			attr_dev(span6, "class", "parameter svelte-1havf7j");
-    			add_location(span6, file$a, 1117, 11, 38479);
+    			add_location(span6, file$a, 1117, 11, 38482);
     			attr_dev(span7, "class", "parameter svelte-1havf7j");
-    			add_location(span7, file$a, 1118, 15, 38579);
+    			add_location(span7, file$a, 1118, 15, 38582);
     			attr_dev(span8, "class", "parameter-text svelte-1havf7j");
-    			add_location(span8, file$a, 1115, 10, 38394);
+    			add_location(span8, file$a, 1115, 10, 38397);
     			attr_dev(span9, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span9, file$a, 1121, 10, 38708);
+    			add_location(span9, file$a, 1121, 10, 38711);
     			attr_dev(span10, "class", "parameter-text svelte-1havf7j");
-    			add_location(span10, file$a, 1124, 10, 38825);
-    			add_location(td3, file$a, 1114, 9, 38379);
+    			add_location(span10, file$a, 1124, 10, 38828);
+    			add_location(td3, file$a, 1114, 9, 38382);
     			attr_dev(span11, "class", "parameter-text svelte-1havf7j");
-    			add_location(span11, file$a, 1129, 10, 38935);
+    			add_location(span11, file$a, 1129, 10, 38938);
     			attr_dev(span12, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span12, file$a, 1134, 10, 39154);
+    			add_location(span12, file$a, 1134, 10, 39157);
     			attr_dev(span13, "class", "parameter-text svelte-1havf7j");
-    			add_location(span13, file$a, 1137, 10, 39302);
+    			add_location(span13, file$a, 1137, 10, 39305);
     			attr_dev(span14, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span14, file$a, 1140, 10, 39388);
+    			add_location(span14, file$a, 1140, 10, 39391);
     			attr_dev(span15, "class", "parameter-text svelte-1havf7j");
-    			add_location(span15, file$a, 1143, 10, 39603);
-    			add_location(td4, file$a, 1128, 9, 38920);
+    			add_location(span15, file$a, 1143, 10, 39606);
+    			add_location(td4, file$a, 1128, 9, 38923);
     			attr_dev(span16, "class", "parameter-text svelte-1havf7j");
-    			add_location(span16, file$a, 1148, 10, 39728);
+    			add_location(span16, file$a, 1148, 10, 39731);
     			attr_dev(span17, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span17, file$a, 1153, 10, 39947);
+    			add_location(span17, file$a, 1153, 10, 39950);
     			attr_dev(span18, "class", "parameter-text svelte-1havf7j");
-    			add_location(span18, file$a, 1156, 10, 40095);
+    			add_location(span18, file$a, 1156, 10, 40098);
     			attr_dev(span19, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span19, file$a, 1160, 10, 40192);
+    			add_location(span19, file$a, 1160, 10, 40195);
     			attr_dev(span20, "class", "parameter-text svelte-1havf7j");
-    			add_location(span20, file$a, 1163, 10, 40350);
-    			add_location(td5, file$a, 1147, 9, 39713);
-    			add_location(tr2, file$a, 1113, 8, 38365);
+    			add_location(span20, file$a, 1163, 10, 40353);
+    			add_location(td5, file$a, 1147, 9, 39716);
+    			add_location(tr2, file$a, 1113, 8, 38368);
     			attr_dev(span21, "class", "parameter-text svelte-1havf7j");
-    			add_location(span21, file$a, 1170, 10, 40506);
+    			add_location(span21, file$a, 1170, 10, 40509);
     			attr_dev(span22, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span22, file$a, 1174, 10, 40674);
+    			add_location(span22, file$a, 1174, 10, 40677);
     			attr_dev(span23, "class", "parameter-text svelte-1havf7j");
-    			add_location(span23, file$a, 1177, 10, 40793);
+    			add_location(span23, file$a, 1177, 10, 40796);
     			attr_dev(span24, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span24, file$a, 1182, 10, 41002);
-    			add_location(td6, file$a, 1169, 9, 40491);
+    			add_location(span24, file$a, 1182, 10, 41005);
+    			add_location(td6, file$a, 1169, 9, 40494);
     			attr_dev(span25, "class", "parameter-text svelte-1havf7j");
-    			add_location(span25, file$a, 1187, 10, 41158);
+    			add_location(span25, file$a, 1187, 10, 41161);
     			attr_dev(span26, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span26, file$a, 1195, 10, 41616);
+    			add_location(span26, file$a, 1195, 10, 41619);
     			attr_dev(span27, "class", "parameter-text svelte-1havf7j");
-    			add_location(span27, file$a, 1198, 10, 41768);
+    			add_location(span27, file$a, 1198, 10, 41771);
     			attr_dev(span28, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span28, file$a, 1201, 10, 41872);
+    			add_location(span28, file$a, 1201, 10, 41875);
     			attr_dev(span29, "class", "parameter-text svelte-1havf7j");
-    			add_location(span29, file$a, 1204, 10, 42085);
-    			add_location(td7, file$a, 1186, 9, 41143);
+    			add_location(span29, file$a, 1204, 10, 42088);
+    			add_location(td7, file$a, 1186, 9, 41146);
     			attr_dev(span30, "class", "parameter-text svelte-1havf7j");
-    			add_location(span30, file$a, 1209, 10, 42224);
+    			add_location(span30, file$a, 1209, 10, 42227);
     			attr_dev(span31, "class", "emphasize-text svelte-1havf7j");
-    			add_location(span31, file$a, 1215, 10, 42504);
+    			add_location(span31, file$a, 1215, 10, 42507);
     			attr_dev(span32, "class", "parameter-text svelte-1havf7j");
-    			add_location(span32, file$a, 1218, 10, 42669);
-    			add_location(td8, file$a, 1208, 9, 42209);
-    			add_location(tr3, file$a, 1168, 8, 40477);
-    			add_location(tbody, file$a, 1078, 8, 37095);
+    			add_location(span32, file$a, 1218, 10, 42672);
+    			add_location(td8, file$a, 1208, 9, 42212);
+    			add_location(tr3, file$a, 1168, 8, 40480);
+    			add_location(tbody, file$a, 1078, 8, 37098);
     			attr_dev(table, "class", "table2 svelte-1havf7j");
-    			add_location(table, file$a, 1069, 7, 36733);
+    			add_location(table, file$a, 1069, 7, 36736);
     			attr_dev(div1, "class", "child svelte-1havf7j");
-    			add_location(div1, file$a, 1064, 6, 36631);
+    			add_location(div1, file$a, 1064, 6, 36634);
     			attr_dev(span33, "class", "parameter-text svelte-1havf7j");
-    			add_location(span33, file$a, 1229, 7, 43047);
+    			add_location(span33, file$a, 1229, 7, 43050);
     			attr_dev(div2, "class", "caption svelte-1havf7j");
-    			add_location(div2, file$a, 1228, 6, 43018);
+    			add_location(div2, file$a, 1228, 6, 43021);
     			attr_dev(div3, "class", "twelve columns");
-    			add_location(div3, file$a, 1063, 5, 36596);
+    			add_location(div3, file$a, 1063, 5, 36599);
     			attr_dev(div4, "class", "row svelte-1havf7j");
-    			add_location(div4, file$a, 1062, 4, 36501);
+    			add_location(div4, file$a, 1062, 4, 36504);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -16443,7 +16443,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5.name,
+    		id: create_if_block_4$1.name,
     		type: "if",
     		source: "(1062:3) {#if 6 == currentTab}",
     		ctx
@@ -16453,7 +16453,7 @@ var app = (function () {
     }
 
     // (1345:4) {#if userNeeds.exportData}
-    function create_if_block_4$1(ctx) {
+    function create_if_block_3$1(ctx) {
     	let button;
     	let t_value = /*translations*/ ctx[45].app.hideExport + "";
     	let t;
@@ -16464,7 +16464,7 @@ var app = (function () {
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "button-class svelte-1havf7j");
-    			add_location(button, file$a, 1345, 5, 46277);
+    			add_location(button, file$a, 1345, 5, 46280);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -16483,7 +16483,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4$1.name,
+    		id: create_if_block_3$1.name,
     		type: "if",
     		source: "(1345:4) {#if userNeeds.exportData}",
     		ctx
@@ -16493,7 +16493,7 @@ var app = (function () {
     }
 
     // (1351:4) {#if !userNeeds.exportData}
-    function create_if_block_3$1(ctx) {
+    function create_if_block_2$1(ctx) {
     	let button;
     	let t_value = /*translations*/ ctx[45].app.export + "";
     	let t;
@@ -16504,7 +16504,7 @@ var app = (function () {
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "button-class svelte-1havf7j");
-    			add_location(button, file$a, 1351, 5, 46440);
+    			add_location(button, file$a, 1351, 5, 46443);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -16523,7 +16523,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$1.name,
+    		id: create_if_block_2$1.name,
     		type: "if",
     		source: "(1351:4) {#if !userNeeds.exportData}",
     		ctx
@@ -16533,7 +16533,7 @@ var app = (function () {
     }
 
     // (1362:1) {#if userNeeds.exportData}
-    function create_if_block_2$1(ctx) {
+    function create_if_block_1$2(ctx) {
     	let div1;
     	let div0;
     	let textarea;
@@ -16548,11 +16548,11 @@ var app = (function () {
     			div0 = element("div");
     			textarea = element("textarea");
     			attr_dev(textarea, "class", "svelte-1havf7j");
-    			add_location(textarea, file$a, 1364, 4, 46805);
+    			add_location(textarea, file$a, 1364, 4, 46808);
     			attr_dev(div0, "class", "twelve columns");
-    			add_location(div0, file$a, 1363, 3, 46772);
+    			add_location(div0, file$a, 1363, 3, 46775);
     			attr_dev(div1, "class", "row svelte-1havf7j");
-    			add_location(div1, file$a, 1362, 2, 46696);
+    			add_location(div1, file$a, 1362, 2, 46699);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -16593,7 +16593,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$1.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
     		source: "(1362:1) {#if userNeeds.exportData}",
     		ctx
@@ -16602,8 +16602,8 @@ var app = (function () {
     	return block;
     }
 
-    // (1373:5) {#if language === 'en'}
-    function create_if_block_1$2(ctx) {
+    // (1407:5) {:else}
+    function create_else_block$1(ctx) {
     	let div0;
     	let t1;
     	let p0;
@@ -16656,24 +16656,24 @@ var app = (function () {
     			div1.textContent = "Acknowledgements";
     			t17 = space();
     			p3 = element("p");
-    			p3.textContent = "Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.\n\t\t\t\t\t\t\tYao Cheng for help with Chinese translations.\n\t\t\t\t\t\t\tLucas Sanders for help with Portuguese translations.";
+    			p3.textContent = "Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.\n\t\t\t\t\t\t\tYao Cheng for help with Chinese translations.\n\t\t\t\t\t\t\tLucas Sanders for help with Portuguese translations.\n\t\t\t\t\t\t\tMaria Dagounaki for help with Spanish translations.";
     			attr_dev(div0, "class", "wtitle svelte-1havf7j");
-    			add_location(div0, file$a, 1373, 6, 47006);
-    			add_location(p0, file$a, 1374, 6, 47044);
+    			add_location(div0, file$a, 1407, 6, 48512);
+    			add_location(p0, file$a, 1408, 6, 48550);
     			attr_dev(a0, "href", "https://twitter.com/MarkoLalovic/status/1266022718035632128");
-    			add_location(a0, file$a, 1386, 7, 47661);
+    			add_location(a0, file$a, 1420, 7, 49167);
     			attr_dev(a1, "href", "mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator");
     			attr_dev(a1, "target", "_top");
-    			add_location(a1, file$a, 1389, 7, 47776);
-    			add_location(p1, file$a, 1384, 6, 47618);
+    			add_location(a1, file$a, 1423, 7, 49282);
+    			add_location(p1, file$a, 1418, 6, 49124);
     			attr_dev(a2, "href", "notes.html");
-    			add_location(a2, file$a, 1393, 7, 47942);
+    			add_location(a2, file$a, 1427, 7, 49448);
     			attr_dev(a3, "href", "https://github.com/markolalovic/covid-calc");
-    			add_location(a3, file$a, 1396, 7, 48003);
-    			add_location(p2, file$a, 1391, 6, 47885);
+    			add_location(a3, file$a, 1430, 7, 49509);
+    			add_location(p2, file$a, 1425, 6, 49391);
     			attr_dev(div1, "class", "wtitle svelte-1havf7j");
-    			add_location(div1, file$a, 1399, 6, 48091);
-    			add_location(p3, file$a, 1400, 6, 48140);
+    			add_location(div1, file$a, 1433, 6, 49597);
+    			add_location(p3, file$a, 1434, 6, 49646);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -16715,16 +16715,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
-    		type: "if",
-    		source: "(1373:5) {#if language === 'en'}",
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(1407:5) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1407:5) {#if language === 'pt'}
+    // (1373:5) {#if language === 'pt'}
     function create_if_block$4(ctx) {
     	let div0;
     	let t1;
@@ -16778,24 +16778,24 @@ var app = (function () {
     			div1.textContent = "Agradecimentos";
     			t17 = space();
     			p3 = element("p");
-    			p3.textContent = "Tjaša Kovačević pela ajuda no cálculo de perdas de anos esperados e dos impactos econômicos na pobreza.\n\t\t\t\t\t\t\tYao Cheng pela ajuda com traduções para o chinês.\n\t\t\t\t\t\t\tLucas Sanders pela ajuda com traduções para o português.";
+    			p3.textContent = "Tjaša Kovačević pela ajuda no cálculo de perdas de anos esperados e dos impactos econômicos na pobreza.\n\t\t\t\t\t\t\tYao Cheng pela ajuda com traduções para o chinês.\n\t\t\t\t\t\t\tLucas Sanders pela ajuda com traduções para o português.\n\t\t\t\t\t\t\tMaria Dagounaki pela ajuda com traduções para o espanhol.";
     			attr_dev(div0, "class", "wtitle svelte-1havf7j");
-    			add_location(div0, file$a, 1407, 6, 48431);
-    			add_location(p0, file$a, 1408, 6, 48469);
+    			add_location(div0, file$a, 1373, 6, 47009);
+    			add_location(p0, file$a, 1374, 6, 47047);
     			attr_dev(a0, "href", "https://twitter.com/MarkoLalovic/status/1266022718035632128");
-    			add_location(a0, file$a, 1420, 7, 49128);
+    			add_location(a0, file$a, 1386, 7, 47706);
     			attr_dev(a1, "href", "mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator");
     			attr_dev(a1, "target", "_top");
-    			add_location(a1, file$a, 1423, 7, 49249);
-    			add_location(p1, file$a, 1418, 6, 49088);
+    			add_location(a1, file$a, 1389, 7, 47827);
+    			add_location(p1, file$a, 1384, 6, 47666);
     			attr_dev(a2, "href", "notes.html");
-    			add_location(a2, file$a, 1427, 7, 49408);
+    			add_location(a2, file$a, 1393, 7, 47986);
     			attr_dev(a3, "href", "https://github.com/markolalovic/covid-calc");
-    			add_location(a3, file$a, 1430, 7, 49467);
-    			add_location(p2, file$a, 1425, 6, 49358);
+    			add_location(a3, file$a, 1396, 7, 48045);
+    			add_location(p2, file$a, 1391, 6, 47936);
     			attr_dev(div1, "class", "wtitle svelte-1havf7j");
-    			add_location(div1, file$a, 1433, 6, 49556);
-    			add_location(p3, file$a, 1434, 6, 49603);
+    			add_location(div1, file$a, 1399, 6, 48134);
+    			add_location(p3, file$a, 1400, 6, 48181);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -16839,7 +16839,7 @@ var app = (function () {
     		block,
     		id: create_if_block$4.name,
     		type: "if",
-    		source: "(1407:5) {#if language === 'pt'}",
+    		source: "(1373:5) {#if language === 'pt'}",
     		ctx
     	});
 
@@ -17049,7 +17049,6 @@ var app = (function () {
     	let div37;
     	let div36;
     	let div35;
-    	let t94;
     	let current;
     	let dispose;
 
@@ -17085,13 +17084,13 @@ var app = (function () {
 
     	const tabs = new Tabs({ props: tabs_props, $$inline: true });
     	binding_callbacks.push(() => bind(tabs, "activeTabValue", tabs_activeTabValue_binding));
-    	let if_block0 = 0 === /*currentTab*/ ctx[0] && create_if_block_19(ctx);
-    	let if_block1 = 1 === /*currentTab*/ ctx[0] && create_if_block_15(ctx);
-    	let if_block2 = 2 === /*currentTab*/ ctx[0] && create_if_block_12(ctx);
-    	let if_block3 = 3 === /*currentTab*/ ctx[0] && create_if_block_9(ctx);
-    	let if_block4 = 4 === /*currentTab*/ ctx[0] && create_if_block_8(ctx);
-    	let if_block5 = 5 == /*currentTab*/ ctx[0] && create_if_block_6(ctx);
-    	let if_block6 = 6 == /*currentTab*/ ctx[0] && create_if_block_5(ctx);
+    	let if_block0 = 0 === /*currentTab*/ ctx[0] && create_if_block_18(ctx);
+    	let if_block1 = 1 === /*currentTab*/ ctx[0] && create_if_block_14(ctx);
+    	let if_block2 = 2 === /*currentTab*/ ctx[0] && create_if_block_11(ctx);
+    	let if_block3 = 3 === /*currentTab*/ ctx[0] && create_if_block_8(ctx);
+    	let if_block4 = 4 === /*currentTab*/ ctx[0] && create_if_block_7(ctx);
+    	let if_block5 = 5 == /*currentTab*/ ctx[0] && create_if_block_5(ctx);
+    	let if_block6 = 6 == /*currentTab*/ ctx[0] && create_if_block_4$1(ctx);
 
     	function autocomplete1_selectedItem_binding(value) {
     		/*autocomplete1_selectedItem_binding*/ ctx[135].call(null, value);
@@ -17112,11 +17111,17 @@ var app = (function () {
     		});
 
     	binding_callbacks.push(() => bind(autocomplete1, "selectedItem", autocomplete1_selectedItem_binding));
-    	let if_block7 = /*userNeeds*/ ctx[1].exportData && create_if_block_4$1(ctx);
-    	let if_block8 = !/*userNeeds*/ ctx[1].exportData && create_if_block_3$1(ctx);
-    	let if_block9 = /*userNeeds*/ ctx[1].exportData && create_if_block_2$1(ctx);
-    	let if_block10 = /*language*/ ctx[4] === "en" && create_if_block_1$2(ctx);
-    	let if_block11 = /*language*/ ctx[4] === "pt" && create_if_block$4(ctx);
+    	let if_block7 = /*userNeeds*/ ctx[1].exportData && create_if_block_3$1(ctx);
+    	let if_block8 = !/*userNeeds*/ ctx[1].exportData && create_if_block_2$1(ctx);
+    	let if_block9 = /*userNeeds*/ ctx[1].exportData && create_if_block_1$2(ctx);
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*language*/ ctx[4] === "pt") return create_if_block$4;
+    		return create_else_block$1;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block10 = current_block_type(ctx);
 
     	const block = {
     		c: function create() {
@@ -17311,9 +17316,7 @@ var app = (function () {
     			div37 = element("div");
     			div36 = element("div");
     			div35 = element("div");
-    			if (if_block10) if_block10.c();
-    			t94 = space();
-    			if (if_block11) if_block11.c();
+    			if_block10.c();
     			attr_dev(h3, "class", "title svelte-1havf7j");
     			add_location(h3, file$a, 601, 4, 21265);
     			attr_dev(h6, "class", "parameter-text svelte-1havf7j");
@@ -17402,108 +17405,108 @@ var app = (function () {
     			add_location(div16, file$a, 698, 1, 23706);
     			attr_dev(p3, "class", "parameter-title svelte-1havf7j");
     			set_style(p3, "text-align", "left");
-    			add_location(p3, file$a, 1247, 5, 43512);
+    			add_location(p3, file$a, 1247, 5, 43515);
     			attr_dev(div17, "class", "parameter-text svelte-1havf7j");
-    			add_location(div17, file$a, 1251, 5, 43625);
-    			add_location(label3, file$a, 1246, 4, 43499);
+    			add_location(div17, file$a, 1251, 5, 43628);
+    			add_location(label3, file$a, 1246, 4, 43502);
     			attr_dev(span6, "class", "parameter-text svelte-1havf7j");
-    			add_location(span6, file$a, 1255, 4, 43733);
+    			add_location(span6, file$a, 1255, 4, 43736);
     			attr_dev(span7, "class", "parameter-text svelte-1havf7j");
-    			add_location(span7, file$a, 1262, 4, 43924);
+    			add_location(span7, file$a, 1262, 4, 43927);
     			attr_dev(div18, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div18, file$a, 1244, 3, 43456);
+    			add_location(div18, file$a, 1244, 3, 43459);
     			attr_dev(div19, "class", "four columns");
-    			add_location(div19, file$a, 1243, 2, 43426);
+    			add_location(div19, file$a, 1243, 2, 43429);
     			attr_dev(span8, "class", "parameter svelte-1havf7j");
     			set_style(span8, "float", "right");
-    			add_location(span8, file$a, 1273, 6, 44171);
+    			add_location(span8, file$a, 1273, 6, 44174);
     			attr_dev(p4, "class", "parameter-title svelte-1havf7j");
     			set_style(p4, "text-align", "left");
-    			add_location(p4, file$a, 1270, 5, 44073);
+    			add_location(p4, file$a, 1270, 5, 44076);
     			attr_dev(span9, "class", "parameter-text svelte-1havf7j");
-    			add_location(span9, file$a, 1276, 7, 44289);
+    			add_location(span9, file$a, 1276, 7, 44292);
     			attr_dev(span10, "class", "parameter-text svelte-1havf7j");
-    			add_location(span10, file$a, 1279, 7, 44388);
+    			add_location(span10, file$a, 1279, 7, 44391);
     			attr_dev(div20, "class", "parameter-text svelte-1havf7j");
-    			add_location(div20, file$a, 1275, 5, 44253);
-    			add_location(label4, file$a, 1269, 4, 44060);
+    			add_location(div20, file$a, 1275, 5, 44256);
+    			add_location(label4, file$a, 1269, 4, 44063);
     			attr_dev(input2, "class", "u-full-width");
     			attr_dev(input2, "type", "range");
     			attr_dev(input2, "min", "-100");
     			attr_dev(input2, "max", "100");
-    			add_location(input2, file$a, 1284, 4, 44514);
+    			add_location(input2, file$a, 1284, 4, 44517);
     			attr_dev(div21, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div21, file$a, 1268, 3, 44018);
+    			add_location(div21, file$a, 1268, 3, 44021);
     			attr_dev(div22, "class", "four columns");
-    			add_location(div22, file$a, 1267, 2, 43988);
+    			add_location(div22, file$a, 1267, 2, 43991);
     			attr_dev(button, "class", "button svelte-1havf7j");
-    			add_location(button, file$a, 1291, 5, 44727);
+    			add_location(button, file$a, 1291, 5, 44730);
     			attr_dev(div23, "class", "button-class");
-    			add_location(div23, file$a, 1290, 4, 44695);
+    			add_location(div23, file$a, 1290, 4, 44698);
     			attr_dev(span11, "class", "parameter-text svelte-1havf7j");
-    			add_location(span11, file$a, 1294, 4, 44832);
+    			add_location(span11, file$a, 1294, 4, 44835);
     			attr_dev(div24, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div24, file$a, 1289, 3, 44653);
+    			add_location(div24, file$a, 1289, 3, 44656);
     			attr_dev(div25, "class", "four columns");
-    			add_location(div25, file$a, 1288, 2, 44623);
+    			add_location(div25, file$a, 1288, 2, 44626);
     			attr_dev(div26, "class", "row svelte-1havf7j");
-    			add_location(div26, file$a, 1242, 1, 43406);
+    			add_location(div26, file$a, 1242, 1, 43409);
     			attr_dev(span12, "class", "parameter svelte-1havf7j");
     			set_style(span12, "float", "right");
-    			add_location(span12, file$a, 1308, 6, 45151);
+    			add_location(span12, file$a, 1308, 6, 45154);
     			attr_dev(p5, "class", "parameter-title svelte-1havf7j");
     			set_style(p5, "text-align", "left");
-    			add_location(p5, file$a, 1305, 5, 45049);
+    			add_location(p5, file$a, 1305, 5, 45052);
     			attr_dev(span13, "class", "parameter-text svelte-1havf7j");
-    			add_location(span13, file$a, 1311, 6, 45271);
+    			add_location(span13, file$a, 1311, 6, 45274);
     			attr_dev(span14, "class", "parameter svelte-1havf7j");
-    			add_location(span14, file$a, 1314, 6, 45371);
+    			add_location(span14, file$a, 1314, 6, 45374);
     			attr_dev(span15, "class", "parameter-text svelte-1havf7j");
-    			add_location(span15, file$a, 1317, 6, 45443);
+    			add_location(span15, file$a, 1317, 6, 45446);
     			attr_dev(div27, "class", "parameter-text svelte-1havf7j");
-    			add_location(div27, file$a, 1310, 5, 45236);
-    			add_location(label5, file$a, 1304, 4, 45036);
+    			add_location(div27, file$a, 1310, 5, 45239);
+    			add_location(label5, file$a, 1304, 4, 45039);
     			attr_dev(input3, "class", "pointer u-full-width svelte-1havf7j");
     			attr_dev(input3, "type", "range");
     			attr_dev(input3, "min", "0");
     			attr_dev(input3, "max", "100");
-    			add_location(input3, file$a, 1322, 4, 45566);
+    			add_location(input3, file$a, 1322, 4, 45569);
     			attr_dev(div28, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div28, file$a, 1303, 3, 44994);
+    			add_location(div28, file$a, 1303, 3, 44997);
     			attr_dev(div29, "class", "four columns");
-    			add_location(div29, file$a, 1302, 2, 44964);
+    			add_location(div29, file$a, 1302, 2, 44967);
     			attr_dev(span16, "class", "parameter svelte-1havf7j");
     			set_style(span16, "float", "right");
-    			add_location(span16, file$a, 1332, 6, 45875);
+    			add_location(span16, file$a, 1332, 6, 45878);
     			attr_dev(p6, "class", "parameter-title svelte-1havf7j");
     			set_style(p6, "text-align", "left");
-    			add_location(p6, file$a, 1329, 5, 45769);
+    			add_location(p6, file$a, 1329, 5, 45772);
     			attr_dev(div30, "class", "parameter-text svelte-1havf7j");
-    			add_location(div30, file$a, 1334, 5, 45950);
-    			add_location(label6, file$a, 1328, 4, 45756);
+    			add_location(div30, file$a, 1334, 5, 45953);
+    			add_location(label6, file$a, 1328, 4, 45759);
     			attr_dev(input4, "class", "pointer u-full-width svelte-1havf7j");
     			attr_dev(input4, "type", "range");
     			attr_dev(input4, "min", input4_min_value = 0);
     			attr_dev(input4, "max", /*pctH*/ ctx[8]);
-    			add_location(input4, file$a, 1338, 4, 46060);
+    			add_location(input4, file$a, 1338, 4, 46063);
     			attr_dev(div31, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div31, file$a, 1327, 3, 45714);
+    			add_location(div31, file$a, 1327, 3, 45717);
     			attr_dev(div32, "class", "four columns");
-    			add_location(div32, file$a, 1326, 2, 45684);
+    			add_location(div32, file$a, 1326, 2, 45687);
     			attr_dev(span17, "class", "parameter-text svelte-1havf7j");
-    			add_location(span17, file$a, 1356, 4, 46564);
+    			add_location(span17, file$a, 1356, 4, 46567);
     			attr_dev(div33, "class", "child parameter-space-4 svelte-1havf7j");
-    			add_location(div33, file$a, 1343, 3, 46203);
+    			add_location(div33, file$a, 1343, 3, 46206);
     			attr_dev(div34, "class", "four columns");
-    			add_location(div34, file$a, 1342, 2, 46173);
+    			add_location(div34, file$a, 1342, 2, 46176);
     			attr_dev(div35, "class", "child parameter-text svelte-1havf7j");
-    			add_location(div35, file$a, 1371, 4, 46936);
+    			add_location(div35, file$a, 1371, 4, 46939);
     			attr_dev(div36, "class", "twelve columns");
-    			add_location(div36, file$a, 1370, 3, 46903);
+    			add_location(div36, file$a, 1370, 3, 46906);
     			attr_dev(div37, "class", "row svelte-1havf7j");
-    			add_location(div37, file$a, 1369, 2, 46882);
+    			add_location(div37, file$a, 1369, 2, 46885);
     			attr_dev(div38, "class", "row svelte-1havf7j");
-    			add_location(div38, file$a, 1301, 1, 44944);
+    			add_location(div38, file$a, 1301, 1, 44947);
     			attr_dev(main, "class", "container");
     			add_location(main, file$a, 596, 0, 21155);
     		},
@@ -17703,9 +17706,7 @@ var app = (function () {
     			append_dev(div38, div37);
     			append_dev(div37, div36);
     			append_dev(div36, div35);
-    			if (if_block10) if_block10.m(div35, null);
-    			append_dev(div35, t94);
-    			if (if_block11) if_block11.m(div35, null);
+    			if_block10.m(div35, null);
     			current = true;
     			if (remount) run_all(dispose);
 
@@ -17789,7 +17790,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_19(ctx);
+    					if_block0 = create_if_block_18(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(div15, t41);
@@ -17812,7 +17813,7 @@ var app = (function () {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_15(ctx);
+    					if_block1 = create_if_block_14(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(div15, t42);
@@ -17835,7 +17836,7 @@ var app = (function () {
     						transition_in(if_block2, 1);
     					}
     				} else {
-    					if_block2 = create_if_block_12(ctx);
+    					if_block2 = create_if_block_11(ctx);
     					if_block2.c();
     					transition_in(if_block2, 1);
     					if_block2.m(div15, t43);
@@ -17858,7 +17859,7 @@ var app = (function () {
     						transition_in(if_block3, 1);
     					}
     				} else {
-    					if_block3 = create_if_block_9(ctx);
+    					if_block3 = create_if_block_8(ctx);
     					if_block3.c();
     					transition_in(if_block3, 1);
     					if_block3.m(div15, t44);
@@ -17881,7 +17882,7 @@ var app = (function () {
     						transition_in(if_block4, 1);
     					}
     				} else {
-    					if_block4 = create_if_block_8(ctx);
+    					if_block4 = create_if_block_7(ctx);
     					if_block4.c();
     					transition_in(if_block4, 1);
     					if_block4.m(div15, t45);
@@ -17904,7 +17905,7 @@ var app = (function () {
     						transition_in(if_block5, 1);
     					}
     				} else {
-    					if_block5 = create_if_block_6(ctx);
+    					if_block5 = create_if_block_5(ctx);
     					if_block5.c();
     					transition_in(if_block5, 1);
     					if_block5.m(div15, t46);
@@ -17927,7 +17928,7 @@ var app = (function () {
     						transition_in(if_block6, 1);
     					}
     				} else {
-    					if_block6 = create_if_block_5(ctx);
+    					if_block6 = create_if_block_4$1(ctx);
     					if_block6.c();
     					transition_in(if_block6, 1);
     					if_block6.m(div15, null);
@@ -17991,7 +17992,7 @@ var app = (function () {
     				if (if_block7) {
     					if_block7.p(ctx, dirty);
     				} else {
-    					if_block7 = create_if_block_4$1(ctx);
+    					if_block7 = create_if_block_3$1(ctx);
     					if_block7.c();
     					if_block7.m(div33, t89);
     				}
@@ -18004,7 +18005,7 @@ var app = (function () {
     				if (if_block8) {
     					if_block8.p(ctx, dirty);
     				} else {
-    					if_block8 = create_if_block_3$1(ctx);
+    					if_block8 = create_if_block_2$1(ctx);
     					if_block8.c();
     					if_block8.m(div33, t90);
     				}
@@ -18023,7 +18024,7 @@ var app = (function () {
     						transition_in(if_block9, 1);
     					}
     				} else {
-    					if_block9 = create_if_block_2$1(ctx);
+    					if_block9 = create_if_block_1$2(ctx);
     					if_block9.c();
     					transition_in(if_block9, 1);
     					if_block9.m(div38, t93);
@@ -18038,26 +18039,14 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*language*/ ctx[4] === "en") {
-    				if (if_block10) ; else {
-    					if_block10 = create_if_block_1$2(ctx);
-    					if_block10.c();
-    					if_block10.m(div35, t94);
-    				}
-    			} else if (if_block10) {
+    			if (current_block_type !== (current_block_type = select_block_type(ctx))) {
     				if_block10.d(1);
-    				if_block10 = null;
-    			}
+    				if_block10 = current_block_type(ctx);
 
-    			if (/*language*/ ctx[4] === "pt") {
-    				if (if_block11) ; else {
-    					if_block11 = create_if_block$4(ctx);
-    					if_block11.c();
-    					if_block11.m(div35, null);
+    				if (if_block10) {
+    					if_block10.c();
+    					if_block10.m(div35, null);
     				}
-    			} else if (if_block11) {
-    				if_block11.d(1);
-    				if_block11 = null;
     			}
     		},
     		i: function intro(local) {
@@ -18104,8 +18093,7 @@ var app = (function () {
     			if (if_block7) if_block7.d();
     			if (if_block8) if_block8.d();
     			if (if_block9) if_block9.d();
-    			if (if_block10) if_block10.d();
-    			if (if_block11) if_block11.d();
+    			if_block10.d();
     			run_all(dispose);
     		}
     	};

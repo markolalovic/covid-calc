@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store';
 
-// version = 2020-06-14 11:17:38;
+// version = 2020-06-15 09:43:43;
 
 export const englishDictStore = readable({ 
 	app: {
@@ -43,7 +43,7 @@ export const englishDictStore = readable({
 		 sources: "Sources: ",
 		 projectedPoveryByRegion: "Projected poverty increases by region due to coronavirus impact on world economy.",
 		 projectionsCaption: "Projections of total deaths from COVID-19. Click on the legend to select or deselect a country.",
-		 source: "Source:",
+		 source: "Source: ",
 		 reset: "Reset",
 		 infectedTitle: "Expected Number of Infected by Age",
 		 deathsTitle: "Expected Number of Deaths by Age",
