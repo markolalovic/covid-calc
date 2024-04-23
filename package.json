@@ -17,7 +17,7 @@
     "svelte-scrollto": "^0.1.1"
   },
   "dependencies": {
-    "gh-pages": "^2.2.0",
+    "gh-pages": "^5.0.0",
     "sirv-cli": "^0.4.4",
     "serialize-javascript": ">=3.1.0"
   }
