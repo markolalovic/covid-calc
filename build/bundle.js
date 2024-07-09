@@ -18,6 +18,9 @@ var app = (function () {
     function safe_not_equal(a, b) {
         return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
     }
+    function is_empty(obj) {
+        return Object.keys(obj).length === 0;
+    }
     function subscribe(store, ...callbacks) {
         if (store == null) {
             return noop;
@@ -30,6 +33,10 @@ var app = (function () {
     }
     function null_to_empty(value) {
         return value == null ? '' : value;
+    }
+    function split_css_unit(value) {
+        const split = typeof value === 'string' && value.match(/^\s*(-?[\d.]+)([^\s]*)\s*$/);
+        return split ? [parseFloat(split[1]), split[2] || 'px'] : [value, 'px'];
     }
 
     const is_client = typeof window !== 'undefined';
@@ -66,15 +73,34 @@ var app = (function () {
             }
         };
     }
-
     function append(target, node) {
         target.appendChild(node);
+    }
+    function get_root_for_style(node) {
+        if (!node)
+            return document;
+        const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+        if (root && root.host) {
+            return root;
+        }
+        return node.ownerDocument;
+    }
+    function append_empty_stylesheet(node) {
+        const style_element = element('style');
+        append_stylesheet(get_root_for_style(node), style_element);
+        return style_element.sheet;
+    }
+    function append_stylesheet(node, style) {
+        append(node.head || node, style);
+        return style.sheet;
     }
     function insert(target, node, anchor) {
         target.insertBefore(node, anchor || null);
     }
     function detach(node) {
-        node.parentNode.removeChild(node);
+        if (node.parentNode) {
+            node.parentNode.removeChild(node);
+        }
     }
     function destroy_each(iterations, detaching) {
         for (let i = 0; i < iterations.length; i += 1) {
@@ -108,56 +134,76 @@ var app = (function () {
             node.setAttribute(attribute, value);
     }
     function to_number(value) {
-        return value === '' ? undefined : +value;
+        return value === '' ? null : +value;
     }
     function children(element) {
         return Array.from(element.childNodes);
     }
     function set_data(text, data) {
         data = '' + data;
-        if (text.data !== data)
-            text.data = data;
+        if (text.data === data)
+            return;
+        text.data = data;
     }
     function set_input_value(input, value) {
-        if (value != null || input.value) {
-            input.value = value;
-        }
+        input.value = value == null ? '' : value;
     }
     function set_style(node, key, value, important) {
-        node.style.setProperty(key, value, important ? 'important' : '');
+        if (value == null) {
+            node.style.removeProperty(key);
+        }
+        else {
+            node.style.setProperty(key, value, important ? 'important' : '');
+        }
     }
-    function custom_event(type, detail) {
+    function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
         const e = document.createEvent('CustomEvent');
-        e.initCustomEvent(type, false, false, detail);
+        e.initCustomEvent(type, bubbles, cancelable, detail);
         return e;
     }
     class HtmlTag {
-        constructor(html, anchor = null) {
-            this.e = element('div');
-            this.a = anchor;
-            this.u(html);
+        constructor(is_svg = false) {
+            this.is_svg = false;
+            this.is_svg = is_svg;
+            this.e = this.n = null;
         }
-        m(target, anchor = null) {
-            for (let i = 0; i < this.n.length; i += 1) {
-                insert(target, this.n[i], anchor);
+        c(html) {
+            this.h(html);
+        }
+        m(html, target, anchor = null) {
+            if (!this.e) {
+                if (this.is_svg)
+                    this.e = svg_element(target.nodeName);
+                /** #7364  target for <template> may be provided as #document-fragment(11) */
+                else
+                    this.e = element((target.nodeType === 11 ? 'TEMPLATE' : target.nodeName));
+                this.t = target.tagName !== 'TEMPLATE' ? target : target.content;
+                this.c(html);
             }
-            this.t = target;
+            this.i(anchor);
         }
-        u(html) {
+        h(html) {
             this.e.innerHTML = html;
-            this.n = Array.from(this.e.childNodes);
+            this.n = Array.from(this.e.nodeName === 'TEMPLATE' ? this.e.content.childNodes : this.e.childNodes);
+        }
+        i(anchor) {
+            for (let i = 0; i < this.n.length; i += 1) {
+                insert(this.t, this.n[i], anchor);
+            }
         }
         p(html) {
             this.d();
-            this.u(html);
-            this.m(this.t, this.a);
+            this.h(html);
+            this.i(this.a);
         }
         d() {
             this.n.forEach(detach);
         }
     }
 
-    const active_docs = new Set();
+    // we need to store the information for multiple documents because a Svelte application could also contain iframes
+    // https://github.com/sveltejs/svelte/issues/3624
+    const managed_styles = new Map();
     let active = 0;
     // https://github.com/darkskyapp/string-hash/blob/master/index.js
     function hash(str) {
@@ -166,6 +212,11 @@ var app = (function () {
         while (i--)
             hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
         return hash >>> 0;
+    }
+    function create_style_information(doc, node) {
+        const info = { stylesheet: append_empty_stylesheet(node), rules: {} };
+        managed_styles.set(doc, info);
+        return info;
     }
     function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
         const step = 16.666 / duration;
@@ -176,16 +227,14 @@ var app = (function () {
         }
         const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
         const name = `__svelte_${hash(rule)}_${uid}`;
-        const doc = node.ownerDocument;
-        active_docs.add(doc);
-        const stylesheet = doc.__svelte_stylesheet || (doc.__svelte_stylesheet = doc.head.appendChild(element('style')).sheet);
-        const current_rules = doc.__svelte_rules || (doc.__svelte_rules = {});
-        if (!current_rules[name]) {
-            current_rules[name] = true;
+        const doc = get_root_for_style(node);
+        const { stylesheet, rules } = managed_styles.get(doc) || create_style_information(doc, node);
+        if (!rules[name]) {
+            rules[name] = true;
             stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
         }
         const animation = node.style.animation || '';
-        node.style.animation = `${animation ? `${animation}, ` : ``}${name} ${duration}ms linear ${delay}ms 1 both`;
+        node.style.animation = `${animation ? `${animation}, ` : ''}${name} ${duration}ms linear ${delay}ms 1 both`;
         active += 1;
         return name;
     }
@@ -207,14 +256,13 @@ var app = (function () {
         raf(() => {
             if (active)
                 return;
-            active_docs.forEach(doc => {
-                const stylesheet = doc.__svelte_stylesheet;
-                let i = stylesheet.cssRules.length;
-                while (i--)
-                    stylesheet.deleteRule(i);
-                doc.__svelte_rules = {};
+            managed_styles.forEach(info => {
+                const { ownerNode } = info.stylesheet;
+                // there is no ownerNode if it runs on jsdom.
+                if (ownerNode)
+                    detach(ownerNode);
             });
-            active_docs.clear();
+            managed_styles.clear();
         });
     }
 
@@ -224,21 +272,35 @@ var app = (function () {
     }
     function get_current_component() {
         if (!current_component)
-            throw new Error(`Function called outside component initialization`);
+            throw new Error('Function called outside component initialization');
         return current_component;
     }
+    /**
+     * The `onMount` function schedules a callback to run as soon as the component has been mounted to the DOM.
+     * It must be called during the component's initialisation (but doesn't need to live *inside* the component;
+     * it can be called from an external module).
+     *
+     * `onMount` does not run inside a [server-side component](/docs#run-time-server-side-component-api).
+     *
+     * https://svelte.dev/docs#run-time-svelte-onmount
+     */
     function onMount(fn) {
         get_current_component().$$.on_mount.push(fn);
     }
+    /**
+     * Schedules a callback to run immediately after the component has been updated.
+     *
+     * The first time the callback runs will be after the initial `onMount`
+     */
     function afterUpdate(fn) {
         get_current_component().$$.after_update.push(fn);
     }
 
     const dirty_components = [];
     const binding_callbacks = [];
-    const render_callbacks = [];
+    let render_callbacks = [];
     const flush_callbacks = [];
-    const resolved_promise = Promise.resolve();
+    const resolved_promise = /* @__PURE__ */ Promise.resolve();
     let update_scheduled = false;
     function schedule_update() {
         if (!update_scheduled) {
@@ -252,21 +314,54 @@ var app = (function () {
     function add_flush_callback(fn) {
         flush_callbacks.push(fn);
     }
-    let flushing = false;
+    // flush() calls callbacks in this order:
+    // 1. All beforeUpdate callbacks, in order: parents before children
+    // 2. All bind:this callbacks, in reverse order: children before parents.
+    // 3. All afterUpdate callbacks, in order: parents before children. EXCEPT
+    //    for afterUpdates called during the initial onMount, which are called in
+    //    reverse order: children before parents.
+    // Since callbacks might update component values, which could trigger another
+    // call to flush(), the following steps guard against this:
+    // 1. During beforeUpdate, any updated components will be added to the
+    //    dirty_components array and will cause a reentrant call to flush(). Because
+    //    the flush index is kept outside the function, the reentrant call will pick
+    //    up where the earlier call left off and go through all dirty components. The
+    //    current_component value is saved and restored so that the reentrant call will
+    //    not interfere with the "parent" flush() call.
+    // 2. bind:this callbacks cannot trigger new flush() calls.
+    // 3. During afterUpdate, any updated components will NOT have their afterUpdate
+    //    callback called a second time; the seen_callbacks set, outside the flush()
+    //    function, guarantees this behavior.
     const seen_callbacks = new Set();
+    let flushidx = 0; // Do *not* move this inside the flush() function
     function flush() {
-        if (flushing)
+        // Do not reenter flush while dirty components are updated, as this can
+        // result in an infinite loop. Instead, let the inner flush handle it.
+        // Reentrancy is ok afterwards for bindings etc.
+        if (flushidx !== 0) {
             return;
-        flushing = true;
+        }
+        const saved_component = current_component;
         do {
             // first, call beforeUpdate functions
             // and update components
-            for (let i = 0; i < dirty_components.length; i += 1) {
-                const component = dirty_components[i];
-                set_current_component(component);
-                update(component.$$);
+            try {
+                while (flushidx < dirty_components.length) {
+                    const component = dirty_components[flushidx];
+                    flushidx++;
+                    set_current_component(component);
+                    update(component.$$);
+                }
             }
+            catch (e) {
+                // reset dirty state to not end up in a deadlocked state and then rethrow
+                dirty_components.length = 0;
+                flushidx = 0;
+                throw e;
+            }
+            set_current_component(null);
             dirty_components.length = 0;
+            flushidx = 0;
             while (binding_callbacks.length)
                 binding_callbacks.pop()();
             // then, once components are updated, call
@@ -286,8 +381,8 @@ var app = (function () {
             flush_callbacks.pop()();
         }
         update_scheduled = false;
-        flushing = false;
         seen_callbacks.clear();
+        set_current_component(saved_component);
     }
     function update($$) {
         if ($$.fragment !== null) {
@@ -298,6 +393,16 @@ var app = (function () {
             $$.fragment && $$.fragment.p($$.ctx, dirty);
             $$.after_update.forEach(add_render_callback);
         }
+    }
+    /**
+     * Useful for example to execute remaining `afterUpdate` callbacks before executing `destroy`.
+     */
+    function flush_render_callbacks(fns) {
+        const filtered = [];
+        const targets = [];
+        render_callbacks.forEach((c) => fns.indexOf(c) === -1 ? filtered.push(c) : targets.push(c));
+        targets.forEach((c) => c());
+        render_callbacks = filtered;
     }
 
     let promise;
@@ -349,10 +454,14 @@ var app = (function () {
             });
             block.o(local);
         }
+        else if (callback) {
+            callback();
+        }
     }
     const null_transition = { duration: 0 };
     function create_in_transition(node, fn, params) {
-        let config = fn(node, params);
+        const options = { direction: 'in' };
+        let config = fn(node, params, options);
         let running = false;
         let animation_name;
         let task;
@@ -393,9 +502,10 @@ var app = (function () {
             start() {
                 if (started)
                     return;
+                started = true;
                 delete_rule(node);
                 if (is_function(config)) {
-                    config = config();
+                    config = config(options);
                     wait().then(go);
                 }
                 else {
@@ -414,7 +524,8 @@ var app = (function () {
         };
     }
     function create_out_transition(node, fn, params) {
-        let config = fn(node, params);
+        const options = { direction: 'out' };
+        let config = fn(node, params, options);
         let running = true;
         let animation_name;
         const group = outros;
@@ -449,7 +560,7 @@ var app = (function () {
         if (is_function(config)) {
             wait().then(() => {
                 // @ts-ignore
-                config = config();
+                config = config(options);
                 go();
             });
         }
@@ -480,27 +591,33 @@ var app = (function () {
     function create_component(block) {
         block && block.c();
     }
-    function mount_component(component, target, anchor) {
-        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+    function mount_component(component, target, anchor, customElement) {
+        const { fragment, after_update } = component.$$;
         fragment && fragment.m(target, anchor);
-        // onMount happens before the initial afterUpdate
-        add_render_callback(() => {
-            const new_on_destroy = on_mount.map(run).filter(is_function);
-            if (on_destroy) {
-                on_destroy.push(...new_on_destroy);
-            }
-            else {
-                // Edge case - component was destroyed immediately,
-                // most likely as a result of a binding initialising
-                run_all(new_on_destroy);
-            }
-            component.$$.on_mount = [];
-        });
+        if (!customElement) {
+            // onMount happens before the initial afterUpdate
+            add_render_callback(() => {
+                const new_on_destroy = component.$$.on_mount.map(run).filter(is_function);
+                // if the component was destroyed immediately
+                // it will update the `$$.on_destroy` reference to `null`.
+                // the destructured on_destroy may still reference to the old array
+                if (component.$$.on_destroy) {
+                    component.$$.on_destroy.push(...new_on_destroy);
+                }
+                else {
+                    // Edge case - component was destroyed immediately,
+                    // most likely as a result of a binding initialising
+                    run_all(new_on_destroy);
+                }
+                component.$$.on_mount = [];
+            });
+        }
         after_update.forEach(add_render_callback);
     }
     function destroy_component(component, detaching) {
         const $$ = component.$$;
         if ($$.fragment !== null) {
+            flush_render_callbacks($$.after_update);
             run_all($$.on_destroy);
             $$.fragment && $$.fragment.d(detaching);
             // TODO null out other refs, including component.$$ (but need to
@@ -517,13 +634,12 @@ var app = (function () {
         }
         component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
     }
-    function init(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
+    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
         const parent_component = current_component;
         set_current_component(component);
-        const prop_values = options.props || {};
         const $$ = component.$$ = {
             fragment: null,
-            ctx: null,
+            ctx: [],
             // state
             props,
             update: noop,
@@ -532,19 +648,23 @@ var app = (function () {
             // lifecycle
             on_mount: [],
             on_destroy: [],
+            on_disconnect: [],
             before_update: [],
             after_update: [],
-            context: new Map(parent_component ? parent_component.$$.context : []),
+            context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
             // everything else
             callbacks: blank_object(),
-            dirty
+            dirty,
+            skip_bound: false,
+            root: options.target || parent_component.$$.root
         };
+        append_styles && append_styles($$.root);
         let ready = false;
         $$.ctx = instance
-            ? instance(component, prop_values, (i, ret, ...rest) => {
+            ? instance(component, options.props || {}, (i, ret, ...rest) => {
                 const value = rest.length ? rest[0] : ret;
                 if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
-                    if ($$.bound[i])
+                    if (!$$.skip_bound && $$.bound[i])
                         $$.bound[i](value);
                     if (ready)
                         make_dirty(component, i);
@@ -570,17 +690,23 @@ var app = (function () {
             }
             if (options.intro)
                 transition_in(component.$$.fragment);
-            mount_component(component, options.target, options.anchor);
+            mount_component(component, options.target, options.anchor, options.customElement);
             flush();
         }
         set_current_component(parent_component);
     }
+    /**
+     * Base class for Svelte components. Used when dev=false.
+     */
     class SvelteComponent {
         $destroy() {
             destroy_component(this, 1);
             this.$destroy = noop;
         }
         $on(type, callback) {
+            if (!is_function(callback)) {
+                return noop;
+            }
             const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
             callbacks.push(callback);
             return () => {
@@ -589,8 +715,12 @@ var app = (function () {
                     callbacks.splice(index, 1);
             };
         }
-        $set() {
-            // overridden by instance, if it has props
+        $set($$props) {
+            if (this.$$set && !is_empty($$props)) {
+                this.$$.skip_bound = true;
+                this.$$set($$props);
+                this.$$.skip_bound = false;
+            }
         }
     }
 
@@ -598,30 +728,29 @@ var app = (function () {
     /**
      * Creates a `Readable` store that allows reading by subscription.
      * @param value initial value
-     * @param {StartStopNotifier}start start and stop notifications for subscriptions
+     * @param {StartStopNotifier} [start]
      */
     function readable(value, start) {
         return {
-            subscribe: writable(value, start).subscribe,
+            subscribe: writable(value, start).subscribe
         };
     }
     /**
      * Create a `Writable` store that allows both updating and reading by subscription.
      * @param {*=}value initial value
-     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     * @param {StartStopNotifier=} start
      */
     function writable(value, start = noop) {
         let stop;
-        const subscribers = [];
+        const subscribers = new Set();
         function set(new_value) {
             if (safe_not_equal(value, new_value)) {
                 value = new_value;
                 if (stop) { // store is ready
                     const run_queue = !subscriber_queue.length;
-                    for (let i = 0; i < subscribers.length; i += 1) {
-                        const s = subscribers[i];
-                        s[1]();
-                        subscriber_queue.push(s, value);
+                    for (const subscriber of subscribers) {
+                        subscriber[1]();
+                        subscriber_queue.push(subscriber, value);
                     }
                     if (run_queue) {
                         for (let i = 0; i < subscriber_queue.length; i += 2) {
@@ -637,17 +766,14 @@ var app = (function () {
         }
         function subscribe(run, invalidate = noop) {
             const subscriber = [run, invalidate];
-            subscribers.push(subscriber);
-            if (subscribers.length === 1) {
+            subscribers.add(subscriber);
+            if (subscribers.size === 1) {
                 stop = start(set) || noop;
             }
             run(value);
             return () => {
-                const index = subscribers.indexOf(subscriber);
-                if (index !== -1) {
-                    subscribers.splice(index, 1);
-                }
-                if (subscribers.length === 0) {
+                subscribers.delete(subscriber);
+                if (subscribers.size === 0 && stop) {
                     stop();
                     stop = null;
                 }
@@ -8262,7 +8388,7 @@ var app = (function () {
           .text(numberText);
     };
 
-    /* src/CompareByAge.svelte generated by Svelte v3.22.3 */
+    /* src/CompareByAge.svelte generated by Svelte v3.59.2 */
 
     function create_fragment(ctx) {
     	let div;
@@ -8271,22 +8397,18 @@ var app = (function () {
     		c() {
     			div = element("div");
 
-    			div.innerHTML = `<svg class="infected" width="450" height="320"><style>
-      .hover-rect:hover {
+    			div.innerHTML = `<svg class="infected" width="450" height="320"><style>.hover-rect:hover {
         opacity: 1;
         stroke: black;
         stroke-width: 1px;
         fill: rgba(228,26,28, 1);
-      }
-    </style></svg> 
-  <svg class="deaths" width="450" height="320"><style>
-      .hover-rect:hover {
+      }</style></svg> 
+  <svg class="deaths" width="450" height="320"><style>.hover-rect:hover {
         opacity: 1;
         stroke: black;
         stroke-width: 1px;
         fill: rgba(228,26,28, 1);
-      }
-    </style></svg>`;
+      }</style></svg>`;
 
     			set_style(div, "margin-top", "25px");
     		},
@@ -8314,19 +8436,19 @@ var app = (function () {
 
     function instance($$self, $$props, $$invalidate) {
     	let { infectedData = [] } = $$props;
-    	let { infectedTitle = "" } = $$props;
-    	let { infectedTitleListName = "" } = $$props;
-    	let { infectedTitleListNumber = "" } = $$props;
+    	let { infectedTitle = '' } = $$props;
+    	let { infectedTitleListName = '' } = $$props;
+    	let { infectedTitleListNumber = '' } = $$props;
     	let { deathsData = [] } = $$props;
-    	let { deathsTitle = "" } = $$props;
-    	let { deathsTitleListName = "" } = $$props;
-    	let { deathsTitleListNumber = "" } = $$props;
+    	let { deathsTitle = '' } = $$props;
+    	let { deathsTitleListName = '' } = $$props;
+    	let { deathsTitleListNumber = '' } = $$props;
 
     	// other, emphasize, estimate
-    	const colors = ["#e0f3db", "#a8ddb5", "#43a2ca"];
+    	const colors = ['#e0f3db', '#a8ddb5', '#43a2ca'];
 
     	afterUpdate(() => {
-    		d3.select("svg.infected").call(visualList, {
+    		d3.select('svg.infected').call(visualList, {
     			dataList: infectedData,
     			titleListName: infectedTitleListName,
     			titleListNumber: infectedTitleListNumber,
@@ -8337,13 +8459,13 @@ var app = (function () {
     			yValue: d => d.name,
     			textValue,
     			margin: { top: 70, right: 100, bottom: 0, left: 0 },
-    			barPadding: 0.2,
+    			barPadding: .2,
     			verticalSpacing: 55,
     			transitionDuration,
     			colors
     		});
 
-    		d3.select("svg.deaths").call(visualList, {
+    		d3.select('svg.deaths').call(visualList, {
     			dataList: deathsData,
     			titleListName: deathsTitleListName,
     			titleListNumber: deathsTitleListNumber,
@@ -8354,22 +8476,22 @@ var app = (function () {
     			yValue: d => d.name,
     			textValue,
     			margin: { top: 70, right: 100, bottom: 0, left: 0 },
-    			barPadding: 0.2,
+    			barPadding: .2,
     			verticalSpacing: 55,
     			transitionDuration,
     			colors
     		});
     	});
 
-    	$$self.$set = $$props => {
-    		if ("infectedData" in $$props) $$invalidate(0, infectedData = $$props.infectedData);
-    		if ("infectedTitle" in $$props) $$invalidate(1, infectedTitle = $$props.infectedTitle);
-    		if ("infectedTitleListName" in $$props) $$invalidate(2, infectedTitleListName = $$props.infectedTitleListName);
-    		if ("infectedTitleListNumber" in $$props) $$invalidate(3, infectedTitleListNumber = $$props.infectedTitleListNumber);
-    		if ("deathsData" in $$props) $$invalidate(4, deathsData = $$props.deathsData);
-    		if ("deathsTitle" in $$props) $$invalidate(5, deathsTitle = $$props.deathsTitle);
-    		if ("deathsTitleListName" in $$props) $$invalidate(6, deathsTitleListName = $$props.deathsTitleListName);
-    		if ("deathsTitleListNumber" in $$props) $$invalidate(7, deathsTitleListNumber = $$props.deathsTitleListNumber);
+    	$$self.$$set = $$props => {
+    		if ('infectedData' in $$props) $$invalidate(0, infectedData = $$props.infectedData);
+    		if ('infectedTitle' in $$props) $$invalidate(1, infectedTitle = $$props.infectedTitle);
+    		if ('infectedTitleListName' in $$props) $$invalidate(2, infectedTitleListName = $$props.infectedTitleListName);
+    		if ('infectedTitleListNumber' in $$props) $$invalidate(3, infectedTitleListNumber = $$props.infectedTitleListNumber);
+    		if ('deathsData' in $$props) $$invalidate(4, deathsData = $$props.deathsData);
+    		if ('deathsTitle' in $$props) $$invalidate(5, deathsTitle = $$props.deathsTitle);
+    		if ('deathsTitleListName' in $$props) $$invalidate(6, deathsTitleListName = $$props.deathsTitleListName);
+    		if ('deathsTitleListNumber' in $$props) $$invalidate(7, deathsTitleListNumber = $$props.deathsTitleListNumber);
     	};
 
     	return [
@@ -8401,7 +8523,7 @@ var app = (function () {
     	}
     }
 
-    /* src/Compare.svelte generated by Svelte v3.22.3 */
+    /* src/Compare.svelte generated by Svelte v3.59.2 */
 
     function create_fragment$1(ctx) {
     	let div;
@@ -8410,14 +8532,12 @@ var app = (function () {
     		c() {
     			div = element("div");
 
-    			div.innerHTML = `<svg class="compare" width="700" height="410"><style>
-      .hover-rect:hover {
+    			div.innerHTML = `<svg class="compare" width="700" height="410"><style>.hover-rect:hover {
         opacity: 1;
         stroke: black;
         stroke-width: 1px;
         fill: rgba(228,26,28, 1);
-      }
-    </style></svg>`;
+      }</style></svg>`;
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -8440,10 +8560,10 @@ var app = (function () {
     	let { titleListNumber = "" } = $$props;
 
     	// colors for: other, emphasize, estimate
-    	const colors = ["#fdc086", "#beaed4", "#7fc97f"];
+    	const colors = ['#fdc086', '#beaed4', '#7fc97f'];
 
     	afterUpdate(() => {
-    		d3.select("svg.compare").call(visualList, {
+    		d3.select('svg.compare').call(visualList, {
     			dataList: compareData,
     			titleListName,
     			titleListNumber,
@@ -8453,18 +8573,18 @@ var app = (function () {
     			xValue: d => d.number,
     			yValue: d => d.name,
     			margin: { top: 70, right: 220, bottom: 0, left: 90 },
-    			barPadding: 0.2,
+    			barPadding: .2,
     			verticalSpacing: 55,
     			transitionDuration: transitionDuration$1,
     			colors
     		});
     	});
 
-    	$$self.$set = $$props => {
-    		if ("compareData" in $$props) $$invalidate(0, compareData = $$props.compareData);
-    		if ("titleListMain" in $$props) $$invalidate(1, titleListMain = $$props.titleListMain);
-    		if ("titleListName" in $$props) $$invalidate(2, titleListName = $$props.titleListName);
-    		if ("titleListNumber" in $$props) $$invalidate(3, titleListNumber = $$props.titleListNumber);
+    	$$self.$$set = $$props => {
+    		if ('compareData' in $$props) $$invalidate(0, compareData = $$props.compareData);
+    		if ('titleListMain' in $$props) $$invalidate(1, titleListMain = $$props.titleListMain);
+    		if ('titleListName' in $$props) $$invalidate(2, titleListName = $$props.titleListName);
+    		if ('titleListNumber' in $$props) $$invalidate(3, titleListNumber = $$props.titleListNumber);
     	};
 
     	return [compareData, titleListMain, titleListName, titleListNumber];
@@ -8615,7 +8735,7 @@ var app = (function () {
           .attr('x', textOffset);
     };
 
-    /* src/WorldMap.svelte generated by Svelte v3.22.3 */
+    /* src/WorldMap.svelte generated by Svelte v3.59.2 */
 
     function create_fragment$2(ctx) {
     	let div;
@@ -8662,43 +8782,43 @@ var app = (function () {
 
     	// domain and range arrays
     	let incomeColors = [
-    		"rgb(208,28,139)",
-    		"rgb(241,182,218)",
-    		"rgb(184,225,134)",
-    		"rgb(77,172,38)",
-    		"darkgrey"
+    		'rgb(208,28,139)',
+    		'rgb(241,182,218)',
+    		'rgb(184,225,134)',
+    		'rgb(77,172,38)',
+    		'darkgrey'
     	];
 
     	let incomeLegend = [
-    		"No data",
-    		"4. High income",
-    		"3. Upper middle income",
-    		"2. Lower middle income",
-    		"1. Low income"
+    		'No data',
+    		'4. High income',
+    		'3. Upper middle income',
+    		'2. Lower middle income',
+    		'1. Low income'
     	].reverse();
 
     	let propsColors = [
-    		"rgb(166,97,26)",
-    		"rgb(223,194,125)",
-    		"rgb(128,205,193)",
-    		"rgb(1,133,113)",
-    		"darkgrey"
+    		'rgb(166,97,26)',
+    		'rgb(223,194,125)',
+    		'rgb(128,205,193)',
+    		'rgb(1,133,113)',
+    		'darkgrey'
     	];
 
-    	let propsLegend = ["No data", "<5%", "5- 10%", "10- 20%", ">20%"].reverse();
+    	let propsLegend = ['No data', '<5%', '5- 10%', '10- 20%', '>20%'].reverse();
 
     	afterUpdate(() => {
-    		svg = d3.select("svg.worldmap");
+    		svg = d3.select('svg.worldmap');
 
     		// choropleth map
-    		let g = svg.selectAll("g").data([null]);
+    		let g = svg.selectAll('g').data([null]);
 
-    		g = g.enter().append("g").merge(g);
+    		g = g.enter().append('g').merge(g);
 
     		// update legend on each property switch
-    		let legend = svg.selectAll("g.legend").data([null]);
+    		let legend = svg.selectAll('g.legend').data([null]);
 
-    		legend = legend.enter().append("g").attr("class", "legend").merge(legend).attr("transform", `translate(40, 310)`);
+    		legend = legend.enter().append('g').attr('class', 'legend').merge(legend).attr('transform', `translate(40, 310)`);
     		const colorScale = d3.scaleOrdinal();
     		let colorValue; // strange to send null to choroplethMap
     		let selectedColorValue;
@@ -8708,8 +8828,6 @@ var app = (function () {
     			selectedColorValue = d;
     			render();
     		}
-
-    		
 
     		function handleMouseOut(d, i) {
     			selectedColorValue = null;
@@ -8753,8 +8871,8 @@ var app = (function () {
     		}
     	});
 
-    	$$self.$set = $$props => {
-    		if ("selectedRisk" in $$props) $$invalidate(0, selectedRisk = $$props.selectedRisk);
+    	$$self.$$set = $$props => {
+    		if ('selectedRisk' in $$props) $$invalidate(0, selectedRisk = $$props.selectedRisk);
     	};
 
     	return [selectedRisk];
@@ -8767,7 +8885,7 @@ var app = (function () {
     	}
     }
 
-    /* src/Poverty.svelte generated by Svelte v3.22.3 */
+    /* src/Poverty.svelte generated by Svelte v3.59.2 */
 
     function create_fragment$3(ctx) {
     	let div;
@@ -8776,14 +8894,12 @@ var app = (function () {
     		c() {
     			div = element("div");
 
-    			div.innerHTML = `<svg class="compare" width="700" height="420"><style>
-      .hover-rect:hover {
+    			div.innerHTML = `<svg class="compare" width="700" height="420"><style>.hover-rect:hover {
         opacity: 1;
         stroke: black;
         stroke-width: 1px;
         fill: rgba(228,26,28, 1);
-      }
-    </style></svg>`;
+      }</style></svg>`;
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -8801,13 +8917,13 @@ var app = (function () {
 
     function instance$3($$self, $$props, $$invalidate) {
     	let { compareData = [] } = $$props;
-    	let { titleListMain = "" } = $$props;
-    	let { titleListName = "" } = $$props;
-    	let { titleListNumber = "" } = $$props;
+    	let { titleListMain = '' } = $$props;
+    	let { titleListName = '' } = $$props;
+    	let { titleListNumber = '' } = $$props;
     	let { colorsList = [] } = $$props;
 
     	afterUpdate(() => {
-    		d3.select("svg.compare").call(visualList, {
+    		d3.select('svg.compare').call(visualList, {
     			dataList: compareData,
     			titleListName,
     			titleListNumber,
@@ -8817,19 +8933,19 @@ var app = (function () {
     			xValue: d => d.number,
     			yValue: d => d.name,
     			margin: { top: 70, right: 220, bottom: 0, left: 90 },
-    			barPadding: 0.2,
+    			barPadding: .2,
     			verticalSpacing: 55,
     			transitionDuration: transitionDuration$2,
     			colors: colorsList
     		});
     	});
 
-    	$$self.$set = $$props => {
-    		if ("compareData" in $$props) $$invalidate(0, compareData = $$props.compareData);
-    		if ("titleListMain" in $$props) $$invalidate(1, titleListMain = $$props.titleListMain);
-    		if ("titleListName" in $$props) $$invalidate(2, titleListName = $$props.titleListName);
-    		if ("titleListNumber" in $$props) $$invalidate(3, titleListNumber = $$props.titleListNumber);
-    		if ("colorsList" in $$props) $$invalidate(4, colorsList = $$props.colorsList);
+    	$$self.$$set = $$props => {
+    		if ('compareData' in $$props) $$invalidate(0, compareData = $$props.compareData);
+    		if ('titleListMain' in $$props) $$invalidate(1, titleListMain = $$props.titleListMain);
+    		if ('titleListName' in $$props) $$invalidate(2, titleListName = $$props.titleListName);
+    		if ('titleListNumber' in $$props) $$invalidate(3, titleListNumber = $$props.titleListNumber);
+    		if ('colorsList' in $$props) $$invalidate(4, colorsList = $$props.colorsList);
     	};
 
     	return [compareData, titleListMain, titleListName, titleListNumber, colorsList];
@@ -9215,7 +9331,7 @@ var app = (function () {
           .attr('x', textOffset);
     };
 
-    /* src/Projections.svelte generated by Svelte v3.22.3 */
+    /* src/Projections.svelte generated by Svelte v3.59.2 */
 
     function create_fragment$4(ctx) {
     	let svg_1;
@@ -9256,28 +9372,28 @@ var app = (function () {
     }
 
     function instance$4($$self, $$props, $$invalidate) {
-    	let { projectionsTitle = "" } = $$props;
-    	let { projectionsXAxisLabel = "" } = $$props;
-    	let { projectionsYAxisLabel = "" } = $$props;
-    	let { language = "" } = $$props;
+    	let { projectionsTitle = '' } = $$props;
+    	let { projectionsXAxisLabel = '' } = $$props;
+    	let { projectionsYAxisLabel = '' } = $$props;
+    	let { language = '' } = $$props;
     	let svg;
 
     	// state   
-    	let selectedColorValues = ["United States", "Brazil", "Italy"];
+    	let selectedColorValues = ['United States', 'Brazil', 'Italy'];
 
-    	let selectedCountries = ["United States", "Brazil", "Italy"];
+    	let selectedCountries = ['United States', 'Brazil', 'Italy'];
     	let data;
 
     	afterUpdate(() => {
-    		svg = d3.select("svg.projections");
+    		svg = d3.select('svg.projections');
 
-    		d3.csv("projections.csv").then(inData => {
+    		d3.csv('projections.csv').then(inData => {
     			inData.forEach(d => {
     				d.totdea_mean = +d.totdea_mean;
     			});
 
     			data = inData;
-    			console.log("projections.csv");
+    			console.log('projections.csv');
     			console.log(data);
     			render();
     		});
@@ -9299,17 +9415,17 @@ var app = (function () {
 
     	const render = () => {
     		// projections line chart
-    		let lineChartG = svg.selectAll("g.line-chart").data([null]);
+    		let lineChartG = svg.selectAll('g.line-chart').data([null]);
 
-    		lineChartG = lineChartG.enter().append("g").attr("class", "line-chart").merge(lineChartG);
+    		lineChartG = lineChartG.enter().append('g').attr('class', 'line-chart').merge(lineChartG);
 
     		// select country legend
-    		let colorLegendG = svg.selectAll("g.country-legend").data([null]);
+    		let colorLegendG = svg.selectAll('g.country-legend').data([null]);
 
-    		colorLegendG = colorLegendG.enter().append("g").attr("class", "country-legend").merge(colorLegendG);
-    		const width = +svg.attr("width");
-    		const height = +svg.attr("height");
-    		const parseTime = d3.timeParse("%Y-%m-%d");
+    		colorLegendG = colorLegendG.enter().append('g').attr('class', 'country-legend').merge(colorLegendG);
+    		const width = +svg.attr('width');
+    		const height = +svg.attr('height');
+    		const parseTime = d3.timeParse('%Y-%m-%d');
     		const yValue = d => d.totdea_mean;
     		const xValue = d => parseTime(d.date);
     		const colorValue = d => d.country;
@@ -9345,7 +9461,7 @@ var app = (function () {
     			selectedCountries
     		});
 
-    		colorLegendG.attr("transform", `translate(800, 45)`).call(colorLegendProjections, {
+    		colorLegendG.attr('transform', `translate(800, 45)`).call(colorLegendProjections, {
     			colorScale,
     			circleRadius: 11,
     			spacing: 30,
@@ -9356,11 +9472,11 @@ var app = (function () {
     		});
     	};
 
-    	$$self.$set = $$props => {
-    		if ("projectionsTitle" in $$props) $$invalidate(0, projectionsTitle = $$props.projectionsTitle);
-    		if ("projectionsXAxisLabel" in $$props) $$invalidate(1, projectionsXAxisLabel = $$props.projectionsXAxisLabel);
-    		if ("projectionsYAxisLabel" in $$props) $$invalidate(2, projectionsYAxisLabel = $$props.projectionsYAxisLabel);
-    		if ("language" in $$props) $$invalidate(3, language = $$props.language);
+    	$$self.$$set = $$props => {
+    		if ('projectionsTitle' in $$props) $$invalidate(0, projectionsTitle = $$props.projectionsTitle);
+    		if ('projectionsXAxisLabel' in $$props) $$invalidate(1, projectionsXAxisLabel = $$props.projectionsXAxisLabel);
+    		if ('projectionsYAxisLabel' in $$props) $$invalidate(2, projectionsYAxisLabel = $$props.projectionsYAxisLabel);
+    		if ('language' in $$props) $$invalidate(3, language = $$props.language);
     	};
 
     	return [projectionsTitle, projectionsXAxisLabel, projectionsYAxisLabel, language];
@@ -9379,7 +9495,7 @@ var app = (function () {
     	}
     }
 
-    /* src/Tabs.svelte generated by Svelte v3.22.3 */
+    /* src/Tabs.svelte generated by Svelte v3.59.2 */
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -9407,7 +9523,9 @@ var app = (function () {
     		},
     		m(target, anchor) {
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(target, anchor);
+    				}
     			}
 
     			insert(target, each_1_anchor, anchor);
@@ -9451,6 +9569,7 @@ var app = (function () {
     	let t0;
     	let t1;
     	let li_class_value;
+    	let mounted;
     	let dispose;
 
     	return {
@@ -9462,32 +9581,36 @@ var app = (function () {
     			attr(span, "class", "svelte-1v427x8");
 
     			attr(li, "class", li_class_value = "" + (null_to_empty(/*activeTabValue*/ ctx[0] === /*item*/ ctx[3].value
-    			? "active"
-    			: "") + " svelte-1v427x8"));
+    			? 'active'
+    			: '') + " svelte-1v427x8"));
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, li, anchor);
     			append(li, span);
     			append(span, t0);
     			append(li, t1);
-    			if (remount) dispose();
 
-    			dispose = listen(span, "click", function () {
-    				if (is_function(/*handleClick*/ ctx[2](/*item*/ ctx[3].value))) /*handleClick*/ ctx[2](/*item*/ ctx[3].value).apply(this, arguments);
-    			});
+    			if (!mounted) {
+    				dispose = listen(span, "click", function () {
+    					if (is_function(/*handleClick*/ ctx[2](/*item*/ ctx[3].value))) /*handleClick*/ ctx[2](/*item*/ ctx[3].value).apply(this, arguments);
+    				});
+
+    				mounted = true;
+    			}
     		},
     		p(new_ctx, dirty) {
     			ctx = new_ctx;
     			if (dirty & /*items*/ 2 && t0_value !== (t0_value = /*item*/ ctx[3].label + "")) set_data(t0, t0_value);
 
     			if (dirty & /*activeTabValue, items*/ 3 && li_class_value !== (li_class_value = "" + (null_to_empty(/*activeTabValue*/ ctx[0] === /*item*/ ctx[3].value
-    			? "active"
-    			: "") + " svelte-1v427x8"))) {
+    			? 'active'
+    			: '') + " svelte-1v427x8"))) {
     				attr(li, "class", li_class_value);
     			}
     		},
     		d(detaching) {
     			if (detaching) detach(li);
+    			mounted = false;
     			dispose();
     		}
     	};
@@ -9546,9 +9669,9 @@ var app = (function () {
 
     	const handleClick = tabValue => () => $$invalidate(0, activeTabValue = tabValue);
 
-    	$$self.$set = $$props => {
-    		if ("items" in $$props) $$invalidate(1, items = $$props.items);
-    		if ("activeTabValue" in $$props) $$invalidate(0, activeTabValue = $$props.activeTabValue);
+    	$$self.$$set = $$props => {
+    		if ('items' in $$props) $$invalidate(1, items = $$props.items);
+    		if ('activeTabValue' in $$props) $$invalidate(0, activeTabValue = $$props.activeTabValue);
     	};
 
     	return [activeTabValue, items, handleClick];
@@ -9561,7 +9684,7 @@ var app = (function () {
     	}
     }
 
-    /* src/Subtabs.svelte generated by Svelte v3.22.3 */
+    /* src/Subtabs.svelte generated by Svelte v3.59.2 */
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -9589,7 +9712,9 @@ var app = (function () {
     		},
     		m(target, anchor) {
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(target, anchor);
+    				}
     			}
 
     			insert(target, each_1_anchor, anchor);
@@ -9633,6 +9758,7 @@ var app = (function () {
     	let t0;
     	let t1;
     	let li_class_value;
+    	let mounted;
     	let dispose;
 
     	return {
@@ -9644,32 +9770,36 @@ var app = (function () {
     			attr(span, "class", "svelte-eadenl");
 
     			attr(li, "class", li_class_value = "" + (null_to_empty(/*activeTabValue*/ ctx[0] === /*item*/ ctx[3].value
-    			? "active"
-    			: "") + " svelte-eadenl"));
+    			? 'active'
+    			: '') + " svelte-eadenl"));
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, li, anchor);
     			append(li, span);
     			append(span, t0);
     			append(li, t1);
-    			if (remount) dispose();
 
-    			dispose = listen(span, "click", function () {
-    				if (is_function(/*handleClick*/ ctx[2](/*item*/ ctx[3].value))) /*handleClick*/ ctx[2](/*item*/ ctx[3].value).apply(this, arguments);
-    			});
+    			if (!mounted) {
+    				dispose = listen(span, "click", function () {
+    					if (is_function(/*handleClick*/ ctx[2](/*item*/ ctx[3].value))) /*handleClick*/ ctx[2](/*item*/ ctx[3].value).apply(this, arguments);
+    				});
+
+    				mounted = true;
+    			}
     		},
     		p(new_ctx, dirty) {
     			ctx = new_ctx;
     			if (dirty & /*items*/ 2 && t0_value !== (t0_value = /*item*/ ctx[3].label + "")) set_data(t0, t0_value);
 
     			if (dirty & /*activeTabValue, items*/ 3 && li_class_value !== (li_class_value = "" + (null_to_empty(/*activeTabValue*/ ctx[0] === /*item*/ ctx[3].value
-    			? "active"
-    			: "") + " svelte-eadenl"))) {
+    			? 'active'
+    			: '') + " svelte-eadenl"))) {
     				attr(li, "class", li_class_value);
     			}
     		},
     		d(detaching) {
     			if (detaching) detach(li);
+    			mounted = false;
     			dispose();
     		}
     	};
@@ -9732,9 +9862,9 @@ var app = (function () {
 
     	const handleClick = tabValue => () => $$invalidate(0, activeTabValue = tabValue);
 
-    	$$self.$set = $$props => {
-    		if ("items" in $$props) $$invalidate(1, items = $$props.items);
-    		if ("activeTabValue" in $$props) $$invalidate(0, activeTabValue = $$props.activeTabValue);
+    	$$self.$$set = $$props => {
+    		if ('items' in $$props) $$invalidate(1, items = $$props.items);
+    		if ('activeTabValue' in $$props) $$invalidate(0, activeTabValue = $$props.activeTabValue);
     	};
 
     	return [activeTabValue, items, handleClick];
@@ -9747,7 +9877,7 @@ var app = (function () {
     	}
     }
 
-    /* src/SimpleAutocomplete.svelte generated by Svelte v3.22.3 */
+    /* src/SimpleAutocomplete.svelte generated by Svelte v3.59.2 */
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -9805,7 +9935,9 @@ var app = (function () {
     		},
     		m(target, anchor) {
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(target, anchor);
+    				}
     			}
 
     			insert(target, t, anchor);
@@ -9862,6 +9994,7 @@ var app = (function () {
     function create_if_block_2(ctx) {
     	let div;
     	let div_class_value;
+    	let mounted;
     	let dispose;
 
     	function select_block_type_1(ctx, dirty) {
@@ -9872,8 +10005,8 @@ var app = (function () {
     	let current_block_type = select_block_type_1(ctx);
     	let if_block = current_block_type(ctx);
 
-    	function click_handler(...args) {
-    		return /*click_handler*/ ctx[61](/*listItem*/ ctx[63], ...args);
+    	function click_handler() {
+    		return /*click_handler*/ ctx[38](/*listItem*/ ctx[63]);
     	}
 
     	return {
@@ -9882,14 +10015,17 @@ var app = (function () {
     			if_block.c();
 
     			attr(div, "class", div_class_value = "autocomplete-list-item " + (/*i*/ ctx[65] === /*highlightIndex*/ ctx[11]
-    			? "selected"
-    			: "") + " svelte-16ggvsq");
+    			? 'selected'
+    			: '') + " svelte-16ggvsq");
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, div, anchor);
     			if_block.m(div, null);
-    			if (remount) dispose();
-    			dispose = listen(div, "click", click_handler);
+
+    			if (!mounted) {
+    				dispose = listen(div, "click", click_handler);
+    				mounted = true;
+    			}
     		},
     		p(new_ctx, dirty) {
     			ctx = new_ctx;
@@ -9907,14 +10043,15 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*highlightIndex*/ 2048 && div_class_value !== (div_class_value = "autocomplete-list-item " + (/*i*/ ctx[65] === /*highlightIndex*/ ctx[11]
-    			? "selected"
-    			: "") + " svelte-16ggvsq")) {
+    			? 'selected'
+    			: '') + " svelte-16ggvsq")) {
     				attr(div, "class", div_class_value);
     			}
     		},
     		d(detaching) {
     			if (detaching) detach(div);
     			if_block.d();
+    			mounted = false;
     			dispose();
     		}
     	};
@@ -9924,18 +10061,23 @@ var app = (function () {
     function create_else_block(ctx) {
     	let html_tag;
     	let raw_value = /*listItem*/ ctx[63].label + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(raw_value, null);
+    			html_tag = new HtmlTag(false);
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
-    			html_tag.m(target, anchor);
+    			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*filteredListItems*/ 4096 && raw_value !== (raw_value = /*listItem*/ ctx[63].label + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
@@ -9945,18 +10087,23 @@ var app = (function () {
     function create_if_block_3(ctx) {
     	let html_tag;
     	let raw_value = /*listItem*/ ctx[63].highlighted.label + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(raw_value, null);
+    			html_tag = new HtmlTag(false);
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
-    			html_tag.m(target, anchor);
+    			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*filteredListItems*/ 4096 && raw_value !== (raw_value = /*listItem*/ ctx[63].highlighted.label + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
@@ -10035,6 +10182,7 @@ var app = (function () {
     	let div0;
     	let div0_class_value;
     	let div1_class_value;
+    	let mounted;
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
@@ -10053,34 +10201,37 @@ var app = (function () {
     			div0 = element("div");
     			if (if_block) if_block.c();
     			attr(input_1, "type", "text");
+    			attr(input_1, "class", "input autocomplete-input svelte-16ggvsq");
     			attr(input_1, "placeholder", /*placeholder*/ ctx[2]);
     			attr(input_1, "name", /*name*/ ctx[4]);
     			input_1.disabled = /*disabled*/ ctx[5];
     			attr(input_1, "title", /*title*/ ctx[6]);
-    			attr(input_1, "class", "input autocomplete-input svelte-16ggvsq");
-    			attr(div0, "class", div0_class_value = "autocomplete-list " + (/*opened*/ ctx[10] ? "" : "hidden") + " is-fullwidth" + " svelte-16ggvsq");
+    			attr(div0, "class", div0_class_value = "autocomplete-list " + (/*opened*/ ctx[10] ? '' : 'hidden') + " is-fullwidth" + " svelte-16ggvsq");
     			attr(div1, "class", div1_class_value = "" + (/*className*/ ctx[3] + " autocomplete select is-fullwidth" + " svelte-16ggvsq"));
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, div1, anchor);
     			append(div1, input_1);
-    			/*input_1_binding*/ ctx[59](input_1);
+    			/*input_1_binding*/ ctx[36](input_1);
     			set_input_value(input_1, /*text*/ ctx[7]);
     			append(div1, t);
     			append(div1, div0);
     			if (if_block) if_block.m(div0, null);
-    			/*div0_binding*/ ctx[62](div0);
-    			if (remount) run_all(dispose);
+    			/*div0_binding*/ ctx[39](div0);
 
-    			dispose = [
-    				listen(window, "click", /*onDocumentClick*/ ctx[14]),
-    				listen(input_1, "input", /*input_1_input_handler*/ ctx[60]),
-    				listen(input_1, "input", /*onInput*/ ctx[17]),
-    				listen(input_1, "focus", /*onFocus*/ ctx[19]),
-    				listen(input_1, "keydown", /*onKeyDown*/ ctx[15]),
-    				listen(input_1, "click", /*onInputClick*/ ctx[18]),
-    				listen(input_1, "keypress", /*onKeyPress*/ ctx[16])
-    			];
+    			if (!mounted) {
+    				dispose = [
+    					listen(window, "click", /*onDocumentClick*/ ctx[14]),
+    					listen(input_1, "input", /*input_1_input_handler*/ ctx[37]),
+    					listen(input_1, "input", /*onInput*/ ctx[17]),
+    					listen(input_1, "focus", /*onFocus*/ ctx[19]),
+    					listen(input_1, "keydown", /*onKeyDown*/ ctx[15]),
+    					listen(input_1, "click", /*onInputClick*/ ctx[18]),
+    					listen(input_1, "keypress", /*onKeyPress*/ ctx[16])
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*placeholder*/ 4) {
@@ -10115,7 +10266,7 @@ var app = (function () {
     				}
     			}
 
-    			if (dirty[0] & /*opened*/ 1024 && div0_class_value !== (div0_class_value = "autocomplete-list " + (/*opened*/ ctx[10] ? "" : "hidden") + " is-fullwidth" + " svelte-16ggvsq")) {
+    			if (dirty[0] & /*opened*/ 1024 && div0_class_value !== (div0_class_value = "autocomplete-list " + (/*opened*/ ctx[10] ? '' : 'hidden') + " is-fullwidth" + " svelte-16ggvsq")) {
     				attr(div0, "class", div0_class_value);
     			}
 
@@ -10127,13 +10278,14 @@ var app = (function () {
     		o: noop,
     		d(detaching) {
     			if (detaching) detach(div1);
-    			/*input_1_binding*/ ctx[59](null);
+    			/*input_1_binding*/ ctx[36](null);
 
     			if (if_block) {
     				if_block.d();
     			}
 
-    			/*div0_binding*/ ctx[62](null);
+    			/*div0_binding*/ ctx[39](null);
+    			mounted = false;
     			run_all(dispose);
     		}
     	};
@@ -10625,23 +10777,6 @@ var app = (function () {
     		}
     	}
 
-    	function clear() {
-    		if (debug) {
-    			console.log("clear");
-    		}
-
-    		$$invalidate(7, text = "");
-    		setTimeout(() => input.focus());
-    	}
-
-    	function onBlur() {
-    		if (debug) {
-    			console.log("onBlur");
-    		}
-
-    		close();
-    	}
-
     	// 'item number one'.replace(/(it)(.*)(nu)(.*)(one)/ig, '<b>$1</b>$2 <b>$3</b>$4 <b>$5</b>')
     	function highlightFilter(q, fields) {
     		const qs = "(" + q.trim().replace(/\s/g, ")(.*)(") + ")";
@@ -10666,8 +10801,9 @@ var app = (function () {
     	}
 
     	function input_1_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(8, input = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			input = $$value;
+    			$$invalidate(8, input);
     		});
     	}
 
@@ -10679,35 +10815,36 @@ var app = (function () {
     	const click_handler = listItem => onListItemClick(listItem);
 
     	function div0_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(9, list = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			list = $$value;
+    			$$invalidate(9, list);
     		});
     	}
 
-    	$$self.$set = $$props => {
-    		if ("items" in $$props) $$invalidate(22, items = $$props.items);
-    		if ("labelFieldName" in $$props) $$invalidate(23, labelFieldName = $$props.labelFieldName);
-    		if ("keywordsFieldName" in $$props) $$invalidate(24, keywordsFieldName = $$props.keywordsFieldName);
-    		if ("valueFieldName" in $$props) $$invalidate(25, valueFieldName = $$props.valueFieldName);
-    		if ("labelFunction" in $$props) $$invalidate(26, labelFunction = $$props.labelFunction);
-    		if ("keywordsFunction" in $$props) $$invalidate(27, keywordsFunction = $$props.keywordsFunction);
-    		if ("valueFunction" in $$props) $$invalidate(28, valueFunction = $$props.valueFunction);
-    		if ("keywordsCleanFunction" in $$props) $$invalidate(29, keywordsCleanFunction = $$props.keywordsCleanFunction);
-    		if ("textCleanFunction" in $$props) $$invalidate(30, textCleanFunction = $$props.textCleanFunction);
-    		if ("beforeChange" in $$props) $$invalidate(31, beforeChange = $$props.beforeChange);
-    		if ("onChange" in $$props) $$invalidate(32, onChange = $$props.onChange);
-    		if ("selectFirstIfEmpty" in $$props) $$invalidate(33, selectFirstIfEmpty = $$props.selectFirstIfEmpty);
-    		if ("minCharactersToSearch" in $$props) $$invalidate(34, minCharactersToSearch = $$props.minCharactersToSearch);
-    		if ("maxItemsToShowInList" in $$props) $$invalidate(0, maxItemsToShowInList = $$props.maxItemsToShowInList);
-    		if ("noResultsText" in $$props) $$invalidate(1, noResultsText = $$props.noResultsText);
-    		if ("placeholder" in $$props) $$invalidate(2, placeholder = $$props.placeholder);
-    		if ("className" in $$props) $$invalidate(3, className = $$props.className);
-    		if ("name" in $$props) $$invalidate(4, name = $$props.name);
-    		if ("disabled" in $$props) $$invalidate(5, disabled = $$props.disabled);
-    		if ("title" in $$props) $$invalidate(6, title = $$props.title);
-    		if ("debug" in $$props) $$invalidate(35, debug = $$props.debug);
-    		if ("selectedItem" in $$props) $$invalidate(20, selectedItem = $$props.selectedItem);
-    		if ("value" in $$props) $$invalidate(21, value = $$props.value);
+    	$$self.$$set = $$props => {
+    		if ('items' in $$props) $$invalidate(22, items = $$props.items);
+    		if ('labelFieldName' in $$props) $$invalidate(23, labelFieldName = $$props.labelFieldName);
+    		if ('keywordsFieldName' in $$props) $$invalidate(24, keywordsFieldName = $$props.keywordsFieldName);
+    		if ('valueFieldName' in $$props) $$invalidate(25, valueFieldName = $$props.valueFieldName);
+    		if ('labelFunction' in $$props) $$invalidate(26, labelFunction = $$props.labelFunction);
+    		if ('keywordsFunction' in $$props) $$invalidate(27, keywordsFunction = $$props.keywordsFunction);
+    		if ('valueFunction' in $$props) $$invalidate(28, valueFunction = $$props.valueFunction);
+    		if ('keywordsCleanFunction' in $$props) $$invalidate(29, keywordsCleanFunction = $$props.keywordsCleanFunction);
+    		if ('textCleanFunction' in $$props) $$invalidate(30, textCleanFunction = $$props.textCleanFunction);
+    		if ('beforeChange' in $$props) $$invalidate(31, beforeChange = $$props.beforeChange);
+    		if ('onChange' in $$props) $$invalidate(32, onChange = $$props.onChange);
+    		if ('selectFirstIfEmpty' in $$props) $$invalidate(33, selectFirstIfEmpty = $$props.selectFirstIfEmpty);
+    		if ('minCharactersToSearch' in $$props) $$invalidate(34, minCharactersToSearch = $$props.minCharactersToSearch);
+    		if ('maxItemsToShowInList' in $$props) $$invalidate(0, maxItemsToShowInList = $$props.maxItemsToShowInList);
+    		if ('noResultsText' in $$props) $$invalidate(1, noResultsText = $$props.noResultsText);
+    		if ('placeholder' in $$props) $$invalidate(2, placeholder = $$props.placeholder);
+    		if ('className' in $$props) $$invalidate(3, className = $$props.className);
+    		if ('name' in $$props) $$invalidate(4, name = $$props.name);
+    		if ('disabled' in $$props) $$invalidate(5, disabled = $$props.disabled);
+    		if ('title' in $$props) $$invalidate(6, title = $$props.title);
+    		if ('debug' in $$props) $$invalidate(35, debug = $$props.debug);
+    		if ('selectedItem' in $$props) $$invalidate(20, selectedItem = $$props.selectedItem);
+    		if ('value' in $$props) $$invalidate(21, value = $$props.value);
     	};
 
     	$$self.$$.update = () => {
@@ -10757,29 +10894,6 @@ var app = (function () {
     		selectFirstIfEmpty,
     		minCharactersToSearch,
     		debug,
-    		filteredTextLength,
-    		listItems,
-    		highlightFilter,
-    		safeLabelFunction,
-    		safeKeywordsFunction,
-    		onSelectedItemChanged,
-    		prepareListItems,
-    		getListItem,
-    		prepareUserEnteredText,
-    		search,
-    		selectListItem,
-    		selectItem,
-    		up,
-    		down,
-    		highlight,
-    		onEsc,
-    		resetListToAllItemsAndOpen,
-    		open,
-    		close,
-    		isMinCharsToSearchReached,
-    		closeIfMinCharsToSearchReached,
-    		clear,
-    		onBlur,
     		input_1_binding,
     		input_1_input_handler,
     		click_handler,
@@ -10822,6 +10936,7 @@ var app = (function () {
     				selectedItem: 20,
     				value: 21
     			},
+    			null,
     			[-1, -1, -1]
     		);
     	}
@@ -11003,7 +11118,7 @@ var app = (function () {
         linear: identity
     });
 
-    function fade(node, { delay = 0, duration = 400, easing = identity }) {
+    function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
         const o = +getComputedStyle(node).opacity;
         return {
             delay,
@@ -11012,17 +11127,19 @@ var app = (function () {
             css: t => `opacity: ${t * o}`
         };
     }
-    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 }) {
+    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
         const style = getComputedStyle(node);
         const target_opacity = +style.opacity;
         const transform = style.transform === 'none' ? '' : style.transform;
         const od = target_opacity * (1 - opacity);
+        const [xValue, xUnit] = split_css_unit(x);
+        const [yValue, yUnit] = split_css_unit(y);
         return {
             delay,
             duration,
             easing,
             css: (t, u) => `
-			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${(1 - t) * yValue}${yUnit});
 			opacity: ${target_opacity - (od * u)}`
         };
     }
@@ -11235,7 +11352,7 @@ var app = (function () {
       );
     };
 
-    /* src/Square.svelte generated by Svelte v3.22.3 */
+    /* src/Square.svelte generated by Svelte v3.59.2 */
 
     function create_fragment$8(ctx) {
     	let svg;
@@ -11300,17 +11417,17 @@ var app = (function () {
     }
 
     function instance$8($$self, $$props, $$invalidate) {
-    	let { text = "" } = $$props;
-    	let { color = "" } = $$props;
+    	let { text = '' } = $$props;
+    	let { color = '' } = $$props;
     	let { size = 18 } = $$props;
     	let { factorWidth = 3 } = $$props;
-    	let fillText = "fill: " + color + "; ";
+    	let fillText = 'fill: ' + color + '; ';
 
-    	$$self.$set = $$props => {
-    		if ("text" in $$props) $$invalidate(0, text = $$props.text);
-    		if ("color" in $$props) $$invalidate(4, color = $$props.color);
-    		if ("size" in $$props) $$invalidate(1, size = $$props.size);
-    		if ("factorWidth" in $$props) $$invalidate(2, factorWidth = $$props.factorWidth);
+    	$$self.$$set = $$props => {
+    		if ('text' in $$props) $$invalidate(0, text = $$props.text);
+    		if ('color' in $$props) $$invalidate(4, color = $$props.color);
+    		if ('size' in $$props) $$invalidate(1, size = $$props.size);
+    		if ('factorWidth' in $$props) $$invalidate(2, factorWidth = $$props.factorWidth);
     	};
 
     	return [text, size, factorWidth, fillText, color];
@@ -11329,7 +11446,7 @@ var app = (function () {
     	}
     }
 
-    /* src/LineLegend.svelte generated by Svelte v3.22.3 */
+    /* src/LineLegend.svelte generated by Svelte v3.59.2 */
 
     function create_if_block_1$1(ctx) {
     	let svg;
@@ -11407,12 +11524,12 @@ var app = (function () {
     			line = svg_element("line");
     			text_1 = svg_element("text");
     			t1 = text(/*text*/ ctx[0]);
-    			attr(line, "stroke", "black");
     			attr(line, "x1", "10");
+    			attr(line, "x2", "30");
     			attr(line, "y1", y);
     			attr(line, "y2", y);
     			attr(line, "fill", "none");
-    			attr(line, "x2", "30");
+    			attr(line, "stroke", "black");
     			attr(line, "stroke-width", "4.5px");
     			attr(line, "stroke-linejoin", "round");
     			attr(line, "stroke-linecap", "round");
@@ -11452,8 +11569,8 @@ var app = (function () {
     function create_fragment$9(ctx) {
     	let t;
     	let if_block1_anchor;
-    	let if_block0 = /*type*/ ctx[1] === "continuous" && create_if_block_1$1(ctx);
-    	let if_block1 = /*type*/ ctx[1] === "dashed" && create_if_block$3(ctx);
+    	let if_block0 = /*type*/ ctx[1] === 'continuous' && create_if_block_1$1(ctx);
+    	let if_block1 = /*type*/ ctx[1] === 'dashed' && create_if_block$3(ctx);
 
     	return {
     		c() {
@@ -11469,7 +11586,7 @@ var app = (function () {
     			insert(target, if_block1_anchor, anchor);
     		},
     		p(ctx, [dirty]) {
-    			if (/*type*/ ctx[1] === "continuous") {
+    			if (/*type*/ ctx[1] === 'continuous') {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
@@ -11482,7 +11599,7 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (/*type*/ ctx[1] === "dashed") {
+    			if (/*type*/ ctx[1] === 'dashed') {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
@@ -11509,16 +11626,16 @@ var app = (function () {
     let y = 10;
 
     function instance$9($$self, $$props, $$invalidate) {
-    	let { text = "" } = $$props;
-    	let { type = "" } = $$props;
+    	let { text = '' } = $$props;
+    	let { type = '' } = $$props;
     	let { size = 18 } = $$props;
     	let { factorWidth = 3 } = $$props;
 
-    	$$self.$set = $$props => {
-    		if ("text" in $$props) $$invalidate(0, text = $$props.text);
-    		if ("type" in $$props) $$invalidate(1, type = $$props.type);
-    		if ("size" in $$props) $$invalidate(2, size = $$props.size);
-    		if ("factorWidth" in $$props) $$invalidate(3, factorWidth = $$props.factorWidth);
+    	$$self.$$set = $$props => {
+    		if ('text' in $$props) $$invalidate(0, text = $$props.text);
+    		if ('type' in $$props) $$invalidate(1, type = $$props.type);
+    		if ('size' in $$props) $$invalidate(2, size = $$props.size);
+    		if ('factorWidth' in $$props) $$invalidate(3, factorWidth = $$props.factorWidth);
     	};
 
     	return [text, type, size, factorWidth];
@@ -11537,7 +11654,7 @@ var app = (function () {
     	}
     }
 
-    /* src/App.svelte generated by Svelte v3.22.3 */
+    /* src/App.svelte generated by Svelte v3.59.2 */
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -11546,59 +11663,62 @@ var app = (function () {
     }
 
     // (703:3) {#if 0 === currentTab}
-    function create_if_block_18(ctx) {
+    function create_if_block_17(ctx) {
     	let div2;
     	let div1;
     	let div0;
+    	let comparebyage;
     	let div2_intro;
     	let div2_outro;
     	let t0;
     	let div6;
     	let div3;
+    	let square0;
     	let t1;
+    	let square1;
     	let t2;
     	let div5;
     	let div4;
     	let span2;
-    	let t3_value = /*translations*/ ctx[45].app.basedOn + "";
+    	let t3_value = /*translations*/ ctx[11].app.basedOn + "";
     	let t3;
     	let t4;
     	let span0;
-    	let t5_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "";
+    	let t5_value = /*translations*/ ctx[11].fatalityRisks[/*selectedSourceId*/ ctx[12]].source + "";
     	let t5;
     	let t6;
-    	let t7_value = /*translations*/ ctx[45].app.basedOnContinued1 + "";
+    	let t7_value = /*translations*/ ctx[11].app.basedOnContinued1 + "";
     	let t7;
     	let t8;
     	let span1;
-    	let t9_value = /*rowsOfScenarios*/ ctx[30][0].loc + "";
+    	let t9_value = /*rowsOfScenarios*/ ctx[10][0].loc + "";
     	let t9;
     	let t10;
-    	let t11_value = /*translations*/ ctx[45].app.basedOnContinued2 + "";
+    	let t11_value = /*translations*/ ctx[11].app.basedOnContinued2 + "";
     	let t11;
     	let t12;
     	let span3;
-    	let t13_value = numberFormatter(/*totalInfected*/ ctx[48]) + "";
+    	let t13_value = numberFormatter(/*totalInfected*/ ctx[52]) + "";
     	let t13;
     	let t14;
     	let span4;
-    	let t15_value = /*translations*/ ctx[45].app.basedOnContinued3 + "";
+    	let t15_value = /*translations*/ ctx[11].app.basedOnContinued3 + "";
     	let t15;
     	let t16;
     	let span5;
-    	let t17_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "";
+    	let t17_value = numberFormatter(/*totalDeaths*/ ctx[14]) + "";
     	let t17;
     	let t18;
     	let span6;
-    	let t19_value = /*translations*/ ctx[45].app.basedOnContinued4 + "";
+    	let t19_value = /*translations*/ ctx[11].app.basedOnContinued4 + "";
     	let t19;
     	let t20;
     	let span7;
-    	let t21_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "";
+    	let t21_value = numberFormatter(/*totalYearsLost*/ ctx[13]) + "";
     	let t21;
     	let t22;
     	let span9;
-    	let t23_value = /*translations*/ ctx[45].app.basedOnContinued5 + "";
+    	let t23_value = /*translations*/ ctx[11].app.basedOnContinued5 + "";
     	let t23;
     	let t24;
     	let span8;
@@ -11606,21 +11726,21 @@ var app = (function () {
     	let t26;
     	let current;
 
-    	const comparebyage = new CompareByAge({
+    	comparebyage = new CompareByAge({
     			props: {
-    				infectedData: /*infectedData*/ ctx[17],
-    				infectedTitle: /*infectedTitle*/ ctx[19],
-    				infectedTitleListName: /*infectedTitleListName*/ ctx[21],
-    				infectedTitleListNumber: /*infectedTitleListNumber*/ ctx[22],
-    				deathsData: /*deathsData*/ ctx[18],
-    				deathsTitle: /*deathsTitle*/ ctx[20],
-    				deathsTitleListName: /*deathsTitleListName*/ ctx[23],
-    				deathsTitleListNumber: /*deathsTitleListNumber*/ ctx[24]
+    				infectedData: /*infectedData*/ ctx[24],
+    				infectedTitle: /*infectedTitle*/ ctx[26],
+    				infectedTitleListName: /*infectedTitleListName*/ ctx[28],
+    				infectedTitleListNumber: /*infectedTitleListNumber*/ ctx[29],
+    				deathsData: /*deathsData*/ ctx[25],
+    				deathsTitle: /*deathsTitle*/ ctx[27],
+    				deathsTitleListName: /*deathsTitleListName*/ ctx[30],
+    				deathsTitleListNumber: /*deathsTitleListNumber*/ ctx[31]
     			}
     		});
 
-    	const square0 = new Square({ props: { text: "60+", color: "#43a2ca" } });
-    	const square1 = new Square({ props: { text: "<60", color: "#d4f0cd" } });
+    	square0 = new Square({ props: { text: '60+', color: '#43a2ca' } });
+    	square1 = new Square({ props: { text: '<60', color: '#d4f0cd' } });
 
     	return {
     		c() {
@@ -11669,25 +11789,25 @@ var app = (function () {
     			t23 = text(t23_value);
     			t24 = space();
     			span8 = element("span");
-    			t25 = text(/*selectedLocation*/ ctx[2]);
+    			t25 = text(/*selectedLocation*/ ctx[0]);
     			t26 = text(".");
-    			attr(div0, "class", "child svelte-1havf7j");
+    			attr(div0, "class", "child svelte-1ezrwae");
     			attr(div1, "class", "twelve columns");
-    			attr(div2, "class", "row svelte-1havf7j");
+    			attr(div2, "class", "row svelte-1ezrwae");
     			attr(div3, "class", "one columns");
-    			attr(span0, "class", "parameter svelte-1havf7j");
-    			attr(span1, "class", "parameter svelte-1havf7j");
-    			attr(span2, "class", "parameter-text svelte-1havf7j");
-    			attr(span3, "class", "emphasize-text svelte-1havf7j");
-    			attr(span4, "class", "parameter-text svelte-1havf7j");
-    			attr(span5, "class", "emphasize-text svelte-1havf7j");
-    			attr(span6, "class", "parameter-text svelte-1havf7j");
-    			attr(span7, "class", "emphasize-text svelte-1havf7j");
-    			attr(span8, "class", "parameter svelte-1havf7j");
-    			attr(span9, "class", "parameter-text svelte-1havf7j");
-    			attr(div4, "class", "caption svelte-1havf7j");
+    			attr(span0, "class", "parameter svelte-1ezrwae");
+    			attr(span1, "class", "parameter svelte-1ezrwae");
+    			attr(span2, "class", "parameter-text svelte-1ezrwae");
+    			attr(span3, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span4, "class", "parameter-text svelte-1ezrwae");
+    			attr(span5, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span6, "class", "parameter-text svelte-1ezrwae");
+    			attr(span7, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span8, "class", "parameter svelte-1ezrwae");
+    			attr(span9, "class", "parameter-text svelte-1ezrwae");
+    			attr(div4, "class", "caption svelte-1ezrwae");
     			attr(div5, "class", "ten columns");
-    			attr(div6, "class", "row svelte-1havf7j");
+    			attr(div6, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div2, anchor);
@@ -11739,37 +11859,39 @@ var app = (function () {
     			append(span9, t26);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
     			const comparebyage_changes = {};
-    			if (dirty[0] & /*infectedData*/ 131072) comparebyage_changes.infectedData = /*infectedData*/ ctx[17];
-    			if (dirty[0] & /*infectedTitle*/ 524288) comparebyage_changes.infectedTitle = /*infectedTitle*/ ctx[19];
-    			if (dirty[0] & /*infectedTitleListName*/ 2097152) comparebyage_changes.infectedTitleListName = /*infectedTitleListName*/ ctx[21];
-    			if (dirty[0] & /*infectedTitleListNumber*/ 4194304) comparebyage_changes.infectedTitleListNumber = /*infectedTitleListNumber*/ ctx[22];
-    			if (dirty[0] & /*deathsData*/ 262144) comparebyage_changes.deathsData = /*deathsData*/ ctx[18];
-    			if (dirty[0] & /*deathsTitle*/ 1048576) comparebyage_changes.deathsTitle = /*deathsTitle*/ ctx[20];
-    			if (dirty[0] & /*deathsTitleListName*/ 8388608) comparebyage_changes.deathsTitleListName = /*deathsTitleListName*/ ctx[23];
-    			if (dirty[0] & /*deathsTitleListNumber*/ 16777216) comparebyage_changes.deathsTitleListNumber = /*deathsTitleListNumber*/ ctx[24];
+    			if (dirty[0] & /*infectedData*/ 16777216) comparebyage_changes.infectedData = /*infectedData*/ ctx[24];
+    			if (dirty[0] & /*infectedTitle*/ 67108864) comparebyage_changes.infectedTitle = /*infectedTitle*/ ctx[26];
+    			if (dirty[0] & /*infectedTitleListName*/ 268435456) comparebyage_changes.infectedTitleListName = /*infectedTitleListName*/ ctx[28];
+    			if (dirty[0] & /*infectedTitleListNumber*/ 536870912) comparebyage_changes.infectedTitleListNumber = /*infectedTitleListNumber*/ ctx[29];
+    			if (dirty[0] & /*deathsData*/ 33554432) comparebyage_changes.deathsData = /*deathsData*/ ctx[25];
+    			if (dirty[0] & /*deathsTitle*/ 134217728) comparebyage_changes.deathsTitle = /*deathsTitle*/ ctx[27];
+    			if (dirty[0] & /*deathsTitleListName*/ 1073741824) comparebyage_changes.deathsTitleListName = /*deathsTitleListName*/ ctx[30];
+    			if (dirty[1] & /*deathsTitleListNumber*/ 1) comparebyage_changes.deathsTitleListNumber = /*deathsTitleListNumber*/ ctx[31];
     			comparebyage.$set(comparebyage_changes);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t3_value !== (t3_value = /*translations*/ ctx[45].app.basedOn + "")) set_data(t3, t3_value);
-    			if ((!current || dirty[1] & /*translations, selectedSourceId*/ 49152) && t5_value !== (t5_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "")) set_data(t5, t5_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t7_value !== (t7_value = /*translations*/ ctx[45].app.basedOnContinued1 + "")) set_data(t7, t7_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[30][0].loc + "")) set_data(t9, t9_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t11_value !== (t11_value = /*translations*/ ctx[45].app.basedOnContinued2 + "")) set_data(t11, t11_value);
-    			if ((!current || dirty[1] & /*totalInfected*/ 131072) && t13_value !== (t13_value = numberFormatter(/*totalInfected*/ ctx[48]) + "")) set_data(t13, t13_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t15_value !== (t15_value = /*translations*/ ctx[45].app.basedOnContinued3 + "")) set_data(t15, t15_value);
-    			if ((!current || dirty[1] & /*totalDeaths*/ 262144) && t17_value !== (t17_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "")) set_data(t17, t17_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t19_value !== (t19_value = /*translations*/ ctx[45].app.basedOnContinued4 + "")) set_data(t19, t19_value);
-    			if ((!current || dirty[1] & /*totalYearsLost*/ 524288) && t21_value !== (t21_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "")) set_data(t21, t21_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t23_value !== (t23_value = /*translations*/ ctx[45].app.basedOnContinued5 + "")) set_data(t23, t23_value);
-    			if (!current || dirty[0] & /*selectedLocation*/ 4) set_data(t25, /*selectedLocation*/ ctx[2]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t3_value !== (t3_value = /*translations*/ ctx[11].app.basedOn + "")) set_data(t3, t3_value);
+    			if ((!current || dirty[0] & /*translations, selectedSourceId*/ 6144) && t5_value !== (t5_value = /*translations*/ ctx[11].fatalityRisks[/*selectedSourceId*/ ctx[12]].source + "")) set_data(t5, t5_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t7_value !== (t7_value = /*translations*/ ctx[11].app.basedOnContinued1 + "")) set_data(t7, t7_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[10][0].loc + "")) set_data(t9, t9_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t11_value !== (t11_value = /*translations*/ ctx[11].app.basedOnContinued2 + "")) set_data(t11, t11_value);
+    			if ((!current || dirty[1] & /*totalInfected*/ 2097152) && t13_value !== (t13_value = numberFormatter(/*totalInfected*/ ctx[52]) + "")) set_data(t13, t13_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t15_value !== (t15_value = /*translations*/ ctx[11].app.basedOnContinued3 + "")) set_data(t15, t15_value);
+    			if ((!current || dirty[0] & /*totalDeaths*/ 16384) && t17_value !== (t17_value = numberFormatter(/*totalDeaths*/ ctx[14]) + "")) set_data(t17, t17_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t19_value !== (t19_value = /*translations*/ ctx[11].app.basedOnContinued4 + "")) set_data(t19, t19_value);
+    			if ((!current || dirty[0] & /*totalYearsLost*/ 8192) && t21_value !== (t21_value = numberFormatter(/*totalYearsLost*/ ctx[13]) + "")) set_data(t21, t21_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t23_value !== (t23_value = /*translations*/ ctx[11].app.basedOnContinued5 + "")) set_data(t23, t23_value);
+    			if (!current || dirty[0] & /*selectedLocation*/ 1) set_data(t25, /*selectedLocation*/ ctx[0]);
     		},
     		i(local) {
     			if (current) return;
     			transition_in(comparebyage.$$.fragment, local);
 
     			add_render_callback(() => {
+    				if (!current) return;
     				if (div2_outro) div2_outro.end(1);
-    				if (!div2_intro) div2_intro = create_in_transition(div2, fade, { duration: durationIn });
+    				div2_intro = create_in_transition(div2, fade, { duration: durationIn });
     				div2_intro.start();
     			});
 
@@ -11798,19 +11920,24 @@ var app = (function () {
     }
 
     // (753:3) {#if 1 === currentTab}
-    function create_if_block_14(ctx) {
+    function create_if_block_13(ctx) {
     	let div0;
+    	let subtabs;
     	let updating_activeTabValue;
     	let t0;
     	let div2;
     	let div1;
+    	let compare;
     	let t1;
     	let div6;
     	let div3;
     	let t2;
     	let div4;
+    	let square0;
     	let t3;
+    	let square1;
     	let t4;
+    	let square2;
     	let t5;
     	let div5;
     	let t6;
@@ -11818,54 +11945,54 @@ var app = (function () {
     	let current;
 
     	function subtabs_activeTabValue_binding(value) {
-    		/*subtabs_activeTabValue_binding*/ ctx[130].call(null, value);
+    		/*subtabs_activeTabValue_binding*/ ctx[113](value);
     	}
 
-    	let subtabs_props = { items: /*compareItems*/ ctx[11] };
+    	let subtabs_props = { items: /*compareItems*/ ctx[8] };
 
-    	if (/*currentCompare*/ ctx[12] !== void 0) {
-    		subtabs_props.activeTabValue = /*currentCompare*/ ctx[12];
+    	if (/*currentCompare*/ ctx[9] !== void 0) {
+    		subtabs_props.activeTabValue = /*currentCompare*/ ctx[9];
     	}
 
-    	const subtabs = new Subtabs({ props: subtabs_props });
-    	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding));
+    	subtabs = new Subtabs({ props: subtabs_props });
+    	binding_callbacks.push(() => bind(subtabs, 'activeTabValue', subtabs_activeTabValue_binding));
 
-    	const compare = new Compare({
+    	compare = new Compare({
     			props: {
-    				compareData: /*compareList*/ ctx[13],
-    				titleListMain: /*titleListMain*/ ctx[16],
-    				titleListName: /*titleListName*/ ctx[14],
-    				titleListNumber: /*titleListNumber*/ ctx[15]
+    				compareData: /*compareList*/ ctx[20],
+    				titleListMain: /*titleListMain*/ ctx[23],
+    				titleListName: /*titleListName*/ ctx[21],
+    				titleListNumber: /*titleListNumber*/ ctx[22]
     			}
     		});
 
-    	const square0 = new Square({
+    	square0 = new Square({
     			props: {
-    				text: "2020+",
-    				color: "#fdc086",
+    				text: '2020+',
+    				color: '#fdc086',
     				factorWidth: 4
     			}
     		});
 
-    	const square1 = new Square({
+    	square1 = new Square({
     			props: {
-    				text: "2017",
-    				color: "#beaed4",
+    				text: '2017',
+    				color: '#beaed4',
     				factorWidth: 4
     			}
     		});
 
-    	const square2 = new Square({
+    	square2 = new Square({
     			props: {
-    				text: "<2020-05-27",
-    				color: "#7fc97f",
+    				text: '<2020-05-27',
+    				color: '#7fc97f',
     				factorWidth: 6
     			}
     		});
 
-    	let if_block0 = 0 == /*currentCompare*/ ctx[12] && create_if_block_17(ctx);
-    	let if_block1 = 1 == /*currentCompare*/ ctx[12] && create_if_block_16(ctx);
-    	let if_block2 = 2 == /*currentCompare*/ ctx[12] && create_if_block_15(ctx);
+    	let if_block0 = 0 == /*currentCompare*/ ctx[9] && create_if_block_16(ctx);
+    	let if_block1 = 1 == /*currentCompare*/ ctx[9] && create_if_block_15(ctx);
+    	let if_block2 = 2 == /*currentCompare*/ ctx[9] && create_if_block_14(ctx);
 
     	return {
     		c() {
@@ -11894,14 +12021,14 @@ var app = (function () {
     			t7 = space();
     			if (if_block2) if_block2.c();
     			set_style(div0, "margin-top", "5px");
-    			attr(div1, "class", "child svelte-1havf7j");
+    			attr(div1, "class", "child svelte-1ezrwae");
     			attr(div2, "class", "twelve columns");
     			set_style(div2, "text-align", "center");
     			set_style(div2, "margin-top", "25px");
     			attr(div3, "class", "two columns");
     			attr(div4, "class", "two columns");
     			attr(div5, "class", "eight columns");
-    			attr(div6, "class", "row svelte-1havf7j");
+    			attr(div6, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div0, anchor);
@@ -11931,27 +12058,27 @@ var app = (function () {
     		},
     		p(ctx, dirty) {
     			const subtabs_changes = {};
-    			if (dirty[0] & /*compareItems*/ 2048) subtabs_changes.items = /*compareItems*/ ctx[11];
+    			if (dirty[0] & /*compareItems*/ 256) subtabs_changes.items = /*compareItems*/ ctx[8];
 
-    			if (!updating_activeTabValue && dirty[0] & /*currentCompare*/ 4096) {
+    			if (!updating_activeTabValue && dirty[0] & /*currentCompare*/ 512) {
     				updating_activeTabValue = true;
-    				subtabs_changes.activeTabValue = /*currentCompare*/ ctx[12];
+    				subtabs_changes.activeTabValue = /*currentCompare*/ ctx[9];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			subtabs.$set(subtabs_changes);
     			const compare_changes = {};
-    			if (dirty[0] & /*compareList*/ 8192) compare_changes.compareData = /*compareList*/ ctx[13];
-    			if (dirty[0] & /*titleListMain*/ 65536) compare_changes.titleListMain = /*titleListMain*/ ctx[16];
-    			if (dirty[0] & /*titleListName*/ 16384) compare_changes.titleListName = /*titleListName*/ ctx[14];
-    			if (dirty[0] & /*titleListNumber*/ 32768) compare_changes.titleListNumber = /*titleListNumber*/ ctx[15];
+    			if (dirty[0] & /*compareList*/ 1048576) compare_changes.compareData = /*compareList*/ ctx[20];
+    			if (dirty[0] & /*titleListMain*/ 8388608) compare_changes.titleListMain = /*titleListMain*/ ctx[23];
+    			if (dirty[0] & /*titleListName*/ 2097152) compare_changes.titleListName = /*titleListName*/ ctx[21];
+    			if (dirty[0] & /*titleListNumber*/ 4194304) compare_changes.titleListNumber = /*titleListNumber*/ ctx[22];
     			compare.$set(compare_changes);
 
-    			if (0 == /*currentCompare*/ ctx[12]) {
+    			if (0 == /*currentCompare*/ ctx[9]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_17(ctx);
+    					if_block0 = create_if_block_16(ctx);
     					if_block0.c();
     					if_block0.m(div5, t6);
     				}
@@ -11960,11 +12087,11 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (1 == /*currentCompare*/ ctx[12]) {
+    			if (1 == /*currentCompare*/ ctx[9]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block_16(ctx);
+    					if_block1 = create_if_block_15(ctx);
     					if_block1.c();
     					if_block1.m(div5, t7);
     				}
@@ -11973,11 +12100,11 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if (2 == /*currentCompare*/ ctx[12]) {
+    			if (2 == /*currentCompare*/ ctx[9]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
-    					if_block2 = create_if_block_15(ctx);
+    					if_block2 = create_if_block_14(ctx);
     					if_block2.c();
     					if_block2.m(div5, null);
     				}
@@ -12022,20 +12149,20 @@ var app = (function () {
     }
 
     // (776:6) {#if 0 == currentCompare}
-    function create_if_block_17(ctx) {
+    function create_if_block_16(ctx) {
     	let div3;
     	let div0;
-    	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
+    	let t0_value = /*translations*/ ctx[11].app.compareWithOtherCaption1 + "";
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption2 + "";
+    	let t2_value = /*translations*/ ctx[11].app.compareWithOtherCaption2 + "";
     	let t2;
     	let t3;
     	let a0;
     	let t5;
     	let div2;
-    	let t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption3 + "";
+    	let t6_value = /*translations*/ ctx[11].app.compareWithOtherCaption3 + "";
     	let t6;
     	let t7;
     	let a1;
@@ -12057,12 +12184,12 @@ var app = (function () {
     			t7 = space();
     			a1 = element("a");
     			a1.textContent = "Our World in Data";
-    			attr(div0, "class", "parameter-text svelte-1havf7j");
+    			attr(div0, "class", "parameter-text svelte-1ezrwae");
     			attr(a0, "href", "https://ourworldindata.org/causes-of-death");
-    			attr(div1, "class", "parameter-text svelte-1havf7j");
+    			attr(div1, "class", "parameter-text svelte-1ezrwae");
     			attr(a1, "href", "https://ourworldindata.org/coronavirus-data");
-    			attr(div2, "class", "parameter-text svelte-1havf7j");
-    			attr(div3, "class", "caption svelte-1havf7j");
+    			attr(div2, "class", "parameter-text svelte-1ezrwae");
+    			attr(div3, "class", "caption svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div3, anchor);
@@ -12080,9 +12207,9 @@ var app = (function () {
     			append(div2, a1);
     		},
     		p(ctx, dirty) {
-    			if (dirty[1] & /*translations*/ 16384 && t0_value !== (t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "")) set_data(t0, t0_value);
-    			if (dirty[1] & /*translations*/ 16384 && t2_value !== (t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption2 + "")) set_data(t2, t2_value);
-    			if (dirty[1] & /*translations*/ 16384 && t6_value !== (t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption3 + "")) set_data(t6, t6_value);
+    			if (dirty[0] & /*translations*/ 2048 && t0_value !== (t0_value = /*translations*/ ctx[11].app.compareWithOtherCaption1 + "")) set_data(t0, t0_value);
+    			if (dirty[0] & /*translations*/ 2048 && t2_value !== (t2_value = /*translations*/ ctx[11].app.compareWithOtherCaption2 + "")) set_data(t2, t2_value);
+    			if (dirty[0] & /*translations*/ 2048 && t6_value !== (t6_value = /*translations*/ ctx[11].app.compareWithOtherCaption3 + "")) set_data(t6, t6_value);
     		},
     		d(detaching) {
     			if (detaching) detach(div3);
@@ -12091,25 +12218,25 @@ var app = (function () {
     }
 
     // (791:6) {#if 1 == currentCompare}
-    function create_if_block_16(ctx) {
+    function create_if_block_15(ctx) {
     	let div3;
     	let div0;
-    	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
+    	let t0_value = /*translations*/ ctx[11].app.compareWithOtherCaption1 + "";
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption4 + "";
+    	let t2_value = /*translations*/ ctx[11].app.compareWithOtherCaption4 + "";
     	let t2;
     	let t3;
     	let a0;
     	let t5;
     	let div2;
-    	let t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "";
+    	let t6_value = /*translations*/ ctx[11].app.compareWithOtherCaption5 + "";
     	let t6;
     	let t7;
     	let a1;
     	let t9;
-    	let t10_value = /*translations*/ ctx[45].app.authorsCalculations + "";
+    	let t10_value = /*translations*/ ctx[11].app.authorsCalculations + "";
     	let t10;
 
     	return {
@@ -12131,12 +12258,12 @@ var app = (function () {
     			a1.textContent = "Our World in Data";
     			t9 = space();
     			t10 = text(t10_value);
-    			attr(div0, "class", "parameter-text svelte-1havf7j");
+    			attr(div0, "class", "parameter-text svelte-1ezrwae");
     			attr(a0, "href", "https://ourworldindata.org/grapher/burden-of-disease-by-cause");
-    			attr(div1, "class", "parameter-text svelte-1havf7j");
+    			attr(div1, "class", "parameter-text svelte-1ezrwae");
     			attr(a1, "href", "https://ourworldindata.org/coronavirus-data");
-    			attr(div2, "class", "parameter-text svelte-1havf7j");
-    			attr(div3, "class", "caption svelte-1havf7j");
+    			attr(div2, "class", "parameter-text svelte-1ezrwae");
+    			attr(div3, "class", "caption svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div3, anchor);
@@ -12156,10 +12283,10 @@ var app = (function () {
     			append(div2, t10);
     		},
     		p(ctx, dirty) {
-    			if (dirty[1] & /*translations*/ 16384 && t0_value !== (t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "")) set_data(t0, t0_value);
-    			if (dirty[1] & /*translations*/ 16384 && t2_value !== (t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption4 + "")) set_data(t2, t2_value);
-    			if (dirty[1] & /*translations*/ 16384 && t6_value !== (t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "")) set_data(t6, t6_value);
-    			if (dirty[1] & /*translations*/ 16384 && t10_value !== (t10_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data(t10, t10_value);
+    			if (dirty[0] & /*translations*/ 2048 && t0_value !== (t0_value = /*translations*/ ctx[11].app.compareWithOtherCaption1 + "")) set_data(t0, t0_value);
+    			if (dirty[0] & /*translations*/ 2048 && t2_value !== (t2_value = /*translations*/ ctx[11].app.compareWithOtherCaption4 + "")) set_data(t2, t2_value);
+    			if (dirty[0] & /*translations*/ 2048 && t6_value !== (t6_value = /*translations*/ ctx[11].app.compareWithOtherCaption5 + "")) set_data(t6, t6_value);
+    			if (dirty[0] & /*translations*/ 2048 && t10_value !== (t10_value = /*translations*/ ctx[11].app.authorsCalculations + "")) set_data(t10, t10_value);
     		},
     		d(detaching) {
     			if (detaching) detach(div3);
@@ -12168,25 +12295,25 @@ var app = (function () {
     }
 
     // (807:6) {#if 2 == currentCompare}
-    function create_if_block_15(ctx) {
+    function create_if_block_14(ctx) {
     	let div3;
     	let div0;
-    	let t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "";
+    	let t0_value = /*translations*/ ctx[11].app.compareWithOtherCaption1 + "";
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption7 + "";
+    	let t2_value = /*translations*/ ctx[11].app.compareWithOtherCaption7 + "";
     	let t2;
     	let t3;
     	let a0;
     	let t5;
     	let div2;
-    	let t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "";
+    	let t6_value = /*translations*/ ctx[11].app.compareWithOtherCaption5 + "";
     	let t6;
     	let t7;
     	let a1;
     	let t9;
-    	let t10_value = /*translations*/ ctx[45].app.authorsCalculations + "";
+    	let t10_value = /*translations*/ ctx[11].app.authorsCalculations + "";
     	let t10;
 
     	return {
@@ -12208,12 +12335,12 @@ var app = (function () {
     			a1.textContent = "Our World in Data";
     			t9 = space();
     			t10 = text(t10_value);
-    			attr(div0, "class", "parameter-text svelte-1havf7j");
+    			attr(div0, "class", "parameter-text svelte-1ezrwae");
     			attr(a0, "href", "https://ourworldindata.org/grapher/disease-burden-by-risk-factor");
-    			attr(div1, "class", "parameter-text svelte-1havf7j");
+    			attr(div1, "class", "parameter-text svelte-1ezrwae");
     			attr(a1, "href", "https://ourworldindata.org/coronavirus-data");
-    			attr(div2, "class", "parameter-text svelte-1havf7j");
-    			attr(div3, "class", "caption svelte-1havf7j");
+    			attr(div2, "class", "parameter-text svelte-1ezrwae");
+    			attr(div3, "class", "caption svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div3, anchor);
@@ -12233,10 +12360,10 @@ var app = (function () {
     			append(div2, t10);
     		},
     		p(ctx, dirty) {
-    			if (dirty[1] & /*translations*/ 16384 && t0_value !== (t0_value = /*translations*/ ctx[45].app.compareWithOtherCaption1 + "")) set_data(t0, t0_value);
-    			if (dirty[1] & /*translations*/ 16384 && t2_value !== (t2_value = /*translations*/ ctx[45].app.compareWithOtherCaption7 + "")) set_data(t2, t2_value);
-    			if (dirty[1] & /*translations*/ 16384 && t6_value !== (t6_value = /*translations*/ ctx[45].app.compareWithOtherCaption5 + "")) set_data(t6, t6_value);
-    			if (dirty[1] & /*translations*/ 16384 && t10_value !== (t10_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data(t10, t10_value);
+    			if (dirty[0] & /*translations*/ 2048 && t0_value !== (t0_value = /*translations*/ ctx[11].app.compareWithOtherCaption1 + "")) set_data(t0, t0_value);
+    			if (dirty[0] & /*translations*/ 2048 && t2_value !== (t2_value = /*translations*/ ctx[11].app.compareWithOtherCaption7 + "")) set_data(t2, t2_value);
+    			if (dirty[0] & /*translations*/ 2048 && t6_value !== (t6_value = /*translations*/ ctx[11].app.compareWithOtherCaption5 + "")) set_data(t6, t6_value);
+    			if (dirty[0] & /*translations*/ 2048 && t10_value !== (t10_value = /*translations*/ ctx[11].app.authorsCalculations + "")) set_data(t10, t10_value);
     		},
     		d(detaching) {
     			if (detaching) detach(div3);
@@ -12245,8 +12372,9 @@ var app = (function () {
     }
 
     // (827:3) {#if 2 === currentTab}
-    function create_if_block_11(ctx) {
+    function create_if_block_10(ctx) {
     	let div5;
+    	let subtabs;
     	let updating_activeTabValue;
     	let t0;
     	let div4;
@@ -12255,35 +12383,35 @@ var app = (function () {
     	let t2;
     	let div2;
     	let div0;
-    	let t3_value = /*translations*/ ctx[45].app.mapCaption + "";
+    	let t3_value = /*translations*/ ctx[11].app.mapCaption + "";
     	let t3;
     	let t4;
     	let div1;
-    	let t5_value = /*translations*/ ctx[45].app.source + "";
+    	let t5_value = /*translations*/ ctx[11].app.source + "";
     	let t5;
     	let t6;
     	let a;
     	let t8;
-    	let t9_value = /*translations*/ ctx[45].app.authorsCalculations + "";
+    	let t9_value = /*translations*/ ctx[11].app.authorsCalculations + "";
     	let t9;
     	let div5_intro;
     	let div5_outro;
     	let current;
 
     	function subtabs_activeTabValue_binding_1(value) {
-    		/*subtabs_activeTabValue_binding_1*/ ctx[131].call(null, value);
+    		/*subtabs_activeTabValue_binding_1*/ ctx[114](value);
     	}
 
-    	let subtabs_props = { items: /*mapItems*/ ctx[32] };
+    	let subtabs_props = { items: /*mapItems*/ ctx[38] };
 
-    	if (/*selectedRisk*/ ctx[33] !== void 0) {
-    		subtabs_props.activeTabValue = /*selectedRisk*/ ctx[33];
+    	if (/*selectedRisk*/ ctx[39] !== void 0) {
+    		subtabs_props.activeTabValue = /*selectedRisk*/ ctx[39];
     	}
 
-    	const subtabs = new Subtabs({ props: subtabs_props });
-    	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding_1));
-    	let if_block0 = 0 == /*selectedRisk*/ ctx[33] && create_if_block_13(ctx);
-    	let if_block1 = 1 == /*selectedRisk*/ ctx[33] && create_if_block_12(ctx);
+    	subtabs = new Subtabs({ props: subtabs_props });
+    	binding_callbacks.push(() => bind(subtabs, 'activeTabValue', subtabs_activeTabValue_binding_1));
+    	let if_block0 = 0 == /*selectedRisk*/ ctx[39] && create_if_block_12(ctx);
+    	let if_block1 = 1 == /*selectedRisk*/ ctx[39] && create_if_block_11(ctx);
 
     	return {
     		c() {
@@ -12307,15 +12435,15 @@ var app = (function () {
     			a.textContent = "World Atlas TopoJSON";
     			t8 = space();
     			t9 = text(t9_value);
-    			attr(div0, "class", "parameter-text svelte-1havf7j");
+    			attr(div0, "class", "parameter-text svelte-1ezrwae");
     			attr(a, "href", "https://github.com/topojson/world-atlas");
-    			attr(div1, "class", "parameter-text svelte-1havf7j");
-    			attr(div2, "class", "caption svelte-1havf7j");
-    			attr(div3, "class", "child svelte-1havf7j");
+    			attr(div1, "class", "parameter-text svelte-1ezrwae");
+    			attr(div2, "class", "caption svelte-1ezrwae");
+    			attr(div3, "class", "child svelte-1ezrwae");
     			attr(div4, "class", "twelve columns");
     			set_style(div4, "text-align", "center");
     			set_style(div4, "margin-top", "25px");
-    			attr(div5, "class", "row svelte-1havf7j");
+    			attr(div5, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div5, anchor);
@@ -12339,27 +12467,28 @@ var app = (function () {
     			append(div1, t9);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
     			const subtabs_changes = {};
-    			if (dirty[1] & /*mapItems*/ 2) subtabs_changes.items = /*mapItems*/ ctx[32];
+    			if (dirty[1] & /*mapItems*/ 128) subtabs_changes.items = /*mapItems*/ ctx[38];
 
-    			if (!updating_activeTabValue && dirty[1] & /*selectedRisk*/ 4) {
+    			if (!updating_activeTabValue && dirty[1] & /*selectedRisk*/ 256) {
     				updating_activeTabValue = true;
-    				subtabs_changes.activeTabValue = /*selectedRisk*/ ctx[33];
+    				subtabs_changes.activeTabValue = /*selectedRisk*/ ctx[39];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			subtabs.$set(subtabs_changes);
 
-    			if (0 == /*selectedRisk*/ ctx[33]) {
+    			if (0 == /*selectedRisk*/ ctx[39]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
-    					if (dirty[1] & /*selectedRisk*/ 4) {
+    					if (dirty[1] & /*selectedRisk*/ 256) {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_13(ctx);
+    					if_block0 = create_if_block_12(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(div3, t1);
@@ -12374,15 +12503,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (1 == /*selectedRisk*/ ctx[33]) {
+    			if (1 == /*selectedRisk*/ ctx[39]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[1] & /*selectedRisk*/ 4) {
+    					if (dirty[1] & /*selectedRisk*/ 256) {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_12(ctx);
+    					if_block1 = create_if_block_11(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(div3, t2);
@@ -12397,9 +12526,9 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t3_value !== (t3_value = /*translations*/ ctx[45].app.mapCaption + "")) set_data(t3, t3_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t5_value !== (t5_value = /*translations*/ ctx[45].app.source + "")) set_data(t5, t5_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t9_value !== (t9_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data(t9, t9_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t3_value !== (t3_value = /*translations*/ ctx[11].app.mapCaption + "")) set_data(t3, t3_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t5_value !== (t5_value = /*translations*/ ctx[11].app.source + "")) set_data(t5, t5_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t9_value !== (t9_value = /*translations*/ ctx[11].app.authorsCalculations + "")) set_data(t9, t9_value);
     		},
     		i(local) {
     			if (current) return;
@@ -12408,8 +12537,9 @@ var app = (function () {
     			transition_in(if_block1);
 
     			add_render_callback(() => {
+    				if (!current) return;
     				if (div5_outro) div5_outro.end(1);
-    				if (!div5_intro) div5_intro = create_in_transition(div5, fade, { duration: durationIn });
+    				div5_intro = create_in_transition(div5, fade, { duration: durationIn });
     				div5_intro.start();
     			});
 
@@ -12434,18 +12564,19 @@ var app = (function () {
     }
 
     // (832:7) {#if 0 == selectedRisk}
-    function create_if_block_13(ctx) {
+    function create_if_block_12(ctx) {
     	let div0;
-    	let t0_value = /*translations*/ ctx[45].app.proportionOver60ByCountry + "";
+    	let t0_value = /*translations*/ ctx[11].app.proportionOver60ByCountry + "";
     	let t0;
     	let t1;
     	let div1;
+    	let worldmap;
     	let current;
 
-    	const worldmap = new WorldMap({
+    	worldmap = new WorldMap({
     			props: {
-    				mapTitle: /*mapTitle*/ ctx[31],
-    				selectedRisk: /*selectedRisk*/ ctx[33]
+    				mapTitle: /*mapTitle*/ ctx[37],
+    				selectedRisk: /*selectedRisk*/ ctx[39]
     			}
     		});
 
@@ -12456,9 +12587,9 @@ var app = (function () {
     			t1 = space();
     			div1 = element("div");
     			create_component(worldmap.$$.fragment);
-    			attr(div0, "class", "worldmap-title svelte-1havf7j");
+    			attr(div0, "class", "worldmap-title svelte-1ezrwae");
     			set_style(div0, "font-size", "16");
-    			attr(div1, "class", "child svelte-1havf7j");
+    			attr(div1, "class", "child svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div0, anchor);
@@ -12469,10 +12600,10 @@ var app = (function () {
     			current = true;
     		},
     		p(ctx, dirty) {
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t0_value !== (t0_value = /*translations*/ ctx[45].app.proportionOver60ByCountry + "")) set_data(t0, t0_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t0_value !== (t0_value = /*translations*/ ctx[11].app.proportionOver60ByCountry + "")) set_data(t0, t0_value);
     			const worldmap_changes = {};
-    			if (dirty[1] & /*mapTitle*/ 1) worldmap_changes.mapTitle = /*mapTitle*/ ctx[31];
-    			if (dirty[1] & /*selectedRisk*/ 4) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[33];
+    			if (dirty[1] & /*mapTitle*/ 64) worldmap_changes.mapTitle = /*mapTitle*/ ctx[37];
+    			if (dirty[1] & /*selectedRisk*/ 256) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[39];
     			worldmap.$set(worldmap_changes);
     		},
     		i(local) {
@@ -12494,18 +12625,19 @@ var app = (function () {
     }
 
     // (842:7) {#if 1 == selectedRisk}
-    function create_if_block_12(ctx) {
+    function create_if_block_11(ctx) {
     	let div0;
-    	let t0_value = /*translations*/ ctx[45].app.lowIncomeRiskByCountry + "";
+    	let t0_value = /*translations*/ ctx[11].app.lowIncomeRiskByCountry + "";
     	let t0;
     	let t1;
     	let div1;
+    	let worldmap;
     	let current;
 
-    	const worldmap = new WorldMap({
+    	worldmap = new WorldMap({
     			props: {
-    				mapTitle: /*mapTitle*/ ctx[31],
-    				selectedRisk: /*selectedRisk*/ ctx[33]
+    				mapTitle: /*mapTitle*/ ctx[37],
+    				selectedRisk: /*selectedRisk*/ ctx[39]
     			}
     		});
 
@@ -12516,9 +12648,9 @@ var app = (function () {
     			t1 = space();
     			div1 = element("div");
     			create_component(worldmap.$$.fragment);
-    			attr(div0, "class", "worldmap-title svelte-1havf7j");
+    			attr(div0, "class", "worldmap-title svelte-1ezrwae");
     			set_style(div0, "font-size", "16");
-    			attr(div1, "class", "child svelte-1havf7j");
+    			attr(div1, "class", "child svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div0, anchor);
@@ -12529,10 +12661,10 @@ var app = (function () {
     			current = true;
     		},
     		p(ctx, dirty) {
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t0_value !== (t0_value = /*translations*/ ctx[45].app.lowIncomeRiskByCountry + "")) set_data(t0, t0_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t0_value !== (t0_value = /*translations*/ ctx[11].app.lowIncomeRiskByCountry + "")) set_data(t0, t0_value);
     			const worldmap_changes = {};
-    			if (dirty[1] & /*mapTitle*/ 1) worldmap_changes.mapTitle = /*mapTitle*/ ctx[31];
-    			if (dirty[1] & /*selectedRisk*/ 4) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[33];
+    			if (dirty[1] & /*mapTitle*/ 64) worldmap_changes.mapTitle = /*mapTitle*/ ctx[37];
+    			if (dirty[1] & /*selectedRisk*/ 256) worldmap_changes.selectedRisk = /*selectedRisk*/ ctx[39];
     			worldmap.$set(worldmap_changes);
     		},
     		i(local) {
@@ -12554,7 +12686,8 @@ var app = (function () {
     }
 
     // (868:3) {#if 3 === currentTab}
-    function create_if_block_8(ctx) {
+    function create_if_block_7(ctx) {
+    	let subtabs;
     	let updating_activeTabValue;
     	let t0;
     	let t1;
@@ -12562,19 +12695,19 @@ var app = (function () {
     	let current;
 
     	function subtabs_activeTabValue_binding_2(value) {
-    		/*subtabs_activeTabValue_binding_2*/ ctx[132].call(null, value);
+    		/*subtabs_activeTabValue_binding_2*/ ctx[115](value);
     	}
 
-    	let subtabs_props = { items: /*povertyItems*/ ctx[34] };
+    	let subtabs_props = { items: /*povertyItems*/ ctx[40] };
 
-    	if (/*currentPoverty*/ ctx[35] !== void 0) {
-    		subtabs_props.activeTabValue = /*currentPoverty*/ ctx[35];
+    	if (/*currentPoverty*/ ctx[41] !== void 0) {
+    		subtabs_props.activeTabValue = /*currentPoverty*/ ctx[41];
     	}
 
-    	const subtabs = new Subtabs({ props: subtabs_props });
-    	binding_callbacks.push(() => bind(subtabs, "activeTabValue", subtabs_activeTabValue_binding_2));
-    	let if_block0 = 0 == /*currentPoverty*/ ctx[35] && create_if_block_10(ctx);
-    	let if_block1 = 1 == /*currentPoverty*/ ctx[35] && create_if_block_9(ctx);
+    	subtabs = new Subtabs({ props: subtabs_props });
+    	binding_callbacks.push(() => bind(subtabs, 'activeTabValue', subtabs_activeTabValue_binding_2));
+    	let if_block0 = 0 == /*currentPoverty*/ ctx[41] && create_if_block_9(ctx);
+    	let if_block1 = 1 == /*currentPoverty*/ ctx[41] && create_if_block_8(ctx);
 
     	return {
     		c() {
@@ -12596,25 +12729,25 @@ var app = (function () {
     		},
     		p(ctx, dirty) {
     			const subtabs_changes = {};
-    			if (dirty[1] & /*povertyItems*/ 8) subtabs_changes.items = /*povertyItems*/ ctx[34];
+    			if (dirty[1] & /*povertyItems*/ 512) subtabs_changes.items = /*povertyItems*/ ctx[40];
 
-    			if (!updating_activeTabValue && dirty[1] & /*currentPoverty*/ 16) {
+    			if (!updating_activeTabValue && dirty[1] & /*currentPoverty*/ 1024) {
     				updating_activeTabValue = true;
-    				subtabs_changes.activeTabValue = /*currentPoverty*/ ctx[35];
+    				subtabs_changes.activeTabValue = /*currentPoverty*/ ctx[41];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			subtabs.$set(subtabs_changes);
 
-    			if (0 == /*currentPoverty*/ ctx[35]) {
+    			if (0 == /*currentPoverty*/ ctx[41]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
-    					if (dirty[1] & /*currentPoverty*/ 16) {
+    					if (dirty[1] & /*currentPoverty*/ 1024) {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_10(ctx);
+    					if_block0 = create_if_block_9(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(t1.parentNode, t1);
@@ -12629,15 +12762,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (1 == /*currentPoverty*/ ctx[35]) {
+    			if (1 == /*currentPoverty*/ ctx[41]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[1] & /*currentPoverty*/ 16) {
+    					if (dirty[1] & /*currentPoverty*/ 1024) {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_9(ctx);
+    					if_block1 = create_if_block_8(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
@@ -12677,65 +12810,69 @@ var app = (function () {
     }
 
     // (870:4) {#if 0 == currentPoverty}
-    function create_if_block_10(ctx) {
+    function create_if_block_9(ctx) {
     	let div1;
     	let div0;
+    	let poverty;
     	let t0;
     	let div8;
     	let div2;
     	let t1;
     	let div3;
+    	let square0;
     	let t2;
+    	let square1;
     	let t3;
+    	let square2;
     	let t4;
     	let div7;
     	let div6;
     	let div4;
-    	let t5_value = /*translations*/ ctx[45].app.projectedPovery + "";
+    	let t5_value = /*translations*/ ctx[11].app.projectedPovery + "";
     	let t5;
     	let t6;
     	let div5;
-    	let t7_value = /*translations*/ ctx[45].app.sources + "";
+    	let t7_value = /*translations*/ ctx[11].app.sources + "";
     	let t7;
     	let t8;
     	let a0;
     	let t10;
     	let a1;
     	let t12;
-    	let t13_value = /*translations*/ ctx[45].app.authorsCalculations + "";
+    	let t13_value = /*translations*/ ctx[11].app.authorsCalculations + "";
     	let t13;
     	let current;
 
-    	const poverty = new Poverty({
+    	poverty = new Poverty({
     			props: {
-    				compareData: /*povertyProjCountries*/ ctx[36],
-    				titleListMain: /*mainProjCountries*/ ctx[38],
-    				titleListName: /*nameProjCountries*/ ctx[39],
-    				titleListNumber: /*numberProjCountries*/ ctx[40],
+    				compareData: /*povertyProjCountries*/ ctx[42],
+    				titleListMain: /*mainProjCountries*/ ctx[44],
+    				titleListName: /*nameProjCountries*/ ctx[45],
+    				titleListNumber: /*numberProjCountries*/ ctx[46],
     				colorsList: /*colorsProjCountries*/ ctx[63]
     			}
     		});
 
-    	const square0 = new Square({
+    	square0 = new Square({
     			props: {
-    				text: /*translations*/ ctx[45].app.southAsia,
-    				color: "#377eb8",
+    				text: /*translations*/ ctx[11].app.southAsia,
+    				color: '#377eb8',
     				factorWidth: 10
     			}
     		});
 
-    	const square1 = new Square({
+    	square1 = new Square({
     			props: {
-    				text: /*translations*/ ctx[45].app.subSahAfrica,
-    				color: "#e41a1c",
+    				text: /*translations*/ ctx[11].app.subSahAfrica,
+    				color: '#e41a1c',
     				factorWidth: 10
     			}
     		});
 
-    	const square2 = new Square({
+    	square2 = new Square({
     			props: {
-    				text: /*translations*/ ctx[45].app.eastAsiaPacific,
-    				color: "#4daf4a",
+    				text: /*translations*/ ctx[11].app.eastAsiaPacific,
+    				color: '#4daf4a',
     				factorWidth: 11
     			}
     		});
@@ -12772,19 +12909,19 @@ var app = (function () {
     			a1.textContent = "POVCAL";
     			t12 = space();
     			t13 = text(t13_value);
-    			attr(div0, "class", "child svelte-1havf7j");
+    			attr(div0, "class", "child svelte-1ezrwae");
     			attr(div1, "class", "twelve columns");
     			set_style(div1, "text-align", "center");
     			set_style(div1, "margin-top", "25px");
     			attr(div2, "class", "one columns");
     			attr(div3, "class", "three columns");
-    			attr(div4, "class", "parameter-text svelte-1havf7j");
+    			attr(div4, "class", "parameter-text svelte-1ezrwae");
     			attr(a0, "href", "https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en");
     			attr(a1, "href", "https://data.worldbank.org/indicator/SI.POV.DDA");
-    			attr(div5, "class", "parameter-text svelte-1havf7j");
-    			attr(div6, "class", "caption svelte-1havf7j");
+    			attr(div5, "class", "parameter-text svelte-1ezrwae");
+    			attr(div6, "class", "caption svelte-1ezrwae");
     			attr(div7, "class", "eight columns");
-    			attr(div8, "class", "row svelte-1havf7j");
+    			attr(div8, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div1, anchor);
@@ -12818,23 +12955,23 @@ var app = (function () {
     		},
     		p(ctx, dirty) {
     			const poverty_changes = {};
-    			if (dirty[1] & /*povertyProjCountries*/ 32) poverty_changes.compareData = /*povertyProjCountries*/ ctx[36];
-    			if (dirty[1] & /*mainProjCountries*/ 128) poverty_changes.titleListMain = /*mainProjCountries*/ ctx[38];
-    			if (dirty[1] & /*nameProjCountries*/ 256) poverty_changes.titleListName = /*nameProjCountries*/ ctx[39];
-    			if (dirty[1] & /*numberProjCountries*/ 512) poverty_changes.titleListNumber = /*numberProjCountries*/ ctx[40];
+    			if (dirty[1] & /*povertyProjCountries*/ 2048) poverty_changes.compareData = /*povertyProjCountries*/ ctx[42];
+    			if (dirty[1] & /*mainProjCountries*/ 8192) poverty_changes.titleListMain = /*mainProjCountries*/ ctx[44];
+    			if (dirty[1] & /*nameProjCountries*/ 16384) poverty_changes.titleListName = /*nameProjCountries*/ ctx[45];
+    			if (dirty[1] & /*numberProjCountries*/ 32768) poverty_changes.titleListNumber = /*numberProjCountries*/ ctx[46];
     			poverty.$set(poverty_changes);
     			const square0_changes = {};
-    			if (dirty[1] & /*translations*/ 16384) square0_changes.text = /*translations*/ ctx[45].app.southAsia;
+    			if (dirty[0] & /*translations*/ 2048) square0_changes.text = /*translations*/ ctx[11].app.southAsia;
     			square0.$set(square0_changes);
     			const square1_changes = {};
-    			if (dirty[1] & /*translations*/ 16384) square1_changes.text = /*translations*/ ctx[45].app.subSahAfrica;
+    			if (dirty[0] & /*translations*/ 2048) square1_changes.text = /*translations*/ ctx[11].app.subSahAfrica;
     			square1.$set(square1_changes);
     			const square2_changes = {};
-    			if (dirty[1] & /*translations*/ 16384) square2_changes.text = /*translations*/ ctx[45].app.eastAsiaPacific;
+    			if (dirty[0] & /*translations*/ 2048) square2_changes.text = /*translations*/ ctx[11].app.eastAsiaPacific;
     			square2.$set(square2_changes);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t5_value !== (t5_value = /*translations*/ ctx[45].app.projectedPovery + "")) set_data(t5, t5_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t7_value !== (t7_value = /*translations*/ ctx[45].app.sources + "")) set_data(t7, t7_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t13_value !== (t13_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data(t13, t13_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t5_value !== (t5_value = /*translations*/ ctx[11].app.projectedPovery + "")) set_data(t5, t5_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t7_value !== (t7_value = /*translations*/ ctx[11].app.sources + "")) set_data(t7, t7_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t13_value !== (t13_value = /*translations*/ ctx[11].app.authorsCalculations + "")) set_data(t13, t13_value);
     		},
     		i(local) {
     			if (current) return;
@@ -12864,9 +13001,10 @@ var app = (function () {
     }
 
     // (907:4) {#if 1 == currentPoverty}
-    function create_if_block_9(ctx) {
+    function create_if_block_8(ctx) {
     	let div1;
     	let div0;
+    	let poverty;
     	let t0;
     	let div7;
     	let div2;
@@ -12874,27 +13012,27 @@ var app = (function () {
     	let div6;
     	let div5;
     	let div3;
-    	let t2_value = /*translations*/ ctx[45].app.projectedPovery + "";
+    	let t2_value = /*translations*/ ctx[11].app.projectedPovery + "";
     	let t2;
     	let t3;
     	let div4;
-    	let t4_value = /*translations*/ ctx[45].app.sources + "";
+    	let t4_value = /*translations*/ ctx[11].app.sources + "";
     	let t4;
     	let t5;
     	let a0;
     	let t7;
     	let a1;
     	let t9;
-    	let t10_value = /*translations*/ ctx[45].app.authorsCalculations + "";
+    	let t10_value = /*translations*/ ctx[11].app.authorsCalculations + "";
     	let t10;
     	let current;
 
-    	const poverty = new Poverty({
+    	poverty = new Poverty({
     			props: {
-    				compareData: /*povertyProjRegions*/ ctx[37],
-    				titleListMain: /*mainProjRegions*/ ctx[41],
-    				titleListName: /*nameProjRegions*/ ctx[42],
-    				titleListNumber: /*numberProjRegions*/ ctx[43],
+    				compareData: /*povertyProjRegions*/ ctx[43],
+    				titleListMain: /*mainProjRegions*/ ctx[47],
+    				titleListName: /*nameProjRegions*/ ctx[48],
+    				titleListNumber: /*numberProjRegions*/ ctx[49],
     				colorsList: /*colorsProjRegions*/ ctx[62]
     			}
     		});
@@ -12924,18 +13062,18 @@ var app = (function () {
     			a1.textContent = "POVCAL";
     			t9 = space();
     			t10 = text(t10_value);
-    			attr(div0, "class", "child svelte-1havf7j");
+    			attr(div0, "class", "child svelte-1ezrwae");
     			attr(div1, "class", "twelve columns");
     			set_style(div1, "text-align", "center");
     			set_style(div1, "margin-top", "25px");
     			attr(div2, "class", "four columns");
-    			attr(div3, "class", "parameter-text svelte-1havf7j");
+    			attr(div3, "class", "parameter-text svelte-1ezrwae");
     			attr(a0, "href", "https://www.imf.org/~/media/Files/Publications/WEO/2020/April/English/execsum.ashx?la=en");
     			attr(a1, "href", "https://data.worldbank.org/indicator/SI.POV.DDA");
-    			attr(div4, "class", "parameter-text svelte-1havf7j");
-    			attr(div5, "class", "caption svelte-1havf7j");
+    			attr(div4, "class", "parameter-text svelte-1ezrwae");
+    			attr(div5, "class", "caption svelte-1ezrwae");
     			attr(div6, "class", "eight columns");
-    			attr(div7, "class", "row svelte-1havf7j");
+    			attr(div7, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div1, anchor);
@@ -12962,14 +13100,14 @@ var app = (function () {
     		},
     		p(ctx, dirty) {
     			const poverty_changes = {};
-    			if (dirty[1] & /*povertyProjRegions*/ 64) poverty_changes.compareData = /*povertyProjRegions*/ ctx[37];
-    			if (dirty[1] & /*mainProjRegions*/ 1024) poverty_changes.titleListMain = /*mainProjRegions*/ ctx[41];
-    			if (dirty[1] & /*nameProjRegions*/ 2048) poverty_changes.titleListName = /*nameProjRegions*/ ctx[42];
-    			if (dirty[1] & /*numberProjRegions*/ 4096) poverty_changes.titleListNumber = /*numberProjRegions*/ ctx[43];
+    			if (dirty[1] & /*povertyProjRegions*/ 4096) poverty_changes.compareData = /*povertyProjRegions*/ ctx[43];
+    			if (dirty[1] & /*mainProjRegions*/ 65536) poverty_changes.titleListMain = /*mainProjRegions*/ ctx[47];
+    			if (dirty[1] & /*nameProjRegions*/ 131072) poverty_changes.titleListName = /*nameProjRegions*/ ctx[48];
+    			if (dirty[1] & /*numberProjRegions*/ 262144) poverty_changes.titleListNumber = /*numberProjRegions*/ ctx[49];
     			poverty.$set(poverty_changes);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t2_value !== (t2_value = /*translations*/ ctx[45].app.projectedPovery + "")) set_data(t2, t2_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t4_value !== (t4_value = /*translations*/ ctx[45].app.sources + "")) set_data(t4, t4_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t10_value !== (t10_value = /*translations*/ ctx[45].app.authorsCalculations + "")) set_data(t10, t10_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t2_value !== (t2_value = /*translations*/ ctx[11].app.projectedPovery + "")) set_data(t2, t2_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t4_value !== (t4_value = /*translations*/ ctx[11].app.sources + "")) set_data(t4, t4_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t10_value !== (t10_value = /*translations*/ ctx[11].app.authorsCalculations + "")) set_data(t10, t10_value);
     		},
     		i(local) {
     			if (current) return;
@@ -12990,25 +13128,28 @@ var app = (function () {
     }
 
     // (941:3) {#if 4 === currentTab}
-    function create_if_block_7(ctx) {
+    function create_if_block_6(ctx) {
     	let div9;
     	let div1;
     	let div0;
+    	let projections;
     	let t0;
     	let div8;
     	let div2;
     	let t1;
     	let div3;
+    	let linelegend0;
     	let t2;
+    	let linelegend1;
     	let t3;
     	let div7;
     	let div6;
     	let div4;
-    	let t4_value = /*translations*/ ctx[45].app.projectionsCaption + "";
+    	let t4_value = /*translations*/ ctx[11].app.projectionsCaption + "";
     	let t4;
     	let t5;
     	let div5;
-    	let t6_value = /*translations*/ ctx[45].app.source + "";
+    	let t6_value = /*translations*/ ctx[11].app.source + "";
     	let t6;
     	let t7;
     	let a;
@@ -13016,27 +13157,27 @@ var app = (function () {
     	let div9_outro;
     	let current;
 
-    	const projections = new Projections({
+    	projections = new Projections({
     			props: {
-    				projectionsTitle: /*projectionsTitle*/ ctx[25],
-    				projectionsXAxisLabel: /*projectionsXAxisLabel*/ ctx[26],
-    				projectionsYAxisLabel: /*projectionsYAxisLabel*/ ctx[27],
-    				language: /*language*/ ctx[4]
+    				projectionsTitle: /*projectionsTitle*/ ctx[32],
+    				projectionsXAxisLabel: /*projectionsXAxisLabel*/ ctx[33],
+    				projectionsYAxisLabel: /*projectionsYAxisLabel*/ ctx[34],
+    				language: /*language*/ ctx[1]
     			}
     		});
 
-    	const linelegend0 = new LineLegend({
+    	linelegend0 = new LineLegend({
     			props: {
-    				text: /*projectionsLegendDeaths*/ ctx[28],
-    				type: "continuous",
+    				text: /*projectionsLegendDeaths*/ ctx[35],
+    				type: 'continuous',
     				factorWidth: 15
     			}
     		});
 
-    	const linelegend1 = new LineLegend({
+    	linelegend1 = new LineLegend({
     			props: {
-    				text: /*projectionsLegendDeathsProjected*/ ctx[29],
-    				type: "dashed",
+    				text: /*projectionsLegendDeathsProjected*/ ctx[36],
+    				type: 'dashed',
     				factorWidth: 15
     			}
     		});
@@ -13067,17 +13208,17 @@ var app = (function () {
     			t7 = space();
     			a = element("a");
     			a.textContent = "IHME";
-    			attr(div0, "class", "child svelte-1havf7j");
+    			attr(div0, "class", "child svelte-1ezrwae");
     			attr(div1, "class", "twelve columns");
     			attr(div2, "class", "one columns");
     			attr(div3, "class", "three columns");
-    			attr(div4, "class", "parameter-text svelte-1havf7j");
+    			attr(div4, "class", "parameter-text svelte-1ezrwae");
     			attr(a, "href", "http://www.healthdata.org/");
-    			attr(div5, "class", "parameter-text svelte-1havf7j");
-    			attr(div6, "class", "caption svelte-1havf7j");
+    			attr(div5, "class", "parameter-text svelte-1ezrwae");
+    			attr(div6, "class", "caption svelte-1ezrwae");
     			attr(div7, "class", "eight columns");
-    			attr(div8, "class", "row svelte-1havf7j");
-    			attr(div9, "class", "row svelte-1havf7j");
+    			attr(div8, "class", "row svelte-1ezrwae");
+    			attr(div9, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div9, anchor);
@@ -13104,21 +13245,22 @@ var app = (function () {
     			append(div5, a);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
     			const projections_changes = {};
-    			if (dirty[0] & /*projectionsTitle*/ 33554432) projections_changes.projectionsTitle = /*projectionsTitle*/ ctx[25];
-    			if (dirty[0] & /*projectionsXAxisLabel*/ 67108864) projections_changes.projectionsXAxisLabel = /*projectionsXAxisLabel*/ ctx[26];
-    			if (dirty[0] & /*projectionsYAxisLabel*/ 134217728) projections_changes.projectionsYAxisLabel = /*projectionsYAxisLabel*/ ctx[27];
-    			if (dirty[0] & /*language*/ 16) projections_changes.language = /*language*/ ctx[4];
+    			if (dirty[1] & /*projectionsTitle*/ 2) projections_changes.projectionsTitle = /*projectionsTitle*/ ctx[32];
+    			if (dirty[1] & /*projectionsXAxisLabel*/ 4) projections_changes.projectionsXAxisLabel = /*projectionsXAxisLabel*/ ctx[33];
+    			if (dirty[1] & /*projectionsYAxisLabel*/ 8) projections_changes.projectionsYAxisLabel = /*projectionsYAxisLabel*/ ctx[34];
+    			if (dirty[0] & /*language*/ 2) projections_changes.language = /*language*/ ctx[1];
     			projections.$set(projections_changes);
     			const linelegend0_changes = {};
-    			if (dirty[0] & /*projectionsLegendDeaths*/ 268435456) linelegend0_changes.text = /*projectionsLegendDeaths*/ ctx[28];
+    			if (dirty[1] & /*projectionsLegendDeaths*/ 16) linelegend0_changes.text = /*projectionsLegendDeaths*/ ctx[35];
     			linelegend0.$set(linelegend0_changes);
     			const linelegend1_changes = {};
-    			if (dirty[0] & /*projectionsLegendDeathsProjected*/ 536870912) linelegend1_changes.text = /*projectionsLegendDeathsProjected*/ ctx[29];
+    			if (dirty[1] & /*projectionsLegendDeathsProjected*/ 32) linelegend1_changes.text = /*projectionsLegendDeathsProjected*/ ctx[36];
     			linelegend1.$set(linelegend1_changes);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t4_value !== (t4_value = /*translations*/ ctx[45].app.projectionsCaption + "")) set_data(t4, t4_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t6_value !== (t6_value = /*translations*/ ctx[45].app.source + "")) set_data(t6, t6_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t4_value !== (t4_value = /*translations*/ ctx[11].app.projectionsCaption + "")) set_data(t4, t4_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t6_value !== (t6_value = /*translations*/ ctx[11].app.source + "")) set_data(t6, t6_value);
     		},
     		i(local) {
     			if (current) return;
@@ -13127,8 +13269,9 @@ var app = (function () {
     			transition_in(linelegend1.$$.fragment, local);
 
     			add_render_callback(() => {
+    				if (!current) return;
     				if (div9_outro) div9_outro.end(1);
-    				if (!div9_intro) div9_intro = create_in_transition(div9, fade, { duration: durationIn });
+    				div9_intro = create_in_transition(div9, fade, { duration: durationIn });
     				div9_intro.start();
     			});
 
@@ -13153,7 +13296,7 @@ var app = (function () {
     }
 
     // (981:3) {#if 5 == currentTab}
-    function create_if_block_5(ctx) {
+    function create_if_block_4$1(ctx) {
     	let div4;
     	let div3;
     	let div1;
@@ -13163,55 +13306,55 @@ var app = (function () {
     	let thead;
     	let tr0;
     	let th0;
-    	let t2_value = /*translations*/ ctx[45].app.location + "";
+    	let t2_value = /*translations*/ ctx[11].app.location + "";
     	let t2;
     	let t3;
     	let th1;
-    	let t4_value = /*translations*/ ctx[45].app.fatalityRates + "";
+    	let t4_value = /*translations*/ ctx[11].app.fatalityRates + "";
     	let t4;
     	let t5;
     	let th2;
-    	let t6_value = /*translations*/ ctx[45].app.varyFRs + "";
+    	let t6_value = /*translations*/ ctx[11].app.varyFRs + "";
     	let t6;
     	let t7;
     	let th3;
-    	let t8_value = /*translations*/ ctx[45].app.infectionRate + "";
+    	let t8_value = /*translations*/ ctx[11].app.infectionRate + "";
     	let t8;
     	let t9;
     	let th4;
-    	let t10_value = /*translations*/ ctx[45].app.over60InfectionRate + "";
+    	let t10_value = /*translations*/ ctx[11].app.over60InfectionRate + "";
     	let t10;
     	let t11;
     	let th5;
-    	let t12_value = /*translations*/ ctx[45].app.over60InfectionRate + "";
+    	let t12_value = /*translations*/ ctx[11].app.over60InfectionRate + "";
     	let t12;
     	let t13;
     	let th6;
-    	let t14_value = /*translations*/ ctx[45].app.elimination + "";
+    	let t14_value = /*translations*/ ctx[11].app.elimination + "";
     	let t14;
     	let t15;
     	let th7;
-    	let t16_value = /*translations*/ ctx[45].app.infectionUntil + "";
+    	let t16_value = /*translations*/ ctx[11].app.infectionUntil + "";
     	let t16;
     	let t17;
     	let th8;
-    	let t18_value = /*translations*/ ctx[45].app.infected + "";
+    	let t18_value = /*translations*/ ctx[11].app.infected + "";
     	let t18;
     	let t19;
     	let th9;
-    	let t20_value = /*translations*/ ctx[45].app.deaths + "";
+    	let t20_value = /*translations*/ ctx[11].app.deaths + "";
     	let t20;
     	let t21;
     	let th10;
-    	let t22_value = /*translations*/ ctx[45].app.yrsOfLifeLost + "";
+    	let t22_value = /*translations*/ ctx[11].app.yrsOfLifeLost + "";
     	let t22;
     	let t23;
     	let th11;
-    	let t24_value = /*translations*/ ctx[45].app.yrsOfLifeLostCosts + "";
+    	let t24_value = /*translations*/ ctx[11].app.yrsOfLifeLostCosts + "";
     	let t24;
     	let t25;
     	let th12;
-    	let t26_value = /*translations*/ ctx[45].app.scenariosDescription + "";
+    	let t26_value = /*translations*/ ctx[11].app.scenariosDescription + "";
     	let t26;
     	let t27;
     	let tbody;
@@ -13223,7 +13366,7 @@ var app = (function () {
     	let t30;
     	let td1;
     	let span1;
-    	let t31_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "";
+    	let t31_value = /*translations*/ ctx[11].fatalityRisks[/*selectedSourceId*/ ctx[12]].source + "";
     	let t31;
     	let t32;
     	let td2;
@@ -13258,17 +13401,17 @@ var app = (function () {
     	let t50;
     	let td8;
     	let span8;
-    	let t51_value = numberFormatter(/*totalInfected*/ ctx[48]) + "";
+    	let t51_value = numberFormatter(/*totalInfected*/ ctx[52]) + "";
     	let t51;
     	let t52;
     	let td9;
     	let span9;
-    	let t53_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "";
+    	let t53_value = numberFormatter(/*totalDeaths*/ ctx[14]) + "";
     	let t53;
     	let t54;
     	let td10;
     	let span10;
-    	let t55_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "";
+    	let t55_value = numberFormatter(/*totalYearsLost*/ ctx[13]) + "";
     	let t55;
     	let t56;
     	let td11;
@@ -13287,8 +13430,9 @@ var app = (function () {
     	let div4_intro;
     	let div4_outro;
     	let current;
+    	let mounted;
     	let dispose;
-    	let each_value = /*rowsOfScenarios*/ ctx[30];
+    	let each_value = /*rowsOfScenarios*/ ctx[10];
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -13355,7 +13499,7 @@ var app = (function () {
     			tr1 = element("tr");
     			td0 = element("td");
     			span0 = element("span");
-    			t29 = text(/*selectedLocation*/ ctx[2]);
+    			t29 = text(/*selectedLocation*/ ctx[0]);
     			t30 = space();
     			td1 = element("td");
     			span1 = element("span");
@@ -13363,32 +13507,32 @@ var app = (function () {
     			t32 = space();
     			td2 = element("td");
     			span2 = element("span");
-    			t33 = text(/*pctOfChange*/ ctx[7]);
+    			t33 = text(/*pctOfChange*/ ctx[4]);
     			t34 = text("%");
     			t35 = space();
     			td3 = element("td");
     			span3 = element("span");
-    			t36 = text(/*pctH*/ ctx[8]);
+    			t36 = text(/*pctH*/ ctx[5]);
     			t37 = text("%");
     			t38 = space();
     			td4 = element("td");
     			span4 = element("span");
-    			t39 = text(/*pctH_60plus*/ ctx[44]);
+    			t39 = text(/*pctH_60plus*/ ctx[15]);
     			t40 = text("%");
     			t41 = space();
     			td5 = element("td");
     			span5 = element("span");
-    			t42 = text(/*pctH_below60*/ ctx[47]);
+    			t42 = text(/*pctH_below60*/ ctx[16]);
     			t43 = text("%");
     			t44 = space();
     			td6 = element("td");
     			span6 = element("span");
-    			t45 = text(/*prElimTimes100*/ ctx[9]);
+    			t45 = text(/*prElimTimes100*/ ctx[6]);
     			t46 = text("%");
     			t47 = space();
     			td7 = element("td");
     			span7 = element("span");
-    			t48 = text(/*pctU*/ ctx[10]);
+    			t48 = text(/*pctU*/ ctx[7]);
     			t49 = text("%");
     			t50 = space();
     			td8 = element("td");
@@ -13416,54 +13560,54 @@ var app = (function () {
     			button.textContent = "Add";
     			t63 = space();
     			div2 = element("div");
-    			div2.innerHTML = `<span class="parameter-text svelte-1havf7j"></span>`;
-    			attr(div0, "class", "wtitle svelte-1havf7j");
-    			attr(th0, "class", "svelte-1havf7j");
-    			attr(th1, "class", "svelte-1havf7j");
-    			attr(th2, "class", "svelte-1havf7j");
-    			attr(th3, "class", "svelte-1havf7j");
-    			attr(th4, "class", "svelte-1havf7j");
-    			attr(th5, "class", "svelte-1havf7j");
-    			attr(th6, "class", "svelte-1havf7j");
-    			attr(th7, "class", "svelte-1havf7j");
-    			attr(th8, "class", "svelte-1havf7j");
-    			attr(th9, "class", "svelte-1havf7j");
-    			attr(th10, "class", "svelte-1havf7j");
-    			attr(th11, "class", "svelte-1havf7j");
-    			attr(th12, "class", "svelte-1havf7j");
-    			attr(span0, "class", "parameter svelte-1havf7j");
-    			attr(td0, "class", "svelte-1havf7j");
-    			attr(span1, "class", "parameter svelte-1havf7j");
-    			attr(td1, "class", "svelte-1havf7j");
-    			attr(span2, "class", "parameter svelte-1havf7j");
-    			attr(td2, "class", "svelte-1havf7j");
-    			attr(span3, "class", "parameter svelte-1havf7j");
-    			attr(td3, "class", "svelte-1havf7j");
-    			attr(span4, "class", "parameter svelte-1havf7j");
-    			attr(td4, "class", "svelte-1havf7j");
-    			attr(span5, "class", "parameter svelte-1havf7j");
-    			attr(td5, "class", "svelte-1havf7j");
-    			attr(span6, "class", "parameter svelte-1havf7j");
-    			attr(td6, "class", "svelte-1havf7j");
-    			attr(span7, "class", "parameter svelte-1havf7j");
-    			attr(td7, "class", "svelte-1havf7j");
-    			attr(span8, "class", "parameter svelte-1havf7j");
-    			attr(td8, "class", "svelte-1havf7j");
-    			attr(span9, "class", "parameter svelte-1havf7j");
-    			attr(td9, "class", "svelte-1havf7j");
-    			attr(span10, "class", "parameter svelte-1havf7j");
-    			attr(td10, "class", "svelte-1havf7j");
-    			attr(span11, "class", "parameter svelte-1havf7j");
-    			attr(td11, "class", "svelte-1havf7j");
-    			attr(button, "class", "button svelte-1havf7j");
-    			attr(td12, "class", "svelte-1havf7j");
-    			attr(table, "class", "table1 svelte-1havf7j");
-    			attr(div1, "class", "child parameter-text svelte-1havf7j");
-    			attr(div2, "class", "caption svelte-1havf7j");
+    			div2.innerHTML = `<span class="parameter-text svelte-1ezrwae"></span>`;
+    			attr(div0, "class", "wtitle svelte-1ezrwae");
+    			attr(th0, "class", "svelte-1ezrwae");
+    			attr(th1, "class", "svelte-1ezrwae");
+    			attr(th2, "class", "svelte-1ezrwae");
+    			attr(th3, "class", "svelte-1ezrwae");
+    			attr(th4, "class", "svelte-1ezrwae");
+    			attr(th5, "class", "svelte-1ezrwae");
+    			attr(th6, "class", "svelte-1ezrwae");
+    			attr(th7, "class", "svelte-1ezrwae");
+    			attr(th8, "class", "svelte-1ezrwae");
+    			attr(th9, "class", "svelte-1ezrwae");
+    			attr(th10, "class", "svelte-1ezrwae");
+    			attr(th11, "class", "svelte-1ezrwae");
+    			attr(th12, "class", "svelte-1ezrwae");
+    			attr(span0, "class", "parameter svelte-1ezrwae");
+    			attr(td0, "class", "svelte-1ezrwae");
+    			attr(span1, "class", "parameter svelte-1ezrwae");
+    			attr(td1, "class", "svelte-1ezrwae");
+    			attr(span2, "class", "parameter svelte-1ezrwae");
+    			attr(td2, "class", "svelte-1ezrwae");
+    			attr(span3, "class", "parameter svelte-1ezrwae");
+    			attr(td3, "class", "svelte-1ezrwae");
+    			attr(span4, "class", "parameter svelte-1ezrwae");
+    			attr(td4, "class", "svelte-1ezrwae");
+    			attr(span5, "class", "parameter svelte-1ezrwae");
+    			attr(td5, "class", "svelte-1ezrwae");
+    			attr(span6, "class", "parameter svelte-1ezrwae");
+    			attr(td6, "class", "svelte-1ezrwae");
+    			attr(span7, "class", "parameter svelte-1ezrwae");
+    			attr(td7, "class", "svelte-1ezrwae");
+    			attr(span8, "class", "parameter svelte-1ezrwae");
+    			attr(td8, "class", "svelte-1ezrwae");
+    			attr(span9, "class", "parameter svelte-1ezrwae");
+    			attr(td9, "class", "svelte-1ezrwae");
+    			attr(span10, "class", "parameter svelte-1ezrwae");
+    			attr(td10, "class", "svelte-1ezrwae");
+    			attr(span11, "class", "parameter svelte-1ezrwae");
+    			attr(td11, "class", "svelte-1ezrwae");
+    			attr(button, "class", "button svelte-1ezrwae");
+    			attr(td12, "class", "svelte-1ezrwae");
+    			attr(table, "class", "table1 svelte-1ezrwae");
+    			attr(div1, "class", "child parameter-text svelte-1ezrwae");
+    			attr(div2, "class", "caption svelte-1ezrwae");
     			attr(div3, "class", "twelve columns");
-    			attr(div4, "class", "row svelte-1havf7j");
+    			attr(div4, "class", "row svelte-1ezrwae");
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, div4, anchor);
     			append(div4, div3);
     			append(div3, div1);
@@ -13514,7 +13658,9 @@ var app = (function () {
     			append(table, tbody);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(tbody, null);
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(tbody, null);
+    				}
     			}
 
     			append(tbody, t28);
@@ -13577,36 +13723,40 @@ var app = (function () {
     			append(tr1, t60);
     			append(tr1, td12);
     			append(td12, input);
-    			set_input_value(input, /*desc*/ ctx[3]);
+    			set_input_value(input, /*desc*/ ctx[19]);
     			append(td12, t61);
     			append(td12, button);
     			append(div3, t63);
     			append(div3, div2);
     			current = true;
-    			if (remount) run_all(dispose);
 
-    			dispose = [
-    				listen(input, "input", /*input_input_handler*/ ctx[133]),
-    				listen(button, "click", /*addScenario*/ ctx[59])
-    			];
+    			if (!mounted) {
+    				dispose = [
+    					listen(input, "input", /*input_input_handler*/ ctx[116]),
+    					listen(button, "click", /*addScenario*/ ctx[59])
+    				];
+
+    				mounted = true;
+    			}
     		},
-    		p(ctx, dirty) {
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t2_value !== (t2_value = /*translations*/ ctx[45].app.location + "")) set_data(t2, t2_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t4_value !== (t4_value = /*translations*/ ctx[45].app.fatalityRates + "")) set_data(t4, t4_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t6_value !== (t6_value = /*translations*/ ctx[45].app.varyFRs + "")) set_data(t6, t6_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t8_value !== (t8_value = /*translations*/ ctx[45].app.infectionRate + "")) set_data(t8, t8_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t10_value !== (t10_value = /*translations*/ ctx[45].app.over60InfectionRate + "")) set_data(t10, t10_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t12_value !== (t12_value = /*translations*/ ctx[45].app.over60InfectionRate + "")) set_data(t12, t12_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t14_value !== (t14_value = /*translations*/ ctx[45].app.elimination + "")) set_data(t14, t14_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t16_value !== (t16_value = /*translations*/ ctx[45].app.infectionUntil + "")) set_data(t16, t16_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t18_value !== (t18_value = /*translations*/ ctx[45].app.infected + "")) set_data(t18, t18_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t20_value !== (t20_value = /*translations*/ ctx[45].app.deaths + "")) set_data(t20, t20_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t22_value !== (t22_value = /*translations*/ ctx[45].app.yrsOfLifeLost + "")) set_data(t22, t22_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t24_value !== (t24_value = /*translations*/ ctx[45].app.yrsOfLifeLostCosts + "")) set_data(t24, t24_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t26_value !== (t26_value = /*translations*/ ctx[45].app.scenariosDescription + "")) set_data(t26, t26_value);
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t2_value !== (t2_value = /*translations*/ ctx[11].app.location + "")) set_data(t2, t2_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t4_value !== (t4_value = /*translations*/ ctx[11].app.fatalityRates + "")) set_data(t4, t4_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t6_value !== (t6_value = /*translations*/ ctx[11].app.varyFRs + "")) set_data(t6, t6_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t8_value !== (t8_value = /*translations*/ ctx[11].app.infectionRate + "")) set_data(t8, t8_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t10_value !== (t10_value = /*translations*/ ctx[11].app.over60InfectionRate + "")) set_data(t10, t10_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t12_value !== (t12_value = /*translations*/ ctx[11].app.over60InfectionRate + "")) set_data(t12, t12_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t14_value !== (t14_value = /*translations*/ ctx[11].app.elimination + "")) set_data(t14, t14_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t16_value !== (t16_value = /*translations*/ ctx[11].app.infectionUntil + "")) set_data(t16, t16_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t18_value !== (t18_value = /*translations*/ ctx[11].app.infected + "")) set_data(t18, t18_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t20_value !== (t20_value = /*translations*/ ctx[11].app.deaths + "")) set_data(t20, t20_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t22_value !== (t22_value = /*translations*/ ctx[11].app.yrsOfLifeLost + "")) set_data(t22, t22_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t24_value !== (t24_value = /*translations*/ ctx[11].app.yrsOfLifeLostCosts + "")) set_data(t24, t24_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t26_value !== (t26_value = /*translations*/ ctx[11].app.scenariosDescription + "")) set_data(t26, t26_value);
 
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 | dirty[1] & /*deleteScenario*/ 536870912) {
-    				each_value = /*rowsOfScenarios*/ ctx[30];
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 | dirty[1] & /*deleteScenario*/ 536870912) {
+    				each_value = /*rowsOfScenarios*/ ctx[10];
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
@@ -13628,29 +13778,30 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (!current || dirty[0] & /*selectedLocation*/ 4) set_data(t29, /*selectedLocation*/ ctx[2]);
-    			if ((!current || dirty[1] & /*translations, selectedSourceId*/ 49152) && t31_value !== (t31_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "")) set_data(t31, t31_value);
-    			if (!current || dirty[0] & /*pctOfChange*/ 128) set_data(t33, /*pctOfChange*/ ctx[7]);
-    			if (!current || dirty[0] & /*pctH*/ 256) set_data(t36, /*pctH*/ ctx[8]);
-    			if (!current || dirty[1] & /*pctH_60plus*/ 8192) set_data(t39, /*pctH_60plus*/ ctx[44]);
-    			if (!current || dirty[1] & /*pctH_below60*/ 65536) set_data(t42, /*pctH_below60*/ ctx[47]);
-    			if (!current || dirty[0] & /*prElimTimes100*/ 512) set_data(t45, /*prElimTimes100*/ ctx[9]);
-    			if (!current || dirty[0] & /*pctU*/ 1024) set_data(t48, /*pctU*/ ctx[10]);
-    			if ((!current || dirty[1] & /*totalInfected*/ 131072) && t51_value !== (t51_value = numberFormatter(/*totalInfected*/ ctx[48]) + "")) set_data(t51, t51_value);
-    			if ((!current || dirty[1] & /*totalDeaths*/ 262144) && t53_value !== (t53_value = numberFormatter(/*totalDeaths*/ ctx[49]) + "")) set_data(t53, t53_value);
-    			if ((!current || dirty[1] & /*totalYearsLost*/ 524288) && t55_value !== (t55_value = numberFormatter(/*totalYearsLost*/ ctx[50]) + "")) set_data(t55, t55_value);
+    			if (!current || dirty[0] & /*selectedLocation*/ 1) set_data(t29, /*selectedLocation*/ ctx[0]);
+    			if ((!current || dirty[0] & /*translations, selectedSourceId*/ 6144) && t31_value !== (t31_value = /*translations*/ ctx[11].fatalityRisks[/*selectedSourceId*/ ctx[12]].source + "")) set_data(t31, t31_value);
+    			if (!current || dirty[0] & /*pctOfChange*/ 16) set_data(t33, /*pctOfChange*/ ctx[4]);
+    			if (!current || dirty[0] & /*pctH*/ 32) set_data(t36, /*pctH*/ ctx[5]);
+    			if (!current || dirty[0] & /*pctH_60plus*/ 32768) set_data(t39, /*pctH_60plus*/ ctx[15]);
+    			if (!current || dirty[0] & /*pctH_below60*/ 65536) set_data(t42, /*pctH_below60*/ ctx[16]);
+    			if (!current || dirty[0] & /*prElimTimes100*/ 64) set_data(t45, /*prElimTimes100*/ ctx[6]);
+    			if (!current || dirty[0] & /*pctU*/ 128) set_data(t48, /*pctU*/ ctx[7]);
+    			if ((!current || dirty[1] & /*totalInfected*/ 2097152) && t51_value !== (t51_value = numberFormatter(/*totalInfected*/ ctx[52]) + "")) set_data(t51, t51_value);
+    			if ((!current || dirty[0] & /*totalDeaths*/ 16384) && t53_value !== (t53_value = numberFormatter(/*totalDeaths*/ ctx[14]) + "")) set_data(t53, t53_value);
+    			if ((!current || dirty[0] & /*totalYearsLost*/ 8192) && t55_value !== (t55_value = numberFormatter(/*totalYearsLost*/ ctx[13]) + "")) set_data(t55, t55_value);
     			if ((!current || dirty[1] & /*totalMoneyLost*/ 1048576) && t58_value !== (t58_value = numberFormatter(/*totalMoneyLost*/ ctx[51]) + "")) set_data(t58, t58_value);
 
-    			if (dirty[0] & /*desc*/ 8 && input.value !== /*desc*/ ctx[3]) {
-    				set_input_value(input, /*desc*/ ctx[3]);
+    			if (dirty[0] & /*desc*/ 524288 && input.value !== /*desc*/ ctx[19]) {
+    				set_input_value(input, /*desc*/ ctx[19]);
     			}
     		},
     		i(local) {
     			if (current) return;
 
     			add_render_callback(() => {
+    				if (!current) return;
     				if (div4_outro) div4_outro.end(1);
-    				if (!div4_intro) div4_intro = create_in_transition(div4, fade, { duration: durationIn });
+    				div4_intro = create_in_transition(div4, fade, { duration: durationIn });
     				div4_intro.start();
     			});
 
@@ -13665,35 +13816,41 @@ var app = (function () {
     			if (detaching) detach(div4);
     			destroy_each(each_blocks, detaching);
     			if (detaching && div4_outro) div4_outro.end();
+    			mounted = false;
     			run_all(dispose);
     		}
     	};
     }
 
     // (1023:11) {#if scenario.id > 2}
-    function create_if_block_6(ctx) {
+    function create_if_block_5(ctx) {
     	let button;
+    	let mounted;
     	let dispose;
 
     	return {
     		c() {
     			button = element("button");
     			button.textContent = "Delete";
-    			attr(button, "class", "button svelte-1havf7j");
+    			attr(button, "class", "button svelte-1ezrwae");
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, button, anchor);
-    			if (remount) dispose();
 
-    			dispose = listen(button, "click", function () {
-    				if (is_function(/*deleteScenario*/ ctx[60](/*scenario*/ ctx[139].id))) /*deleteScenario*/ ctx[60](/*scenario*/ ctx[139].id).apply(this, arguments);
-    			});
+    			if (!mounted) {
+    				dispose = listen(button, "click", function () {
+    					if (is_function(/*deleteScenario*/ ctx[60](/*scenario*/ ctx[139].id))) /*deleteScenario*/ ctx[60](/*scenario*/ ctx[139].id).apply(this, arguments);
+    				});
+
+    				mounted = true;
+    			}
     		},
     		p(new_ctx, dirty) {
     			ctx = new_ctx;
     		},
     		d(detaching) {
     			if (detaching) detach(button);
+    			mounted = false;
     			dispose();
     		}
     	};
@@ -13764,7 +13921,7 @@ var app = (function () {
     	let t32_value = /*scenario*/ ctx[139].comments + "";
     	let t32;
     	let t33;
-    	let if_block = /*scenario*/ ctx[139].id > 2 && create_if_block_6(ctx);
+    	let if_block = /*scenario*/ ctx[139].id > 2 && create_if_block_5(ctx);
 
     	return {
     		c() {
@@ -13819,21 +13976,21 @@ var app = (function () {
     			t32 = text(t32_value);
     			t33 = space();
     			if (if_block) if_block.c();
-    			attr(span0, "class", "parameter svelte-1havf7j");
-    			attr(td0, "class", "svelte-1havf7j");
-    			attr(span1, "class", "parameter svelte-1havf7j");
-    			attr(td1, "class", "svelte-1havf7j");
-    			attr(td2, "class", "svelte-1havf7j");
-    			attr(td3, "class", "svelte-1havf7j");
-    			attr(td4, "class", "svelte-1havf7j");
-    			attr(td5, "class", "svelte-1havf7j");
-    			attr(td6, "class", "svelte-1havf7j");
-    			attr(td7, "class", "svelte-1havf7j");
-    			attr(td8, "class", "svelte-1havf7j");
-    			attr(td9, "class", "svelte-1havf7j");
-    			attr(td10, "class", "svelte-1havf7j");
-    			attr(td11, "class", "svelte-1havf7j");
-    			attr(td12, "class", "svelte-1havf7j");
+    			attr(span0, "class", "parameter svelte-1ezrwae");
+    			attr(td0, "class", "svelte-1ezrwae");
+    			attr(span1, "class", "parameter svelte-1ezrwae");
+    			attr(td1, "class", "svelte-1ezrwae");
+    			attr(td2, "class", "svelte-1ezrwae");
+    			attr(td3, "class", "svelte-1ezrwae");
+    			attr(td4, "class", "svelte-1ezrwae");
+    			attr(td5, "class", "svelte-1ezrwae");
+    			attr(td6, "class", "svelte-1ezrwae");
+    			attr(td7, "class", "svelte-1ezrwae");
+    			attr(td8, "class", "svelte-1ezrwae");
+    			attr(td9, "class", "svelte-1ezrwae");
+    			attr(td10, "class", "svelte-1ezrwae");
+    			attr(td11, "class", "svelte-1ezrwae");
+    			attr(td12, "class", "svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, tr, anchor);
@@ -13889,25 +14046,25 @@ var app = (function () {
     			if (if_block) if_block.m(td12, null);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t0_value !== (t0_value = /*scenario*/ ctx[139].loc + "")) set_data(t0, t0_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t2_value !== (t2_value = /*scenario*/ ctx[139].frs + "")) set_data(t2, t2_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t4_value !== (t4_value = /*scenario*/ ctx[139].F + "")) set_data(t4, t4_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t7_value !== (t7_value = /*scenario*/ ctx[139].H + "")) set_data(t7, t7_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t10_value !== (t10_value = /*scenario*/ ctx[139].H_60 + "")) set_data(t10, t10_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t13_value !== (t13_value = /*scenario*/ ctx[139].H_below + "")) set_data(t13, t13_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t16_value !== (t16_value = /*scenario*/ ctx[139].Elim + "")) set_data(t16, t16_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t19_value !== (t19_value = /*scenario*/ ctx[139].U + "")) set_data(t19, t19_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t22_value !== (t22_value = numberFormatter(/*scenario*/ ctx[139].totInf) + "")) set_data(t22, t22_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t24_value !== (t24_value = numberFormatter(/*scenario*/ ctx[139].totDeaths) + "")) set_data(t24, t24_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t26_value !== (t26_value = numberFormatter(/*scenario*/ ctx[139].yrsLifeLost) + "")) set_data(t26, t26_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t29_value !== (t29_value = numberFormatter(/*scenario*/ ctx[139].yrsLifeLostCosts) + "")) set_data(t29, t29_value);
-    			if (dirty[0] & /*rowsOfScenarios*/ 1073741824 && t32_value !== (t32_value = /*scenario*/ ctx[139].comments + "")) set_data(t32, t32_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t0_value !== (t0_value = /*scenario*/ ctx[139].loc + "")) set_data(t0, t0_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t2_value !== (t2_value = /*scenario*/ ctx[139].frs + "")) set_data(t2, t2_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t4_value !== (t4_value = /*scenario*/ ctx[139].F + "")) set_data(t4, t4_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t7_value !== (t7_value = /*scenario*/ ctx[139].H + "")) set_data(t7, t7_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t10_value !== (t10_value = /*scenario*/ ctx[139].H_60 + "")) set_data(t10, t10_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t13_value !== (t13_value = /*scenario*/ ctx[139].H_below + "")) set_data(t13, t13_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t16_value !== (t16_value = /*scenario*/ ctx[139].Elim + "")) set_data(t16, t16_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t19_value !== (t19_value = /*scenario*/ ctx[139].U + "")) set_data(t19, t19_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t22_value !== (t22_value = numberFormatter(/*scenario*/ ctx[139].totInf) + "")) set_data(t22, t22_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t24_value !== (t24_value = numberFormatter(/*scenario*/ ctx[139].totDeaths) + "")) set_data(t24, t24_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t26_value !== (t26_value = numberFormatter(/*scenario*/ ctx[139].yrsLifeLost) + "")) set_data(t26, t26_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t29_value !== (t29_value = numberFormatter(/*scenario*/ ctx[139].yrsLifeLostCosts) + "")) set_data(t29, t29_value);
+    			if (dirty[0] & /*rowsOfScenarios*/ 1024 && t32_value !== (t32_value = /*scenario*/ ctx[139].comments + "")) set_data(t32, t32_value);
 
     			if (/*scenario*/ ctx[139].id > 2) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_6(ctx);
+    					if_block = create_if_block_5(ctx);
     					if_block.c();
     					if_block.m(td12, null);
     				}
@@ -13924,7 +14081,7 @@ var app = (function () {
     }
 
     // (1062:3) {#if 6 == currentTab}
-    function create_if_block_4$1(ctx) {
+    function create_if_block_3$1(ctx) {
     	let div4;
     	let div3;
     	let div1;
@@ -13938,16 +14095,16 @@ var app = (function () {
     	let td0;
     	let span1;
     	let t8;
-    	let t9_value = /*rowsOfScenarios*/ ctx[30][0].H + "";
+    	let t9_value = /*rowsOfScenarios*/ ctx[10][0].H + "";
     	let t9;
     	let t10;
     	let span0;
-    	let t11_value = /*rowsOfScenarios*/ ctx[30][0].loc + "";
+    	let t11_value = /*rowsOfScenarios*/ ctx[10][0].loc + "";
     	let t11;
     	let t12;
     	let t13;
     	let span2;
-    	let t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totInf) + "";
+    	let t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totInf) + "";
     	let t14;
     	let t15;
     	let span3;
@@ -13955,23 +14112,23 @@ var app = (function () {
     	let td1;
     	let span4;
     	let t18;
-    	let t19_value = /*rowsOfScenarios*/ ctx[30][1].H_60 + "";
+    	let t19_value = /*rowsOfScenarios*/ ctx[10][1].H_60 + "";
     	let t19;
     	let t20;
-    	let t21_value = /*rowsOfScenarios*/ ctx[30][1].H_below + "";
+    	let t21_value = /*rowsOfScenarios*/ ctx[10][1].H_below + "";
     	let t21;
     	let t22;
-    	let t23_value = /*rowsOfScenarios*/ ctx[30][1].H + "";
+    	let t23_value = /*rowsOfScenarios*/ ctx[10][1].H + "";
     	let t23;
     	let t24;
     	let t25;
     	let td2;
     	let span5;
     	let t26;
-    	let t27_value = /*rowsOfScenarios*/ ctx[30][2].Elim + "";
+    	let t27_value = /*rowsOfScenarios*/ ctx[10][2].Elim + "";
     	let t27;
     	let t28;
-    	let t29_value = /*rowsOfScenarios*/ ctx[30][2].U + "";
+    	let t29_value = /*rowsOfScenarios*/ ctx[10][2].U + "";
     	let t29;
     	let t30;
     	let t31;
@@ -13980,16 +14137,16 @@ var app = (function () {
     	let span8;
     	let t32;
     	let span6;
-    	let t33_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "";
+    	let t33_value = /*translations*/ ctx[11].fatalityRisks[/*selectedSourceId*/ ctx[12]].source + "";
     	let t33;
     	let t34;
     	let span7;
-    	let t35_value = /*rowsOfScenarios*/ ctx[30][0].loc + "";
+    	let t35_value = /*rowsOfScenarios*/ ctx[10][0].loc + "";
     	let t35;
     	let t36;
     	let t37;
     	let span9;
-    	let t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "";
+    	let t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths) + "";
     	let t38;
     	let t39;
     	let span10;
@@ -13997,21 +14154,21 @@ var app = (function () {
     	let td4;
     	let span11;
     	let t42;
-    	let t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "";
+    	let t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths) + "";
     	let t43;
     	let t44;
-    	let t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].totDeaths) + "";
+    	let t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][1].totDeaths) + "";
     	let t45;
     	let t46;
     	let t47;
     	let span12;
-    	let t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][1].totDeaths) + "";
+    	let t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths - /*rowsOfScenarios*/ ctx[10][1].totDeaths) + "";
     	let t48;
     	let t49;
     	let span13;
     	let t51;
     	let span14;
-    	let t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][1].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "";
+    	let t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[10][1].totDeaths / /*rowsOfScenarios*/ ctx[10][0].totDeaths - 1)) + "";
     	let t52;
     	let t53;
     	let t54;
@@ -14020,21 +14177,21 @@ var app = (function () {
     	let td5;
     	let span16;
     	let t57;
-    	let t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "";
+    	let t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths) + "";
     	let t58;
     	let t59;
-    	let t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].totDeaths) + "";
+    	let t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][2].totDeaths) + "";
     	let t60;
     	let t61;
     	let t62;
     	let span17;
-    	let t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][2].totDeaths) + "";
+    	let t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths - /*rowsOfScenarios*/ ctx[10][2].totDeaths) + "";
     	let t63;
     	let t64;
     	let span18;
     	let t66;
     	let span19;
-    	let t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][2].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "";
+    	let t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[10][2].totDeaths / /*rowsOfScenarios*/ ctx[10][0].totDeaths - 1)) + "";
     	let t67;
     	let t68;
     	let t69;
@@ -14045,35 +14202,35 @@ var app = (function () {
     	let span21;
     	let t73;
     	let span22;
-    	let t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "";
+    	let t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLost) + "";
     	let t74;
     	let t75;
     	let span23;
     	let t77;
     	let span24;
     	let t78;
-    	let t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "";
+    	let t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLostCosts) + "";
     	let t79;
     	let t80;
     	let t81;
     	let td7;
     	let span25;
     	let t82;
-    	let t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "";
+    	let t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLost) + "";
     	let t83;
     	let t84;
-    	let t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "";
+    	let t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][1].yrsLifeLost) + "";
     	let t85;
     	let t86;
     	let t87;
     	let span26;
-    	let t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "";
+    	let t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[10][1].yrsLifeLost) + "";
     	let t88;
     	let t89;
     	let span27;
     	let t91;
     	let span28;
-    	let t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "";
+    	let t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[10][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[10][0].yrsLifeLost) + "";
     	let t92;
     	let t93;
     	let t94;
@@ -14082,16 +14239,16 @@ var app = (function () {
     	let td8;
     	let span30;
     	let t97;
-    	let t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "";
+    	let t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLostCosts) + "";
     	let t98;
     	let t99;
-    	let t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "";
+    	let t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][2].yrsLifeLostCosts) + "";
     	let t100;
     	let t101;
     	let t102;
     	let span31;
     	let t103;
-    	let t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "";
+    	let t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[10][2].yrsLifeLostCosts) + "";
     	let t104;
     	let t105;
     	let t106;
@@ -14113,7 +14270,7 @@ var app = (function () {
     			table = element("table");
     			thead = element("thead");
 
-    			thead.innerHTML = `<tr class="parameter-title svelte-1havf7j"><th>Scenario 0: Do nothing, as a baseline</th> 
+    			thead.innerHTML = `<tr class="parameter-title svelte-1ezrwae"><th>Scenario 0: Do nothing, as a baseline</th> 
 										<th>Scenario 1: Decrease infection rate for people over 60
 											and increase for those below 60</th> 
 										<th>Scenario 2: Increase the probability of elimination</th></tr>`;
@@ -14268,52 +14425,50 @@ var app = (function () {
     			t108 = space();
     			div2 = element("div");
 
-    			div2.innerHTML = `<span class="parameter-text svelte-1havf7j">
-								Estimates should be interpreted with caution.
+    			div2.innerHTML = `<span class="parameter-text svelte-1ezrwae">Estimates should be interpreted with caution.
 								This tool is focused on simple presentation and pedagogical aspects
 								and only offers crude estimates. It uses relatively simplistic
-								methodology outlined in the Notes below.
-							</span>`;
+								methodology outlined in the Notes below.</span>`;
 
-    			attr(div0, "class", "wtitle svelte-1havf7j");
-    			attr(span0, "class", "parameter svelte-1havf7j");
-    			attr(span1, "class", "parameter-text svelte-1havf7j");
-    			attr(span2, "class", "emphasize-text svelte-1havf7j");
-    			attr(span3, "class", "parameter-text svelte-1havf7j");
-    			attr(span4, "class", "parameter-text svelte-1havf7j");
-    			attr(span5, "class", "parameter-text svelte-1havf7j");
-    			attr(span6, "class", "parameter svelte-1havf7j");
-    			attr(span7, "class", "parameter svelte-1havf7j");
-    			attr(span8, "class", "parameter-text svelte-1havf7j");
-    			attr(span9, "class", "emphasize-text svelte-1havf7j");
-    			attr(span10, "class", "parameter-text svelte-1havf7j");
-    			attr(span11, "class", "parameter-text svelte-1havf7j");
-    			attr(span12, "class", "emphasize-text svelte-1havf7j");
-    			attr(span13, "class", "parameter-text svelte-1havf7j");
-    			attr(span14, "class", "emphasize-text svelte-1havf7j");
-    			attr(span15, "class", "parameter-text svelte-1havf7j");
-    			attr(span16, "class", "parameter-text svelte-1havf7j");
-    			attr(span17, "class", "emphasize-text svelte-1havf7j");
-    			attr(span18, "class", "parameter-text svelte-1havf7j");
-    			attr(span19, "class", "emphasize-text svelte-1havf7j");
-    			attr(span20, "class", "parameter-text svelte-1havf7j");
-    			attr(span21, "class", "parameter-text svelte-1havf7j");
-    			attr(span22, "class", "emphasize-text svelte-1havf7j");
-    			attr(span23, "class", "parameter-text svelte-1havf7j");
-    			attr(span24, "class", "emphasize-text svelte-1havf7j");
-    			attr(span25, "class", "parameter-text svelte-1havf7j");
-    			attr(span26, "class", "emphasize-text svelte-1havf7j");
-    			attr(span27, "class", "parameter-text svelte-1havf7j");
-    			attr(span28, "class", "emphasize-text svelte-1havf7j");
-    			attr(span29, "class", "parameter-text svelte-1havf7j");
-    			attr(span30, "class", "parameter-text svelte-1havf7j");
-    			attr(span31, "class", "emphasize-text svelte-1havf7j");
-    			attr(span32, "class", "parameter-text svelte-1havf7j");
-    			attr(table, "class", "table2 svelte-1havf7j");
-    			attr(div1, "class", "child svelte-1havf7j");
-    			attr(div2, "class", "caption svelte-1havf7j");
+    			attr(div0, "class", "wtitle svelte-1ezrwae");
+    			attr(span0, "class", "parameter svelte-1ezrwae");
+    			attr(span1, "class", "parameter-text svelte-1ezrwae");
+    			attr(span2, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span3, "class", "parameter-text svelte-1ezrwae");
+    			attr(span4, "class", "parameter-text svelte-1ezrwae");
+    			attr(span5, "class", "parameter-text svelte-1ezrwae");
+    			attr(span6, "class", "parameter svelte-1ezrwae");
+    			attr(span7, "class", "parameter svelte-1ezrwae");
+    			attr(span8, "class", "parameter-text svelte-1ezrwae");
+    			attr(span9, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span10, "class", "parameter-text svelte-1ezrwae");
+    			attr(span11, "class", "parameter-text svelte-1ezrwae");
+    			attr(span12, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span13, "class", "parameter-text svelte-1ezrwae");
+    			attr(span14, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span15, "class", "parameter-text svelte-1ezrwae");
+    			attr(span16, "class", "parameter-text svelte-1ezrwae");
+    			attr(span17, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span18, "class", "parameter-text svelte-1ezrwae");
+    			attr(span19, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span20, "class", "parameter-text svelte-1ezrwae");
+    			attr(span21, "class", "parameter-text svelte-1ezrwae");
+    			attr(span22, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span23, "class", "parameter-text svelte-1ezrwae");
+    			attr(span24, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span25, "class", "parameter-text svelte-1ezrwae");
+    			attr(span26, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span27, "class", "parameter-text svelte-1ezrwae");
+    			attr(span28, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span29, "class", "parameter-text svelte-1ezrwae");
+    			attr(span30, "class", "parameter-text svelte-1ezrwae");
+    			attr(span31, "class", "emphasize-text svelte-1ezrwae");
+    			attr(span32, "class", "parameter-text svelte-1ezrwae");
+    			attr(table, "class", "table2 svelte-1ezrwae");
+    			attr(div1, "class", "child svelte-1ezrwae");
+    			attr(div2, "class", "caption svelte-1ezrwae");
     			attr(div3, "class", "twelve columns");
-    			attr(div4, "class", "row svelte-1havf7j");
+    			attr(div4, "class", "row svelte-1ezrwae");
     		},
     		m(target, anchor) {
     			insert(target, div4, anchor);
@@ -14463,42 +14618,44 @@ var app = (function () {
     			append(div3, div2);
     			current = true;
     		},
-    		p(ctx, dirty) {
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[30][0].H + "")) set_data(t9, t9_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t11_value !== (t11_value = /*rowsOfScenarios*/ ctx[30][0].loc + "")) set_data(t11, t11_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t14_value !== (t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totInf) + "")) set_data(t14, t14_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t19_value !== (t19_value = /*rowsOfScenarios*/ ctx[30][1].H_60 + "")) set_data(t19, t19_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t21_value !== (t21_value = /*rowsOfScenarios*/ ctx[30][1].H_below + "")) set_data(t21, t21_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t23_value !== (t23_value = /*rowsOfScenarios*/ ctx[30][1].H + "")) set_data(t23, t23_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t27_value !== (t27_value = /*rowsOfScenarios*/ ctx[30][2].Elim + "")) set_data(t27, t27_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t29_value !== (t29_value = /*rowsOfScenarios*/ ctx[30][2].U + "")) set_data(t29, t29_value);
-    			if ((!current || dirty[1] & /*translations, selectedSourceId*/ 49152) && t33_value !== (t33_value = /*translations*/ ctx[45].fatalityRisks[/*selectedSourceId*/ ctx[46]].source + "")) set_data(t33, t33_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t35_value !== (t35_value = /*rowsOfScenarios*/ ctx[30][0].loc + "")) set_data(t35, t35_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t38_value !== (t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "")) set_data(t38, t38_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t43_value !== (t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "")) set_data(t43, t43_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t45_value !== (t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].totDeaths) + "")) set_data(t45, t45_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t48_value !== (t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][1].totDeaths) + "")) set_data(t48, t48_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t52_value !== (t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][1].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "")) set_data(t52, t52_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t58_value !== (t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths) + "")) set_data(t58, t58_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t60_value !== (t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].totDeaths) + "")) set_data(t60, t60_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t63_value !== (t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].totDeaths - /*rowsOfScenarios*/ ctx[30][2].totDeaths) + "")) set_data(t63, t63_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t67_value !== (t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[30][2].totDeaths / /*rowsOfScenarios*/ ctx[30][0].totDeaths - 1)) + "")) set_data(t67, t67_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t74_value !== (t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "")) set_data(t74, t74_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t79_value !== (t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "")) set_data(t79, t79_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t83_value !== (t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "")) set_data(t83, t83_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t85_value !== (t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "")) set_data(t85, t85_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t88_value !== (t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost) + "")) set_data(t88, t88_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t92_value !== (t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[30][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[30][0].yrsLifeLost) + "")) set_data(t92, t92_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t98_value !== (t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts) + "")) set_data(t98, t98_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t100_value !== (t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "")) set_data(t100, t100_value);
-    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1073741824) && t104_value !== (t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[30][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[30][2].yrsLifeLostCosts) + "")) set_data(t104, t104_value);
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t9_value !== (t9_value = /*rowsOfScenarios*/ ctx[10][0].H + "")) set_data(t9, t9_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t11_value !== (t11_value = /*rowsOfScenarios*/ ctx[10][0].loc + "")) set_data(t11, t11_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t14_value !== (t14_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totInf) + "")) set_data(t14, t14_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t19_value !== (t19_value = /*rowsOfScenarios*/ ctx[10][1].H_60 + "")) set_data(t19, t19_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t21_value !== (t21_value = /*rowsOfScenarios*/ ctx[10][1].H_below + "")) set_data(t21, t21_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t23_value !== (t23_value = /*rowsOfScenarios*/ ctx[10][1].H + "")) set_data(t23, t23_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t27_value !== (t27_value = /*rowsOfScenarios*/ ctx[10][2].Elim + "")) set_data(t27, t27_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t29_value !== (t29_value = /*rowsOfScenarios*/ ctx[10][2].U + "")) set_data(t29, t29_value);
+    			if ((!current || dirty[0] & /*translations, selectedSourceId*/ 6144) && t33_value !== (t33_value = /*translations*/ ctx[11].fatalityRisks[/*selectedSourceId*/ ctx[12]].source + "")) set_data(t33, t33_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t35_value !== (t35_value = /*rowsOfScenarios*/ ctx[10][0].loc + "")) set_data(t35, t35_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t38_value !== (t38_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths) + "")) set_data(t38, t38_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t43_value !== (t43_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths) + "")) set_data(t43, t43_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t45_value !== (t45_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][1].totDeaths) + "")) set_data(t45, t45_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t48_value !== (t48_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths - /*rowsOfScenarios*/ ctx[10][1].totDeaths) + "")) set_data(t48, t48_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t52_value !== (t52_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[10][1].totDeaths / /*rowsOfScenarios*/ ctx[10][0].totDeaths - 1)) + "")) set_data(t52, t52_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t58_value !== (t58_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths) + "")) set_data(t58, t58_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t60_value !== (t60_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][2].totDeaths) + "")) set_data(t60, t60_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t63_value !== (t63_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].totDeaths - /*rowsOfScenarios*/ ctx[10][2].totDeaths) + "")) set_data(t63, t63_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t67_value !== (t67_value = Math.round(-100 * (/*rowsOfScenarios*/ ctx[10][2].totDeaths / /*rowsOfScenarios*/ ctx[10][0].totDeaths - 1)) + "")) set_data(t67, t67_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t74_value !== (t74_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLost) + "")) set_data(t74, t74_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t79_value !== (t79_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLostCosts) + "")) set_data(t79, t79_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t83_value !== (t83_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLost) + "")) set_data(t83, t83_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t85_value !== (t85_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][1].yrsLifeLost) + "")) set_data(t85, t85_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t88_value !== (t88_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLost - /*rowsOfScenarios*/ ctx[10][1].yrsLifeLost) + "")) set_data(t88, t88_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t92_value !== (t92_value = Math.round(100 * /*rowsOfScenarios*/ ctx[10][1].yrsLifeLost / /*rowsOfScenarios*/ ctx[10][0].yrsLifeLost) + "")) set_data(t92, t92_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t98_value !== (t98_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLostCosts) + "")) set_data(t98, t98_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t100_value !== (t100_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][2].yrsLifeLostCosts) + "")) set_data(t100, t100_value);
+    			if ((!current || dirty[0] & /*rowsOfScenarios*/ 1024) && t104_value !== (t104_value = numberFormatter(/*rowsOfScenarios*/ ctx[10][0].yrsLifeLostCosts - /*rowsOfScenarios*/ ctx[10][2].yrsLifeLostCosts) + "")) set_data(t104, t104_value);
     		},
     		i(local) {
     			if (current) return;
 
     			add_render_callback(() => {
+    				if (!current) return;
     				if (div4_outro) div4_outro.end(1);
-    				if (!div4_intro) div4_intro = create_in_transition(div4, fade, { duration: durationIn });
+    				div4_intro = create_in_transition(div4, fade, { duration: durationIn });
     				div4_intro.start();
     			});
 
@@ -14516,72 +14673,83 @@ var app = (function () {
     	};
     }
 
-    // (1345:4) {#if userNeeds.exportData}
-    function create_if_block_3$1(ctx) {
-    	let button;
-    	let t_value = /*translations*/ ctx[45].app.hideExport + "";
-    	let t;
-    	let dispose;
-
-    	return {
-    		c() {
-    			button = element("button");
-    			t = text(t_value);
-    			attr(button, "class", "button-class svelte-1havf7j");
-    		},
-    		m(target, anchor, remount) {
-    			insert(target, button, anchor);
-    			append(button, t);
-    			if (remount) dispose();
-    			dispose = listen(button, "click", /*toggleExportData*/ ctx[61]);
-    		},
-    		p(ctx, dirty) {
-    			if (dirty[1] & /*translations*/ 16384 && t_value !== (t_value = /*translations*/ ctx[45].app.hideExport + "")) set_data(t, t_value);
-    		},
-    		d(detaching) {
-    			if (detaching) detach(button);
-    			dispose();
-    		}
-    	};
-    }
-
-    // (1351:4) {#if !userNeeds.exportData}
+    // (1349:4) {#if userNeeds.exportData}
     function create_if_block_2$1(ctx) {
     	let button;
-    	let t_value = /*translations*/ ctx[45].app.export + "";
+    	let t_value = /*translations*/ ctx[11].app.hideExport + "";
     	let t;
+    	let mounted;
     	let dispose;
 
     	return {
     		c() {
     			button = element("button");
     			t = text(t_value);
-    			attr(button, "class", "button-class svelte-1havf7j");
+    			attr(button, "class", "button-class svelte-1ezrwae");
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, button, anchor);
     			append(button, t);
-    			if (remount) dispose();
-    			dispose = listen(button, "click", /*toggleExportData*/ ctx[61]);
+
+    			if (!mounted) {
+    				dispose = listen(button, "click", /*toggleExportData*/ ctx[61]);
+    				mounted = true;
+    			}
     		},
     		p(ctx, dirty) {
-    			if (dirty[1] & /*translations*/ 16384 && t_value !== (t_value = /*translations*/ ctx[45].app.export + "")) set_data(t, t_value);
+    			if (dirty[0] & /*translations*/ 2048 && t_value !== (t_value = /*translations*/ ctx[11].app.hideExport + "")) set_data(t, t_value);
     		},
     		d(detaching) {
     			if (detaching) detach(button);
+    			mounted = false;
     			dispose();
     		}
     	};
     }
 
-    // (1362:1) {#if userNeeds.exportData}
+    // (1355:4) {#if !userNeeds.exportData}
     function create_if_block_1$2(ctx) {
+    	let button;
+    	let t_value = /*translations*/ ctx[11].app.export + "";
+    	let t;
+    	let mounted;
+    	let dispose;
+
+    	return {
+    		c() {
+    			button = element("button");
+    			t = text(t_value);
+    			attr(button, "class", "button-class svelte-1ezrwae");
+    		},
+    		m(target, anchor) {
+    			insert(target, button, anchor);
+    			append(button, t);
+
+    			if (!mounted) {
+    				dispose = listen(button, "click", /*toggleExportData*/ ctx[61]);
+    				mounted = true;
+    			}
+    		},
+    		p(ctx, dirty) {
+    			if (dirty[0] & /*translations*/ 2048 && t_value !== (t_value = /*translations*/ ctx[11].app.export + "")) set_data(t, t_value);
+    		},
+    		d(detaching) {
+    			if (detaching) detach(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+    }
+
+    // (1366:1) {#if userNeeds.exportData}
+    function create_if_block$4(ctx) {
     	let div1;
     	let div0;
     	let textarea;
     	let div1_intro;
     	let div1_outro;
     	let current;
+    	let mounted;
     	let dispose;
 
     	return {
@@ -14589,30 +14757,34 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			textarea = element("textarea");
-    			attr(textarea, "class", "svelte-1havf7j");
+    			attr(textarea, "class", "svelte-1ezrwae");
     			attr(div0, "class", "twelve columns");
-    			attr(div1, "class", "row svelte-1havf7j");
+    			attr(div1, "class", "row svelte-1ezrwae");
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, div1, anchor);
     			append(div1, div0);
     			append(div0, textarea);
-    			set_input_value(textarea, /*exportedData*/ ctx[55]);
+    			set_input_value(textarea, /*exportedData*/ ctx[50]);
     			current = true;
-    			if (remount) dispose();
-    			dispose = listen(textarea, "input", /*textarea_input_handler*/ ctx[138]);
+
+    			if (!mounted) {
+    				dispose = listen(textarea, "input", /*textarea_input_handler*/ ctx[121]);
+    				mounted = true;
+    			}
     		},
     		p(ctx, dirty) {
-    			if (dirty[1] & /*exportedData*/ 16777216) {
-    				set_input_value(textarea, /*exportedData*/ ctx[55]);
+    			if (dirty[1] & /*exportedData*/ 524288) {
+    				set_input_value(textarea, /*exportedData*/ ctx[50]);
     			}
     		},
     		i(local) {
     			if (current) return;
 
     			add_render_callback(() => {
+    				if (!current) return;
     				if (div1_outro) div1_outro.end(1);
-    				if (!div1_intro) div1_intro = create_in_transition(div1, fly, { duration: 800 });
+    				div1_intro = create_in_transition(div1, fly, { duration: 800 });
     				div1_intro.start();
     			});
 
@@ -14626,169 +14798,8 @@ var app = (function () {
     		d(detaching) {
     			if (detaching) detach(div1);
     			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
     			dispose();
-    		}
-    	};
-    }
-
-    // (1407:5) {:else}
-    function create_else_block$1(ctx) {
-    	let div0;
-    	let t1;
-    	let p0;
-    	let t3;
-    	let p1;
-    	let t9;
-    	let p2;
-    	let t15;
-    	let div1;
-    	let t17;
-    	let p3;
-
-    	return {
-    		c() {
-    			div0 = element("div");
-    			div0.textContent = "About";
-    			t1 = space();
-    			p0 = element("p");
-    			p0.textContent = "At the time of writing, the impacts of COVID-2019 \n\t\t\t\t\t\t\tremain largely uncertain and depend on a whole range of possibilities.\n\n\t\t\t\t\t\t\tOrganizing the overwhelming mass of the available information in the media and literature, \n\t\t\t\t\t\t\tcoming up with a reasonable working estimates and comparing multiple scenarios can be challenging.\n\n\t\t\t\t\t\t\tAs an attempt to address this problem I used publicly available data and published information \n\t\t\t\t\t\t\tto create this international tool that allows users to derive their own country-specific estimates.";
-    			t3 = space();
-    			p1 = element("p");
-
-    			p1.innerHTML = `
-							Please send me feedback:
-							<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>.
-							
-							or email me:
-							<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">here</a>.
-						`;
-
-    			t9 = space();
-    			p2 = element("p");
-
-    			p2.innerHTML = `
-							For technical details please refer to:
-							<a href="notes.html">notes</a>
-							
-							or the:
-							<a href="https://github.com/markolalovic/covid-calc">source code</a>.
-						`;
-
-    			t15 = space();
-    			div1 = element("div");
-    			div1.textContent = "Acknowledgements";
-    			t17 = space();
-    			p3 = element("p");
-    			p3.textContent = "Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.\n\t\t\t\t\t\t\tYao Cheng for help with Chinese translations.\n\t\t\t\t\t\t\tLucas Sanders for help with Portuguese translations.\n\t\t\t\t\t\t\tMaria Dagounaki for help with Spanish translations.";
-    			attr(div0, "class", "wtitle svelte-1havf7j");
-    			attr(div1, "class", "wtitle svelte-1havf7j");
-    		},
-    		m(target, anchor) {
-    			insert(target, div0, anchor);
-    			insert(target, t1, anchor);
-    			insert(target, p0, anchor);
-    			insert(target, t3, anchor);
-    			insert(target, p1, anchor);
-    			insert(target, t9, anchor);
-    			insert(target, p2, anchor);
-    			insert(target, t15, anchor);
-    			insert(target, div1, anchor);
-    			insert(target, t17, anchor);
-    			insert(target, p3, anchor);
-    		},
-    		d(detaching) {
-    			if (detaching) detach(div0);
-    			if (detaching) detach(t1);
-    			if (detaching) detach(p0);
-    			if (detaching) detach(t3);
-    			if (detaching) detach(p1);
-    			if (detaching) detach(t9);
-    			if (detaching) detach(p2);
-    			if (detaching) detach(t15);
-    			if (detaching) detach(div1);
-    			if (detaching) detach(t17);
-    			if (detaching) detach(p3);
-    		}
-    	};
-    }
-
-    // (1373:5) {#if language === 'pt'}
-    function create_if_block$4(ctx) {
-    	let div0;
-    	let t1;
-    	let p0;
-    	let t3;
-    	let p1;
-    	let t9;
-    	let p2;
-    	let t15;
-    	let div1;
-    	let t17;
-    	let p3;
-
-    	return {
-    		c() {
-    			div0 = element("div");
-    			div0.textContent = "Sobre";
-    			t1 = space();
-    			p0 = element("p");
-    			p0.textContent = "No momento da redação deste artigo, os impactos do COVID-2019 permanecem incertos e dependem de uma gama de possibilidades. \n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tOrganizar essa gigantesca massa de informações disponíveis na mídia e na literatura, \n\t\t\t\t\t\t\tafim de obter uma estimativa razoável, comparando vários cenários, pode ser um desafio. \n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tComo tentativa de solucionar esse problema, usei dados publicamente disponíveis e publiquei algumas informações \n\t\t\t\t\t\t\tpara criar essa ferramenta internacional que permite aos usuários obter suas próprias estimativas específicas \n\t\t\t\t\t\t\tpara cada país.";
-    			t3 = space();
-    			p1 = element("p");
-
-    			p1.innerHTML = `
-							Envie-me um feedback:
-							<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">aqui</a>.
-							
-							ou envie um email:
-							<a href="mailto:marko.lalovic@yahoo.com?Subject=COVID%20Calculator" target="_top">aqui</a>.
-						`;
-
-    			t9 = space();
-    			p2 = element("p");
-
-    			p2.innerHTML = `
-							Para detalhes técnicos, veja as
-							<a href="notes.html">notas</a>
-							
-							ou o:
-							<a href="https://github.com/markolalovic/covid-calc">código fonte</a>.
-						`;
-
-    			t15 = space();
-    			div1 = element("div");
-    			div1.textContent = "Agradecimentos";
-    			t17 = space();
-    			p3 = element("p");
-    			p3.textContent = "Tjaša Kovačević pela ajuda no cálculo de perdas de anos esperados e dos impactos econômicos na pobreza.\n\t\t\t\t\t\t\tYao Cheng pela ajuda com traduções para o chinês.\n\t\t\t\t\t\t\tLucas Sanders pela ajuda com traduções para o português.\n\t\t\t\t\t\t\tMaria Dagounaki pela ajuda com traduções para o espanhol.";
-    			attr(div0, "class", "wtitle svelte-1havf7j");
-    			attr(div1, "class", "wtitle svelte-1havf7j");
-    		},
-    		m(target, anchor) {
-    			insert(target, div0, anchor);
-    			insert(target, t1, anchor);
-    			insert(target, p0, anchor);
-    			insert(target, t3, anchor);
-    			insert(target, p1, anchor);
-    			insert(target, t9, anchor);
-    			insert(target, p2, anchor);
-    			insert(target, t15, anchor);
-    			insert(target, div1, anchor);
-    			insert(target, t17, anchor);
-    			insert(target, p3, anchor);
-    		},
-    		d(detaching) {
-    			if (detaching) detach(div0);
-    			if (detaching) detach(t1);
-    			if (detaching) detach(p0);
-    			if (detaching) detach(t3);
-    			if (detaching) detach(p1);
-    			if (detaching) detach(t9);
-    			if (detaching) detach(p2);
-    			if (detaching) detach(t15);
-    			if (detaching) detach(div1);
-    			if (detaching) detach(t17);
-    			if (detaching) detach(p3);
     		}
     	};
     }
@@ -14799,11 +14810,11 @@ var app = (function () {
     	let div1;
     	let div0;
     	let h3;
-    	let t0_value = /*translations*/ ctx[45].app.mainTitle + "";
+    	let t0_value = /*translations*/ ctx[11].app.mainTitle + "";
     	let t0;
     	let t1;
     	let h6;
-    	let t2_value = /*translations*/ ctx[45].app.subtitle + "";
+    	let t2_value = /*translations*/ ctx[11].app.subtitle + "";
     	let t2;
     	let t3;
     	let div3;
@@ -14821,21 +14832,22 @@ var app = (function () {
     	let div6;
     	let label0;
     	let p0;
-    	let t12_value = /*translations*/ ctx[45].app.selectLocation + "";
+    	let t12_value = /*translations*/ ctx[11].app.selectLocation + "";
     	let t12;
     	let t13;
     	let div5;
-    	let t14_value = /*translations*/ ctx[45].app.locationDescription + "";
+    	let t14_value = /*translations*/ ctx[11].app.locationDescription + "";
     	let t14;
     	let t15;
     	let span0;
+    	let autocomplete0;
     	let updating_selectedItem;
     	let t16;
     	let div10;
     	let div9;
     	let label1;
     	let p1;
-    	let t17_value = /*translations*/ ctx[45].app.infectionRate + "";
+    	let t17_value = /*translations*/ ctx[11].app.infectionRate + "";
     	let t17;
     	let t18;
     	let span1;
@@ -14843,7 +14855,7 @@ var app = (function () {
     	let t20;
     	let t21;
     	let div8;
-    	let t22_value = /*translations*/ ctx[45].app.infectionRateDescription + "";
+    	let t22_value = /*translations*/ ctx[11].app.infectionRateDescription + "";
     	let t22;
     	let t23;
     	let input0;
@@ -14852,7 +14864,7 @@ var app = (function () {
     	let div12;
     	let label2;
     	let p2;
-    	let t25_value = /*translations*/ ctx[45].app.over60InfectionRate + "";
+    	let t25_value = /*translations*/ ctx[11].app.over60InfectionRate + "";
     	let t25;
     	let t26;
     	let span2;
@@ -14860,13 +14872,13 @@ var app = (function () {
     	let t28;
     	let t29;
     	let div11;
-    	let t30_value = /*translations*/ ctx[45].app.over60Description + "";
+    	let t30_value = /*translations*/ ctx[11].app.over60Description + "";
     	let t30;
     	let t31;
     	let input1;
     	let t32;
     	let span3;
-    	let t33_value = /*translations*/ ctx[45].app.proportionIsThen + "";
+    	let t33_value = /*translations*/ ctx[11].app.proportionIsThen + "";
     	let t33;
     	let t34;
     	let span4;
@@ -14874,11 +14886,12 @@ var app = (function () {
     	let t36;
     	let t37;
     	let span5;
-    	let t38_value = /*translations*/ ctx[45].app.proportionIsThenDescription + "";
+    	let t38_value = /*translations*/ ctx[11].app.proportionIsThenDescription + "";
     	let t38;
     	let t39;
     	let div16;
     	let div15;
+    	let tabs;
     	let updating_activeTabValue;
     	let t40;
     	let t41;
@@ -14893,14 +14906,15 @@ var app = (function () {
     	let div18;
     	let label3;
     	let p3;
-    	let t48_value = /*translations*/ ctx[45].app.fatalityRates + "";
+    	let t48_value = /*translations*/ ctx[11].app.fatalityRates + "";
     	let t48;
     	let t49;
     	let div17;
-    	let t50_value = /*translations*/ ctx[45].app.fatalityRatesDescription + "";
+    	let t50_value = /*translations*/ ctx[11].app.fatalityRatesDescription + "";
     	let t50;
     	let t51;
     	let span6;
+    	let autocomplete1;
     	let updating_selectedItem_1;
     	let t52;
     	let span7;
@@ -14909,7 +14923,7 @@ var app = (function () {
     	let div21;
     	let label4;
     	let p4;
-    	let t54_value = /*translations*/ ctx[45].app.varyFRs + "";
+    	let t54_value = /*translations*/ ctx[11].app.varyFRs + "";
     	let t54;
     	let t55;
     	let span8;
@@ -14918,11 +14932,11 @@ var app = (function () {
     	let t58;
     	let div20;
     	let span9;
-    	let t59_value = /*translations*/ ctx[45].app.varyFRsDescription1 + "";
+    	let t59_value = /*translations*/ ctx[11].app.varyFRsDescription1 + "";
     	let t59;
     	let t60;
     	let span10;
-    	let t61_value = /*translations*/ ctx[45].app.varyFRsDescription2 + "";
+    	let t61_value = /*translations*/ ctx[11].app.varyFRsDescription2 + "";
     	let t61;
     	let t62;
     	let input2;
@@ -14931,19 +14945,19 @@ var app = (function () {
     	let div24;
     	let div23;
     	let button;
-    	let t64_value = /*translations*/ ctx[45].app.reset + "";
+    	let t64_value = /*translations*/ ctx[11].app.reset + "";
     	let t64;
     	let t65;
     	let span11;
-    	let t66_value = /*translations*/ ctx[45].app.resetDescription + "";
+    	let t66_value = /*translations*/ ctx[11].app.resetDescription + "";
     	let t66;
     	let t67;
-    	let div38;
+    	let div39;
     	let div29;
     	let div28;
     	let label5;
     	let p5;
-    	let t68_value = /*translations*/ ctx[45].app.elimination + "";
+    	let t68_value = /*translations*/ ctx[11].app.elimination + "";
     	let t68;
     	let t69;
     	let span12;
@@ -14952,16 +14966,16 @@ var app = (function () {
     	let t72;
     	let div27;
     	let span13;
-    	let t73_value = /*translations*/ ctx[45].app.eliminationDescription1 + "";
+    	let t73_value = /*translations*/ ctx[11].app.eliminationDescription1 + "";
     	let t73;
     	let t74;
     	let span14;
-    	let t75_value = Math.round(/*pctH*/ ctx[8]) + "";
+    	let t75_value = Math.round(/*pctH*/ ctx[5]) + "";
     	let t75;
     	let t76;
     	let t77;
     	let span15;
-    	let t78_value = /*translations*/ ctx[45].app.eliminationDescription2 + "";
+    	let t78_value = /*translations*/ ctx[11].app.eliminationDescription2 + "";
     	let t78;
     	let t79;
     	let input3;
@@ -14970,7 +14984,7 @@ var app = (function () {
     	let div31;
     	let label6;
     	let p6;
-    	let t81_value = /*translations*/ ctx[45].app.infectionUntil + "";
+    	let t81_value = /*translations*/ ctx[11].app.infectionUntil + "";
     	let t81;
     	let t82;
     	let span16;
@@ -14978,7 +14992,7 @@ var app = (function () {
     	let t84;
     	let t85;
     	let div30;
-    	let t86_value = /*translations*/ ctx[45].app.infectionUntilDescription + "";
+    	let t86_value = /*translations*/ ctx[11].app.infectionUntilDescription + "";
     	let t86;
     	let t87;
     	let input4;
@@ -14989,78 +15003,69 @@ var app = (function () {
     	let t89;
     	let t90;
     	let span17;
-    	let t91_value = /*translations*/ ctx[45].app.exportDescription + "";
+    	let t91_value = /*translations*/ ctx[11].app.exportDescription + "";
     	let t91;
     	let t92;
     	let t93;
-    	let div37;
-    	let div36;
-    	let div35;
+    	let div38;
     	let current;
+    	let mounted;
     	let dispose;
 
     	function autocomplete0_selectedItem_binding(value) {
-    		/*autocomplete0_selectedItem_binding*/ ctx[126].call(null, value);
+    		/*autocomplete0_selectedItem_binding*/ ctx[109](value);
     	}
 
     	let autocomplete0_props = {
-    		items: /*translations*/ ctx[45].countries,
+    		items: /*translations*/ ctx[11].countries,
     		labelFieldName: "name"
     	};
 
-    	if (/*selectedObject*/ ctx[5] !== void 0) {
-    		autocomplete0_props.selectedItem = /*selectedObject*/ ctx[5];
+    	if (/*selectedObject*/ ctx[2] !== void 0) {
+    		autocomplete0_props.selectedItem = /*selectedObject*/ ctx[2];
     	}
 
-    	const autocomplete0 = new SimpleAutocomplete({ props: autocomplete0_props });
-    	binding_callbacks.push(() => bind(autocomplete0, "selectedItem", autocomplete0_selectedItem_binding));
+    	autocomplete0 = new SimpleAutocomplete({ props: autocomplete0_props });
+    	binding_callbacks.push(() => bind(autocomplete0, 'selectedItem', autocomplete0_selectedItem_binding));
 
     	function tabs_activeTabValue_binding(value) {
-    		/*tabs_activeTabValue_binding*/ ctx[129].call(null, value);
+    		/*tabs_activeTabValue_binding*/ ctx[112](value);
     	}
 
-    	let tabs_props = { items: /*tabItems*/ ctx[52] };
+    	let tabs_props = { items: /*tabItems*/ ctx[55] };
 
-    	if (/*currentTab*/ ctx[0] !== void 0) {
-    		tabs_props.activeTabValue = /*currentTab*/ ctx[0];
+    	if (/*currentTab*/ ctx[17] !== void 0) {
+    		tabs_props.activeTabValue = /*currentTab*/ ctx[17];
     	}
 
-    	const tabs = new Tabs({ props: tabs_props });
-    	binding_callbacks.push(() => bind(tabs, "activeTabValue", tabs_activeTabValue_binding));
-    	let if_block0 = 0 === /*currentTab*/ ctx[0] && create_if_block_18(ctx);
-    	let if_block1 = 1 === /*currentTab*/ ctx[0] && create_if_block_14(ctx);
-    	let if_block2 = 2 === /*currentTab*/ ctx[0] && create_if_block_11(ctx);
-    	let if_block3 = 3 === /*currentTab*/ ctx[0] && create_if_block_8(ctx);
-    	let if_block4 = 4 === /*currentTab*/ ctx[0] && create_if_block_7(ctx);
-    	let if_block5 = 5 == /*currentTab*/ ctx[0] && create_if_block_5(ctx);
-    	let if_block6 = 6 == /*currentTab*/ ctx[0] && create_if_block_4$1(ctx);
+    	tabs = new Tabs({ props: tabs_props });
+    	binding_callbacks.push(() => bind(tabs, 'activeTabValue', tabs_activeTabValue_binding));
+    	let if_block0 = 0 === /*currentTab*/ ctx[17] && create_if_block_17(ctx);
+    	let if_block1 = 1 === /*currentTab*/ ctx[17] && create_if_block_13(ctx);
+    	let if_block2 = 2 === /*currentTab*/ ctx[17] && create_if_block_10(ctx);
+    	let if_block3 = 3 === /*currentTab*/ ctx[17] && create_if_block_7(ctx);
+    	let if_block4 = 4 === /*currentTab*/ ctx[17] && create_if_block_6(ctx);
+    	let if_block5 = 5 == /*currentTab*/ ctx[17] && create_if_block_4$1(ctx);
+    	let if_block6 = 6 == /*currentTab*/ ctx[17] && create_if_block_3$1(ctx);
 
     	function autocomplete1_selectedItem_binding(value) {
-    		/*autocomplete1_selectedItem_binding*/ ctx[134].call(null, value);
+    		/*autocomplete1_selectedItem_binding*/ ctx[117](value);
     	}
 
     	let autocomplete1_props = {
-    		items: /*translations*/ ctx[45].fatalityRisks,
+    		items: /*translations*/ ctx[11].fatalityRisks,
     		labelFieldName: "source"
     	};
 
-    	if (/*selectedSourceObject*/ ctx[6] !== void 0) {
-    		autocomplete1_props.selectedItem = /*selectedSourceObject*/ ctx[6];
+    	if (/*selectedSourceObject*/ ctx[3] !== void 0) {
+    		autocomplete1_props.selectedItem = /*selectedSourceObject*/ ctx[3];
     	}
 
-    	const autocomplete1 = new SimpleAutocomplete({ props: autocomplete1_props });
-    	binding_callbacks.push(() => bind(autocomplete1, "selectedItem", autocomplete1_selectedItem_binding));
-    	let if_block7 = /*userNeeds*/ ctx[1].exportData && create_if_block_3$1(ctx);
-    	let if_block8 = !/*userNeeds*/ ctx[1].exportData && create_if_block_2$1(ctx);
-    	let if_block9 = /*userNeeds*/ ctx[1].exportData && create_if_block_1$2(ctx);
-
-    	function select_block_type(ctx, dirty) {
-    		if (/*language*/ ctx[4] === "pt") return create_if_block$4;
-    		return create_else_block$1;
-    	}
-
-    	let current_block_type = select_block_type(ctx);
-    	let if_block10 = current_block_type(ctx);
+    	autocomplete1 = new SimpleAutocomplete({ props: autocomplete1_props });
+    	binding_callbacks.push(() => bind(autocomplete1, 'selectedItem', autocomplete1_selectedItem_binding));
+    	let if_block7 = /*userNeeds*/ ctx[18].exportData && create_if_block_2$1(ctx);
+    	let if_block8 = !/*userNeeds*/ ctx[18].exportData && create_if_block_1$2(ctx);
+    	let if_block9 = /*userNeeds*/ ctx[18].exportData && create_if_block$4(ctx);
 
     	return {
     		c() {
@@ -15108,7 +15113,7 @@ var app = (function () {
     			t17 = text(t17_value);
     			t18 = space();
     			span1 = element("span");
-    			t19 = text(/*pctH*/ ctx[8]);
+    			t19 = text(/*pctH*/ ctx[5]);
     			t20 = text("%");
     			t21 = space();
     			div8 = element("div");
@@ -15123,7 +15128,7 @@ var app = (function () {
     			t25 = text(t25_value);
     			t26 = space();
     			span2 = element("span");
-    			t27 = text(/*pctH_60plus*/ ctx[44]);
+    			t27 = text(/*pctH_60plus*/ ctx[15]);
     			t28 = text("%");
     			t29 = space();
     			div11 = element("div");
@@ -15135,7 +15140,7 @@ var app = (function () {
     			t33 = text(t33_value);
     			t34 = space();
     			span4 = element("span");
-    			t35 = text(/*pctH_below60*/ ctx[47]);
+    			t35 = text(/*pctH_below60*/ ctx[16]);
     			t36 = text("%");
     			t37 = text(".\n\t\t\t\t");
     			span5 = element("span");
@@ -15181,7 +15186,7 @@ var app = (function () {
     			t54 = text(t54_value);
     			t55 = space();
     			span8 = element("span");
-    			t56 = text(/*pctOfChange*/ ctx[7]);
+    			t56 = text(/*pctOfChange*/ ctx[4]);
     			t57 = text("%");
     			t58 = space();
     			div20 = element("div");
@@ -15202,7 +15207,7 @@ var app = (function () {
     			span11 = element("span");
     			t66 = text(t66_value);
     			t67 = space();
-    			div38 = element("div");
+    			div39 = element("div");
     			div29 = element("div");
     			div28 = element("div");
     			label5 = element("label");
@@ -15210,7 +15215,7 @@ var app = (function () {
     			t68 = text(t68_value);
     			t69 = space();
     			span12 = element("span");
-    			t70 = text(/*prElimTimes100*/ ctx[9]);
+    			t70 = text(/*prElimTimes100*/ ctx[6]);
     			t71 = text("%");
     			t72 = space();
     			div27 = element("div");
@@ -15233,7 +15238,7 @@ var app = (function () {
     			t81 = text(t81_value);
     			t82 = space();
     			span16 = element("span");
-    			t83 = text(/*pctU*/ ctx[10]);
+    			t83 = text(/*pctU*/ ctx[7]);
     			t84 = text("%");
     			t85 = space();
     			div30 = element("div");
@@ -15252,120 +15257,128 @@ var app = (function () {
     			t92 = space();
     			if (if_block9) if_block9.c();
     			t93 = space();
-    			div37 = element("div");
-    			div36 = element("div");
-    			div35 = element("div");
-    			if_block10.c();
-    			attr(h3, "class", "title svelte-1havf7j");
-    			attr(h6, "class", "parameter-text svelte-1havf7j");
-    			attr(div0, "class", "child svelte-1havf7j");
-    			attr(div1, "class", "eight columns title svelte-1havf7j");
+    			div38 = element("div");
+
+    			div38.innerHTML = `<div class="twelve columns"><div class="child parameter-text svelte-1ezrwae"><p>Please send me feedback
+						<a href="https://twitter.com/MarkoLalovic/status/1266022718035632128">here</a>
+						or email me <a href="mailto:marko@lalovic.io?Subject=COVID%20Calculator">here</a>.
+						For technical details please refer to <a href="https://lalovic.io/blog/covid-calc/">blog post</a>
+						or the <a href="https://github.com/markolalovic/covid-calc">source code</a>.</p> 
+
+					<div class="wtitle svelte-1ezrwae">Acknowledgements</div> 
+					<p>Tjaša Kovačević for help with the calculation of expected years of life lost and economic impacts on poverty.
+						Yao Cheng for help with Chinese translations.
+						Lucas Sanders for help with Portuguese translations.
+						Maria Dagounaki for help with Spanish translations.</p></div></div>`;
+
+    			attr(h3, "class", "title svelte-1ezrwae");
+    			attr(h6, "class", "parameter-text svelte-1ezrwae");
+    			attr(div0, "class", "child svelte-1ezrwae");
+    			attr(div1, "class", "eight columns title svelte-1ezrwae");
     			attr(a0, "href", "#zh");
-    			attr(a0, "class", "lang-link svelte-1havf7j");
+    			attr(a0, "class", "lang-link svelte-1ezrwae");
     			attr(a1, "href", "#es");
-    			attr(a1, "class", "lang-link svelte-1havf7j");
+    			attr(a1, "class", "lang-link svelte-1ezrwae");
     			attr(a2, "href", "#en");
-    			attr(a2, "class", "lang-link svelte-1havf7j");
+    			attr(a2, "class", "lang-link svelte-1ezrwae");
     			attr(a3, "href", "#pt");
-    			attr(a3, "class", "lang-link svelte-1havf7j");
-    			attr(div2, "class", "child svelte-1havf7j");
-    			attr(div3, "class", "four columns title svelte-1havf7j");
-    			attr(div4, "class", "row svelte-1havf7j");
-    			attr(p0, "class", "parameter-title svelte-1havf7j");
+    			attr(a3, "class", "lang-link svelte-1ezrwae");
+    			attr(div2, "class", "child svelte-1ezrwae");
+    			attr(div3, "class", "four columns title svelte-1ezrwae");
+    			attr(div4, "class", "row svelte-1ezrwae");
+    			attr(p0, "class", "parameter-title svelte-1ezrwae");
     			set_style(p0, "text-align", "left");
-    			attr(div5, "class", "parameter-text svelte-1havf7j");
-    			attr(span0, "class", "parameter-text svelte-1havf7j");
-    			attr(div6, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(div5, "class", "parameter-text svelte-1ezrwae");
+    			attr(span0, "class", "parameter-text svelte-1ezrwae");
+    			attr(div6, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div7, "class", "four columns");
-    			attr(span1, "class", "parameter svelte-1havf7j");
+    			attr(span1, "class", "parameter svelte-1ezrwae");
     			set_style(span1, "float", "right");
-    			attr(p1, "class", "parameter-title svelte-1havf7j");
+    			attr(p1, "class", "parameter-title svelte-1ezrwae");
     			set_style(p1, "text-align", "left");
-    			attr(div8, "class", "parameter-text svelte-1havf7j");
-    			attr(input0, "class", "pointer u-full-width svelte-1havf7j");
+    			attr(div8, "class", "parameter-text svelte-1ezrwae");
+    			attr(input0, "class", "pointer u-full-width svelte-1ezrwae");
     			attr(input0, "type", "range");
     			attr(input0, "min", "1");
     			attr(input0, "max", "99");
-    			attr(div9, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(div9, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div10, "class", "four columns");
-    			attr(span2, "class", "parameter svelte-1havf7j");
+    			attr(span2, "class", "parameter svelte-1ezrwae");
     			set_style(span2, "float", "right");
-    			attr(p2, "class", "parameter-title svelte-1havf7j");
+    			attr(p2, "class", "parameter-title svelte-1ezrwae");
     			set_style(p2, "text-align", "left");
-    			attr(div11, "class", "parameter-text svelte-1havf7j");
-    			attr(input1, "class", "pointer u-full-width svelte-1havf7j");
+    			attr(div11, "class", "parameter-text svelte-1ezrwae");
+    			attr(input1, "class", "pointer u-full-width svelte-1ezrwae");
     			attr(input1, "type", "range");
-    			attr(input1, "min", /*lowerBound*/ ctx[53]);
-    			attr(input1, "max", /*upperBound*/ ctx[54]);
-    			attr(span3, "class", "parameter-text svelte-1havf7j");
-    			attr(span4, "class", "parameter svelte-1havf7j");
-    			attr(span5, "class", "parameter-text svelte-1havf7j");
-    			attr(div12, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(input1, "min", /*lowerBound*/ ctx[54]);
+    			attr(input1, "max", /*upperBound*/ ctx[53]);
+    			attr(span3, "class", "parameter-text svelte-1ezrwae");
+    			attr(span4, "class", "parameter svelte-1ezrwae");
+    			attr(span5, "class", "parameter-text svelte-1ezrwae");
+    			attr(div12, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div13, "class", "four columns");
-    			attr(div14, "class", "row svelte-1havf7j");
+    			attr(div14, "class", "row svelte-1ezrwae");
     			attr(div15, "class", "twelve columns");
-    			attr(div16, "class", "row svelte-1havf7j");
-    			attr(p3, "class", "parameter-title svelte-1havf7j");
+    			attr(div16, "class", "row svelte-1ezrwae");
+    			attr(p3, "class", "parameter-title svelte-1ezrwae");
     			set_style(p3, "text-align", "left");
-    			attr(div17, "class", "parameter-text svelte-1havf7j");
-    			attr(span6, "class", "parameter-text svelte-1havf7j");
-    			attr(span7, "class", "parameter-text svelte-1havf7j");
-    			attr(div18, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(div17, "class", "parameter-text svelte-1ezrwae");
+    			attr(span6, "class", "parameter-text svelte-1ezrwae");
+    			attr(span7, "class", "parameter-text svelte-1ezrwae");
+    			attr(div18, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div19, "class", "four columns");
-    			attr(span8, "class", "parameter svelte-1havf7j");
+    			attr(span8, "class", "parameter svelte-1ezrwae");
     			set_style(span8, "float", "right");
-    			attr(p4, "class", "parameter-title svelte-1havf7j");
+    			attr(p4, "class", "parameter-title svelte-1ezrwae");
     			set_style(p4, "text-align", "left");
-    			attr(span9, "class", "parameter-text svelte-1havf7j");
-    			attr(span10, "class", "parameter-text svelte-1havf7j");
-    			attr(div20, "class", "parameter-text svelte-1havf7j");
+    			attr(span9, "class", "parameter-text svelte-1ezrwae");
+    			attr(span10, "class", "parameter-text svelte-1ezrwae");
+    			attr(div20, "class", "parameter-text svelte-1ezrwae");
     			attr(input2, "class", "u-full-width");
     			attr(input2, "type", "range");
     			attr(input2, "min", "-100");
     			attr(input2, "max", "100");
-    			attr(div21, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(div21, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div22, "class", "four columns");
-    			attr(button, "class", "button svelte-1havf7j");
+    			attr(button, "class", "button svelte-1ezrwae");
     			attr(div23, "class", "button-class");
-    			attr(span11, "class", "parameter-text svelte-1havf7j");
-    			attr(div24, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(span11, "class", "parameter-text svelte-1ezrwae");
+    			attr(div24, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div25, "class", "four columns");
-    			attr(div26, "class", "row svelte-1havf7j");
-    			attr(span12, "class", "parameter svelte-1havf7j");
+    			attr(div26, "class", "row svelte-1ezrwae");
+    			attr(span12, "class", "parameter svelte-1ezrwae");
     			set_style(span12, "float", "right");
-    			attr(p5, "class", "parameter-title svelte-1havf7j");
+    			attr(p5, "class", "parameter-title svelte-1ezrwae");
     			set_style(p5, "text-align", "left");
-    			attr(span13, "class", "parameter-text svelte-1havf7j");
-    			attr(span14, "class", "parameter svelte-1havf7j");
-    			attr(span15, "class", "parameter-text svelte-1havf7j");
-    			attr(div27, "class", "parameter-text svelte-1havf7j");
-    			attr(input3, "class", "pointer u-full-width svelte-1havf7j");
+    			attr(span13, "class", "parameter-text svelte-1ezrwae");
+    			attr(span14, "class", "parameter svelte-1ezrwae");
+    			attr(span15, "class", "parameter-text svelte-1ezrwae");
+    			attr(div27, "class", "parameter-text svelte-1ezrwae");
+    			attr(input3, "class", "pointer u-full-width svelte-1ezrwae");
     			attr(input3, "type", "range");
     			attr(input3, "min", "0");
     			attr(input3, "max", "100");
-    			attr(div28, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(div28, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div29, "class", "four columns");
-    			attr(span16, "class", "parameter svelte-1havf7j");
+    			attr(span16, "class", "parameter svelte-1ezrwae");
     			set_style(span16, "float", "right");
-    			attr(p6, "class", "parameter-title svelte-1havf7j");
+    			attr(p6, "class", "parameter-title svelte-1ezrwae");
     			set_style(p6, "text-align", "left");
-    			attr(div30, "class", "parameter-text svelte-1havf7j");
-    			attr(input4, "class", "pointer u-full-width svelte-1havf7j");
+    			attr(div30, "class", "parameter-text svelte-1ezrwae");
+    			attr(input4, "class", "pointer u-full-width svelte-1ezrwae");
     			attr(input4, "type", "range");
     			attr(input4, "min", input4_min_value = 0);
-    			attr(input4, "max", /*pctH*/ ctx[8]);
-    			attr(div31, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(input4, "max", /*pctH*/ ctx[5]);
+    			attr(div31, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div32, "class", "four columns");
-    			attr(span17, "class", "parameter-text svelte-1havf7j");
-    			attr(div33, "class", "child parameter-space-4 svelte-1havf7j");
+    			attr(span17, "class", "parameter-text svelte-1ezrwae");
+    			attr(div33, "class", "child parameter-space-4 svelte-1ezrwae");
     			attr(div34, "class", "four columns");
-    			attr(div35, "class", "child parameter-text svelte-1havf7j");
-    			attr(div36, "class", "twelve columns");
-    			attr(div37, "class", "row svelte-1havf7j");
-    			attr(div38, "class", "row svelte-1havf7j");
+    			attr(div38, "class", "row svelte-1ezrwae");
+    			attr(div39, "class", "row svelte-1ezrwae");
     			attr(main, "class", "container");
     		},
-    		m(target, anchor, remount) {
+    		m(target, anchor) {
     			insert(target, main, anchor);
     			append(main, div4);
     			append(div4, div1);
@@ -15413,7 +15426,7 @@ var app = (function () {
     			append(div8, t22);
     			append(div9, t23);
     			append(div9, input0);
-    			set_input_value(input0, /*pctH*/ ctx[8]);
+    			set_input_value(input0, /*pctH*/ ctx[5]);
     			append(div14, t24);
     			append(div14, div13);
     			append(div13, div12);
@@ -15429,7 +15442,7 @@ var app = (function () {
     			append(div11, t30);
     			append(div12, t31);
     			append(div12, input1);
-    			set_input_value(input1, /*pctH_60plus*/ ctx[44]);
+    			set_input_value(input1, /*pctH_60plus*/ ctx[15]);
     			append(div12, t32);
     			append(div12, span3);
     			append(span3, t33);
@@ -15492,7 +15505,7 @@ var app = (function () {
     			append(span10, t61);
     			append(div21, t62);
     			append(div21, input2);
-    			set_input_value(input2, /*pctOfChange*/ ctx[7]);
+    			set_input_value(input2, /*pctOfChange*/ ctx[4]);
     			append(div26, t63);
     			append(div26, div25);
     			append(div25, div24);
@@ -15503,8 +15516,8 @@ var app = (function () {
     			append(div24, span11);
     			append(span11, t66);
     			append(main, t67);
-    			append(main, div38);
-    			append(div38, div29);
+    			append(main, div39);
+    			append(div39, div29);
     			append(div29, div28);
     			append(div28, label5);
     			append(label5, p5);
@@ -15526,9 +15539,9 @@ var app = (function () {
     			append(span15, t78);
     			append(div28, t79);
     			append(div28, input3);
-    			set_input_value(input3, /*prElimTimes100*/ ctx[9]);
-    			append(div38, t80);
-    			append(div38, div32);
+    			set_input_value(input3, /*prElimTimes100*/ ctx[6]);
+    			append(div39, t80);
+    			append(div39, div32);
     			append(div32, div31);
     			append(div31, label6);
     			append(label6, p6);
@@ -15542,9 +15555,9 @@ var app = (function () {
     			append(div30, t86);
     			append(div31, t87);
     			append(div31, input4);
-    			set_input_value(input4, /*pctU*/ ctx[10]);
-    			append(div38, t88);
-    			append(div38, div34);
+    			set_input_value(input4, /*pctU*/ ctx[7]);
+    			append(div39, t88);
+    			append(div39, div34);
     			append(div34, div33);
     			if (if_block7) if_block7.m(div33, null);
     			append(div33, t89);
@@ -15552,97 +15565,97 @@ var app = (function () {
     			append(div33, t90);
     			append(div33, span17);
     			append(span17, t91);
-    			append(div38, t92);
-    			if (if_block9) if_block9.m(div38, null);
-    			append(div38, t93);
-    			append(div38, div37);
-    			append(div37, div36);
-    			append(div36, div35);
-    			if_block10.m(div35, null);
+    			append(div39, t92);
+    			if (if_block9) if_block9.m(div39, null);
+    			append(div39, t93);
+    			append(div39, div38);
     			current = true;
-    			if (remount) run_all(dispose);
 
-    			dispose = [
-    				listen(a0, "click", /*click_handler*/ ctx[122]),
-    				listen(a1, "click", /*click_handler_1*/ ctx[123]),
-    				listen(a2, "click", /*click_handler_2*/ ctx[124]),
-    				listen(a3, "click", /*click_handler_3*/ ctx[125]),
-    				listen(input0, "change", /*input0_change_input_handler*/ ctx[127]),
-    				listen(input0, "input", /*input0_change_input_handler*/ ctx[127]),
-    				listen(input0, "click", /*keepUpWithH*/ ctx[57]),
-    				listen(input1, "change", /*input1_change_input_handler*/ ctx[128]),
-    				listen(input1, "input", /*input1_change_input_handler*/ ctx[128]),
-    				listen(input2, "change", /*input2_change_input_handler*/ ctx[135]),
-    				listen(input2, "input", /*input2_change_input_handler*/ ctx[135]),
-    				listen(button, "click", /*resetParameters*/ ctx[56]),
-    				listen(input3, "change", /*input3_change_input_handler*/ ctx[136]),
-    				listen(input3, "input", /*input3_change_input_handler*/ ctx[136]),
-    				listen(input4, "change", /*input4_change_input_handler*/ ctx[137]),
-    				listen(input4, "input", /*input4_change_input_handler*/ ctx[137])
-    			];
+    			if (!mounted) {
+    				dispose = [
+    					listen(a0, "click", /*click_handler*/ ctx[105]),
+    					listen(a1, "click", /*click_handler_1*/ ctx[106]),
+    					listen(a2, "click", /*click_handler_2*/ ctx[107]),
+    					listen(a3, "click", /*click_handler_3*/ ctx[108]),
+    					listen(input0, "change", /*input0_change_input_handler*/ ctx[110]),
+    					listen(input0, "input", /*input0_change_input_handler*/ ctx[110]),
+    					listen(input0, "click", /*keepUpWithH*/ ctx[57]),
+    					listen(input1, "change", /*input1_change_input_handler*/ ctx[111]),
+    					listen(input1, "input", /*input1_change_input_handler*/ ctx[111]),
+    					listen(input2, "change", /*input2_change_input_handler*/ ctx[118]),
+    					listen(input2, "input", /*input2_change_input_handler*/ ctx[118]),
+    					listen(button, "click", /*resetParameters*/ ctx[56]),
+    					listen(input3, "change", /*input3_change_input_handler*/ ctx[119]),
+    					listen(input3, "input", /*input3_change_input_handler*/ ctx[119]),
+    					listen(input4, "change", /*input4_change_input_handler*/ ctx[120]),
+    					listen(input4, "input", /*input4_change_input_handler*/ ctx[120])
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p(ctx, dirty) {
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t0_value !== (t0_value = /*translations*/ ctx[45].app.mainTitle + "")) set_data(t0, t0_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t2_value !== (t2_value = /*translations*/ ctx[45].app.subtitle + "")) set_data(t2, t2_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t12_value !== (t12_value = /*translations*/ ctx[45].app.selectLocation + "")) set_data(t12, t12_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t14_value !== (t14_value = /*translations*/ ctx[45].app.locationDescription + "")) set_data(t14, t14_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t0_value !== (t0_value = /*translations*/ ctx[11].app.mainTitle + "")) set_data(t0, t0_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t2_value !== (t2_value = /*translations*/ ctx[11].app.subtitle + "")) set_data(t2, t2_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t12_value !== (t12_value = /*translations*/ ctx[11].app.selectLocation + "")) set_data(t12, t12_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t14_value !== (t14_value = /*translations*/ ctx[11].app.locationDescription + "")) set_data(t14, t14_value);
     			const autocomplete0_changes = {};
-    			if (dirty[1] & /*translations*/ 16384) autocomplete0_changes.items = /*translations*/ ctx[45].countries;
+    			if (dirty[0] & /*translations*/ 2048) autocomplete0_changes.items = /*translations*/ ctx[11].countries;
 
-    			if (!updating_selectedItem && dirty[0] & /*selectedObject*/ 32) {
+    			if (!updating_selectedItem && dirty[0] & /*selectedObject*/ 4) {
     				updating_selectedItem = true;
-    				autocomplete0_changes.selectedItem = /*selectedObject*/ ctx[5];
+    				autocomplete0_changes.selectedItem = /*selectedObject*/ ctx[2];
     				add_flush_callback(() => updating_selectedItem = false);
     			}
 
     			autocomplete0.$set(autocomplete0_changes);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t17_value !== (t17_value = /*translations*/ ctx[45].app.infectionRate + "")) set_data(t17, t17_value);
-    			if (!current || dirty[0] & /*pctH*/ 256) set_data(t19, /*pctH*/ ctx[8]);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t22_value !== (t22_value = /*translations*/ ctx[45].app.infectionRateDescription + "")) set_data(t22, t22_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t17_value !== (t17_value = /*translations*/ ctx[11].app.infectionRate + "")) set_data(t17, t17_value);
+    			if (!current || dirty[0] & /*pctH*/ 32) set_data(t19, /*pctH*/ ctx[5]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t22_value !== (t22_value = /*translations*/ ctx[11].app.infectionRateDescription + "")) set_data(t22, t22_value);
 
-    			if (dirty[0] & /*pctH*/ 256) {
-    				set_input_value(input0, /*pctH*/ ctx[8]);
+    			if (dirty[0] & /*pctH*/ 32) {
+    				set_input_value(input0, /*pctH*/ ctx[5]);
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t25_value !== (t25_value = /*translations*/ ctx[45].app.over60InfectionRate + "")) set_data(t25, t25_value);
-    			if (!current || dirty[1] & /*pctH_60plus*/ 8192) set_data(t27, /*pctH_60plus*/ ctx[44]);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t30_value !== (t30_value = /*translations*/ ctx[45].app.over60Description + "")) set_data(t30, t30_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t25_value !== (t25_value = /*translations*/ ctx[11].app.over60InfectionRate + "")) set_data(t25, t25_value);
+    			if (!current || dirty[0] & /*pctH_60plus*/ 32768) set_data(t27, /*pctH_60plus*/ ctx[15]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t30_value !== (t30_value = /*translations*/ ctx[11].app.over60Description + "")) set_data(t30, t30_value);
 
-    			if (!current || dirty[1] & /*lowerBound*/ 4194304) {
-    				attr(input1, "min", /*lowerBound*/ ctx[53]);
+    			if (!current || dirty[1] & /*lowerBound*/ 8388608) {
+    				attr(input1, "min", /*lowerBound*/ ctx[54]);
     			}
 
-    			if (!current || dirty[1] & /*upperBound*/ 8388608) {
-    				attr(input1, "max", /*upperBound*/ ctx[54]);
+    			if (!current || dirty[1] & /*upperBound*/ 4194304) {
+    				attr(input1, "max", /*upperBound*/ ctx[53]);
     			}
 
-    			if (dirty[1] & /*pctH_60plus*/ 8192) {
-    				set_input_value(input1, /*pctH_60plus*/ ctx[44]);
+    			if (dirty[0] & /*pctH_60plus*/ 32768) {
+    				set_input_value(input1, /*pctH_60plus*/ ctx[15]);
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t33_value !== (t33_value = /*translations*/ ctx[45].app.proportionIsThen + "")) set_data(t33, t33_value);
-    			if (!current || dirty[1] & /*pctH_below60*/ 65536) set_data(t35, /*pctH_below60*/ ctx[47]);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t38_value !== (t38_value = /*translations*/ ctx[45].app.proportionIsThenDescription + "")) set_data(t38, t38_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t33_value !== (t33_value = /*translations*/ ctx[11].app.proportionIsThen + "")) set_data(t33, t33_value);
+    			if (!current || dirty[0] & /*pctH_below60*/ 65536) set_data(t35, /*pctH_below60*/ ctx[16]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t38_value !== (t38_value = /*translations*/ ctx[11].app.proportionIsThenDescription + "")) set_data(t38, t38_value);
     			const tabs_changes = {};
-    			if (dirty[1] & /*tabItems*/ 2097152) tabs_changes.items = /*tabItems*/ ctx[52];
+    			if (dirty[1] & /*tabItems*/ 16777216) tabs_changes.items = /*tabItems*/ ctx[55];
 
-    			if (!updating_activeTabValue && dirty[0] & /*currentTab*/ 1) {
+    			if (!updating_activeTabValue && dirty[0] & /*currentTab*/ 131072) {
     				updating_activeTabValue = true;
-    				tabs_changes.activeTabValue = /*currentTab*/ ctx[0];
+    				tabs_changes.activeTabValue = /*currentTab*/ ctx[17];
     				add_flush_callback(() => updating_activeTabValue = false);
     			}
 
     			tabs.$set(tabs_changes);
 
-    			if (0 === /*currentTab*/ ctx[0]) {
+    			if (0 === /*currentTab*/ ctx[17]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_18(ctx);
+    					if_block0 = create_if_block_17(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(div15, t41);
@@ -15657,15 +15670,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (1 === /*currentTab*/ ctx[0]) {
+    			if (1 === /*currentTab*/ ctx[17]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_14(ctx);
+    					if_block1 = create_if_block_13(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(div15, t42);
@@ -15680,15 +15693,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (2 === /*currentTab*/ ctx[0]) {
+    			if (2 === /*currentTab*/ ctx[17]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block2, 1);
     					}
     				} else {
-    					if_block2 = create_if_block_11(ctx);
+    					if_block2 = create_if_block_10(ctx);
     					if_block2.c();
     					transition_in(if_block2, 1);
     					if_block2.m(div15, t43);
@@ -15703,15 +15716,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (3 === /*currentTab*/ ctx[0]) {
+    			if (3 === /*currentTab*/ ctx[17]) {
     				if (if_block3) {
     					if_block3.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block3, 1);
     					}
     				} else {
-    					if_block3 = create_if_block_8(ctx);
+    					if_block3 = create_if_block_7(ctx);
     					if_block3.c();
     					transition_in(if_block3, 1);
     					if_block3.m(div15, t44);
@@ -15726,15 +15739,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (4 === /*currentTab*/ ctx[0]) {
+    			if (4 === /*currentTab*/ ctx[17]) {
     				if (if_block4) {
     					if_block4.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block4, 1);
     					}
     				} else {
-    					if_block4 = create_if_block_7(ctx);
+    					if_block4 = create_if_block_6(ctx);
     					if_block4.c();
     					transition_in(if_block4, 1);
     					if_block4.m(div15, t45);
@@ -15749,15 +15762,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (5 == /*currentTab*/ ctx[0]) {
+    			if (5 == /*currentTab*/ ctx[17]) {
     				if (if_block5) {
     					if_block5.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block5, 1);
     					}
     				} else {
-    					if_block5 = create_if_block_5(ctx);
+    					if_block5 = create_if_block_4$1(ctx);
     					if_block5.c();
     					transition_in(if_block5, 1);
     					if_block5.m(div15, t46);
@@ -15772,15 +15785,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (6 == /*currentTab*/ ctx[0]) {
+    			if (6 == /*currentTab*/ ctx[17]) {
     				if (if_block6) {
     					if_block6.p(ctx, dirty);
 
-    					if (dirty[0] & /*currentTab*/ 1) {
+    					if (dirty[0] & /*currentTab*/ 131072) {
     						transition_in(if_block6, 1);
     					}
     				} else {
-    					if_block6 = create_if_block_4$1(ctx);
+    					if_block6 = create_if_block_3$1(ctx);
     					if_block6.c();
     					transition_in(if_block6, 1);
     					if_block6.m(div15, null);
@@ -15795,56 +15808,56 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t48_value !== (t48_value = /*translations*/ ctx[45].app.fatalityRates + "")) set_data(t48, t48_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t50_value !== (t50_value = /*translations*/ ctx[45].app.fatalityRatesDescription + "")) set_data(t50, t50_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t48_value !== (t48_value = /*translations*/ ctx[11].app.fatalityRates + "")) set_data(t48, t48_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t50_value !== (t50_value = /*translations*/ ctx[11].app.fatalityRatesDescription + "")) set_data(t50, t50_value);
     			const autocomplete1_changes = {};
-    			if (dirty[1] & /*translations*/ 16384) autocomplete1_changes.items = /*translations*/ ctx[45].fatalityRisks;
+    			if (dirty[0] & /*translations*/ 2048) autocomplete1_changes.items = /*translations*/ ctx[11].fatalityRisks;
 
-    			if (!updating_selectedItem_1 && dirty[0] & /*selectedSourceObject*/ 64) {
+    			if (!updating_selectedItem_1 && dirty[0] & /*selectedSourceObject*/ 8) {
     				updating_selectedItem_1 = true;
-    				autocomplete1_changes.selectedItem = /*selectedSourceObject*/ ctx[6];
+    				autocomplete1_changes.selectedItem = /*selectedSourceObject*/ ctx[3];
     				add_flush_callback(() => updating_selectedItem_1 = false);
     			}
 
     			autocomplete1.$set(autocomplete1_changes);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t54_value !== (t54_value = /*translations*/ ctx[45].app.varyFRs + "")) set_data(t54, t54_value);
-    			if (!current || dirty[0] & /*pctOfChange*/ 128) set_data(t56, /*pctOfChange*/ ctx[7]);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t59_value !== (t59_value = /*translations*/ ctx[45].app.varyFRsDescription1 + "")) set_data(t59, t59_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t61_value !== (t61_value = /*translations*/ ctx[45].app.varyFRsDescription2 + "")) set_data(t61, t61_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t54_value !== (t54_value = /*translations*/ ctx[11].app.varyFRs + "")) set_data(t54, t54_value);
+    			if (!current || dirty[0] & /*pctOfChange*/ 16) set_data(t56, /*pctOfChange*/ ctx[4]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t59_value !== (t59_value = /*translations*/ ctx[11].app.varyFRsDescription1 + "")) set_data(t59, t59_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t61_value !== (t61_value = /*translations*/ ctx[11].app.varyFRsDescription2 + "")) set_data(t61, t61_value);
 
-    			if (dirty[0] & /*pctOfChange*/ 128) {
-    				set_input_value(input2, /*pctOfChange*/ ctx[7]);
+    			if (dirty[0] & /*pctOfChange*/ 16) {
+    				set_input_value(input2, /*pctOfChange*/ ctx[4]);
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t64_value !== (t64_value = /*translations*/ ctx[45].app.reset + "")) set_data(t64, t64_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t66_value !== (t66_value = /*translations*/ ctx[45].app.resetDescription + "")) set_data(t66, t66_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t68_value !== (t68_value = /*translations*/ ctx[45].app.elimination + "")) set_data(t68, t68_value);
-    			if (!current || dirty[0] & /*prElimTimes100*/ 512) set_data(t70, /*prElimTimes100*/ ctx[9]);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t73_value !== (t73_value = /*translations*/ ctx[45].app.eliminationDescription1 + "")) set_data(t73, t73_value);
-    			if ((!current || dirty[0] & /*pctH*/ 256) && t75_value !== (t75_value = Math.round(/*pctH*/ ctx[8]) + "")) set_data(t75, t75_value);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t78_value !== (t78_value = /*translations*/ ctx[45].app.eliminationDescription2 + "")) set_data(t78, t78_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t64_value !== (t64_value = /*translations*/ ctx[11].app.reset + "")) set_data(t64, t64_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t66_value !== (t66_value = /*translations*/ ctx[11].app.resetDescription + "")) set_data(t66, t66_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t68_value !== (t68_value = /*translations*/ ctx[11].app.elimination + "")) set_data(t68, t68_value);
+    			if (!current || dirty[0] & /*prElimTimes100*/ 64) set_data(t70, /*prElimTimes100*/ ctx[6]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t73_value !== (t73_value = /*translations*/ ctx[11].app.eliminationDescription1 + "")) set_data(t73, t73_value);
+    			if ((!current || dirty[0] & /*pctH*/ 32) && t75_value !== (t75_value = Math.round(/*pctH*/ ctx[5]) + "")) set_data(t75, t75_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t78_value !== (t78_value = /*translations*/ ctx[11].app.eliminationDescription2 + "")) set_data(t78, t78_value);
 
-    			if (dirty[0] & /*prElimTimes100*/ 512) {
-    				set_input_value(input3, /*prElimTimes100*/ ctx[9]);
+    			if (dirty[0] & /*prElimTimes100*/ 64) {
+    				set_input_value(input3, /*prElimTimes100*/ ctx[6]);
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t81_value !== (t81_value = /*translations*/ ctx[45].app.infectionUntil + "")) set_data(t81, t81_value);
-    			if (!current || dirty[0] & /*pctU*/ 1024) set_data(t83, /*pctU*/ ctx[10]);
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t86_value !== (t86_value = /*translations*/ ctx[45].app.infectionUntilDescription + "")) set_data(t86, t86_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t81_value !== (t81_value = /*translations*/ ctx[11].app.infectionUntil + "")) set_data(t81, t81_value);
+    			if (!current || dirty[0] & /*pctU*/ 128) set_data(t83, /*pctU*/ ctx[7]);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t86_value !== (t86_value = /*translations*/ ctx[11].app.infectionUntilDescription + "")) set_data(t86, t86_value);
 
-    			if (!current || dirty[0] & /*pctH*/ 256) {
-    				attr(input4, "max", /*pctH*/ ctx[8]);
+    			if (!current || dirty[0] & /*pctH*/ 32) {
+    				attr(input4, "max", /*pctH*/ ctx[5]);
     			}
 
-    			if (dirty[0] & /*pctU*/ 1024) {
-    				set_input_value(input4, /*pctU*/ ctx[10]);
+    			if (dirty[0] & /*pctU*/ 128) {
+    				set_input_value(input4, /*pctU*/ ctx[7]);
     			}
 
-    			if (/*userNeeds*/ ctx[1].exportData) {
+    			if (/*userNeeds*/ ctx[18].exportData) {
     				if (if_block7) {
     					if_block7.p(ctx, dirty);
     				} else {
-    					if_block7 = create_if_block_3$1(ctx);
+    					if_block7 = create_if_block_2$1(ctx);
     					if_block7.c();
     					if_block7.m(div33, t89);
     				}
@@ -15853,11 +15866,11 @@ var app = (function () {
     				if_block7 = null;
     			}
 
-    			if (!/*userNeeds*/ ctx[1].exportData) {
+    			if (!/*userNeeds*/ ctx[18].exportData) {
     				if (if_block8) {
     					if_block8.p(ctx, dirty);
     				} else {
-    					if_block8 = create_if_block_2$1(ctx);
+    					if_block8 = create_if_block_1$2(ctx);
     					if_block8.c();
     					if_block8.m(div33, t90);
     				}
@@ -15866,20 +15879,20 @@ var app = (function () {
     				if_block8 = null;
     			}
 
-    			if ((!current || dirty[1] & /*translations*/ 16384) && t91_value !== (t91_value = /*translations*/ ctx[45].app.exportDescription + "")) set_data(t91, t91_value);
+    			if ((!current || dirty[0] & /*translations*/ 2048) && t91_value !== (t91_value = /*translations*/ ctx[11].app.exportDescription + "")) set_data(t91, t91_value);
 
-    			if (/*userNeeds*/ ctx[1].exportData) {
+    			if (/*userNeeds*/ ctx[18].exportData) {
     				if (if_block9) {
     					if_block9.p(ctx, dirty);
 
-    					if (dirty[0] & /*userNeeds*/ 2) {
+    					if (dirty[0] & /*userNeeds*/ 262144) {
     						transition_in(if_block9, 1);
     					}
     				} else {
-    					if_block9 = create_if_block_1$2(ctx);
+    					if_block9 = create_if_block$4(ctx);
     					if_block9.c();
     					transition_in(if_block9, 1);
-    					if_block9.m(div38, t93);
+    					if_block9.m(div39, t93);
     				}
     			} else if (if_block9) {
     				group_outros();
@@ -15889,16 +15902,6 @@ var app = (function () {
     				});
 
     				check_outros();
-    			}
-
-    			if (current_block_type !== (current_block_type = select_block_type(ctx))) {
-    				if_block10.d(1);
-    				if_block10 = current_block_type(ctx);
-
-    				if (if_block10) {
-    					if_block10.c();
-    					if_block10.m(div35, null);
-    				}
     			}
     		},
     		i(local) {
@@ -15945,7 +15948,7 @@ var app = (function () {
     			if (if_block7) if_block7.d();
     			if (if_block8) if_block8.d();
     			if (if_block9) if_block9.d();
-    			if_block10.d();
+    			mounted = false;
     			run_all(dispose);
     		}
     	};
@@ -15960,7 +15963,7 @@ var app = (function () {
     }
 
     function numberISO(x) {
-    	return d3.format(".3s")(x).replace("G", "B");
+    	return d3.format('.3s')(x).replace('G', 'B');
     }
 
     function numberFormatter(x) {
@@ -15972,49 +15975,79 @@ var app = (function () {
     }
 
     function instance$a($$self, $$props, $$invalidate) {
-    	let $englishDictStore;
-    	let $chineseDictStore;
-    	let $spanishDictStore;
+    	let tabItems;
+    	let translations;
+    	let selectedId;
+    	let selectedSourceId;
+    	let demographics;
+    	let fatalitiesBaseline;
+    	let popSize;
+    	let d_60plus;
+    	let pctH_60plus;
+    	let pctH_below60;
+    	let lowerBound;
+    	let upperBound;
+    	let prElim;
+    	let pctU_60plus;
+    	let pctU_below60;
+    	let fatalities;
+    	let totalInfected;
+    	let totalDeaths;
+    	let totalYearsLost;
+    	let totalMoneyLost;
+    	let majorCauses;
+    	let majorDeaths;
+    	let diseaseNames;
+    	let diseaseDALYs;
+    	let riskFactors;
+    	let riskDALYs;
+    	let majorCausesEng;
+    	let exportedData;
+    	let povertyProjCountryNames;
+    	let povertyProjRegionNames;
     	let $portugueseDictStore;
-    	component_subscribe($$self, englishDictStore, $$value => $$invalidate(88, $englishDictStore = $$value));
-    	component_subscribe($$self, chineseDictStore, $$value => $$invalidate(89, $chineseDictStore = $$value));
-    	component_subscribe($$self, spanishDictStore, $$value => $$invalidate(90, $spanishDictStore = $$value));
-    	component_subscribe($$self, portugueseDictStore, $$value => $$invalidate(91, $portugueseDictStore = $$value));
+    	let $spanishDictStore;
+    	let $chineseDictStore;
+    	let $englishDictStore;
+    	component_subscribe($$self, portugueseDictStore, $$value => $$invalidate(124, $portugueseDictStore = $$value));
+    	component_subscribe($$self, spanishDictStore, $$value => $$invalidate(125, $spanishDictStore = $$value));
+    	component_subscribe($$self, chineseDictStore, $$value => $$invalidate(126, $chineseDictStore = $$value));
+    	component_subscribe($$self, englishDictStore, $$value => $$invalidate(127, $englishDictStore = $$value));
 
     	function resetParameters() {
-    		$$invalidate(8, pctH = 30); // proportion of infected case Pr(elimination) = 0
-    		$$invalidate(44, pctH_60plus = 30); // proportion of people over 60 infected
-    		$$invalidate(7, pctOfChange = 0); // proportion of increase or decrease fatality risks
-    		$$invalidate(9, prElimTimes100 = 0); // probability of elimination case Pr(elimination) = 1
-    		$$invalidate(10, pctU = 0); // proportion of infected until elimination
+    		$$invalidate(5, pctH = 30); // proportion of infected case Pr(elimination) = 0
+    		$$invalidate(15, pctH_60plus = 30); // proportion of people over 60 infected
+    		$$invalidate(4, pctOfChange = 0); // proportion of increase or decrease fatality risks
+    		$$invalidate(6, prElimTimes100 = 0); // probability of elimination case Pr(elimination) = 1
+    		$$invalidate(7, pctU = 0); // proportion of infected until elimination
     	}
 
     	function keepUpWithH() {
-    		$$invalidate(44, pctH_60plus = pctH); // so that H_below60 doesn't explode
+    		$$invalidate(15, pctH_60plus = pctH); // so that H_below60 doesn't explode
 
     		if (pctH < pctU) {
-    			$$invalidate(10, pctU = pctH);
+    			$$invalidate(7, pctU = pctH);
     		}
     	}
 
     	function changeLanguageTo(newLanguage) {
-    		$$invalidate(4, language = newLanguage);
+    		$$invalidate(1, language = newLanguage);
 
     		// change default location translation
-    		$$invalidate(5, selectedObject = {
+    		$$invalidate(2, selectedObject = {
     			id: 163,
     			name: translationMap[newLanguage].countries[163].name
     		}); // translations.countries[selectedId].name;
 
     		// change default source object translation
-    		$$invalidate(6, selectedSourceObject = {
+    		$$invalidate(3, selectedSourceObject = {
     			id: 0,
     			source: translationMap[newLanguage].fatalityRisks[0].source,
     			ftr: [0.002, 0.006, 0.03, 0.08, 0.15, 0.6, 2.2, 5.1, 9.3]
     		});
 
     		// change enter description
-    		$$invalidate(3, desc = translationMap[newLanguage].app.enterDescribtion);
+    		$$invalidate(19, desc = translationMap[newLanguage].app.enterDescribtion);
     	}
 
     	function addScenario() {
@@ -16035,11 +16068,11 @@ var app = (function () {
     			comments: "Scenario " + rowsOfScenarios.length.toString() + ": " + desc
     		};
 
-    		$$invalidate(30, rowsOfScenarios = rowsOfScenarios.concat(newScenario));
+    		$$invalidate(10, rowsOfScenarios = rowsOfScenarios.concat(newScenario));
     	}
 
     	let deleteScenario = id => {
-    		$$invalidate(30, rowsOfScenarios = rowsOfScenarios.filter(scn => scn.id !== id));
+    		$$invalidate(10, rowsOfScenarios = rowsOfScenarios.filter(scn => scn.id !== id));
     	};
 
     	let currentTab = 0; // current active tab
@@ -16048,7 +16081,7 @@ var app = (function () {
     	let userNeeds = { exportData: false };
 
     	function toggleExportData() {
-    		$$invalidate(1, userNeeds.exportData = !userNeeds.exportData, userNeeds);
+    		$$invalidate(18, userNeeds.exportData = !userNeeds.exportData, userNeeds);
     		scrollToBottom();
     	}
 
@@ -16056,7 +16089,7 @@ var app = (function () {
      * INITS, REACTIVE DECLARATIONS $:
      *
      */
-    	let selectedLocation = "";
+    	let selectedLocation = '';
 
     	let desc = "Enter description"; // enter scenario description
 
@@ -16068,13 +16101,13 @@ var app = (function () {
     	let portuguese = $portugueseDictStore;
 
     	let translationMap = {
-    		"en": english,
-    		"zh": chinese,
-    		"es": spanish,
-    		"pt": portuguese
+    		'en': english,
+    		'zh': chinese,
+    		'es': spanish,
+    		'pt': portuguese
     	};
 
-    	let language = "en";
+    	let language = 'en';
     	let defaultLocation = { id: 163, name: "World" }; // world is default location 
     	let selectedObject = defaultLocation;
 
@@ -16085,8 +16118,8 @@ var app = (function () {
     	};
 
     	let selectedSourceObject = defaultSourceObject;
-    	let ageGroups = ["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+"];
-    	let lifeExpectanciesGlobal = [71.625, 62.95, 53.55, 44.4, 35.375, 26.625, 18.6, 11.95, 6.975];
+    	let ageGroups = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+'];
+    	let lifeExpectanciesGlobal = [71.625, 62.950, 53.550, 44.400, 35.375, 26.625, 18.600, 11.950, 6.975];
     	let pctOfChange = 0; // variation of fatality rates
     	let pctH = 30; // proportion of population infected
 
@@ -16120,10 +16153,10 @@ var app = (function () {
     	let compareList = [];
 
     	// compare titles
-    	let titleListName = "";
+    	let titleListName = '';
 
-    	let titleListNumber = "";
-    	let titleListMain = "";
+    	let titleListNumber = '';
+    	let titleListMain = '';
 
     	// ageGroups has numbers the same in all languages
     	let ageTypes = [];
@@ -16138,12 +16171,12 @@ var app = (function () {
     	let deathsTitleListNumber = "";
 
     	// projections component 
-    	let projectionsTitle = "";
+    	let projectionsTitle = '';
 
-    	let projectionsXAxisLabel = "";
-    	let projectionsYAxisLabel = "";
-    	let projectionsLegendDeaths = "";
-    	let projectionsLegendDeathsProjected = "";
+    	let projectionsXAxisLabel = '';
+    	let projectionsYAxisLabel = '';
+    	let projectionsLegendDeaths = '';
+    	let projectionsLegendDeathsProjected = '';
 
     	/***
      * SCENARIOS
@@ -16171,7 +16204,7 @@ var app = (function () {
     	let rowsOfScenarios = [{}, {}, {}];
 
     	// world map
-    	let mapTitle = "";
+    	let mapTitle = '';
 
     	let mapItems = [{}, {}];
     	let selectedRisk = 0;
@@ -16197,22 +16230,22 @@ var app = (function () {
     	];
 
     	let povertyProjCountries = [];
-    	let povertyProjRegionNumbers = [21994380, 10619000, 2294580, 1796560, 867540, 665690, 313600];
+    	let povertyProjRegionNumbers = [21994380.0, 10619000.0, 2294580.0, 1796560.0, 867540.0, 665690.0, 313600.0];
     	let povertyProjRegions = [];
 
     	// Projected Poverty Increases by Country and Region
-    	let mainProjCountries = "";
+    	let mainProjCountries = '';
 
-    	let nameProjCountries = "";
-    	let numberProjCountries = "";
-    	let mainProjRegions = "";
-    	let nameProjRegions = "";
-    	let numberProjRegions = "";
+    	let nameProjCountries = '';
+    	let numberProjCountries = '';
+    	let mainProjRegions = '';
+    	let nameProjRegions = '';
+    	let numberProjRegions = '';
 
     	// color countries by regions
     	// 'Sub-Saharan Africa', 'South Asia', 'East Asia & Pacific',
     	// 'Latin America & Caribbean', 'Middle East & North Africa', 'Europe & Central Asia', 'North America'
-    	let colorsProjRegions = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628"];
+    	let colorsProjRegions = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'];
 
     	let colorsProjCountries = [
     		colorsProjRegions[1],
@@ -16229,117 +16262,84 @@ var app = (function () {
     		colorsProjRegions[0]
     	];
 
-    	const click_handler = () => changeLanguageTo("zh");
-    	const click_handler_1 = () => changeLanguageTo("es");
-    	const click_handler_2 = () => changeLanguageTo("en");
-    	const click_handler_3 = () => changeLanguageTo("pt");
+    	const click_handler = () => changeLanguageTo('zh');
+    	const click_handler_1 = () => changeLanguageTo('es');
+    	const click_handler_2 = () => changeLanguageTo('en');
+    	const click_handler_3 = () => changeLanguageTo('pt');
 
     	function autocomplete0_selectedItem_binding(value) {
     		selectedObject = value;
-    		$$invalidate(5, selectedObject);
+    		$$invalidate(2, selectedObject);
     	}
 
     	function input0_change_input_handler() {
     		pctH = to_number(this.value);
-    		$$invalidate(8, pctH);
+    		$$invalidate(5, pctH);
     	}
 
     	function input1_change_input_handler() {
     		pctH_60plus = to_number(this.value);
-    		($$invalidate(44, pctH_60plus), $$invalidate(8, pctH));
+    		($$invalidate(15, pctH_60plus), $$invalidate(5, pctH));
     	}
 
     	function tabs_activeTabValue_binding(value) {
     		currentTab = value;
-    		$$invalidate(0, currentTab);
+    		$$invalidate(17, currentTab);
     	}
 
     	function subtabs_activeTabValue_binding(value) {
     		currentCompare = value;
-    		$$invalidate(12, currentCompare);
+    		$$invalidate(9, currentCompare);
     	}
 
     	function subtabs_activeTabValue_binding_1(value) {
     		selectedRisk = value;
-    		$$invalidate(33, selectedRisk);
+    		$$invalidate(39, selectedRisk);
     	}
 
     	function subtabs_activeTabValue_binding_2(value) {
     		currentPoverty = value;
-    		$$invalidate(35, currentPoverty);
+    		$$invalidate(41, currentPoverty);
     	}
 
     	function input_input_handler() {
     		desc = this.value;
-    		$$invalidate(3, desc);
+    		$$invalidate(19, desc);
     	}
 
     	function autocomplete1_selectedItem_binding(value) {
     		selectedSourceObject = value;
-    		$$invalidate(6, selectedSourceObject);
+    		$$invalidate(3, selectedSourceObject);
     	}
 
     	function input2_change_input_handler() {
     		pctOfChange = to_number(this.value);
-    		$$invalidate(7, pctOfChange);
+    		$$invalidate(4, pctOfChange);
     	}
 
     	function input3_change_input_handler() {
     		prElimTimes100 = to_number(this.value);
-    		$$invalidate(9, prElimTimes100);
+    		$$invalidate(6, prElimTimes100);
     	}
 
     	function input4_change_input_handler() {
     		pctU = to_number(this.value);
-    		($$invalidate(10, pctU), $$invalidate(8, pctH));
+    		($$invalidate(7, pctU), $$invalidate(5, pctH));
     	}
 
     	function textarea_input_handler() {
     		exportedData = this.value;
-    		(((((((((((((((((((((((((((((((((((((((((((((((((((((((((($$invalidate(55, exportedData), $$invalidate(30, rowsOfScenarios)), $$invalidate(65, i)), $$invalidate(73, inputs)), $$invalidate(95, d_60plus)), $$invalidate(76, pctU_60plusExample)), $$invalidate(93, fatalitiesBaseline)), $$invalidate(86, j)), $$invalidate(77, prElimExample)), $$invalidate(92, demographics)), $$invalidate(75, pctU_below60Example)), $$invalidate(74, pctH_below60Example)), $$invalidate(80, deathsExample)), $$invalidate(79, infectedExample)), $$invalidate(78, fatalitiesExample)), $$invalidate(81, yearsLostExample)), $$invalidate(119, lifeExpectanciesGlobal)), $$invalidate(84, totalYearsLostExample)), $$invalidate(2, selectedLocation)), $$invalidate(45, translations)), $$invalidate(46, selectedSourceId)), $$invalidate(82, totalInfectedExample)), $$invalidate(83, totalDeathsExample)), $$invalidate(85, totalMoneyLostExample)), $$invalidate(96, prElim)), $$invalidate(98, pctU_below60)), $$invalidate(47, pctH_below60)), $$invalidate(97, pctU_60plus)), $$invalidate(44, pctH_60plus)), $$invalidate(66, deaths)), $$invalidate(64, infected)), $$invalidate(101, fatalities)), $$invalidate(108, majorCausesEng)), $$invalidate(102, majorCauses)), $$invalidate(103, majorDeaths)), $$invalidate(68, compareTypes)), $$invalidate(104, diseaseNames)), $$invalidate(105, diseaseDALYs)), $$invalidate(106, riskFactors)), $$invalidate(107, riskDALYs)), $$invalidate(118, ageGroups)), $$invalidate(72, ageTypes)), $$invalidate(109, povertyProjCountryNames)), $$invalidate(120, povertyProjCountryNumbers)), $$invalidate(110, povertyProjRegionNames)), $$invalidate(121, povertyProjRegionNumbers)), $$invalidate(94, popSize)), $$invalidate(87, selectedId)), $$invalidate(115, translationMap)), $$invalidate(4, language)), $$invalidate(6, selectedSourceObject)), $$invalidate(9, prElimTimes100)), $$invalidate(10, pctU)), $$invalidate(8, pctH)), $$invalidate(7, pctOfChange)), $$invalidate(49, totalDeaths)), $$invalidate(50, totalYearsLost)), $$invalidate(5, selectedObject)), $$invalidate(67, yearsLost));
+    		(((((((((((((((((((((((((((((((((((((((((((((((((((((((((($$invalidate(50, exportedData), $$invalidate(10, rowsOfScenarios)), $$invalidate(65, i)), $$invalidate(73, inputs)), $$invalidate(91, d_60plus)), $$invalidate(76, pctU_60plusExample)), $$invalidate(90, fatalitiesBaseline)), $$invalidate(86, j)), $$invalidate(77, prElimExample)), $$invalidate(89, demographics)), $$invalidate(75, pctU_below60Example)), $$invalidate(74, pctH_below60Example)), $$invalidate(80, deathsExample)), $$invalidate(79, infectedExample)), $$invalidate(78, fatalitiesExample)), $$invalidate(81, yearsLostExample)), $$invalidate(136, lifeExpectanciesGlobal)), $$invalidate(84, totalYearsLostExample)), $$invalidate(0, selectedLocation)), $$invalidate(11, translations)), $$invalidate(12, selectedSourceId)), $$invalidate(82, totalInfectedExample)), $$invalidate(83, totalDeathsExample)), $$invalidate(85, totalMoneyLostExample)), $$invalidate(101, prElim)), $$invalidate(103, pctU_below60)), $$invalidate(16, pctH_below60)), $$invalidate(102, pctU_60plus)), $$invalidate(15, pctH_60plus)), $$invalidate(66, deaths)), $$invalidate(64, infected)), $$invalidate(100, fatalities)), $$invalidate(98, majorCausesEng)), $$invalidate(97, majorCauses)), $$invalidate(96, majorDeaths)), $$invalidate(68, compareTypes)), $$invalidate(95, diseaseNames)), $$invalidate(94, diseaseDALYs)), $$invalidate(93, riskFactors)), $$invalidate(92, riskDALYs)), $$invalidate(135, ageGroups)), $$invalidate(72, ageTypes)), $$invalidate(88, povertyProjCountryNames)), $$invalidate(137, povertyProjCountryNumbers)), $$invalidate(87, povertyProjRegionNames)), $$invalidate(138, povertyProjRegionNumbers)), $$invalidate(104, popSize)), $$invalidate(99, selectedId)), $$invalidate(132, translationMap)), $$invalidate(1, language)), $$invalidate(3, selectedSourceObject)), $$invalidate(6, prElimTimes100)), $$invalidate(7, pctU)), $$invalidate(5, pctH)), $$invalidate(4, pctOfChange)), $$invalidate(14, totalDeaths)), $$invalidate(13, totalYearsLost)), $$invalidate(2, selectedObject)), $$invalidate(67, yearsLost));
     	}
 
-    	let tabItems;
-    	let translations;
-    	let selectedId;
-    	let selectedSourceId;
-    	let demographics;
-    	let fatalitiesBaseline;
-    	let popSize;
-    	let d_60plus;
-    	let pctH_60plus;
-    	let pctH_below60;
-    	let lowerBound;
-    	let upperBound;
-    	let prElim;
-    	let pctU_60plus;
-    	let pctU_below60;
-    	let lowerBoundUntil;
-    	let upperBoundUntil;
-    	let fatalities;
-    	let totalInfected;
-    	let totalDeaths;
-    	let totalYearsLost;
-    	let totalMoneyLost;
-    	let majorCauses;
-    	let majorDeaths;
-    	let diseaseNames;
-    	let diseaseDALYs;
-    	let riskFactors;
-    	let riskDALYs;
-    	let majorCausesEng;
-    	let exportedData;
-    	let povertyProjCountryNames;
-    	let povertyProjRegionNames;
-
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*language*/ 16) {
-    			 $$invalidate(45, translations = translationMap[language]);
+    		if ($$self.$$.dirty[0] & /*language*/ 2) {
+    			 $$invalidate(11, translations = translationMap[language]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
     			// tab items with labels and values
-    			 $$invalidate(52, tabItems = [
+    			 $$invalidate(55, tabItems = [
     				{
     					label: translations.app.tabItem0,
     					value: 0
@@ -16371,94 +16371,90 @@ var app = (function () {
     			]); // "Ex. Interpretations"
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedObject*/ 32) {
-    			 $$invalidate(87, selectedId = selectedObject.id);
+    		if ($$self.$$.dirty[0] & /*selectedObject*/ 4) {
+    			 $$invalidate(99, selectedId = selectedObject.id);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
-    			 $$invalidate(2, selectedLocation = translations.countries[selectedId].name);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
+    			 $$invalidate(0, selectedLocation = translations.countries[selectedId].name);
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedSourceObject*/ 64) {
-    			 $$invalidate(46, selectedSourceId = selectedSourceObject.id);
+    		if ($$self.$$.dirty[0] & /*selectedSourceObject*/ 8) {
+    			 $$invalidate(12, selectedSourceId = selectedSourceObject.id);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
-    			 $$invalidate(92, demographics = translations.countries[selectedId].demographics);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
+    			 $$invalidate(89, demographics = translations.countries[selectedId].demographics);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations, selectedSourceId*/ 49152) {
-    			 $$invalidate(93, fatalitiesBaseline = translations.fatalityRisks[selectedSourceId].ftr);
+    		if ($$self.$$.dirty[0] & /*translations, selectedSourceId*/ 6144) {
+    			 $$invalidate(90, fatalitiesBaseline = translations.fatalityRisks[selectedSourceId].ftr);
     		}
 
-    		if ($$self.$$.dirty[2] & /*demographics*/ 1073741824) {
+    		if ($$self.$$.dirty[2] & /*demographics*/ 134217728) {
     			/***
      * PARAMETERS H, pctOfChange, H_60+, H_below60, Pr(Elimination), H_until
      *
     */
-    			 $$invalidate(94, popSize = demographics.reduce((a, b) => a + b, 0)); // population size of the chosen location
+    			 $$invalidate(104, popSize = demographics.reduce((a, b) => a + b, 0)); // population size of the chosen location
     		}
 
-    		if ($$self.$$.dirty[2] & /*demographics*/ 1073741824 | $$self.$$.dirty[3] & /*popSize*/ 2) {
-    			 $$invalidate(95, d_60plus = (demographics[6] + demographics[7] + demographics[8]) / popSize); // proportion of people over 60
+    		if ($$self.$$.dirty[2] & /*demographics*/ 134217728 | $$self.$$.dirty[3] & /*popSize*/ 2048) {
+    			 $$invalidate(91, d_60plus = (demographics[6] + demographics[7] + demographics[8]) / popSize); // proportion of people over 60
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 256) {
-    			 $$invalidate(44, pctH_60plus = Math.round(pctH)); // proportion of people over 60 infected
+    		if ($$self.$$.dirty[0] & /*pctH*/ 32) {
+    			 $$invalidate(15, pctH_60plus = Math.round(pctH)); // proportion of people over 60 infected
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 256 | $$self.$$.dirty[1] & /*pctH_60plus*/ 8192 | $$self.$$.dirty[3] & /*d_60plus*/ 4) {
+    		if ($$self.$$.dirty[0] & /*pctH, pctH_60plus*/ 32800 | $$self.$$.dirty[2] & /*d_60plus*/ 536870912) {
     			// if we decrease proportion of 60+ infected, then proportion of younger people infected increases keeping H_overall fixed
-    			 $$invalidate(47, pctH_below60 = Math.round((pctH - pctH_60plus * d_60plus) / (1 - d_60plus)));
+    			 $$invalidate(16, pctH_below60 = Math.round((pctH - pctH_60plus * d_60plus) / (1 - d_60plus)));
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 256 | $$self.$$.dirty[3] & /*d_60plus*/ 4) {
+    		if ($$self.$$.dirty[0] & /*pctH*/ 32 | $$self.$$.dirty[2] & /*d_60plus*/ 536870912) {
     			// derived bounds for pctH_plus based on: 0 <= pctH_below60 <= 1
-    			 $$invalidate(53, lowerBound = Math.max(1, (pctH - 100 * (1 - d_60plus)) / d_60plus)); // has to be more than 0 and ...derive
+    			 $$invalidate(54, lowerBound = Math.max(1, (pctH - 100 * (1 - d_60plus)) / d_60plus)); // has to be more than 0 and ...derive
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH*/ 256 | $$self.$$.dirty[3] & /*d_60plus*/ 4) {
-    			 $$invalidate(54, upperBound = Math.min(pctH / d_60plus, 99)); // can't be more than 100% and pctH / d60_plus
+    		if ($$self.$$.dirty[0] & /*pctH*/ 32 | $$self.$$.dirty[2] & /*d_60plus*/ 536870912) {
+    			 $$invalidate(53, upperBound = Math.min(pctH / d_60plus, 99)); // can't be more than 100% and pctH / d60_plus
     		}
 
-    		if ($$self.$$.dirty[0] & /*prElimTimes100*/ 512) {
-    			 $$invalidate(96, prElim = prElimTimes100 / 100);
+    		if ($$self.$$.dirty[0] & /*prElimTimes100*/ 64) {
+    			 $$invalidate(101, prElim = prElimTimes100 / 100);
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH, pctU*/ 1280) {
+    		if ($$self.$$.dirty[0] & /*pctH, pctU*/ 160) {
     			 if (pctH < pctU) {
-    				$$invalidate(10, pctU = pctH);
+    				$$invalidate(7, pctU = pctH);
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctH, pctU*/ 1280 | $$self.$$.dirty[1] & /*pctH_60plus*/ 8192) {
+    		if ($$self.$$.dirty[0] & /*pctH_60plus, pctH, pctU*/ 32928) {
     			// derive from pctH_60plus to keep the number of parameters low
     			// then from U_60+/U = H_60+/H we get:
-    			 $$invalidate(97, pctU_60plus = pctH_60plus / pctH * pctU); // proportion of 60+ people that are infected until elimination
+    			 $$invalidate(102, pctU_60plus = pctH_60plus / pctH * pctU); // proportion of 60+ people that are infected until elimination
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctU*/ 1024 | $$self.$$.dirty[3] & /*pctU_60plus, d_60plus*/ 20) {
-    			 $$invalidate(98, pctU_below60 = (pctU - pctU_60plus * d_60plus) / (1 - d_60plus)); // pct of people below 60 infected until elimination
+    		if ($$self.$$.dirty[0] & /*pctU*/ 128 | $$self.$$.dirty[2] & /*d_60plus*/ 536870912 | $$self.$$.dirty[3] & /*pctU_60plus*/ 512) {
+    			 $$invalidate(103, pctU_below60 = (pctU - pctU_60plus * d_60plus) / (1 - d_60plus)); // pct of people below 60 infected until elimination
     		}
 
-    		if ($$self.$$.dirty[0] & /*pctU*/ 1024 | $$self.$$.dirty[3] & /*d_60plus*/ 4) {
-    			 lowerBoundUntil = Math.max(1, (pctU - 100 * (1 - d_60plus)) / d_60plus);
-    		}
+    		if ($$self.$$.dirty[0] & /*pctU*/ 128 | $$self.$$.dirty[2] & /*d_60plus*/ 536870912) ;
 
-    		if ($$self.$$.dirty[0] & /*pctU*/ 1024 | $$self.$$.dirty[3] & /*d_60plus*/ 4) {
-    			 upperBoundUntil = Math.min(pctU / d_60plus, 99);
-    		}
+    		if ($$self.$$.dirty[0] & /*pctU*/ 128 | $$self.$$.dirty[2] & /*d_60plus*/ 536870912) ;
 
-    		if ($$self.$$.dirty[0] & /*pctOfChange*/ 128 | $$self.$$.dirty[3] & /*fatalitiesBaseline*/ 1) {
+    		if ($$self.$$.dirty[0] & /*pctOfChange*/ 16 | $$self.$$.dirty[2] & /*fatalitiesBaseline*/ 268435456) {
     			/***
      * CALCULATION of infected, deaths, ... totals
      *
      */
     			// use pctOfChange to increase / decrease the fatality risks
-    			 $$invalidate(101, fatalities = fatalitiesBaseline.map(fat => fat * (1 + pctOfChange / 100)));
+    			 $$invalidate(100, fatalities = fatalitiesBaseline.map(fat => fat * (1 + pctOfChange / 100)));
     		}
 
-    		if ($$self.$$.dirty[1] & /*pctH_below60*/ 65536 | $$self.$$.dirty[2] & /*i, demographics*/ 1073741832 | $$self.$$.dirty[3] & /*prElim, pctU_below60*/ 40) {
+    		if ($$self.$$.dirty[0] & /*pctH_below60*/ 65536 | $$self.$$.dirty[2] & /*i, demographics*/ 134217736 | $$self.$$.dirty[3] & /*prElim, pctU_below60*/ 1280) {
     			// multiply below60 demographics by pctH_below60 selected proportion of infected
     			 for ($$invalidate(65, i = 0); i < 6; $$invalidate(65, i++, i)) {
     				$$invalidate(64, infected[i] = Math.round(prElim * demographics[i] * pctU_below60 / 100 + (1 - prElim) * demographics[i] * pctH_below60 / 100), infected); // infections in case of elimination for below 60
@@ -16466,7 +16462,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[1] & /*pctH_60plus*/ 8192 | $$self.$$.dirty[2] & /*i, demographics*/ 1073741832 | $$self.$$.dirty[3] & /*prElim, pctU_60plus*/ 24) {
+    		if ($$self.$$.dirty[0] & /*pctH_60plus*/ 32768 | $$self.$$.dirty[2] & /*i, demographics*/ 134217736 | $$self.$$.dirty[3] & /*prElim, pctU_60plus*/ 768) {
     			// multiply 60plus demographics by pctH_60plus selected proportion of infected
     			 for ($$invalidate(65, i = 6); i < 9; $$invalidate(65, i++, i)) {
     				$$invalidate(64, infected[i] = Math.round(prElim * demographics[i] * pctU_60plus / 100 + (1 - prElim) * demographics[i] * pctH_60plus / 100), infected); // infections in case of elimination for 60 plus
@@ -16474,7 +16470,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*i, deaths, infected*/ 28 | $$self.$$.dirty[3] & /*fatalities*/ 256) {
+    		if ($$self.$$.dirty[2] & /*i, deaths, infected*/ 28 | $$self.$$.dirty[3] & /*fatalities*/ 128) {
     			 for ($$invalidate(65, i = 0); i < deaths.length; $$invalidate(65, i++, i)) {
     				$$invalidate(66, deaths[i] = Math.round(infected[i] * fatalities[i] / 100), deaths);
     			}
@@ -16488,59 +16484,59 @@ var app = (function () {
 
     		if ($$self.$$.dirty[2] & /*infected*/ 4) {
     			// sum vectors to get totals
-    			 $$invalidate(48, totalInfected = Math.round(infected.reduce((a, b) => a + b, 0)));
+    			 $$invalidate(52, totalInfected = Math.round(infected.reduce((a, b) => a + b, 0)));
     		}
 
     		if ($$self.$$.dirty[2] & /*deaths*/ 16) {
-    			 $$invalidate(49, totalDeaths = Math.round(deaths.reduce((a, b) => a + b, 0)));
+    			 $$invalidate(14, totalDeaths = Math.round(deaths.reduce((a, b) => a + b, 0)));
     		}
 
     		if ($$self.$$.dirty[2] & /*yearsLost*/ 32) {
-    			 $$invalidate(50, totalYearsLost = Math.round(yearsLost.reduce((a, b) => a + b, 0)));
+    			 $$invalidate(13, totalYearsLost = Math.round(yearsLost.reduce((a, b) => a + b, 0)));
     		}
 
-    		if ($$self.$$.dirty[1] & /*totalYearsLost*/ 524288) {
+    		if ($$self.$$.dirty[0] & /*totalYearsLost*/ 8192) {
     			 $$invalidate(51, totalMoneyLost = Math.round(129000 * totalYearsLost / Math.pow(10, 9)));
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
     			// push estimated coronavirus deaths to majorCauses
-    			 $$invalidate(102, majorCauses = [
+    			 $$invalidate(97, majorCauses = [
     				translations.app.covid19Cause,
     				...translations.countries[selectedId].majorCauses
     			]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*totalDeaths, translations*/ 278528 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
-    			 $$invalidate(103, majorDeaths = [totalDeaths, ...translations.countries[selectedId].majorDeaths]);
+    		if ($$self.$$.dirty[0] & /*totalDeaths, translations*/ 18432 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
+    			 $$invalidate(96, majorDeaths = [totalDeaths, ...translations.countries[selectedId].majorDeaths]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
     			// push estimated totalYearsLost TODO: DALYs of coronavirus deaths to diseaseNames
-    			 $$invalidate(104, diseaseNames = [
+    			 $$invalidate(95, diseaseNames = [
     				translations.app.covid19Cause,
     				...translations.countries[selectedId].diseaseNames
     			]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*totalYearsLost, translations*/ 540672 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
-    			 $$invalidate(105, diseaseDALYs = [totalYearsLost, ...translations.countries[selectedId].diseaseDALYs]);
+    		if ($$self.$$.dirty[0] & /*totalYearsLost, translations*/ 10240 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
+    			 $$invalidate(94, diseaseDALYs = [totalYearsLost, ...translations.countries[selectedId].diseaseDALYs]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
     			// push estimated totalYearsLost TODO: DALYs of coronavirus deaths to riskCauses
-    			 $$invalidate(106, riskFactors = [
+    			 $$invalidate(93, riskFactors = [
     				translations.app.covid19Cause,
     				...translations.countries[selectedId].riskFactors
     			]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*totalYearsLost, translations*/ 540672 | $$self.$$.dirty[2] & /*selectedId*/ 33554432) {
-    			 $$invalidate(107, riskDALYs = [totalYearsLost, ...translations.countries[selectedId].riskDALYs]);
+    		if ($$self.$$.dirty[0] & /*totalYearsLost, translations*/ 10240 | $$self.$$.dirty[3] & /*selectedId*/ 64) {
+    			 $$invalidate(92, riskDALYs = [totalYearsLost, ...translations.countries[selectedId].riskDALYs]);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(11, compareItems = [
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(8, compareItems = [
     				{
     					label: translations.app.compareItems0,
     					value: 0
@@ -16556,25 +16552,25 @@ var app = (function () {
     			]); // "Risk Factors in Years of Life Lost"
     		}
 
-    		if ($$self.$$.dirty[2] & /*selectedId*/ 33554432) {
+    		if ($$self.$$.dirty[3] & /*selectedId*/ 64) {
     			// to extract types for colors
-    			 $$invalidate(108, majorCausesEng = [
-    				translationMap["en"].app.covid19Cause,
-    				...translationMap["en"].countries[selectedId].majorCauses
+    			 $$invalidate(98, majorCausesEng = [
+    				translationMap['en'].app.covid19Cause,
+    				...translationMap['en'].countries[selectedId].majorCauses
     			]);
     		}
 
-    		if ($$self.$$.dirty[3] & /*majorCausesEng*/ 32768) {
+    		if ($$self.$$.dirty[3] & /*majorCausesEng*/ 32) {
     			 for (let i = 0; i < majorCausesEng.length; i++) {
-    				if (majorCausesEng[i].includes("estimate")) {
-    					$$invalidate(68, compareTypes[i] = "estimate", compareTypes);
-    				} else if (majorCausesEng[i].includes("until")) ; else {
-    					$$invalidate(68, compareTypes[i] = "other", compareTypes); // compareTypes[i] = 'until';
+    				if (majorCausesEng[i].includes('estimate')) {
+    					$$invalidate(68, compareTypes[i] = 'estimate', compareTypes);
+    				} else if (majorCausesEng[i].includes('until')) ; else {
+    					$$invalidate(68, compareTypes[i] = 'other', compareTypes); // compareTypes[i] = 'until';
     				}
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*majorCauses, majorDeaths*/ 1536) {
+    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*majorCauses, majorDeaths*/ 24) {
     			 for (let i = 0; i < majorCauses.length; i++) {
     				$$invalidate(
     					69,
@@ -16588,7 +16584,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*diseaseNames, diseaseDALYs*/ 6144) {
+    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*diseaseNames, diseaseDALYs*/ 6) {
     			 for (let i = 0; i < diseaseNames.length; i++) {
     				$$invalidate(
     					70,
@@ -16602,7 +16598,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[2] & /*compareTypes*/ 64 | $$self.$$.dirty[3] & /*riskFactors, riskDALYs*/ 24576) {
+    		if ($$self.$$.dirty[2] & /*riskDALYs, compareTypes*/ 1073741888 | $$self.$$.dirty[3] & /*riskFactors*/ 1) {
     			 for (let i = 0; i < riskFactors.length; i++) {
     				$$invalidate(
     					71,
@@ -16616,40 +16612,40 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*currentCompare*/ 4096 | $$self.$$.dirty[2] & /*compareCauses, compareDiseases, compareRisks*/ 896) {
+    		if ($$self.$$.dirty[0] & /*currentCompare*/ 512 | $$self.$$.dirty[2] & /*compareCauses, compareDiseases, compareRisks*/ 896) {
     			 switch (currentCompare) {
     				case 0:
-    					$$invalidate(13, compareList = compareCauses);
+    					$$invalidate(20, compareList = compareCauses);
     					break;
     				case 1:
-    					$$invalidate(13, compareList = compareDiseases);
+    					$$invalidate(20, compareList = compareDiseases);
     					break;
     				default:
-    					$$invalidate(13, compareList = compareRisks);
+    					$$invalidate(20, compareList = compareRisks);
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*compareItems, currentCompare, selectedLocation*/ 6148 | $$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(16, titleListMain = translations.app.titleListMain + compareItems[currentCompare].label + translations.app.inCountry + selectedLocation);
+    		if ($$self.$$.dirty[0] & /*translations, compareItems, currentCompare, selectedLocation*/ 2817) {
+    			 $$invalidate(23, titleListMain = translations.app.titleListMain + compareItems[currentCompare].label + translations.app.inCountry + selectedLocation);
     		}
 
-    		if ($$self.$$.dirty[0] & /*currentCompare*/ 4096 | $$self.$$.dirty[1] & /*translations*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*currentCompare, translations*/ 2560) {
     			 if (currentCompare === 0) {
-    				$$invalidate(14, titleListName = translations.app.titleListName);
-    				$$invalidate(15, titleListNumber = translations.app.deaths);
+    				$$invalidate(21, titleListName = translations.app.titleListName);
+    				$$invalidate(22, titleListNumber = translations.app.deaths);
     			} else if (currentCompare === 1) {
-    				$$invalidate(14, titleListName = translations.app.titleListName);
-    				$$invalidate(15, titleListNumber = translations.app.yearsOfLifeLost);
+    				$$invalidate(21, titleListName = translations.app.titleListName);
+    				$$invalidate(22, titleListNumber = translations.app.yearsOfLifeLost);
     			} else {
-    				$$invalidate(14, titleListName = translations.app.titleListRisk);
-    				$$invalidate(15, titleListNumber = translations.app.yearsOfLifeLost);
+    				$$invalidate(21, titleListName = translations.app.titleListRisk);
+    				$$invalidate(22, titleListNumber = translations.app.yearsOfLifeLost);
     			}
     		}
 
     		if ($$self.$$.dirty[2] & /*infected, ageTypes, deaths*/ 1044) {
     			 for (let i = 0; i < infected.length; i++) {
     				$$invalidate(
-    					17,
+    					24,
     					infectedData[i] = {
     						name: ageGroups[i],
     						number: infected[i],
@@ -16659,7 +16655,7 @@ var app = (function () {
     				);
 
     				$$invalidate(
-    					18,
+    					25,
     					deathsData[i] = {
     						name: ageGroups[i],
     						number: deaths[i],
@@ -16670,51 +16666,51 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(19, infectedTitle = translations.app.infectedTitle);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(26, infectedTitle = translations.app.infectedTitle);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(20, deathsTitle = translations.app.deathsTitle);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(27, deathsTitle = translations.app.deathsTitle);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(21, infectedTitleListName = translations.app.age);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(28, infectedTitleListName = translations.app.age);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(22, infectedTitleListNumber = translations.app.infected);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(29, infectedTitleListNumber = translations.app.infected);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(23, deathsTitleListName = translations.app.age);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(30, deathsTitleListName = translations.app.age);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(24, deathsTitleListNumber = translations.app.deaths);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(31, deathsTitleListNumber = translations.app.deaths);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(25, projectionsTitle = translations.app.projectionsTitle);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(32, projectionsTitle = translations.app.projectionsTitle);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(26, projectionsXAxisLabel = translations.app.date);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(33, projectionsXAxisLabel = translations.app.date);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(27, projectionsYAxisLabel = translations.app.totDeaths);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(34, projectionsYAxisLabel = translations.app.totDeaths);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(28, projectionsLegendDeaths = translations.app.totDeaths);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(35, projectionsLegendDeaths = translations.app.totDeaths);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(29, projectionsLegendDeathsProjected = translations.app.totDeathsProj);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(36, projectionsLegendDeathsProjected = translations.app.totDeathsProj);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
     			 $$invalidate(73, inputs = [
     				{
     					id: 0,
@@ -16749,7 +16745,7 @@ var app = (function () {
     			]); // "Scenario 2: Elimination to 90%, consider also money saved"
     		}
 
-    		if ($$self.$$.dirty[0] & /*selectedLocation*/ 4 | $$self.$$.dirty[1] & /*translations, selectedSourceId*/ 49152 | $$self.$$.dirty[2] & /*i, inputs, pctU_60plusExample, j, prElimExample, demographics, pctU_below60Example, pctH_below60Example, deathsExample, infectedExample, fatalitiesExample, yearsLostExample, totalYearsLostExample, totalInfectedExample, totalDeathsExample, totalMoneyLostExample*/ 1107294216 | $$self.$$.dirty[3] & /*d_60plus, fatalitiesBaseline*/ 5) {
+    		if ($$self.$$.dirty[0] & /*selectedLocation, translations, selectedSourceId*/ 6145 | $$self.$$.dirty[2] & /*i, inputs, d_60plus, pctU_60plusExample, fatalitiesBaseline, j, prElimExample, demographics, pctU_below60Example, pctH_below60Example, deathsExample, infectedExample, fatalitiesExample, yearsLostExample, totalYearsLostExample, totalInfectedExample, totalDeathsExample, totalMoneyLostExample*/ 973076488) {
     			 for ($$invalidate(65, i = 0); i < 3; $$invalidate(65, i++, i)) {
     				// d_60plus does not depend on input parameters
     				$$invalidate(74, pctH_below60Example = Math.round((inputs[i].pctH - inputs[i].pctH_60plus * d_60plus) / (1 - d_60plus)));
@@ -16783,7 +16779,7 @@ var app = (function () {
     				$$invalidate(85, totalMoneyLostExample = Math.round(129000 * totalYearsLostExample / Math.pow(10, 9))); // in $< >B or billion format
 
     				$$invalidate(
-    					30,
+    					10,
     					rowsOfScenarios[i] = {
     						id: inputs[i].id,
     						loc: selectedLocation,
@@ -16805,17 +16801,17 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*rowsOfScenarios*/ 1073741824) {
+    		if ($$self.$$.dirty[0] & /*rowsOfScenarios*/ 1024) {
     			// to export scenarios, countries population properties, etc. we just pretty print the JSONs
-    			 $$invalidate(55, exportedData = "\"Scenarios\": " + JSON.stringify(rowsOfScenarios, null, 2));
+    			 $$invalidate(50, exportedData = '\"Scenarios\": ' + JSON.stringify(rowsOfScenarios, null, 2));
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(31, mapTitle = translations.app.mapTitle);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(37, mapTitle = translations.app.mapTitle);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(32, mapItems = [
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(38, mapItems = [
     				{
     					label: translations.app.mapItems0,
     					value: 0
@@ -16827,8 +16823,8 @@ var app = (function () {
     			]); // "Income by Country"
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(34, povertyItems = [
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(40, povertyItems = [
     				{
     					label: translations.app.povertyItems0,
     					value: 0
@@ -16840,9 +16836,9 @@ var app = (function () {
     			]); // "By Region"
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
     			// poverty increases by country:
-    			 $$invalidate(109, povertyProjCountryNames = [
+    			 $$invalidate(88, povertyProjCountryNames = [
     				translations.app.india,
     				translations.app.nigeria,
     				translations.app.drCongo,
@@ -16858,23 +16854,23 @@ var app = (function () {
     			]);
     		}
 
-    		if ($$self.$$.dirty[3] & /*povertyProjCountryNames*/ 65536) {
+    		if ($$self.$$.dirty[2] & /*povertyProjCountryNames*/ 67108864) {
     			 for (let i = 0; i < povertyProjCountryNames.length; i++) {
     				$$invalidate(
-    					36,
+    					42,
     					povertyProjCountries[i] = {
     						name: povertyProjCountryNames[i],
     						number: povertyProjCountryNumbers[i],
-    						type: "poverty"
+    						type: 'poverty'
     					},
     					povertyProjCountries
     				);
     			}
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
     			// poverty increases by region:
-    			 $$invalidate(110, povertyProjRegionNames = [
+    			 $$invalidate(87, povertyProjRegionNames = [
     				translations.app.subSahAfrica,
     				translations.app.southAsia,
     				translations.app.eastAsiaPacific,
@@ -16885,58 +16881,55 @@ var app = (function () {
     			]);
     		}
 
-    		if ($$self.$$.dirty[3] & /*povertyProjRegionNames*/ 131072) {
+    		if ($$self.$$.dirty[2] & /*povertyProjRegionNames*/ 33554432) {
     			 for (let i = 0; i < povertyProjRegionNames.length; i++) {
     				$$invalidate(
-    					37,
+    					43,
     					povertyProjRegions[i] = {
     						name: povertyProjRegionNames[i],
     						number: povertyProjRegionNumbers[i],
-    						type: "poverty"
+    						type: 'poverty'
     					},
     					povertyProjRegions
     				);
     			}
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(38, mainProjCountries = translations.app.povertyTitle + translations.app.country);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(44, mainProjCountries = translations.app.povertyTitle + translations.app.country);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(39, nameProjCountries = translations.app.country);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(45, nameProjCountries = translations.app.country);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(40, numberProjCountries = translations.app.people);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(46, numberProjCountries = translations.app.people);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(41, mainProjRegions = translations.app.povertyTitle + translations.app.region);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(47, mainProjRegions = translations.app.povertyTitle + translations.app.region);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(42, nameProjRegions = translations.app.region);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(48, nameProjRegions = translations.app.region);
     		}
 
-    		if ($$self.$$.dirty[1] & /*translations*/ 16384) {
-    			 $$invalidate(43, numberProjRegions = translations.app.people);
+    		if ($$self.$$.dirty[0] & /*translations*/ 2048) {
+    			 $$invalidate(49, numberProjRegions = translations.app.people);
     		}
     	};
 
     	 for (let i = 0; i < ageGroups.length; i++) {
-    		if (ageGroups[i].includes("80") || ageGroups[i].includes("70") || ageGroups[i].includes("60")) {
-    			$$invalidate(72, ageTypes[i] = "over60", ageTypes);
+    		if (ageGroups[i].includes('80') || ageGroups[i].includes('70') || ageGroups[i].includes('60')) {
+    			$$invalidate(72, ageTypes[i] = 'over60', ageTypes);
     		} else {
-    			$$invalidate(72, ageTypes[i] = "below60", ageTypes);
+    			$$invalidate(72, ageTypes[i] = 'below60', ageTypes);
     		}
     	}
 
     	return [
-    		currentTab,
-    		userNeeds,
     		selectedLocation,
-    		desc,
     		language,
     		selectedObject,
     		selectedSourceObject,
@@ -16946,6 +16939,16 @@ var app = (function () {
     		pctU,
     		compareItems,
     		currentCompare,
+    		rowsOfScenarios,
+    		translations,
+    		selectedSourceId,
+    		totalYearsLost,
+    		totalDeaths,
+    		pctH_60plus,
+    		pctH_below60,
+    		currentTab,
+    		userNeeds,
+    		desc,
     		compareList,
     		titleListName,
     		titleListNumber,
@@ -16963,7 +16966,6 @@ var app = (function () {
     		projectionsYAxisLabel,
     		projectionsLegendDeaths,
     		projectionsLegendDeathsProjected,
-    		rowsOfScenarios,
     		mapTitle,
     		mapItems,
     		selectedRisk,
@@ -16977,18 +16979,12 @@ var app = (function () {
     		mainProjRegions,
     		nameProjRegions,
     		numberProjRegions,
-    		pctH_60plus,
-    		translations,
-    		selectedSourceId,
-    		pctH_below60,
-    		totalInfected,
-    		totalDeaths,
-    		totalYearsLost,
-    		totalMoneyLost,
-    		tabItems,
-    		lowerBound,
-    		upperBound,
     		exportedData,
+    		totalMoneyLost,
+    		totalInfected,
+    		upperBound,
+    		lowerBound,
+    		tabItems,
     		resetParameters,
     		keepUpWithH,
     		changeLanguageTo,
@@ -17020,41 +17016,24 @@ var app = (function () {
     		totalYearsLostExample,
     		totalMoneyLostExample,
     		j,
-    		selectedId,
-    		$englishDictStore,
-    		$chineseDictStore,
-    		$spanishDictStore,
-    		$portugueseDictStore,
+    		povertyProjRegionNames,
+    		povertyProjCountryNames,
     		demographics,
     		fatalitiesBaseline,
-    		popSize,
     		d_60plus,
+    		riskDALYs,
+    		riskFactors,
+    		diseaseDALYs,
+    		diseaseNames,
+    		majorDeaths,
+    		majorCauses,
+    		majorCausesEng,
+    		selectedId,
+    		fatalities,
     		prElim,
     		pctU_60plus,
     		pctU_below60,
-    		lowerBoundUntil,
-    		upperBoundUntil,
-    		fatalities,
-    		majorCauses,
-    		majorDeaths,
-    		diseaseNames,
-    		diseaseDALYs,
-    		riskFactors,
-    		riskDALYs,
-    		majorCausesEng,
-    		povertyProjCountryNames,
-    		povertyProjRegionNames,
-    		english,
-    		chinese,
-    		spanish,
-    		portuguese,
-    		translationMap,
-    		defaultLocation,
-    		defaultSourceObject,
-    		ageGroups,
-    		lifeExpectanciesGlobal,
-    		povertyProjCountryNumbers,
-    		povertyProjRegionNumbers,
+    		popSize,
     		click_handler,
     		click_handler_1,
     		click_handler_2,
@@ -17078,7 +17057,7 @@ var app = (function () {
     class App extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {}, [-1, -1, -1, -1, -1]);
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {}, null, [-1, -1, -1, -1, -1]);
     	}
     }
 
