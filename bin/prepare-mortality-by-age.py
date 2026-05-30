@@ -50,8 +50,8 @@ def read_population_file(path):
 
 
 def country_name_from_path(path):
-    # "United States-2019.csv" -> "United States"
-    return path.name.removesuffix("-2019.csv")
+    # "United_States-2019.csv" -> "United States"
+    return path.name.removesuffix("-2019.csv").replace("_", " ")
 
 
 def main():

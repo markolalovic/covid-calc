@@ -62,12 +62,19 @@ window.EstimatesContext = (() => {
     return numberISO(x);
   }
 
+  // safer 
   function getCountryData(country) {
     if (!contextData || !contextData.countries) {
-      return null;
+      throw new Error("Estimates-in-context data has not loaded yet.");
     }
 
-    return contextData.countries[country] || contextData.countries.World || null;
+    const countryData = contextData.countries[country];
+
+    if (!countryData) {
+      throw new Error(`No estimates-in-context data found for "${country}".`);
+    }
+
+    return countryData;
   }
 
   function buildCompareData(results, mortalityState) {
