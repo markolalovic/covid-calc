@@ -1,0 +1,11 @@
+- title: Estimates in Context
+  section: estimates-in-context
+  description: Compare estimated COVID-19 deaths and years of life lost with other major causes and risk factors.
+
+- title: Estimates by Age
+  section: mortality-by-age
+  description: Estimate COVID-19 infections and deaths by age group under selected assumptions.
+
+- title: Risks by Country
+  section: risks-by-country
+  description: Compare demographic risk patterns across countries.

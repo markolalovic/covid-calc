@@ -1,0 +1,8 @@
+_docs/*
+_notes/
+node_modules
+bower_components
+_site
+*.mdb
+*.swp
+.sass-cache

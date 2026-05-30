@@ -1,0 +1,60 @@
+body {
+    font:12px/1.2em verdana, arial, sans-serif;
+    color: #333;
+    background-color:#efefef;
+}
+
+label, .chooser, .btn {
+    font-size: 12pt;
+}
+
+.main-tabs {
+    font-size: 2.2rem;
+    padding-top: 2px;
+}
+
+.main-tabs li a{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.logo-mini {
+    height: 25px;
+    margin-top: -10px;
+    margin-bottom: -5px;
+    margin-left: 8px;
+}
+
+.logo-text {
+    color: #16275a;
+}
+
+
+/*
+ * The following CSS styles the footer at the bottom of the page.
+ */
+.footer {
+  margin-top: 30px; /* Separate it a bit from the grid. */
+  margin-bottom: 30px; /* White space below. */
+  font-size: 12pt;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.footer-left {
+    
+}
+.footer-right {
+   
+}
+
+.footer-logo {
+  margin-right: 5px;
+}
+.footer-logo img {
+  background-color: #16275a;
+  padding: 5px;
+  width: 57px;
+}

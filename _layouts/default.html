@@ -1,0 +1,136 @@
+{% include head.html %}
+
+<body>
+<header class="container-fluid covid-tool-container">
+  <nav>{% include navtabs.html %}</nav>
+</header>
+
+<div class="container-fluid covid-tool-container">
+  <div class="row">
+    <section id="meta" class="col-md-12">
+
+      <!-- LEFT: visualization panel -->
+      <section id="visualization" class="col-lg-7 col-md-7 col-sm-12">
+        <div id="visualization-panel" class="panel panel-default">
+          <div id="map" class="panel-body">
+
+            <!-- Estimates in Context -->
+            <div id="estimates-context-chart" class="estimates-context-chart">
+              <ul class="nav nav-pills covid-subtabs estimates-context-subtabs">
+                <li class="active">
+                  <a href="#" data-context-view="causesOfDeath">Causes of Death</a>
+                </li>
+                <li>
+                  <a href="#" data-context-view="causesOfYearsLost">Causes of Years of Life Lost</a>
+                </li>
+                <li>
+                  <a href="#" data-context-view="riskFactorsYearsLost">Risk Factors in Years of Life Lost</a>
+                </li>
+              </ul>
+
+              <svg class="visual-list compare" width="900" height="420"></svg>
+
+              <div id="estimates-context-inline-legend" class="chart-inline-legend estimates-context-inline-legend"></div>
+              <div id="estimates-context-summary" class="caption estimates-context-summary"></div>
+            </div>
+
+            <!-- Estimates by Age -->
+            <div id="mortality-by-age-chart" class="mortality-by-age-chart" style="display: none;">
+              <ul class="nav nav-pills covid-subtabs age-distribution-subtabs">
+                <li class="active">
+                  <a href="#" data-age-view="deaths">Mortality by Age</a>
+                </li>
+                <li>
+                  <a href="#" data-age-view="infected">Infected by Age</a>
+                </li>
+              </ul>
+
+              <svg class="visual-list age-distribution" width="760" height="380"></svg>
+
+              <div id="mortality-inline-legend" class="chart-inline-legend mortality-inline-legend"></div>
+              <div id="mortality-summary" class="caption mortality-summary"></div>
+            </div>
+
+            <!-- Risks by Country -->
+            <div id="risks-by-country-chart" class="risks-by-country-chart" style="display: none;">
+              <ul class="nav nav-pills covid-subtabs risks-country-subtabs">
+                <li class="active">
+                  <a href="#" data-risk-view="prop">Proportion of people over 60 by Country</a>
+                </li>
+                <li>
+                  <a href="#" data-risk-view="income_grp">Low Income Risk by Country</a>
+                </li>
+              </ul>
+
+              <svg class="risk-map" width="900" height="560"></svg>
+
+              <div id="risks-country-summary" class="caption risks-country-summary"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: controls / help panel -->
+      <article id="right-panel-column" class="col-lg-5 col-md-5 col-sm-12">
+        <div id="right-panel" class="panel panel-default right-side-panel">
+
+          <div class="panel-heading">
+
+            <!-- Shared COVID controls for:
+                 - Estimates in Context
+                 - Estimates by Age
+            -->
+            <div id="shared-covid-controls-container">
+              <form id="shared-covid-controls" class="controls-form form-horizontal covid-controls-grid">
+                {% include mortality-by-age-controls.html %}
+              </form>
+            </div>
+
+            <!-- Risks by Country help controls -->
+            <div id="risks-country-controls-container" style="display: none;">
+              <div class="risks-country-controls">
+                <p>You can zoom in and out of the map.</p>
+                <p>You can click and drag the map.</p>
+                <p>Hover over the map to get information about the country it represents.</p>
+                <p>Hover over legend items below to select.</p>
+
+                <div id="risks-country-inline-legend" class="risks-control-legend"></div>                
+
+                <button
+                  type="button"
+                  id="reset-risk-map"
+                  class="btn btn-default btn-block"
+                >
+                  Reset map
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-body right-panel-body" style="display: none;">
+            <div class="col-sm-12 right-panel-section">
+              <section id="right-side-legend" class="legend">
+                <ul id="legend" class="list-unstyled"></ul>
+              </section>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+    </section>
+  </div>
+
+  <div class="row footer">
+    <div class="col-md-12">
+      <p>
+        <a href="https://lalovic.com/2020/06/03/covid-calc">Read more about this project and how to use the Covid Calculator</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+{% include javascripts.html %}
+</body>
+</html>

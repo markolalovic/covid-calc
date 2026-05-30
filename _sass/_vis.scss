@@ -1,0 +1,524 @@
+/* --------------------------------------------------------------------------
+   Base visualization panel
+   -------------------------------------------------------------------------- */
+
+#visualization .panel {
+  margin-bottom: 0;
+}
+
+#visualization .panel-body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#meta {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#meta .panel-heading {
+  padding-bottom: 0;
+}
+
+.field-description {
+  font-size: 1.2em;
+  line-height: 1.4em;
+}
+
+textarea.form-control {
+  resize: vertical;
+  background-color: white;
+}
+
+/* Stable page layout */
+
+.covid-tool-container {
+  max-width: 1502px; // 1482px content + 20px padding
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+header.covid-tool-container {
+  padding-bottom: 0;
+}
+
+header.covid-tool-container .main-tabs {
+  margin-bottom: 0;
+}
+
+/* Large desktop: fixed, stable layout */
+@media (min-width: 1502px) {
+  #meta {
+    display: grid;
+    grid-template-columns: 840px 620px;
+    column-gap: 22px;
+    align-items: start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #visualization,
+  #right-panel-column {
+    float: none !important;
+    width: auto !important;
+    max-width: none !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Medium desktop: flexible layout that cannot overflow */
+@media (min-width: 992px) and (max-width: 1501px) {
+  #meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(480px, 620px);
+    column-gap: 18px;
+    align-items: start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #visualization,
+  #right-panel-column {
+    float: none !important;
+    width: auto !important;
+    max-width: none !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Tablet/mobile: stack */
+@media (max-width: 991px) {
+  #meta {
+    display: block;
+  }
+
+  #visualization,
+  #right-panel-column {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #right-panel-column {
+    margin-top: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Panels
+   -------------------------------------------------------------------------- */
+
+#visualization-panel,
+#right-panel {
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  margin-bottom: 0;
+}
+
+#visualization-panel {
+  background: #fff;
+}
+
+#right-panel {
+  background: #eee;
+}
+
+#map.panel-body {
+  padding: 0 20px 18px 20px;
+  overflow: hidden;
+}
+
+.right-side-panel .panel-heading {
+  background: #eee;
+  padding: 16px 18px 340px 18px;
+}
+
+.right-panel-body {
+  background: #eee;
+  padding: 12px;
+}
+
+.right-panel-section {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   COVID controls
+   -------------------------------------------------------------------------- */
+
+.covid-controls .control-value {
+  font-weight: bold;
+}
+
+.covid-controls input[type="range"] {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  /*
+   * The include appears to wrap controls in .covid-controls.
+   * Make that wrapper the actual grid.
+   */
+  #shared-covid-controls.covid-controls-grid {
+    display: block !important;
+    width: 100%;
+  }
+
+  #shared-covid-controls.covid-controls-grid .covid-controls {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 18px;
+    row-gap: 20px;
+    align-items: start;
+    width: 100%;
+  }
+
+  #shared-covid-controls.covid-controls-grid .form-group {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0;
+  }
+
+  #shared-covid-controls.covid-controls-grid .form-group::before,
+  #shared-covid-controls.covid-controls-grid .form-group::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  #shared-covid-controls.covid-controls-grid label,
+  #shared-covid-controls.covid-controls-grid .control-label {
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 0 4px 0 !important;
+    text-align: left !important;
+    font-size: 16px;
+    line-height: 1.1em;
+  }
+
+  #shared-covid-controls.covid-controls-grid [class^="col-"],
+  #shared-covid-controls.covid-controls-grid [class*=" col-"] {
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #shared-covid-controls.covid-controls-grid select,
+  #shared-covid-controls.covid-controls-grid input[type="range"],
+  #shared-covid-controls.covid-controls-grid button {
+    width: 100% !important;
+  }
+
+  #shared-covid-controls.covid-controls-grid .form-control {
+    height: 34px;
+    font-size: 14px;
+  }
+
+  #shared-covid-controls.covid-controls-grid .help-block {
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 1.28em;
+    color: #666;
+  }
+
+  #reset-mortality-controls {
+    margin-top: 22px;
+    margin-bottom: 10px;
+    height: 34px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 991px) {
+  #shared-covid-controls.covid-controls-grid .covid-controls {
+    display: block;
+  }
+
+  #shared-covid-controls.covid-controls-grid .form-group {
+    margin-bottom: 14px;
+  }
+}
+
+/* Risks by Country: wider map only when there is enough room. */
+@media (min-width: 1502px) {
+  #meta.risks-layout {
+    grid-template-columns: 1100px 360px;
+  }
+}
+
+@media (min-width: 1502px) {
+  #meta {
+    grid-template-columns: 840px 620px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1501px) {
+  #meta.risks-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Risks by Country controls
+   -------------------------------------------------------------------------- */
+
+.risks-country-controls {
+  font-size: 13px;
+  line-height: 1.35em;
+  padding-bottom: 14px;
+}
+
+.risks-country-controls p {
+  margin: 0 0 8px 0;
+}
+
+.risks-country-controls .btn,
+#reset-risk-map {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.risks-control-legend {
+  margin-top: 10px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  line-height: 1.35em;
+}
+
+.risks-control-legend .risk-legend-item {
+  display: grid;
+  grid-template-columns: 14px auto;
+  column-gap: 7px;
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  margin: 3px 0;
+  cursor: pointer;
+}
+
+.risks-control-legend .legend-swatch {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  margin-right: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.risks-control-legend .risk-legend-item.active {
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+   Subtabs
+   -------------------------------------------------------------------------- */
+
+.covid-subtabs {
+  margin-top: 8px;
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-left: var(--chart-left, 90px);
+}
+
+.covid-subtabs > li > a {
+  border-radius: 0;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 991px) {
+  .covid-subtabs {
+    margin-left: 16px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Chart containers and SVGs
+   -------------------------------------------------------------------------- */
+
+.mortality-by-age-chart,
+.estimates-context-chart,
+.risks-by-country-chart {
+  margin-top: 0;
+}
+
+.mortality-by-age-chart svg.age-distribution,
+.estimates-context-chart svg.compare,
+.risks-by-country-chart svg.risk-map {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.risks-by-country-chart svg.risk-map {
+  background: #fff;
+}
+
+.hover-rect:hover {
+  opacity: 1;
+  stroke: black;
+  stroke-width: 1px;
+  fill: rgba(228, 26, 28, 1);
+}
+
+.risks-by-country-chart .country {
+  cursor: pointer;
+  stroke: black;
+  stroke-width: 0.05px;
+}
+
+.risks-by-country-chart .country:hover {
+  opacity: 1;
+  stroke: black;
+  stroke-width: 1px;
+  fill: rgba(228, 26, 28, 1);
+}
+
+.risks-by-country-chart .country.highlighted {
+  stroke: black;
+  stroke-width: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   Legends under bar charts
+   -------------------------------------------------------------------------- */
+
+.legend-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.legend-swatch.covid-estimate {
+  background: #E6A35C;
+}
+
+.legend-swatch.context-other {
+  background: #B7A6D1;
+}
+
+.legend-swatch.over60 {
+  background: #5EA0C6;
+}
+
+.legend-swatch.below60 {
+  background: #B3DCB8;
+}
+
+.chart-inline-legend {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--chart-rendered-width, 820px);
+  margin: var(--legend-margin-top, -30px) auto 6px auto;
+  padding: 0 8px 0 calc(var(--chart-left, 0px) + 8px);
+  font-size: 13px;
+  line-height: 1.35em;
+}
+
+.chart-inline-legend .chart-legend-row {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  column-gap: 7px;
+  align-items: start;
+  margin: 2px 0;
+}
+
+.chart-inline-legend .legend-swatch {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  margin-right: 0;
+}
+
+.mortality-inline-legend {
+  --legend-margin-top: -18px;
+}
+
+.estimates-context-summary,
+.mortality-summary {
+  max-width: var(--chart-rendered-width, 820px);
+  margin: 2px auto 10px auto;
+  padding: 0 8px 0 calc(var(--chart-left, 0px) + 8px);
+  font-size: 13px;
+  line-height: 1.35em;
+}
+
+.estimates-context-summary .emphasize-text,
+.mortality-summary .emphasize-text {
+  font-weight: bold;
+}
+
+#risks-country-summary {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Legacy/placeholder safety
+   -------------------------------------------------------------------------- */
+
+#right-side-legend {
+  display: none;
+}
+
+#legend {
+  max-width: 220px;
+}
+
+.placeholder-panel {
+  min-height: 360px;
+  padding: 30px;
+  color: #666;
+  background: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   Footer spacing
+   -------------------------------------------------------------------------- */
+
+.footer {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+/* visible bottom edge of control box patch:
+ Add breathing room at the bottom of the COVID controls box. */
+#shared-covid-controls {
+  padding-bottom: 10px;
+}
+
+#shared-covid-controls .covid-controls {
+  padding-bottom: 10px;
+}
+
+/* Make the last visible control leave space before the panel border. */
+#shared-covid-controls .covid-controls .form-group:last-child {
+  margin-bottom: 10px !important;
+}
+
+/* fixing alignment of header with charts and controls
+ Keep top tabs and main tool panels on the same horizontal grid. */
+.covid-tool-container > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.covid-tool-container > .row > #meta {
+  padding-left: 0;
+  padding-right: 0;
+}

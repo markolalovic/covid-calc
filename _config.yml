@@ -1,0 +1,12 @@
+title: Covid Calculator
+description: A visual tool to explore and analyze the potential impacts of COVID-19.
+baseurl: ""
+url: ""
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
+sass:
+  sass_dir: _sass
